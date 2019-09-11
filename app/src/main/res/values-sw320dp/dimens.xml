@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="texttag">30sp</dimen>
+    <dimen name="textlogin">20sp</dimen>
+    <dimen name="margintop">10dp</dimen>
+    <dimen name="txtsize">12sp</dimen>
+    <dimen name="edsize">12sp</dimen>
+
+</resources>
