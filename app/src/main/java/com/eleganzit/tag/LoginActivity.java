@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this, ForgotPassword.class));
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
+                //finish();
             }
         });
     }

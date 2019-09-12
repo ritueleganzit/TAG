@@ -72,13 +72,13 @@ android:orientation="vertical"
                     android:gravity="center"
                     android:text="Please Enter Verification code which is sent to +(91) 7685 7584 47"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="10sp" />
+                    android:textSize="14sp" />
                 <me.philio.pinentry.PinEntryView
                     android:id="@+id/vr_code"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    app:digitTextSize="14sp"
+                    app:digitTextSize="15sp"
                     android:layout_marginTop="10dp"
                     app:digitBackground="@drawable/pin_bg"
                     app:digitElevation="5dp"

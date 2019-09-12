@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TAG</string>
+    <string name="privacy"><![CDATA[I agree Privacy policy & Terms Conditions]]></string>
 </resources>

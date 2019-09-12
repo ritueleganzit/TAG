@@ -52,7 +52,7 @@ android:orientation="vertical"
             android:background="@drawable/relbg">
 
             <LinearLayout
-                android:paddingTop="20dp"
+                android:paddingTop="15dp"
                 android:focusableInTouchMode="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -72,14 +72,14 @@ android:orientation="vertical"
                     android:gravity="center"
                     android:text="Please Enter Verification code which is sent to +(91) 7685 7584 47"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="10sp" />
+                    android:textSize="12sp" />
                 <me.philio.pinentry.PinEntryView
                     android:id="@+id/vr_code"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     app:digitTextSize="14sp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="8dp"
                     app:digitBackground="@drawable/pin_bg"
                     app:digitElevation="5dp"
                     app:digitSpacing="10dp"
@@ -88,7 +88,6 @@ android:orientation="vertical"
 
 
                 <TextView
-                    android:layout_marginTop="15dp"
 
                     android:id="@+id/submit"
                     android:layout_width="match_parent"

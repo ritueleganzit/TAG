@@ -36,9 +36,9 @@
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="40dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="30dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_marginTop="8dp"
@@ -89,18 +89,21 @@
                     android:layout_width="wrap_content"
                     android:text="Password"
                     android:layout_height="wrap_content"/>
-
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true"
+                    >
            <EditText
                android:layout_marginTop="5dp"
                android:background="@drawable/editbg"
                android:layout_width="match_parent"
-               android:paddingBottom="10dp"
+               android:paddingBottom="8dp"
                android:paddingLeft="16dp"
                android:paddingRight="16dp"
-               android:paddingTop="10dp"
+               android:paddingTop="8dp"
                android:textSize="18sp"
 
-               android:hint="***"
 android:inputType="textPassword"
 
                android:fontFamily="@font/roboto_regular"
@@ -109,7 +112,7 @@ android:inputType="textPassword"
                android:textColorHint="@color/hintt"
                android:layout_height="wrap_content"/>
 
-
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout
 
@@ -145,8 +148,7 @@ android:fontFamily="@font/roboto_regular"
                 android:layout_marginTop="25dp"
 
                 android:layout_width="match_parent"
-                android:gravity="center_horizontal"
-
+                android:gravity="center_horizontal|bottom"
 
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -226,11 +228,10 @@ android:gravity="center"
                 </LinearLayout>
                 <CheckBox
                     android:layout_gravity="center"
-                    android:text="I agree Privacy policy Terms Conditions"
+                    android:text="@string/privacy"
                     android:fontFamily="@font/roboto_light"
                     android:textColor="@color/txtcolor"
                     android:textSize="13sp"
-                    android:layout_marginTop="25dp"
 
 
                     android:layout_width="wrap_content"
