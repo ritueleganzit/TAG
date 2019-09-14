@@ -1,4 +1,29 @@
 <resources>
     <string name="app_name">TAG</string>
     <string name="privacy"><![CDATA[I agree Privacy policy & Terms Conditions]]></string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">My Profile</string>
+    <string name="menu_slideshow">School</string>
+    <string name="menu_tools">College</string>
+    <string name="menu_share">Ask a question</string>
+    <string name="menu_send">Discussions</string>
+    <string name="menu_college_p">College Predictor</string>
+    <string name="menu_college_compare">College Compare</string>
+    <string name="menu_salary_trend">Salary Trend Report</string>
+    <string name="menu_courses">Courses</string>
+
+
+    <string name="menu_share_app">Share App</string>
+    <string name="menu_rate_us">Rate Us &amp; Feedback</string>
+    <string name="menu_help">Help &amp; FAQ</string>
+    <string name="menu_terms">Terms and Conditions</string>
+    <string name="menu_privacy">Privacy Policy</string>
 </resources>

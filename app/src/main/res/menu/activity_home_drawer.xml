@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:title="@string/menu_gallery" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:title="@string/menu_slideshow" />
+        <item
+            android:id="@+id/nav_tools"
+            android:title="@string/menu_tools" />
+        <item
+            android:id="@+id/nav__menushare"
+            android:title="@string/menu_share" />
+        <item
+            android:id="@+id/nav__menu_send"
+            android:title="@string/menu_send" />
+
+        <item
+            android:id="@+id/nav__menu_college_p"
+            android:title="@string/menu_college_p" />
+        <item
+            android:id="@+id/nav_menu_college_compare"
+            android:title="@string/menu_college_compare" />
+
+        <item
+            android:id="@+id/nav_menu_salary_trend"
+            android:title="@string/menu_salary_trend" />
+        <item
+            android:id="@+id/nav_menu_courses"
+            android:title="@string/menu_courses" />
+    </group>
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:title="@string/menu_share_app" />
+            <item
+                android:id="@+id/nav_send"
+                android:title="@string/menu_rate_us" />
+
+            <item
+                android:id="@+id/nav_menu_help"
+                android:title="@string/menu_help" />
+
+            <item
+                android:id="@+id/nav_menu_terms"
+                android:title="@string/menu_terms" />
+            <item
+                android:id="@+id/nav_menu_privacy"
+                android:title="@string/menu_privacy" />
+        </menu>
+    </item>
+
+</menu>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.eleganzit.tag">
-    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -14,22 +13,44 @@
         android:smallScreens="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         android:xlargeScreens="true">
-        <activity android:name=".IntroSliderActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".LetsGetStartedActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".TermsAndCondition"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".VerificationActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ForgotPassword"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".SignUpActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".LoginActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".SplashActivity"
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity
+            android:name=".IntroSliderActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".LetsGetStartedActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".TermsAndCondition"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".VerificationActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ForgotPassword"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".SignUpActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,6 +58,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

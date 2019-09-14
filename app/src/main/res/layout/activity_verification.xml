@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -32,85 +32,101 @@ android:orientation="vertical"
 
         android:layout_gravity="center"
         android:layout_margin="30dp">
+
+
         <TextView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center_horizontal"
+            android:layout_centerInParent="true"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:background="@drawable/circle"
             android:fontFamily="@font/roboto_medium"
-
+            android:layout_gravity="center_horizontal"
             android:gravity="center"
+            android:layout_above="@+id/frame"
             android:text="TAG"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/texttag" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
+        <androidx.cardview.widget.CardView
             android:layout_marginTop="20dp"
-            android:background="@drawable/relbg">
 
-            <LinearLayout
-                android:paddingTop="20dp"
-                android:focusableInTouchMode="true"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            card_view:cardUseCompatPadding="true"
+            card_view:cardElevation="4dp"
+            app:contentPadding="5dp"
+            card_view:cardCornerRadius="8dp"
+            app:cardBackgroundColor="#ffffff">
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Verification Code"
-                    android:textColor="@color/colorPrimaryDark" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="Please Enter Verification code which is sent to +(91) 7685 7584 47"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="10sp" />
-                <me.philio.pinentry.PinEntryView
-                    android:id="@+id/vr_code"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    app:digitTextSize="14sp"
-                    android:layout_marginTop="10dp"
-                    app:digitBackground="@drawable/pin_bg"
-                    app:digitElevation="5dp"
-                    app:digitSpacing="10dp"
-                    app:mask=""
-                    app:pinInputType="number" />
+                >
 
-
-                <TextView
-                    android:layout_marginTop="15dp"
-
-                    android:id="@+id/submit"
+                <LinearLayout
+                    android:paddingTop="20dp"
+                    android:focusableInTouchMode="true"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_gravity="center_horizontal|bottom"
-                    android:background="@drawable/btnbg"
-                    android:fontFamily="@font/roboto_regular"
-                    android:gravity="center"
-                    android:paddingLeft="16dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="16dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Verification Code"
+                        android:textColor="@color/colorPrimaryDark" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="Please Enter Verification code which is sent to registered email"
+                        android:textColor="@color/colorPrimary"
+                        />
+                    <me.philio.pinentry.PinEntryView
+                        android:id="@+id/vr_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:digitTextSize="14sp"
+                        android:layout_marginTop="10dp"
+                        app:digitBackground="@drawable/pin_bg"
+                        app:digitSpacing="10dp"
+                        app:mask=""
+                        app:pinInputType="number" />
 
-                    android:paddingBottom="10dp"
-                    android:text="SUBMIT"
-                    android:textColor="@android:color/white" />
 
 
-            </LinearLayout>
 
-        </RelativeLayout>
+                    <TextView
+
+                        android:id="@+id/submit"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+
+
+                        android:fontFamily="@font/roboto_regular"
+                        android:textColor="@android:color/white"
+                        android:background="@drawable/btnbg"
+                        android:text="SUBMIT"/>
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
 
 
 

@@ -22,7 +22,7 @@ public class TermsAndCondition extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+finish();
     }
 }
