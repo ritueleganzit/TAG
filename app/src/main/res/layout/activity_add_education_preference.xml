@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    tools:context=".TermsAndCondition">
+
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar"
+        android:elevation="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetEnd="0dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:theme="@style/CustomActionBar">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+
+            android:background="@color/colorPrimaryDark"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_gravity="end"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:src="@drawable/ic_back_white"
+                        android:id="@+id/back"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+
+                    <TextView
+                        android:layout_toRightOf="@+id/back"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:layout_marginLeft="30dp"
+                        android:text="Current Education"
+                        android:layout_centerVertical="true"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textTitle" />
+
+
+                    <TextView
+                        android:layout_toRightOf="@+id/back"
+                        android:textColor="#ffffff"
+                        android:text="Save"
+                        android:gravity="end"
+                        android:layout_marginRight="20dp"
+                        android:id="@+id/submit"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
+
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
+
+
+    <com.eleganzit.tag.utils.MyNestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        tools:context=".ui.activity.AddPersonalInfoActivity">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                app:cardElevation="5dp"
+                android:padding="5dp"
+                app:cardUseCompatPadding="true"
+                app:cardBackgroundColor="#ffffff"
+                android:layout_margin="5dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:paddingBottom="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:weightSum="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+
+                        android:layout_gravity="end"
+
+                        android:orientation="vertical">
+
+
+
+
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:textColor="@color/txtcolor"
+
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textAppearance="?android:textAppearanceSmall"
+                        android:layout_width="match_parent"
+                        android:text="Education Stream"
+                        android:layout_height="wrap_content">
+
+
+                    </TextView>
+                    <EditText
+
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:padding="9dp"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/editbg"
+                        android:layout_height="wrap_content"></EditText>
+                    <TextView
+                        android:textColor="@color/txtcolor"
+                        android:layout_marginBottom="10dp"
+
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textAppearance="?android:textAppearanceSmall"
+
+                        android:layout_width="match_parent"
+                        android:text="Course"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+                    <EditText
+
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:padding="9dp"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/editbg"
+                        android:layout_height="wrap_content"></EditText>
+
+                    <TextView
+                        android:textColor="@color/txtcolor"
+                        android:layout_marginBottom="10dp"
+
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textAppearance="?android:textAppearanceSmall"
+
+                        android:layout_width="match_parent"
+                        android:text="Specialization (optional)"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+                    <EditText
+
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:padding="9dp"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/editbg"
+                        android:layout_height="wrap_content"></EditText>
+
+                    <TextView
+                        android:textColor="@color/txtcolor"
+                        android:layout_marginBottom="10dp"
+
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textAppearance="?android:textAppearanceSmall"
+
+                        android:layout_width="match_parent"
+                        android:text="Mode of Study"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+                    <EditText
+
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:padding="9dp"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/editbg"
+                        android:layout_height="wrap_content"></EditText>
+
+
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+
+    </com.eleganzit.tag.utils.MyNestedScrollView>
+
+</LinearLayout>

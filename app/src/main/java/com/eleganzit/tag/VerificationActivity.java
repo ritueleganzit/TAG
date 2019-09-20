@@ -1,10 +1,10 @@
 package com.eleganzit.tag;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.LoginResponse;
+import com.eleganzit.tag.model.SendOtpResponse;
 
 import me.philio.pinentry.PinEntryView;
 import retrofit2.Call;
@@ -20,7 +21,7 @@ import retrofit2.Response;
 
 public class VerificationActivity extends AppCompatActivity {
 PinEntryView vr_code;
-TextView submit;
+TextView submit,resend;
     ProgressDialog progressDialog;
 
     String pinentered="",data="";
@@ -31,6 +32,7 @@ TextView submit;
         vr_code=findViewById(R.id.vr_code);
         data=getIntent().getStringExtra("data");
         submit=findViewById(R.id.submit);
+        resend=findViewById(R.id.resend);
         progressDialog = new ProgressDialog(VerificationActivity.this);
         progressDialog.setMessage("Please Wait");
         progressDialog.setCancelable(false);
@@ -41,7 +43,14 @@ TextView submit;
                 pinentered=pin;
 
             }
-        });submit.setOnClickListener(new View.OnClickListener() {
+        });
+        resend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendotp();
+            }
+        });
+        submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (pinentered.equals("") || pinentered.length()<4) {
@@ -62,7 +71,38 @@ TextView submit;
             }
         });
     }
+    public void sendotp(){
+        progressDialog.show();
+        RetrofitInterface myInterface = RetrofitAPI.getRetrofit().create(RetrofitInterface.class);
+        Call<SendOtpResponse> call=myInterface.sendOtp(data);
+        call.enqueue(new Callback<SendOtpResponse>() {
+            @Override
+            public void onResponse(Call<SendOtpResponse> call, Response<SendOtpResponse> response) {
+                progressDialog.dismiss();
+                if (response.isSuccessful()) {
 
+                    if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
+                        Toast.makeText(VerificationActivity.this, "Verification Code has been send to Registered Email", Toast.LENGTH_SHORT).show();
+
+                    }
+                    else
+                    {
+                        Toast.makeText(VerificationActivity.this, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SendOtpResponse> call, Throwable t) {
+                progressDialog.dismiss();
+
+                Toast.makeText(VerificationActivity.this, "Server and Internet Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
     private void matchOtp() {
         progressDialog.show();
         RetrofitInterface myInterface = RetrofitAPI.getRetrofit().create(RetrofitInterface.class);

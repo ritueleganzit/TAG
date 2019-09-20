@@ -1,12 +1,12 @@
 package com.eleganzit.tag;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.LoginResponse;
+import com.eleganzit.tag.utils.UserLoggedInSession;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,6 +27,7 @@ import retrofit2.Response;
 public class SignUpActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     String[] listItems = {"INDIA", "UNITED STATES"};
+    UserLoggedInSession userLoggedInSession;
 
     EditText nationality,password,edemail,edmobile,edname;
     TextView logintxt,register;
@@ -44,6 +46,8 @@ public class SignUpActivity extends AppCompatActivity {
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
         edname=findViewById(R.id.edname);
+        userLoggedInSession=new UserLoggedInSession(SignUpActivity.this);
+
         nationality.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,9 +101,11 @@ public void  setSignUp(){
 
                 if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
                     Toast.makeText(SignUpActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(SignUpActivity.this, LetsGetStartedActivity.class).putExtra("textname",""+edname.getText().toString()));
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                    finish();
+                    userLoggedInSession.createSignUpSession(response.body().getData().get(0).getUserEmail()
+                            ,response.body().getData().get(0).getUserId()
+                            ,response.body().getData().get(0).getName()
+                            ,"");
+
                 }
                 else
                 {

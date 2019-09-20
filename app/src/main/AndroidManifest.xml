@@ -9,22 +9,41 @@
         android:label="@string/app_name"
         android:largeScreens="true"
         android:normalScreens="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:smallScreens="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         android:xlargeScreens="true">
+        <activity android:name=".ui.activity.AddEducationPreference"></activity>
+        <activity android:name=".ui.activity.GetCurrentEducation" />
+        <activity android:name=".ui.activity.AddWorkActivity" />
+        <activity android:name=".ui.activity.GetWorkActivty" />
+        <activity android:name=".ui.activity.AddEducationActivity" />
+        <activity android:name=".ui.activity.GetEducationActivity" />
+        <activity android:name=".ui.activity.AddPersonalInfoActivity" />
+        <activity
+            android:name=".PrivacyPolicy"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.MyProfileActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.ProfileTheme"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.AskAQuestionActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".IntroSliderActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-
         <activity
             android:name=".LetsGetStartedActivity"
             android:screenOrientation="portrait"
@@ -58,6 +77,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />

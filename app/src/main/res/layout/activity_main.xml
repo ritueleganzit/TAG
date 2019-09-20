@@ -31,7 +31,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
-            android:src="@drawable/icon"
+            app:srcCompat="@drawable/icon"
 
             android:scaleType="centerInside"
             android:layout_height="wrap_content"/>

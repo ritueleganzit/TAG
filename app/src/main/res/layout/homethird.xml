@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimaryDark"
+app:cardBackgroundColor="@color/colorPrimaryDark"
+    android:layout_marginEnd="4dp"
+    android:layout_marginStart="4dp"
+    app:cardElevation="2dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_weight="0.8"
+            android:gravity="start"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:scaleType="centerInside"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/computer">
+
+            </ImageView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+
+
+            >
+
+            <TextView
+                android:textColor="#ffffff"
+                android:fontFamily="@font/roboto_regular"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:text="An Investment in the knowledge pays the best to top colleges and university"
+                android:layout_height="wrap_content"></TextView>
+        </LinearLayout>
+
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

@@ -1,6 +1,8 @@
 package com.eleganzit.tag.api;
 
 
+import com.eleganzit.tag.model.AddPersonalInfoResponse;
+import com.eleganzit.tag.model.AskQuestionResponse;
 import com.eleganzit.tag.model.LoginResponse;
 import com.eleganzit.tag.model.SendOtpResponse;
 
@@ -45,6 +47,37 @@ public interface RetrofitInterface {
             @Field("user_email") String user_email,
             @Field("password") String password,
             @Field("nationality") String nationality
+    );
+
+ @FormUrlEncoded()
+    @POST("/AudioWalkSystems-AdminPanel/tags/temp-api.php")
+    Call<AskQuestionResponse> askquestion(
+            @Field("action") String ask_question ,
+            @Field("user_id") String user_id,
+            @Field("question_text") String question_text
+    );
+
+ @FormUrlEncoded()
+    @POST("/AudioWalkSystems-AdminPanel/tags/temp-api.php")
+    Call<AddPersonalInfoResponse> updatePersonalInfo(
+            @Field("action") String personal_information ,
+            @Field("user_id") String user_id,
+            @Field("name") String name,
+            @Field("mobile") String mobile,
+            @Field("user_email") String user_email,
+
+            @Field("location") String location
+    ); @FormUrlEncoded()
+    @POST("/AudioWalkSystems-AdminPanel/tags/temp-api.php")
+    Call<AddPersonalInfoResponse> updatePersonalInfo(
+            @Field("action") String personal_information ,
+            @Field("user_id") String user_id,
+            @Field("name") String name,
+            @Field("mobile") String mobile,
+            @Field("user_email") String user_email,
+            @Field("old_password") String old_password,
+            @Field("new_password") String new_password,
+            @Field("location") String location
     );
 
 }

@@ -1,11 +1,12 @@
 package com.eleganzit.tag;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.LoginResponse;
+import com.eleganzit.tag.utils.UserLoggedInSession;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText login_emailid,login_password;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    UserLoggedInSession userLoggedInSession;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         sharedPreferences=getSharedPreferences("rememberme",MODE_PRIVATE);
         editor=sharedPreferences.edit();
+        userLoggedInSession=new UserLoggedInSession(LoginActivity.this);
         login_signup=findViewById(R.id.login_signup);
         cbprivacy=findViewById(R.id.cbprivacy);
         rememberme=findViewById(R.id.rememberme);
@@ -150,14 +154,18 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 progressDialog.dismiss();
+
+
                 if (response.isSuccessful()) {
 
                     if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
+                        Log.d("MYDATA",""+response.body().getData().get(0).getName());
                         Toast.makeText(LoginActivity.this, "Login Succesful", Toast.LENGTH_SHORT).show();
 
-                        startActivity(new Intent(LoginActivity.this,HomeActivity.class));
-                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                        finish();
+                       userLoggedInSession.createLoginSession(response.body().getData().get(0).getUserEmail()
+                       ,response.body().getData().get(0).getUserId()
+                       ,response.body().getData().get(0).getName()
+                       ,"");
 
                     }
                     else

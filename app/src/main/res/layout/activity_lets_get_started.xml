@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="vertical"
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
 android:focusableInTouchMode="true"
 android:layout_width="match_parent"
 android:background="@color/colorPrimary"
@@ -21,7 +22,7 @@ xmlns:tools="http://schemas.android.com/tools">
     android:gravity="center"
     android:text="TAG"/>
 
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -55,7 +56,7 @@ xmlns:tools="http://schemas.android.com/tools">
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleType="centerInside"
-                android:src="@drawable/iconletsgetstarted"/>
+                app:srcCompat="@drawable/iconletsgetstarted"/>
         </LinearLayout>
         <LinearLayout
             android:layout_height="0dp"
@@ -134,7 +135,7 @@ xmlns:tools="http://schemas.android.com/tools">
 
 
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</android.support.v7.widget.CardView>
 
 </LinearLayout>
 
