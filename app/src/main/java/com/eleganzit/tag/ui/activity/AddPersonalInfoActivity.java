@@ -44,6 +44,13 @@ UserLoggedInSession userLoggedInSession;
         name=findViewById(R.id.name);
         location=findViewById(R.id.location);
 
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         userLoggedInSession=new UserLoggedInSession(AddPersonalInfoActivity.this);
         user_id=userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_ID);
         progressDialog = new ProgressDialog(AddPersonalInfoActivity.this);
@@ -51,7 +58,12 @@ UserLoggedInSession userLoggedInSession;
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
 
-
+findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        onBackPressed();
+    }
+});
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +72,7 @@ UserLoggedInSession userLoggedInSession;
                 if ((old_password.getText().toString().trim().equals("")) && (new_password.getText().toString().trim().equals("")) && (cnf_password.getText().toString().trim().equals("")))
                 {
                     updateProfilewithoutPassword();
-                    Toast.makeText(AddPersonalInfoActivity.this, "password not selected", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(AddPersonalInfoActivity.this, "password not selected", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -73,9 +85,9 @@ UserLoggedInSession userLoggedInSession;
 
                 }
 
-                else if (new_password.getText().toString().trim().equals("") || new_password.getText().toString().trim().length() < 6) {
+                else if (new_password.getText().toString().trim().equals("") || new_password.getText().toString().trim().length() < 8) {
 
-                         Toast.makeText(AddPersonalInfoActivity.this, "Password must contain atleast 6 characters", Toast.LENGTH_SHORT).show();
+                         Toast.makeText(AddPersonalInfoActivity.this, "Password must contain atleast 8 characters", Toast.LENGTH_SHORT).show();
 
                     new_password.requestFocus();
 
@@ -87,7 +99,7 @@ UserLoggedInSession userLoggedInSession;
 
                 }else
                      {
-                         Toast.makeText(AddPersonalInfoActivity.this, "password  selected", Toast.LENGTH_SHORT).show();
+                       //  Toast.makeText(AddPersonalInfoActivity.this, "password  selected", Toast.LENGTH_SHORT).show();
 
                         updateProfilewithPassword();
                      }
@@ -103,6 +115,70 @@ UserLoggedInSession userLoggedInSession;
 
             }
         });
+
+        getPersonalInfo();
+
+
+    }
+
+    private void getPersonalInfo() {
+        progressDialog.show();
+        RetrofitInterface myInterface = RetrofitAPI.getRetrofit().create(RetrofitInterface.class);
+        Call<AddPersonalInfoResponse> call=myInterface.get_userdata("get_userdata",user_id);
+        call.enqueue(new Callback<AddPersonalInfoResponse>() {
+            @Override
+            public void onResponse(Call<AddPersonalInfoResponse> call, Response<AddPersonalInfoResponse> response) {
+                progressDialog.dismiss();
+                if (response.isSuccessful()) {
+
+                    if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
+
+                        if (response.body().getData()!=null)
+                        {
+                            for (int i=0;i<response.body().getData().size();i++)
+                            {
+                                if (response.body().getData().get(i).getName()!=null  && !(response.body().getData().get(i).getName().isEmpty()))
+                                {
+                                    name.setText(""+response.body().getData().get(i).getName());
+
+                                }
+
+                                if (response.body().getData().get(i).getLocation()!=null  && !(response.body().getData().get(i).getLocation().isEmpty()))
+                                {
+                                    location.setText(""+response.body().getData().get(i).getLocation());
+
+                                }
+
+                                if (response.body().getData().get(i).getMobile()!=null  && !(response.body().getData().get(i).getMobile().isEmpty()))
+                                {
+                                    mobile.setText(""+response.body().getData().get(i).getMobile());
+
+                                }
+
+                                if (response.body().getData().get(i).getUserEmail()!=null  && !(response.body().getData().get(i).getUserEmail().isEmpty()))
+                                {
+                                    user_email.setText(""+response.body().getData().get(i).getUserEmail());
+
+                                }
+
+                                if (response.body().getData().get(i).getName()!=null  && !(response.body().getData().get(i).getName().isEmpty()))
+                                {
+                                    name.setText(""+response.body().getData().get(i).getName());
+
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AddPersonalInfoResponse> call, Throwable t) {
+
+            }
+        });
+
 
     }
 

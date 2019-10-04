@@ -9,7 +9,8 @@
 
     android:layout_height="match_parent">
 
-<RelativeLayout
+<LinearLayout
+    android:fitsSystemWindows="true"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -57,8 +58,8 @@ android:hapticFeedbackEnabled="false"
 
             android:clipToPadding="false"
             android:orientation="horizontal"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
             android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -73,7 +74,6 @@ android:hapticFeedbackEnabled="false"
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:padding="10dp"
 
             android:layout_marginTop="10dp"
 
@@ -201,8 +201,8 @@ android:hapticFeedbackEnabled="false"
             android:layout_width="match_parent"
             android:id="@+id/secondrc"
             android:orientation="horizontal"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
             android:layout_height="wrap_content"/>
 
@@ -212,6 +212,7 @@ android:hapticFeedbackEnabled="false"
     <LinearLayout
         android:layout_width="match_parent"
         android:id="@+id/lin5"
+        android:layout_marginTop="5dp"
         android:layout_below="@+id/lin4"
         android:orientation="vertical"
         android:gravity="top"
@@ -219,11 +220,10 @@ android:hapticFeedbackEnabled="false"
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:id="@+id/thirdrc"
-
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
             android:clipToPadding="false"
             android:orientation="horizontal"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
             android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -249,8 +249,8 @@ android:hapticFeedbackEnabled="false"
             android:layout_width="match_parent"
             android:id="@+id/fourthrc"
             android:orientation="horizontal"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
             android:layout_height="wrap_content"/>
 
@@ -258,6 +258,6 @@ android:hapticFeedbackEnabled="false"
 
 
 
-</RelativeLayout>
+</LinearLayout>
 
 </com.eleganzit.tag.utils.MyNestedScrollView>

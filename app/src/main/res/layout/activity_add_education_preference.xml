@@ -60,7 +60,7 @@
                         android:layout_centerVertical="true"
                         android:layout_centerInParent="true"
                         android:fontFamily="@font/roboto_medium"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
                         android:id="@+id/submit"
                         android:layout_alignParentEnd="true"
                         android:fontFamily="@font/roboto_medium"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -151,7 +151,8 @@
 
                     </TextView>
                     <EditText
-
+                        android:id="@+id/stream"
+                        android:inputType="text"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
@@ -176,7 +177,8 @@
                     </TextView>
 
                     <EditText
-
+                        android:id="@+id/course"
+                        android:inputType="text"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
@@ -202,7 +204,8 @@
                     </TextView>
 
                     <EditText
-
+                        android:inputType="text"
+android:id="@+id/specialisation"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
@@ -228,11 +231,13 @@
                     </TextView>
 
                     <EditText
+                        android:inputType="text"
 
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
                         android:padding="9dp"
+                        android:id="@+id/mode_of_study"
                         android:layout_width="match_parent"
                         android:background="@drawable/editbg"
                         android:layout_height="wrap_content"></EditText>

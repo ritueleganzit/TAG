@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+
+    >
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/hintt"
+        ></View>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        >
+    <TextView
+        android:textColor="@color/txtcolor"
+
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/roboto_regular"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:text="Exam Name"
+        android:layout_height="wrap_content">
+
+
+    </TextView>
+    <EditText
+        android:inputType="text"
+
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="9dp"
+        android:layout_width="match_parent"
+        android:background="@drawable/editbg"
+        android:layout_height="wrap_content"></EditText>
+    <TextView
+        android:textColor="@color/txtcolor"
+
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/roboto_regular"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:text="Exam Mark"
+        android:layout_height="wrap_content">
+
+
+    </TextView>
+    <EditText
+        android:inputType="text"
+
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="9dp"
+        android:layout_width="match_parent"
+        android:background="@drawable/editbg"
+        android:layout_height="wrap_content"></EditText>
+    <TextView
+        android:textColor="@color/txtcolor"
+
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/roboto_regular"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:text="Exam Rank"
+        android:layout_height="wrap_content">
+
+
+    </TextView>
+    <EditText
+        android:inputType="text"
+
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="9dp"
+        android:layout_width="match_parent"
+        android:background="@drawable/editbg"
+        android:layout_height="wrap_content"></EditText>
+
+</LinearLayout>
+</LinearLayout>

@@ -7,20 +7,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.eleganzit.tag.R;
+import com.eleganzit.tag.model.Preferancedata;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CurrentEduAdapter extends RecyclerView.Adapter<CurrentEduAdapter.MyViewHolder>
 {
 
     Context context;
     Activity activity;
-
-    public CurrentEduAdapter(ArrayList<String> accounts, Context context) {
+    List<Preferancedata> accounts;
+    public CurrentEduAdapter(List<Preferancedata> accounts, Context context) {
 
         this.context = context;
+        this.accounts = accounts;
         activity = (Activity) context;
     }
 
@@ -36,6 +40,17 @@ public class CurrentEduAdapter extends RecyclerView.Adapter<CurrentEduAdapter.My
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int i) {
 
+        Preferancedata preferancedata=accounts.get(i);
+        holder.tvcourse.setText(""+preferancedata.getStream());
+        if (preferancedata.getSpecialisation()!=null  && !(preferancedata.getSpecialisation().isEmpty()))
+        {
+            holder.mode_of_study.setText(""+preferancedata.getCourse()+" ("+preferancedata.getSpecialisation()+")");
+        }
+        else
+        {
+            holder.mode_of_study.setText(""+preferancedata.getCourse());
+        }
+
 
 
 
@@ -43,14 +58,16 @@ public class CurrentEduAdapter extends RecyclerView.Adapter<CurrentEduAdapter.My
 
     @Override
     public int getItemCount() {
-        return 2;
+        return accounts.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-
+TextView tvcourse,mode_of_study;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            mode_of_study=itemView.findViewById(R.id.mode_of_study);
+            tvcourse=itemView.findViewById(R.id.tvcourse);
 
 
         }

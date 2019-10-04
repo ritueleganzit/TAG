@@ -1,0 +1,74 @@
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_weight="0.6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:textColor="@color/txtcolor"
+            android:layout_marginBottom="10dp"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="13sp"
+
+            android:layout_width="match_parent"
+            android:text="For the course"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+        <EditText
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:inputType="text"
+            android:layout_marginBottom="10dp"
+            android:padding="9dp"
+            android:focusable="false"
+            android:layout_width="match_parent"
+            android:background="@drawable/editbg"
+            android:layout_height="wrap_content"></EditText>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_weight="0.4"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:textColor="@color/txtcolor"
+            android:layout_marginBottom="10dp"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="13sp"
+
+            android:layout_width="match_parent"
+            android:text="For the Specialization"                                android:layout_height="wrap_content">
+
+        </TextView>
+
+        <EditText
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:inputType="text"
+            android:layout_marginBottom="10dp"
+            android:padding="9dp"
+            android:focusable="false"
+            android:layout_width="match_parent"
+            android:background="@drawable/editbg"
+            android:layout_height="wrap_content"></EditText>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="2dp"
+    android:padding="3dp"
+    android:background="#f7fdfc"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:textColor="@color/txtcolor"
+                    android:gravity="center_vertical"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_width="match_parent"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:text="Bachelor of Engineering[B.Tech](Civil Engineering)"
+                    android:layout_height="wrap_content"></TextView>
+                <TextView
+
+                    android:textColor="@color/txtcolor"
+                    android:gravity="center_vertical"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_width="match_parent"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:text="Full time | 4 Years"
+                    android:layout_height="wrap_content"></TextView>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+
+
+        android:textColor="@color/txtcolor"
+        android:gravity="center_vertical"
+        android:fontFamily="@font/roboto_regular"
+        android:layout_width="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:text="Admission:"
+        android:layout_height="wrap_content"></TextView>
+    <LinearLayout
+        android:layout_marginLeft="5dp"
+
+        android:entries="@array/feesarray"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <TextView
+
+
+            android:textColor="@color/txtcolor"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/roboto_regular"
+            android:layout_width="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="Counselling /Fees - 1.99 Lakhs/Year"
+            android:layout_height="wrap_content"></TextView>
+        <TextView
+
+
+            android:textColor="@color/txtcolor"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/roboto_regular"
+            android:layout_width="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="Management Quota /Fees - 1.99 Lakhs/Year"
+            android:layout_height="wrap_content"></TextView>
+        <TextView
+
+
+            android:textColor="@color/txtcolor"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/roboto_regular"
+            android:layout_width="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="NRI quota /Fees - 1.99 Lakhs/Year"
+            android:layout_height="wrap_content"></TextView>
+        <TextView
+
+
+            android:textColor="@color/txtcolor"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/roboto_regular"
+            android:layout_width="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="SAARC Country /Fees - 1.99 Lakhs/Year"
+            android:layout_height="wrap_content"></TextView>
+        <TextView
+
+
+            android:textColor="@color/txtcolor"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/roboto_regular"
+            android:layout_width="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="International quota /Fees - 1.99 Lakhs/Year"
+            android:layout_height="wrap_content"></TextView>
+    </LinearLayout>
+</LinearLayout>
+
+
+            </android.support.v7.widget.LinearLayoutCompat>
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+
+    </LinearLayout>
+
+

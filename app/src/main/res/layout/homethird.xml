@@ -13,7 +13,6 @@ app:cardBackgroundColor="@color/colorPrimaryDark"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_margin="10dp"
-        android:padding="10dp"
 
         android:layout_height="wrap_content">
 
@@ -21,14 +20,14 @@ app:cardBackgroundColor="@color/colorPrimaryDark"
             android:layout_weight="0.8"
             android:gravity="start"
             android:orientation="vertical"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             >
 
             <ImageView
                 android:layout_width="match_parent"
-                android:scaleType="centerInside"
-                android:layout_height="wrap_content"
+
+                android:layout_height="match_parent"
                 app:srcCompat="@drawable/computer">
 
             </ImageView>
@@ -46,8 +45,7 @@ app:cardBackgroundColor="@color/colorPrimaryDark"
             <TextView
                 android:textColor="#ffffff"
                 android:fontFamily="@font/roboto_regular"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-
+android:textAppearance="?android:textAppearanceSmall"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_width="wrap_content"

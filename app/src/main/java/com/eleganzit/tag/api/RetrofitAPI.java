@@ -18,8 +18,10 @@ public class RetrofitAPI {
             .writeTimeout(60, TimeUnit.SECONDS)
             .build();
     public static String BASE_URL="http://itechgaints.com/";
+    public static String BASE_URLN="http://eleganzit.online/";
 
     public static Retrofit retrofit=null;
+    public static Retrofit retrofitn=null;
 
     public static Retrofit getRetrofit()
     {
@@ -32,6 +34,19 @@ public class RetrofitAPI {
                     .build();
         }
         return retrofit;
+    }
+
+    public static Retrofit getRetrofitN()
+    {
+        if(retrofitn==null)
+        {
+            retrofitn = new Retrofit.Builder()
+                    .baseUrl(BASE_URLN)
+                    .client(okHttpClient)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return retrofitn;
     }
 
 }

@@ -4,8 +4,15 @@ package com.eleganzit.tag;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
+import android.text.SpannableString;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -16,6 +23,7 @@ import android.widget.Toast;
 import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.LoginResponse;
+import com.eleganzit.tag.utils.HideKeyBoard;
 import com.eleganzit.tag.utils.UserLoggedInSession;
 
 import java.util.regex.Matcher;
@@ -28,12 +36,13 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
 
-    TextView login_signup,forgot,txtlogin,termsandcondition;
+    TextView login_signup,forgot,txtlogin,termsandcondition,privacy;
     CheckBox cbprivacy,rememberme;
     EditText login_emailid,login_password;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     UserLoggedInSession userLoggedInSession;
+    CardView cardviewhide;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         sharedPreferences=getSharedPreferences("rememberme",MODE_PRIVATE);
         editor=sharedPreferences.edit();
         userLoggedInSession=new UserLoggedInSession(LoginActivity.this);
+        cardviewhide=findViewById(R.id.cardviewhide);
         login_signup=findViewById(R.id.login_signup);
         cbprivacy=findViewById(R.id.cbprivacy);
         rememberme=findViewById(R.id.rememberme);
@@ -63,8 +73,52 @@ public class LoginActivity extends AppCompatActivity {
         {
             rememberme.setChecked(true);
             login_emailid.setText(""+sharedPreferences.getString("remember",""));
+            login_password.setText(""+sharedPreferences.getString("rememberpassword",""));
 
         }
+
+        HideKeyBoard.setupUI(cardviewhide,LoginActivity.this);
+
+        SpannableString SpanString = new SpannableString(
+                "I agree Privacy policy & Terms Conditions");
+
+        ClickableSpan teremsAndCondition = new ClickableSpan() {
+            @Override
+            public void onClick(View textView) {
+
+
+                Intent mIntent = new Intent(LoginActivity.this, TermsAndCondition.class);
+                mIntent.putExtra("isTermsAndCondition", true);
+                startActivity(mIntent);
+
+            }
+        };
+
+        // Character starting from 32 - 45 is Terms and condition.
+        // Character starting from 49 - 63 is privacy policy.
+
+        ClickableSpan privacy = new ClickableSpan() {
+            @Override
+            public void onClick(View textView) {
+
+                Intent mIntent = new Intent(LoginActivity.this, PrivacyPolicy.class);
+                mIntent.putExtra("isPrivacyPolicy", true);
+                startActivity(mIntent);
+
+            }
+        };
+
+        SpanString.setSpan(teremsAndCondition, 25, 41, 0);
+        SpanString.setSpan(privacy, 8, 22, 0);
+      //  SpanString.setSpan(new ForegroundColorSpan(Color.BLUE), 25, 40, 0);
+        //SpanString.setSpan(new ForegroundColorSpan(Color.BLUE), 8, 22, 0);
+        SpanString.setSpan(new UnderlineSpan(), 25, 41, 0);
+        SpanString.setSpan(new UnderlineSpan(), 8, 22, 0);
+
+        termsandcondition.setMovementMethod(LinkMovementMethod.getInstance());
+        termsandcondition.setText(SpanString, TextView.BufferType.SPANNABLE);
+        termsandcondition.setSelected(true);
+
 
         termsandcondition.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +156,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (rememberme.isChecked())
                         {
                             editor.putString("remember",""+login_emailid.getText().toString());
+                            editor.putString("rememberpassword",""+login_password.getText().toString());
                             editor.commit();
                         }
                         else
@@ -165,7 +220,8 @@ public class LoginActivity extends AppCompatActivity {
                        userLoggedInSession.createLoginSession(response.body().getData().get(0).getUserEmail()
                        ,response.body().getData().get(0).getUserId()
                        ,response.body().getData().get(0).getName()
-                       ,"");
+                       ,""
+                       ,response.body().getData().get(0).getMobile());
 
                     }
                     else

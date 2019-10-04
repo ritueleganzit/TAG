@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal" android:layout_width="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginBottom="8dp"
+    android:id="@+id/chlin1"
+    android:layout_height="wrap_content">
+    <LinearLayout
+
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+        >
+             <ImageView
+                android:layout_width="45dp"
+                android:text="ADMISSION"
+                android:id="@+id/img"
+                android:scaleType="centerInside"
+android:src="@drawable/swimming"
+                android:padding="8dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:fontFamily="@font/roboto_regular"
+                android:layout_height="45dp"></ImageView>
+
+
+
+        <TextView
+            android:textColor="@color/txtcolor"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:text="Swimming"
+android:id="@+id/nam"
+            android:layout_height="wrap_content"></TextView>
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ed_bg">
+    <LinearLayout
+        android:padding="10dp"
+
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <ImageView
+        android:src="@drawable/school"
+            android:layout_width="80dp"
+            android:scaleType="centerCrop"
+            android:layout_height="70dp">
+
+        </ImageView>
+        <LinearLayout
+            android:paddingLeft="10dp"
+
+
+
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:id="@+id/collegename"
+                android:layout_width="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:layout_toLeftOf="@+id/myRatingBar"
+                android:text="RV College of Engineering "
+                android:fontFamily="@font/roboto_regular"
+                android:layout_height="wrap_content"></TextView>
+
+
+            <TextView
+
+                android:textColor="#939393"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:layout_below="@+id/collegename"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Banglore, Karnataka, India "
+                android:layout_height="wrap_content"></TextView>
+            <RatingBar
+                android:id="@+id/myRatingBar"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:rating="2"
+                android:theme="@style/ReviewRatingBar"
+                android:layout_alignParentRight="true"
+                android:isIndicator="false"
+                ></RatingBar>
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:padding="5dp"
+
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+<LinearLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_weight="1">
+
+    <LinearLayout
+android:layout_gravity="left"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
+            android:layout_marginLeft="7dp"
+
+            android:gravity="left"
+            android:layout_width="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:layout_toLeftOf="@+id/myRatingBar"
+            android:text="Course name"
+            android:fontFamily="@font/roboto_bold"
+            android:layout_height="wrap_content"></TextView>
+ <TextView
+     android:gravity="bottom"
+
+     android:layout_width="wrap_content"
+            android:textSize="12sp"
+     android:drawableLeft="@drawable/ic_user"
+            android:layout_toLeftOf="@+id/myRatingBar"
+            android:text="90000 Students"
+            android:fontFamily="@font/roboto_regular"
+            android:layout_height="wrap_content">
+
+ </TextView> <TextView
+
+     android:padding="10dp"
+        android:gravity="left"
+     android:layout_width="wrap_content"
+            android:textSize="12sp"
+        android:background="@drawable/btnbgwhitte"
+            android:layout_toLeftOf="@+id/myRatingBar"
+            android:text="JEE Main"
+            android:fontFamily="@font/roboto_regular"
+            android:layout_height="wrap_content"></TextView>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_gravity="left"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+       <TextView
+
+        android:padding="10dp"
+           android:gravity="bottom"
+        android:layout_width="wrap_content"
+        android:textSize="12sp"
+           android:layout_gravity="center"
+        android:text="Round 1"
+        android:fontFamily="@font/roboto_regular"
+        android:layout_height="match_parent"></TextView>
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_gravity="right|bottom"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:gravity="bottom|right"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:gravity="right"
+
+            android:layout_width="wrap_content"
+            android:textSize="12sp"
+            android:layout_toLeftOf="@+id/myRatingBar"
+            android:text="5.62 lakhs"
+            android:fontFamily="@font/roboto_regular"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/myRatingBar"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="right"
+            android:text="Rank 708"
+            android:textSize="12sp"></TextView>
+
+
+    </LinearLayout>
+
+</LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:padding="5dp"
+
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_marginLeft="7dp"
+
+                        android:gravity="left"
+                        android:layout_width="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:layout_toLeftOf="@+id/myRatingBar"
+                        android:text="Course name"
+                        android:fontFamily="@font/roboto_bold"
+                        android:layout_height="wrap_content"></TextView>
+                    <TextView
+                        android:gravity="bottom"
+
+                        android:layout_width="wrap_content"
+                        android:textSize="12sp"
+                        android:drawableLeft="@drawable/ic_user"
+                        android:layout_toLeftOf="@+id/myRatingBar"
+                        android:text="90000 Students"
+                        android:fontFamily="@font/roboto_regular"
+                        android:layout_height="wrap_content">
+
+                    </TextView> <TextView
+
+                    android:padding="10dp"
+                    android:gravity="left"
+                    android:layout_width="wrap_content"
+                    android:textSize="12sp"
+                    android:background="@drawable/btnbgwhitte"
+                    android:layout_toLeftOf="@+id/myRatingBar"
+                    android:text="JEE Main"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_height="wrap_content"></TextView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_gravity="center"
+android:gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+
+                        android:padding="10dp"
+                        android:gravity="bottom|center"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:textSize="12sp"
+
+                        android:text="Round 1"
+                        android:fontFamily="@font/roboto_regular"
+                        android:layout_height="match_parent"></TextView>
+
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="right|bottom"
+                    android:layout_width="match_parent"
+                    android:gravity="bottom|right"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:gravity="right"
+
+                        android:layout_width="wrap_content"
+                        android:textSize="12sp"
+                        android:layout_toLeftOf="@+id/myRatingBar"
+                        android:text="5.62 lakhs"
+                        android:fontFamily="@font/roboto_regular"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/myRatingBar"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="right"
+                        android:text="Rank 708"
+                        android:textSize="12sp"></TextView>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

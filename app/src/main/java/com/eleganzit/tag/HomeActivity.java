@@ -4,12 +4,13 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 
-
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.res.ResourcesCompat;
@@ -24,7 +25,11 @@ import android.view.View;
 
 
 import com.eleganzit.tag.ui.activity.AskAQuestionActivity;
+import com.eleganzit.tag.ui.activity.CollegeSelectSpecializationActivity;
 import com.eleganzit.tag.ui.activity.MyProfileActivity;
+import com.eleganzit.tag.ui.activity.TopCollegesActivity;
+import com.eleganzit.tag.ui.activity.collegepredictor.CollegePredictorActivity;
+import com.eleganzit.tag.ui.activity.school.SchoolSelectSpecializationActivity;
 import com.eleganzit.tag.ui.home.HomeFragment;
 import com.eleganzit.tag.utils.UserLoggedInSession;
 import com.infideap.drawerbehavior.AdvanceDrawerLayout;
@@ -75,13 +80,38 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
         navigationView.setNavigationItemSelectedListener(this);
         View header = navigationView.getHeaderView(0);
         TextView text = (TextView) header.findViewById(R.id.name);
-        text.setText(""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_NAME));
+        TextView mobiletv = (TextView) header.findViewById(R.id.mobiletv);
+        TextView emailtv = (TextView) header.findViewById(R.id.emailtv);
+
+
+        if(userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_NAME)!=null && !(userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_NAME).isEmpty()))
+        {
+            text.setText(""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_NAME));
+        }
+        if(userLoggedInSession.getUserDetails().get(UserLoggedInSession.EMAIL)!=null && !(userLoggedInSession.getUserDetails().get(UserLoggedInSession.EMAIL).isEmpty()))
+        {
+            emailtv.setText(""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.EMAIL));
+        }
+
+        if(userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_PHONE)!=null && !userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_PHONE).isEmpty())
+        {
+            mobiletv.setText(""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_PHONE));
+        }
+
+
 
         HomeFragment homeFragment= new HomeFragment();
         getSupportFragmentManager().beginTransaction()//
                 .replace(R.id.container, homeFragment, "TAG")
                 .commit();
 
+        header.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, MyProfileActivity.class));
+
+            }
+        });
     }
 
 
@@ -125,12 +155,32 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
         {
           startActivity(new Intent(HomeActivity.this, TermsAndCondition.class));
 
+        }if (id==R.id.nav__menu_college_p)
+        {
+         // startActivity(new Intent(HomeActivity.this, CollegePredictorActivity.class));
+
+        }if (id==R.id.nav_share)
+        {
+            try {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, "TAG");
+                String shareMessage= "\nLet me recommend you this application\n\n";
+                shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID +"\n\n";
+                shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                startActivity(Intent.createChooser(shareIntent, "choose one"));
+            } catch(Exception e) {
+                //e.toString();
+            }
+
         }if (id==R.id.nav_menu_privacy)
         {
           startActivity(new Intent(HomeActivity.this, PrivacyPolicy.class));
 
         }if (id==R.id.nav_logout)
         {
+            final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(HomeActivity.this);
+
             AlertDialog alertDialog=     new AlertDialog.Builder(this).setMessage("Are you sure you want to logout?").setCancelable(false)
 
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -138,6 +188,9 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
                             userLoggedInSession.logoutUser();
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.clear();
+                            editor.commit();
                             //signOut();
                         }
                     }).setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -153,6 +206,36 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
         }if (id==R.id.nav_gallery)
         {
             startActivity(new Intent(HomeActivity.this, MyProfileActivity.class));
+
+        }if (id==R.id.nav_slideshow)
+        {
+           // startActivity(new Intent(HomeActivity.this, SchoolSelectSpecializationActivity.class));
+
+        }if (id==R.id.nav_menu_courses)
+        {
+            startActivity(new Intent(HomeActivity.this, SelectCourseActivity.class));
+
+        }if (id==R.id.nav_menu_specialization)
+        {
+            startActivity(new Intent(HomeActivity.this, SelectSpecializationActivity.class));
+
+        }if (id==R.id.nav_send)
+        {
+            startActivity(new Intent(HomeActivity.this, RateUs.class));
+
+        }if (id==R.id.nav_menu_help)
+        {
+            startActivity(new Intent(HomeActivity.this, HelpFAQActivity.class));
+
+        }if (id==R.id.nav__menu_send)
+        {
+            //
+             startActivity(new Intent(HomeActivity.this, ViewQuestionsActivity.class));
+
+        }if (id==R.id.nav_tools)
+        {
+
+             startActivity(new Intent(HomeActivity.this, CollegeSelectSpecializationActivity.class));
 
         }
         drawer.closeDrawer(GravityCompat.START);

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.TopCollegesActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_collapseMode="pin"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_gravity="end"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:src="@drawable/ic_back_white"
+                        android:id="@+id/back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+
+                    <TextView
+                        android:layout_toRightOf="@+id/back"
+                        android:gravity="start"
+                        android:textColor="#ffffff"
+                        android:text="Tops Schools in India"
+                        android:layout_marginLeft="15dp"
+
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textTitle" />
+
+
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
+<com.eleganzit.tag.utils.MyNestedScrollView
+    android:layout_width="match_parent"
+    android:fillViewport="true"
+    android:layout_height="match_parent">
+   <LinearLayout
+       android:descendantFocusability="blocksDescendants"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical"
+     >
+       <android.support.v7.widget.CardView android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           xmlns:app="http://schemas.android.com/apk/res-auto"
+           app:cardUseCompatPadding="true"
+           android:id="@+id/clgcard"
+           android:layout_marginTop="5dp"
+           android:layout_marginBottom="8dp"
+           xmlns:android="http://schemas.android.com/apk/res/android">
+       <LinearLayout
+           android:padding="5dp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical">
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="10dp"
+               android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+               android:text="List of colleges in India based on your search"></TextView>
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:textAppearance="?android:textAppearanceSmall"
+               android:text="2456 colleges"></TextView>
+
+       </LinearLayout>
+       </android.support.v7.widget.CardView>
+
+       <android.support.v7.widget.RecyclerView
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:focusableInTouchMode="true"
+           app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+           android:id="@+id/rc_top_colleges"
+           ></android.support.v7.widget.RecyclerView>
+
+
+   </LinearLayout>
+</com.eleganzit.tag.utils.MyNestedScrollView>
+</LinearLayout>

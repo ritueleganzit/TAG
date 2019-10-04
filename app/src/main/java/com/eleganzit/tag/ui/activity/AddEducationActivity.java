@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -13,6 +14,9 @@ import android.widget.Toast;
 
 import com.eleganzit.tag.R;
 import com.eleganzit.tag.SignUpActivity;
+import com.eleganzit.tag.api.RetrofitAPI;
+import com.eleganzit.tag.api.RetrofitInterface;
+import com.eleganzit.tag.model.AddEducationDataResponse;
 import com.eleganzit.tag.utils.UserLoggedInSession;
 
 import java.util.ArrayList;
@@ -20,6 +24,10 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddEducationActivity extends AppCompatActivity {
     private static final int MAX_YEAR = 2099;
@@ -34,15 +42,25 @@ public class AddEducationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_education);
+
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         year=findViewById(R.id.year);
         marks=findViewById(R.id.marks);
         subject=findViewById(R.id.subject);
         board=findViewById(R.id.board);
         school_name=findViewById(R.id.school_name);
+        cource_year=findViewById(R.id.year);
         submit=findViewById(R.id.submit);
         cource_level=findViewById(R.id.cource_level);
         userLoggedInSession=new UserLoggedInSession(AddEducationActivity.this);
         user_id=userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_ID);
+        Log.d("ciuyn",""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_ID));
         progressDialog = new ProgressDialog(AddEducationActivity.this);
         progressDialog.setMessage("Please Wait");
         progressDialog.setCancelable(false);
@@ -59,7 +77,9 @@ cource_level.setText("Bachelor");
             public void onClick(View v) {
                 if (isValid())
                 {
-                    Toast.makeText(AddEducationActivity.this, "valid", Toast.LENGTH_SHORT).show();
+
+                    addeducationbg();
+                    //Toast.makeText(AddEducationActivity.this, "valid", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -80,6 +100,39 @@ cource_level.setText("Bachelor");
 
                 AlertDialog dialog = builder.create();
                 dialog.show();
+            }
+        });
+    }
+
+    private void addeducationbg() {
+        progressDialog.show();
+        RetrofitInterface myInterface = RetrofitAPI.getRetrofit().create(RetrofitInterface.class);
+        Call<AddEducationDataResponse> call=myInterface.addeducationbg("add_education_bg"
+        ,user_id
+        ,cource_level.getText().toString()
+        ,school_name.getText().toString()
+        ,cource_year.getText().toString()
+        ,board.getText().toString()
+        ,subject.getText().toString()
+        ,marks.getText().toString());
+        call.enqueue(new Callback<AddEducationDataResponse>() {
+            @Override
+            public void onResponse(Call<AddEducationDataResponse> call, Response<AddEducationDataResponse> response) {
+                progressDialog.dismiss();
+                if (response.isSuccessful())
+                {
+                    if (response.body().getData()!=null)
+                    {
+                        Toast.makeText(AddEducationActivity.this, "Successfully Inserted", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AddEducationDataResponse> call, Throwable t) {
+progressDialog.dismiss();
+                Toast.makeText(AddEducationActivity.this, "Server and Internet Error", Toast.LENGTH_SHORT).show();
             }
         });
     }

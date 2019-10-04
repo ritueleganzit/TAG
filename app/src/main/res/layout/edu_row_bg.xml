@@ -1,0 +1,221 @@
+<android.support.v7.widget.CardView android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="5dp"
+    android:padding="5dp"
+    app:cardUseCompatPadding="true"
+    app:cardBackgroundColor="#ffffff"
+    android:layout_margin="5dp"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:paddingBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+
+            android:layout_gravity="end"
+
+            android:orientation="vertical">
+
+
+
+
+            <ImageView
+                android:id="@+id/delete"
+
+                android:layout_gravity="end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_close"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:textColor="@color/txtcolor"
+
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:text="Course Level"
+            android:layout_height="wrap_content">
+
+
+        </TextView>
+        <EditText
+            android:drawableRight="@drawable/ic_down"
+android:id="@+id/cource_level"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:focusable="false"
+            android:padding="9dp"
+            android:layout_width="match_parent"
+            android:background="@drawable/editbg"
+            android:layout_height="wrap_content"></EditText>
+        <TextView
+            android:textColor="@color/txtcolor"
+            android:layout_marginBottom="10dp"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+
+            android:layout_width="match_parent"
+            android:text="School Name"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+        <EditText
+
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="9dp"
+            android:id="@+id/school_name"
+            android:layout_width="match_parent"
+            android:inputType="text"
+            android:background="@drawable/editbg"
+            android:layout_height="wrap_content"></EditText>
+
+        <TextView
+            android:textColor="@color/txtcolor"
+            android:layout_marginBottom="10dp"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+
+            android:layout_width="match_parent"
+            android:text="Course Completion Year"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+        <EditText
+            android:drawableRight="@drawable/ic_down"
+
+            android:layout_marginLeft="10dp"
+            android:id="@+id/cource_year"
+            android:focusable="false"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="9dp"
+            android:layout_width="match_parent"
+            android:background="@drawable/editbg"
+            android:layout_height="wrap_content"></EditText>
+
+        <TextView
+            android:textColor="@color/txtcolor"
+            android:layout_marginBottom="10dp"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+
+            android:layout_width="match_parent"
+            android:text="Board"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+        <EditText
+
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="9dp"
+            android:id="@+id/board"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:background="@drawable/editbg"
+            android:layout_height="wrap_content"></EditText>
+
+
+        <TextView
+            android:textColor="@color/txtcolor"
+            android:layout_marginBottom="10dp"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+
+            android:layout_width="match_parent"
+            android:text="Subject"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+        <EditText
+
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="9dp"
+            android:inputType="text"
+            android:id="@+id/subject"
+            android:layout_width="match_parent"
+            android:background="@drawable/editbg"
+            android:layout_height="wrap_content"></EditText>   <TextView
+        android:textColor="@color/txtcolor"
+        android:layout_marginBottom="10dp"
+
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:fontFamily="@font/roboto_regular"
+        android:textAppearance="?android:textAppearanceSmall"
+
+        android:layout_width="match_parent"
+        android:text="Marks"
+        android:layout_height="wrap_content">
+
+    </TextView>
+
+        <EditText
+
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="9dp"
+            android:id="@+id/marks"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:background="@drawable/editbg"
+            android:layout_height="wrap_content"></EditText>
+
+
+        <Button
+            android:text="Save"
+
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:gravity="center"
+            android:id="@+id/btnsave"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content">
+
+        </Button>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

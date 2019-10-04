@@ -5,7 +5,7 @@
     <color name="colorAccent">#69C7C0</color>
     <color name="colorbutton">#1CABA0</color>
     <color name="hintt">#CCCCCC</color>
-    <color name="profileBackground">#fff</color>
+    <color name="profileBackground">#f5f5f5</color>
 
 <color name="txtcolor">#514F4F</color>
 </resources>

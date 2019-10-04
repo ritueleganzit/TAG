@@ -114,7 +114,8 @@ TextView submit,resend;
                 if (response.isSuccessful()) {
 
                     if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
-                        startActivity(new Intent(VerificationActivity.this, LoginActivity.class));
+                        startActivity(new Intent(VerificationActivity.this, ChangePasswordActivity.class)
+                        .putExtra("user_id",""+response.body().getData().get(0).getUserId()));
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                     }
@@ -139,6 +140,6 @@ TextView submit,resend;
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-
+finish();
     }
 }

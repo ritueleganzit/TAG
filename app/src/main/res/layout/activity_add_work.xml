@@ -60,7 +60,7 @@
                         android:layout_centerVertical="true"
                         android:layout_centerInParent="true"
                         android:fontFamily="@font/roboto_medium"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
                         android:id="@+id/submit"
                         android:layout_alignParentEnd="true"
                         android:fontFamily="@font/roboto_medium"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -151,11 +151,12 @@
 
                     </TextView>
                     <EditText
-
+android:id="@+id/employee_name"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
                         android:padding="9dp"
+                        android:inputType="text"
                         android:layout_width="match_parent"
                         android:background="@drawable/editbg"
                         android:layout_height="wrap_content"></EditText>
@@ -176,7 +177,8 @@
                     </TextView>
 
                     <EditText
-
+                        android:id="@+id/designation"
+                        android:inputType="text"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
@@ -188,7 +190,7 @@
                     <TextView
                         android:textColor="@color/txtcolor"
                         android:layout_marginBottom="10dp"
-
+                        android:inputType="text"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
@@ -202,7 +204,8 @@
                     </TextView>
 
                     <EditText
-
+android:id="@+id/department"
+                        android:inputType="text"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
@@ -228,11 +231,12 @@
                     </TextView>
 
                     <EditText
-
+android:id="@+id/current_job"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
                         android:padding="9dp"
+                        android:inputType="text"
                         android:layout_width="match_parent"
                         android:background="@drawable/editbg"
                         android:layout_height="wrap_content"></EditText>

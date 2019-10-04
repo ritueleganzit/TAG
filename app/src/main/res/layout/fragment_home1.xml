@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.eleganzit.tag.utils.MyNestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:fillViewport="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:background="#F5F5F5"
+
+    android:layout_height="match_parent">
+
+<RelativeLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/lin1"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="150dp" />
+
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/indicator"
+android:hapticFeedbackEnabled="false"
+            app:tabRippleColor="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:tabBackground="@drawable/indicator_selector"
+            app:tabGravity="center"
+
+            android:layout_above="@+id/skip"
+            app:tabIndicatorHeight="0dp" />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_below="@+id/lin1"
+        android:layout_width="match_parent"
+        android:id="@+id/lin2"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/firstrc"
+
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/lin3"
+        android:layout_below="@+id/lin2"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+
+            android:layout_marginTop="10dp"
+
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    app:srcCompat="@mipmap/ic_exam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerInside"
+
+                    >
+
+
+                </ImageView>
+                <TextView
+                    android:textColor="@android:color/black"
+
+                    android:layout_width="wrap_content"
+                    android:text="Exam" android:fontFamily="@font/roboto_regular"
+                    android:layout_height="wrap_content"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:scaleType="centerInside"
+
+                    app:srcCompat="@mipmap/ic_counselling"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+
+
+                </ImageView>
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:layout_width="wrap_content"
+                    android:text="Counselling" android:fontFamily="@font/roboto_regular"
+                    android:layout_height="wrap_content"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    app:srcCompat="@mipmap/ic_result"
+                    android:layout_width="wrap_content"
+                    android:scaleType="centerInside"
+
+                    android:layout_height="wrap_content"
+                    >
+
+
+                </ImageView>
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:layout_width="wrap_content"
+                    android:text="Result" android:fontFamily="@font/roboto_regular"
+                    android:layout_height="wrap_content"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:scaleType="centerInside"
+                    app:srcCompat="@mipmap/ic_nearby"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+
+
+                </ImageView>
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:layout_width="wrap_content"
+                    android:text="Near By" android:fontFamily="@font/roboto_regular"
+                    android:layout_height="wrap_content"></TextView>
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/lin3"
+        android:layout_width="match_parent"
+        android:id="@+id/lin4"
+        android:orientation="vertical"
+        android:gravity="top"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:padding="10dp"
+            android:textColor="@android:color/black"
+            android:paddingStart="14dp"
+            android:paddingEnd="12dp"
+            android:layout_width="match_parent"
+            android:text="Featured Colleges" android:fontFamily="@font/roboto_regular"
+            android:layout_height="wrap_content">
+
+        </TextView>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/secondrc"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/lin5"
+        android:layout_below="@+id/lin4"
+        android:orientation="vertical"
+        android:gravity="top"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/thirdrc"
+
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/lin5"
+        android:layout_width="match_parent"
+        android:id="@+id/lin6"
+        android:orientation="vertical"
+        android:gravity="top"
+        android:layout_height="wrap_content">
+        <TextView
+            android:padding="10dp"
+            android:textColor="@android:color/black"
+            android:paddingStart="14dp"
+            android:paddingEnd="12dp"
+            android:layout_width="match_parent"
+            android:text="Featured Schools" android:fontFamily="@font/roboto_regular"
+            android:layout_height="wrap_content">
+
+        </TextView>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/fourthrc"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
+
+</com.eleganzit.tag.utils.MyNestedScrollView>

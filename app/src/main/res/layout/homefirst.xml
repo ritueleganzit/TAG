@@ -13,7 +13,6 @@ xmlns:android="http://schemas.android.com/apk/res/android">
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_margin="10dp"
-    android:padding="10dp"
 
     android:layout_height="wrap_content">
     <LinearLayout
@@ -29,15 +28,15 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:textColor="#ffffff"
             android:layout_width="wrap_content"
             android:text="ADMISSION"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:fontFamily="@font/roboto_regular"
+
+            android:fontFamily="@font/roboto_medium"
             android:layout_height="wrap_content"></TextView>
 
         <TextView
             android:textColor="#ffffff"
             android:fontFamily="@font/roboto_regular"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-
+android:layout_marginTop="2dp"
+            android:textSize="13sp"
             android:layout_width="wrap_content"
             android:text="Apply to top colleges and university"
             android:layout_height="wrap_content"></TextView>

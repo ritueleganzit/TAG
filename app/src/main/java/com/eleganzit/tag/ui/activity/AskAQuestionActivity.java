@@ -84,7 +84,6 @@ call.enqueue(new Callback<AskQuestionResponse>() {
 
             if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
                 Toast.makeText(AskAQuestionActivity.this, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                finish();
             }
             else
             {

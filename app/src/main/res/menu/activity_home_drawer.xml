@@ -6,59 +6,96 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
+
+            android:icon="@drawable/ic_house_menu"
             android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_profile_menu"
+
             android:title="@string/menu_gallery" />
         <item
+            android:icon="@drawable/ic_school_menu"
+
             android:id="@+id/nav_slideshow"
             android:title="@string/menu_slideshow" />
         <item
+            android:icon="@drawable/ic_college_menu"
+
             android:id="@+id/nav_tools"
             android:title="@string/menu_tools" />
         <item
+            android:icon="@drawable/ic_ask_menu"
+
             android:id="@+id/nav__menushare"
             android:title="@string/menu_share" />
         <item
+            android:icon="@drawable/ic_dis_menu"
+
             android:id="@+id/nav__menu_send"
             android:title="@string/menu_send" />
 
         <item
+            android:icon="@drawable/ic_clg_menu"
+
             android:id="@+id/nav__menu_college_p"
             android:title="@string/menu_college_p" />
         <item
+            android:icon="@drawable/ic_clg_menu_compare"
+
             android:id="@+id/nav_menu_college_compare"
             android:title="@string/menu_college_compare" />
 
         <item
+            android:icon="@drawable/ic_salary_menu"
+
             android:id="@+id/nav_menu_salary_trend"
             android:title="@string/menu_salary_trend" />
         <item
             android:id="@+id/nav_menu_courses"
+            android:icon="@drawable/ic_course_menu"
+
             android:title="@string/menu_courses" />
+        <item
+            android:id="@+id/nav_menu_specialization"
+            android:icon="@drawable/ic_menu_special"
+
+            android:title="@string/menu_specialisation" />
     </group>
     <group android:id="@+id/group_settings"
         android:checkableBehavior="single">
         <item
-                android:id="@+id/nav_share"
+            android:icon="@drawable/ic_share_menu"
+
+            android:id="@+id/nav_share"
                 android:title="@string/menu_share_app" />
             <item
+                android:icon="@drawable/ic_rate_menu"
+
                 android:id="@+id/nav_send"
                 android:title="@string/menu_rate_us" />
 
             <item
+                android:icon="@drawable/ic_ask_menu"
+
                 android:id="@+id/nav_menu_help"
                 android:title="@string/menu_help" />
 
             <item
+                android:icon="@drawable/ic_terms_menu"
+
                 android:id="@+id/nav_menu_terms"
                 android:title="@string/menu_terms" />
             <item
+                android:icon="@drawable/ic_privacy_menu"
+
                 android:id="@+id/nav_menu_privacy"
                 android:title="@string/menu_privacy" />
 
         <item
-                android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout_menu"
+
+            android:id="@+id/nav_logout"
                 android:title="@string/menu_logout" />
     </group>
 </menu>

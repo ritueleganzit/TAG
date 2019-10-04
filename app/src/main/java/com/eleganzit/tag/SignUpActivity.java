@@ -1,13 +1,19 @@
 package com.eleganzit.tag;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +21,7 @@ import android.widget.Toast;
 import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.LoginResponse;
+import com.eleganzit.tag.utils.HideKeyBoard;
 import com.eleganzit.tag.utils.UserLoggedInSession;
 
 import java.util.regex.Matcher;
@@ -28,6 +35,7 @@ public class SignUpActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     String[] listItems = {"INDIA", "UNITED STATES"};
     UserLoggedInSession userLoggedInSession;
+    CardView cardhide;
 
     EditText nationality,password,edemail,edmobile,edname;
     TextView logintxt,register;
@@ -35,6 +43,7 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_activity);
+        cardhide=findViewById(R.id.cardhide);
         logintxt=findViewById(R.id.logintxt);
         register=findViewById(R.id.register);
         nationality=findViewById(R.id.nationality);
@@ -51,7 +60,7 @@ public class SignUpActivity extends AppCompatActivity {
         nationality.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+HideKeyBoard.hideKeyboard(SignUpActivity.this);
                 AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
 
                 builder.setItems(listItems, new DialogInterface.OnClickListener() {
@@ -86,6 +95,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             }
         });
+        HideKeyBoard.setupUI(cardhide,SignUpActivity.this);
     }
 
 
@@ -104,7 +114,8 @@ public void  setSignUp(){
                     userLoggedInSession.createSignUpSession(response.body().getData().get(0).getUserEmail()
                             ,response.body().getData().get(0).getUserId()
                             ,response.body().getData().get(0).getName()
-                            ,"");
+                            ,""
+                    ,response.body().getData().get(0).getMobile());
 
                 }
                 else
@@ -155,8 +166,8 @@ public void  setSignUp(){
             edemail.requestFocus();
             return false;
         }
-        else if (password.getText().toString().trim().equals("") || password.getText().toString().trim().length() < 6) {
-            Toast.makeText(this, "Password must contain atleast 6 characters", Toast.LENGTH_SHORT).show();
+        else if (password.getText().toString().trim().equals("") || password.getText().toString().trim().length() < 8) {
+            Toast.makeText(this, "Password must contain atleast 8 characters", Toast.LENGTH_SHORT).show();
 
 
             password.requestFocus();
@@ -175,4 +186,12 @@ public void  setSignUp(){
 
         return true;
     }
+
+
+
+
+
+
+
+
 }

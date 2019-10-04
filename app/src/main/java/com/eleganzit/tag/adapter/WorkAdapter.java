@@ -7,20 +7,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.eleganzit.tag.R;
+import com.eleganzit.tag.model.Workdata;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.MyViewHolder>
 {
 
     Context context;
     Activity activity;
-
-    public WorkAdapter(ArrayList<String> accounts, Context context) {
+   List<Workdata> accounts;
+    public WorkAdapter(List<Workdata> accounts, Context context) {
 
         this.context = context;
+        this.accounts = accounts;
         activity = (Activity) context;
     }
 
@@ -36,21 +40,25 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.MyViewHolder>
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int i) {
 
-
+        Workdata workdata=accounts.get(i);
+holder.designation.setText(""+workdata.getDesignation());
+holder.employee_name.setText(""+workdata.getDepartment());
 
 
     }
 
     @Override
     public int getItemCount() {
-        return 2;
+        return accounts.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-
+TextView designation,employee_name;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            employee_name=itemView.findViewById(R.id.employee_name);
+            designation=itemView.findViewById(R.id.designation);
 
 
         }

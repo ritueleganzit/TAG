@@ -7,6 +7,9 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 import com.eleganzit.tag.utils.UserLoggedInSession;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
+
 
 public class SplashActivity extends AppCompatActivity {
     UserLoggedInSession userLoggedInSession;
@@ -14,6 +17,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
         userLoggedInSession=new UserLoggedInSession(SplashActivity.this);
 

@@ -39,6 +39,7 @@ public class UserLoggedInSession {
 
     public static final String USER_NAME = "user_name";
     public static final String USER_PHOTO = "photo";
+    public static final String USER_PHONE = "phone";
 
     public UserLoggedInSession(Context context){
         this._context = context;
@@ -48,7 +49,7 @@ public class UserLoggedInSession {
         pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
     }
-    public void createLoginSession(String email,String user_id,String user_name,String photo){
+    public void createLoginSession(String email,String user_id,String user_name,String photo,String phone){
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
 
@@ -60,6 +61,7 @@ public class UserLoggedInSession {
         editor.putString(USER_NAME, user_name);
 
         editor.putString(USER_PHOTO, photo);
+        editor.putString(USER_PHONE, phone);
 
 
         // commit changes
@@ -75,7 +77,7 @@ public class UserLoggedInSession {
 
 
 
-    }public void createSignUpSession(String email,String user_id,String user_name,String photo){
+    }public void createSignUpSession(String email,String user_id,String user_name,String photo,String phone){
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
 
@@ -87,6 +89,7 @@ public class UserLoggedInSession {
         editor.putString(USER_NAME, user_name);
 
         editor.putString(USER_PHOTO, photo);
+        editor.putString(USER_PHONE, phone);
 
 
         // commit changes
@@ -129,6 +132,7 @@ public class UserLoggedInSession {
         user.put(EMAIL, pref.getString(EMAIL, null));
         user.put(USER_NAME, pref.getString(USER_NAME, null));
         user.put(USER_PHOTO, pref.getString(USER_PHOTO, null));
+        user.put(USER_PHONE, pref.getString(USER_PHONE, null));
 
 
 

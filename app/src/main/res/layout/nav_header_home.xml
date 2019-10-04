@@ -22,7 +22,6 @@
            android:layout_width="80dp"
            android:layout_height="80dp"
            android:layout_below="@+id/toolbar"
-           android:background="@drawable/circle_bg"
            android:layout_gravity="center_vertical|center_horizontal">
 
            <ImageView
@@ -34,12 +33,12 @@
                android:scaleType="centerInside"
                android:transitionName="simple_activity_transition"
                android:layout_centerHorizontal="true"
-               app:srcCompat="@drawable/pr"
+               app:srcCompat="@drawable/female"
 
                tools:ignore="UnusedAttribute"/>
 
 
-           <TextView
+       <!--    <TextView
                android:fontFamily="@font/roboto_medium"
                android:textColor="#ffffff"
 android:background="@color/colorPrimaryDark"
@@ -52,7 +51,7 @@ android:background="@color/colorPrimaryDark"
                android:text="EDIT"
                android:layout_alignParentRight="true"
                android:layout_gravity="right"
-               />
+               />-->
        </RelativeLayout>
    </LinearLayout>
 
@@ -79,6 +78,7 @@ android:id="@+id/name"
 
             android:layout_width="wrap_content"
 
+        android:id="@+id/mobiletv"
             android:layout_height="wrap_content"
 android:textColor="@color/txtcolor"
             android:text="+(91) 9898098980"
@@ -90,6 +90,7 @@ android:textColor="@color/txtcolor"
         android:textColor="@color/txtcolor"
             android:layout_height="wrap_content"
 
+        android:id="@+id/emailtv"
             android:text="example@gmail.com"
             android:fontFamily="@font/roboto_medium"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
