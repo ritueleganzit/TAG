@@ -209,7 +209,7 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
 
         }if (id==R.id.nav_slideshow)
         {
-           // startActivity(new Intent(HomeActivity.this, SchoolSelectSpecializationActivity.class));
+            startActivity(new Intent(HomeActivity.this, SchoolSelectSpecializationActivity.class));
 
         }if (id==R.id.nav_menu_courses)
         {

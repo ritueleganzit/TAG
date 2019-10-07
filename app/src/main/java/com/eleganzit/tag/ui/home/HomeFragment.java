@@ -2,6 +2,7 @@ package com.eleganzit.tag.ui.home;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -27,6 +28,8 @@ import android.widget.RelativeLayout;
 
 
 import com.eleganzit.tag.R;
+import com.eleganzit.tag.ui.activity.exam.ExamActivity;
+import com.eleganzit.tag.ui.activity.result.ResultsActivity;
 import com.eleganzit.tag.utils.HomeFirstSliderAdapter;
 import com.eleganzit.tag.utils.HomeSecondSliderAdapter;
 import com.eleganzit.tag.utils.HomeSliderAdapter;
@@ -43,7 +46,7 @@ public class HomeFragment extends Fragment {
     ViewPager viewPager;
     TabLayout indicator;
     RecyclerView firstrc,secondrc,thirdrc,fourthrc;
-    LinearLayout linearLayout,lin2,lin3,lin4,lin5,lin6;
+    LinearLayout linearLayout,lin2,lin3,lin4,lin5,lin6,linear_exam,linresult;
 
     List<Integer> color;
     ArrayList colorName;
@@ -53,11 +56,13 @@ public class HomeFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         linearLayout=root.findViewById(R.id.lin1);
+        linear_exam=root.findViewById(R.id.linear_exam);
         lin2=root.findViewById(R.id.lin2);
         lin3=root.findViewById(R.id.lin3);
         lin4=root.findViewById(R.id.lin4);
         lin6=root.findViewById(R.id.lin6);
         lin5=root.findViewById(R.id.lin5);
+        linresult=root.findViewById(R.id.linresult);
         firstrc=root.findViewById(R.id.firstrc);
         secondrc=root.findViewById(R.id.secondrc);
         fourthrc=root.findViewById(R.id.fourthrc);
@@ -139,6 +144,17 @@ public class HomeFragment extends Fragment {
             editor.putBoolean("firstTime", true);
             editor.commit();
         }
+        linear_exam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), ExamActivity.class));
+            }
+        });linresult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), ResultsActivity.class));
+            }
+        });
         /*ViewGroup.LayoutParams params = indicator.getLayoutParams();
 //Change the height in 'Pixels'
         params.height = remaining;*/

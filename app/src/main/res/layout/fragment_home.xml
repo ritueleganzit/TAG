@@ -83,6 +83,7 @@ android:hapticFeedbackEnabled="false"
                 android:orientation="vertical"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:id="@+id/linear_exam"
                 android:layout_height="match_parent">
 
                 <ImageView
@@ -132,6 +133,7 @@ android:hapticFeedbackEnabled="false"
                 android:orientation="vertical"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:id="@+id/linresult"
                 android:layout_height="match_parent">
 
                 <ImageView

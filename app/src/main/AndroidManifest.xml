@@ -14,7 +14,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         android:xlargeScreens="true">
-        <activity android:name=".ui.activity.collegepredictor.CollegePredictorDetail"></activity>
+        <activity android:name=".ui.activity.result.ResultsActivity"></activity>
+        <activity android:name=".ui.activity.exam.ExamDetailActivity" />
+        <activity android:name=".ui.activity.exam.ExamActivity" />
+        <activity android:name=".ui.activity.collegepredictor.CollegePredictorDetail" />
         <activity android:name=".ui.activity.collegepredictor.CollegePredictorActivity" />
         <activity
             android:name=".ui.activity.AddEducationInformationActivity"
