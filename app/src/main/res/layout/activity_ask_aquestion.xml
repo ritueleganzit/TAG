@@ -67,7 +67,6 @@
                         android:id="@+id/textTitle" />
 
                     <TextView
-                        android:layout_toRightOf="@+id/back"
                         android:textColor="#ffffff"
                         android:text="Submit"
                         android:gravity="end"
@@ -77,7 +76,7 @@ android:layout_alignParentEnd="true"
                         android:fontFamily="@font/roboto_medium"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
 
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                          />
 

@@ -6,6 +6,7 @@ import com.eleganzit.tag.model.AddEducationPreferance;
 import com.eleganzit.tag.model.AddEducationPreferanceResponse;
 import com.eleganzit.tag.model.AddPersonalInfoResponse;
 import com.eleganzit.tag.model.AddworkexpResponse;
+import com.eleganzit.tag.model.AppliedCollegeListResponse;
 import com.eleganzit.tag.model.AskQuestionResponse;
 import com.eleganzit.tag.model.DeleteApiResponse;
 import com.eleganzit.tag.model.GetCollegeById;
@@ -15,6 +16,7 @@ import com.eleganzit.tag.model.GetProfileDataResponse;
 import com.eleganzit.tag.model.GetSpecializationResponse;
 import com.eleganzit.tag.model.LoginResponse;
 import com.eleganzit.tag.model.SendOtpResponse;
+import com.eleganzit.tag.model.TopCollegeResponse;
 import com.eleganzit.tag.model.UpdateEducationPreferanceResponse;
 
 import retrofit2.Call;
@@ -221,11 +223,25 @@ public interface RetrofitInterface {
     @GET("/testhost/users/courceById/{id}")
     Call<GetCoursesResponse> getCoursesbyId(@Path(value = "id", encoded = true) int id);
 
+    @GET("/testhost/users/getCollege/{id}")
+    Call<GetCollegeById> getCollegeById(@Path(value = "id", encoded =true) int id);
+
     @GET("/testhost/users/getCollege/4")
     Call<GetCollegeById> getCollegeById();
+
 
     @GET("/testhost/users/specialization/{name}")
     Call<GetSpecializationResponse> getSpecialization(@Path(value = "name", encoded = true) String name);
 
 
+    @GET("/testhost/users/appliedCollegeList/{id}")
+    Call<AppliedCollegeListResponse> appliedCollegeList(@Path(value = "id", encoded = true) String id);
+
+    @FormUrlEncoded()
+    @POST("/testhost/users/getCollegeList")
+    Call<TopCollegeResponse> getCollegeList(
+
+            @Field("course_name") String course_name,
+            @Field("specialization_name") String specialization_name
+    );
 }

@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.eleganzit.tag.R;
@@ -18,12 +19,15 @@ import com.eleganzit.tag.ui.home.HomeFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.nereo.multi_image_selector.bean.Image;
+
 public class TabbedDialog extends DialogFragment {
     TabLayout tabLayout;
     ViewPager viewPager;
     List<Integer> color;
     List<String> colorName;
     TextView txt_click;
+    ImageView close;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -34,6 +38,7 @@ public class TabbedDialog extends DialogFragment {
 
         txt_click=rootview.findViewById(R.id.txt_click);
         viewPager=rootview.findViewById(R.id.viewPager);
+        close=rootview.findViewById(R.id.close);
         tabLayout=rootview.findViewById(R.id.indicator);
         color.add(Color.parseColor("#008e85"));
         color.add(Color.parseColor("#1CABA0"));
@@ -48,6 +53,11 @@ public class TabbedDialog extends DialogFragment {
 
         tabLayout.setupWithViewPager(viewPager);color = new ArrayList<>();
         txt_click.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        }); close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();

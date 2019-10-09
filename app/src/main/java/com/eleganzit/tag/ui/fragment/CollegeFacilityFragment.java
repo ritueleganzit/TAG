@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.eleganzit.tag.R;
 import com.eleganzit.tag.adapter.FacilityAdapter;
+import com.eleganzit.tag.ui.activity.CollegeDetailActivity;
 import com.eleganzit.tag.utils.HomeSecondSliderAdapter;
 
 /**
@@ -30,7 +31,7 @@ RecyclerView rc_facility;
 View v=inflater.inflate(R.layout.fragment_college_facility, container, false);
         rc_facility=v.findViewById(R.id.rc_facility);
         rc_facility.setAdapter(new FacilityAdapter(getActivity()));
-
+        //CollegeDetailActivity.college_nametv.setText("Facilities");
         return v;
     }
 

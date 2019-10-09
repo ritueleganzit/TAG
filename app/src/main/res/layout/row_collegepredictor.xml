@@ -55,7 +55,7 @@
                 android:rating="2"
                 android:theme="@style/ReviewRatingBar"
                 android:layout_alignParentRight="true"
-                android:isIndicator="false"
+                android:isIndicator="true"
                 ></RatingBar>
         </LinearLayout>
 

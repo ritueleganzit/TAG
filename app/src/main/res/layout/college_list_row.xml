@@ -76,13 +76,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="5"
-                android:rating="2"
                 android:theme="@style/ReviewRatingBar"
                 android:layout_alignParentRight="true"
-                android:isIndicator="false"
+                android:isIndicator="true"
                 ></RatingBar>
             <TextView
-
+android:id="@+id/collegeaddress"
                 android:textColor="#939393"
                 android:layout_alignParentLeft="true"
                 android:layout_width="wrap_content"
@@ -124,10 +123,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="start"
-
+android:id="@+id/approved_by"
                     android:layout_alignParentLeft="true"
                     android:layout_weight="1"
-                    android:text="Approved by - AICTE"
+                    android:text=""
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
 
 
@@ -149,7 +148,7 @@
         android:drawableLeft="@drawable/ic_clock"
         android:gravity="center"
         android:layout_gravity="top"
-
+android:id="@+id/college_type"
         android:text="Full Time"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
 
@@ -159,8 +158,8 @@
         android:layout_centerInParent="true"
         android:layout_weight="1"
         android:gravity="start"
-
-        android:text="Accredited by NAAC"
+android:id="@+id/accreditation"
+        android:text=""
         android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
 
 </LinearLayout>
@@ -178,7 +177,7 @@
         android:gravity="start"
         android:layout_gravity="top"
         android:layout_weight="1"
-
+android:id="@+id/years"
         android:drawablePadding="5dp"
         android:drawableLeft="@drawable/ic_cal"
 
@@ -190,9 +189,9 @@
 android:gravity="start"
         android:layout_weight="1"
         android:layout_gravity="start"
+android:id="@+id/isUniversity"
 
-
-        android:text="Affiliated to Deemed university"
+        android:text=""
         android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
 
 </LinearLayout>
@@ -212,30 +211,32 @@ android:gravity="start"
             android:orientation="horizontal"
 >
             <TextView
-
+android:id="@+id/placement"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:text="Placement : Excellent"
+                android:text=""
                 android:layout_height="wrap_content">
 
             </TextView>
            <TextView
+               android:id="@+id/privatetv"
                android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:text="Private"
+                android:text=""
                 android:layout_height="wrap_content">
 
             </TextView>
 <TextView
                android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:text="VTU"
+                android:text=""
                 android:layout_height="wrap_content">
 
             </TextView><TextView
+            android:id="@+id/rank"
                android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:text="Rank 10"
+                android:text=""
                 android:layout_height="wrap_content">
 
             </TextView>

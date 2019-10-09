@@ -187,6 +187,8 @@ RecyclerView rc_edu_pref;
 
             @Override
             public void onFailure(Call<GetProfileDataResponse> call, Throwable t) {
+                progressDialog.dismiss();
+
                 Toast.makeText(getActivity(), "Server or Internet Error", Toast.LENGTH_SHORT).show();
             }
         });

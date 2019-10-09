@@ -67,7 +67,6 @@
                         android:id="@+id/textTitle" />
 
                     <TextView
-                        android:layout_toRightOf="@+id/back"
                         android:textColor="#ffffff"
                         android:text="Next"
                         android:gravity="end"
@@ -141,6 +140,7 @@
                         android:layout_centerVertical="true"
                         android:background="@android:color/transparent"
                         android:paddingLeft="6dp"
+                        android:inputType="textNoSuggestions"
                         android:textAppearance="?android:textAppearanceSmall"
                         android:focusable="false"
                         android:hint="Select Course you want to take"

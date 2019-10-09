@@ -44,6 +44,7 @@
                         android:gravity="start"
                         android:textColor="#ffffff"
                         android:text="College Name"
+
                         android:layout_marginLeft="15dp"
 
                         android:layout_centerInParent="true"
@@ -52,7 +53,7 @@
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textTitle" />
+                        android:id="@+id/college_name" />
 
 
 

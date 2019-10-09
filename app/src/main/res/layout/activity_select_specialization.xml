@@ -68,7 +68,6 @@
                         android:id="@+id/textTitle" />
 
                     <TextView
-                        android:layout_toRightOf="@+id/back"
                         android:textColor="#ffffff"
                         android:text="Next"
                         android:gravity="end"
@@ -157,6 +156,7 @@
                                     android:paddingLeft="6dp"
                                     android:textAppearance="?android:textAppearanceSmall"
 android:hint="Select Course you want to take"
+                                    android:inputType="textNoSuggestions"
                                     android:focusable="false"
                                     android:dropDownVerticalOffset="45dp"
                                     android:paddingTop="10dp"
@@ -208,6 +208,7 @@ android:hint="Select Course you want to take"
                                     android:paddingLeft="6dp"
                                     android:id="@+id/ed_specializationsCourse"
                                     android:focusable="false"
+                                    android:inputType="textNoSuggestions"
                                     android:textAppearance="?android:textAppearanceSmall"
                                     android:hint="Select Specialization"
                                     android:dropDownVerticalOffset="45dp"

@@ -67,11 +67,9 @@
                         android:id="@+id/textTitle" />
 
                     <TextView
-                        android:layout_toRightOf="@+id/back"
                         android:textColor="#ffffff"
                         android:text="Next"
                         android:gravity="end"
-                        android:layout_centerVertical="true"
 
                         android:layout_marginRight="20dp"
                         android:id="@+id/next"

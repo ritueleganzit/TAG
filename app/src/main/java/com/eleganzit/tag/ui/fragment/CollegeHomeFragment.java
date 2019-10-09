@@ -63,7 +63,8 @@ public class CollegeHomeFragment extends Fragment {
     ArrayList<CourseDetail> firstcourseDetailArrayList;
     ArrayList<EventDetail> galleryDataArrayList;
     ImageView imgbg;
-
+    int college_id;
+String college_name;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -89,7 +90,9 @@ public class CollegeHomeFragment extends Fragment {
         study_mode=v.findViewById(R.id.study_mode);
         imgbg=v.findViewById(R.id.imgbg);
         userLoggedInSession=new UserLoggedInSession(getActivity());
-
+        Bundle b = getArguments();
+        college_id=b.getInt("college_id",0);
+        college_name=b.getString("college_name");
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Please Wait");
         progressDialog.setCancelable(false);
@@ -106,6 +109,9 @@ public class CollegeHomeFragment extends Fragment {
 
             }
         });
+        if (college_name!=null && !(college_name.isEmpty())){
+            CollegeDetailActivity.college_nametv.setText(""+college_name);
+        }
 
         viewAll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +126,11 @@ public class CollegeHomeFragment extends Fragment {
 
             }
         });
-        getCollegeData();
+        if (college_id!=0)
+        {
+            getCollegeData();
+        }
+
         return v;
     }
 
@@ -136,12 +146,14 @@ public class CollegeHomeFragment extends Fragment {
         galleryDataArrayList=new ArrayList<>();
         progressDialog.show();
         RetrofitInterface myInterface = RetrofitAPI.getRetrofitN().create(RetrofitInterface.class);
+       /// Toast.makeText(getActivity(), "asdsa"+college_id, Toast.LENGTH_SHORT).show();
 
-        final Call<GetCollegeById> getCollegeByIdCall=myInterface.getCollegeById();
+        final Call<GetCollegeById> getCollegeByIdCall=myInterface.getCollegeById(Integer.parseInt(""+college_id));
         getCollegeByIdCall.enqueue(new Callback<GetCollegeById>() {
             @Override
             public void onResponse(Call<GetCollegeById> call, Response<GetCollegeById> response) {
                 progressDialog.dismiss();
+                //Toast.makeText(getActivity(), "asdsa"+college_id, Toast.LENGTH_SHORT).show();
                 if (response.isSuccessful())
                 {
                     if (response.body().getData()!=null)

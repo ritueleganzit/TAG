@@ -82,7 +82,7 @@
                 android:title="@string/menu_help" />
 
             <item
-                android:icon="@drawable/ic_terms_menu"
+                android:icon="@drawable/ic_menu_terms"
 
                 android:id="@+id/nav_menu_terms"
                 android:title="@string/menu_terms" />

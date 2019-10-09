@@ -106,10 +106,12 @@
                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                android:text="List of colleges in India based on your search"></TextView>
            <TextView
+               android:id="@+id/college_count"
+
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:textAppearance="?android:textAppearanceSmall"
-               android:text="2456 colleges"></TextView>
+               android:text=""></TextView>
 
        </LinearLayout>
        </android.support.v7.widget.CardView>

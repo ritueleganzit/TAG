@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import com.eleganzit.tag.R;
 import com.eleganzit.tag.adapter.CollegeGalleryAdapter;
 import com.eleganzit.tag.model.EventDetail;
+import com.eleganzit.tag.ui.activity.CollegeDetailActivity;
 import com.eleganzit.tag.utils.SwipeController;
 
 import java.util.ArrayList;
@@ -47,6 +48,7 @@ ArrayList<EventDetail> arrayList=new ArrayList<>();
         rc_infra.setAdapter(new CollegeGalleryAdapter(arrayList,linearlayoutsize,getActivity()));
         rc_events.setAdapter(new CollegeGalleryAdapter(arrayList,linearlayoutsize,getActivity()));
         rc_video.setAdapter(new CollegeGalleryAdapter(arrayList,linearlayoutsize,getActivity()));
+       // CollegeDetailActivity.college_nametv.setText("Gallery");
 
         return v;
     }

@@ -157,7 +157,7 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
 
         }if (id==R.id.nav__menu_college_p)
         {
-         // startActivity(new Intent(HomeActivity.this, CollegePredictorActivity.class));
+          startActivity(new Intent(HomeActivity.this, CollegePredictorActivity.class));
 
         }if (id==R.id.nav_share)
         {
