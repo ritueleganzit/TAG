@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:orientation="vertical"
+    android:layout_gravity="center_horizontal|center_vertical"
+    android:gravity="center_vertical|center_horizontal"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@drawable/dialog_header">
+        <TextView
+            android:padding="15dp"
+            android:text="SORT BY"
+            android:background="?android:selectableItemBackground"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:foreground="?android:selectableItemBackground"
+            android:textColor="#ffffff"
+            android:layout_height="wrap_content" />
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_bg"
+        android:orientation="vertical">
+        <TextView
+            android:padding="15dp"
+            android:text="Popularity(Based on search)"
+            android:background="?android:selectableItemBackground"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:foreground="?android:selectableItemBackground"
+            android:textColor="@color/colorPrimary"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="#c9c9c9"/>
+
+        <TextView
+            android:id="@+id/date"
+            android:padding="15dp"
+            android:text="Rating"
+            android:background="?android:selectableItemBackground"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:foreground="?android:selectableItemBackground"
+            android:textColor="@color/colorPrimary"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:id="@+id/divider_delete"
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="#c9c9c9"/>
+
+
+        <TextView
+            android:text="Fees"
+            android:gravity="center"
+            android:background="?android:selectableItemBackground"
+            android:foreground="?android:selectableItemBackground"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:padding="15dp"
+            android:textColor="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="#c9c9c9"/>
+
+
+              <!--
+
+                <TextView
+                    android:id="@+id/bike"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:text="Bike"
+                    android:textStyle="bold"
+                    android:background="?android:selectableItemBackground"
+                    android:layout_marginBottom="10dp"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+        -->
+
+
+    </LinearLayout>
+
+</LinearLayout>
