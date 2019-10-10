@@ -6,40 +6,50 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class GalleryData {
-    @SerializedName("event_details")
+    @SerializedName("college_gallery_id")
     @Expose
-    private List<EventDetail> eventDetails = null;
-    @SerializedName("infrastructure_details")
+    private String collegeGalleryId;
+    @SerializedName("college_id")
     @Expose
-    private List<InfrastructureDetail> infrastructureDetails = null;
-    @SerializedName("video_details")
+    private String collegeId;
+    @SerializedName("section_name")
     @Expose
-    private List<VideoDetail> videoDetails = null;
+    private String sectionName;
+    @SerializedName("image_url")
+    @Expose
+    private String imageUrl;
 
-    public List<EventDetail> getEventDetails() {
-        return eventDetails;
+    public String getCollegeGalleryId() {
+        return collegeGalleryId;
     }
 
-    public void setEventDetails(List<EventDetail> eventDetails) {
-        this.eventDetails = eventDetails;
+    public void setCollegeGalleryId(String collegeGalleryId) {
+        this.collegeGalleryId = collegeGalleryId;
     }
 
-    public List<InfrastructureDetail> getInfrastructureDetails() {
-        return infrastructureDetails;
+    public String getCollegeId() {
+        return collegeId;
     }
 
-    public void setInfrastructureDetails(List<InfrastructureDetail> infrastructureDetails) {
-        this.infrastructureDetails = infrastructureDetails;
+    public void setCollegeId(String collegeId) {
+        this.collegeId = collegeId;
     }
 
-    public List<VideoDetail> getVideoDetails() {
-        return videoDetails;
+    public String getSectionName() {
+        return sectionName;
     }
 
-    public void setVideoDetails(List<VideoDetail> videoDetails) {
-        this.videoDetails = videoDetails;
+    public void setSectionName(String sectionName) {
+        this.sectionName = sectionName;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
 
 }

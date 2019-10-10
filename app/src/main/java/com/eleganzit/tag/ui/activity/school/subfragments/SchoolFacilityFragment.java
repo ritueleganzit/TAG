@@ -28,7 +28,7 @@ RecyclerView rc_facility;
         // Inflate the layout for this fragment
 View v=inflater.inflate(R.layout.fragment_college_facility, container, false);
         rc_facility=v.findViewById(R.id.rc_facility);
-        rc_facility.setAdapter(new FacilityAdapter(getActivity()));
+       // rc_facility.setAdapter(new FacilityAdapter(getActivity()));
 
         return v;
     }

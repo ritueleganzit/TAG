@@ -42,9 +42,9 @@ ArrayList<EventDetail> arrayList=new ArrayList<>();
         eventDetail1.setImageUrl("https://eleganzit.online/img/tag_upload/college/images/myimage.jpeg");
         arrayList.add(eventDetail);
         arrayList.add(eventDetail1);
-        rc_infra.setAdapter(new CollegeGalleryAdapter(arrayList,linearlayoutsize,getActivity()));
-        rc_events.setAdapter(new CollegeGalleryAdapter(arrayList,linearlayoutsize,getActivity()));
-        rc_video.setAdapter(new CollegeGalleryAdapter(arrayList,linearlayoutsize,getActivity()));
+       // rc_infra.setAdapter(new CollegeGalleryAdapter(arrayList,linearlayoutsize,getActivity()));
+        //rc_events.setAdapter(new CollegeGalleryAdapter(arrayList,linearlayoutsize,getActivity()));
+        //rc_video.setAdapter(new CollegeGalleryAdapter(arrayList,linearlayoutsize,getActivity()));
 
         return v;
     }

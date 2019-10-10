@@ -115,6 +115,7 @@ android:id="@+id/collegeaddress"
 
                     android:gravity="start"
 
+                    android:id="@+id/specialname"
                     android:text="Computer Science"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
                 <TextView

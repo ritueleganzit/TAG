@@ -8,6 +8,7 @@ import com.eleganzit.tag.model.AddPersonalInfoResponse;
 import com.eleganzit.tag.model.AddworkexpResponse;
 import com.eleganzit.tag.model.AppliedCollegeListResponse;
 import com.eleganzit.tag.model.AskQuestionResponse;
+import com.eleganzit.tag.model.CollegeHomeResponse;
 import com.eleganzit.tag.model.DeleteApiResponse;
 import com.eleganzit.tag.model.GetCollegeById;
 import com.eleganzit.tag.model.GetCoursesResponse;
@@ -15,14 +16,26 @@ import com.eleganzit.tag.model.GetFaqListResponse;
 import com.eleganzit.tag.model.GetProfileDataResponse;
 import com.eleganzit.tag.model.GetSpecializationResponse;
 import com.eleganzit.tag.model.LoginResponse;
+import com.eleganzit.tag.model.QuestionAnsResponse;
 import com.eleganzit.tag.model.SendOtpResponse;
 import com.eleganzit.tag.model.TopCollegeResponse;
 import com.eleganzit.tag.model.UpdateEducationPreferanceResponse;
+import com.eleganzit.tag.model.appliedcollege.ApplyCollegeMobileResponse;
+import com.eleganzit.tag.model.homecourse.CourseResponse;
+import com.eleganzit.tag.model.homefacility.FacilitiesResponse;
+import com.eleganzit.tag.model.homegallery.GalleryResponse;
+import com.google.gson.JsonObject;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -33,7 +46,7 @@ import retrofit2.http.Path;
 public interface RetrofitInterface {
 
     @FormUrlEncoded()
-    @POST("/AudioWalkSystems-AdminPanel/tags/login-api.php")
+    @POST("/tags/login-api.php")
     Call<LoginResponse> doLogin(
             @Field("username") String username ,
             @Field("password") String password
@@ -41,13 +54,13 @@ public interface RetrofitInterface {
 
 
     @FormUrlEncoded()
-    @POST("/AudioWalkSystems-AdminPanel/tags/checkcode.php")
+    @POST("/tags/checkcode.php")
     Call<LoginResponse> checkcode(
             @Field("username") String username ,
             @Field("sentcode") String sentcode
     );
  @FormUrlEncoded()
-    @POST("/AudioWalkSystems-AdminPanel/tags/temp-api.php")
+    @POST("/tags/temp-api.php")
     Call<LoginResponse> get_restpassword(
             @Field("action") String get_restpassword ,
             @Field("user_id") String user_id ,
@@ -56,13 +69,13 @@ public interface RetrofitInterface {
 
 
     @FormUrlEncoded()
-    @POST("/AudioWalkSystems-AdminPanel/tags/send-otp.php")
+    @POST("/tags/send-otp.php")
     Call<SendOtpResponse> sendOtp(
             @Field("username") String username
     );
 
   @FormUrlEncoded()
-    @POST("/AudioWalkSystems-AdminPanel/tags/signup-api.php")
+    @POST("/tags/signup-api.php")
     Call<LoginResponse> doSignUP(
             @Field("name") String name ,
             @Field("mobile") String mobile,
@@ -72,7 +85,7 @@ public interface RetrofitInterface {
     );
 
  @FormUrlEncoded()
-    @POST("/AudioWalkSystems-AdminPanel/tags/temp-api.php")
+    @POST("/tags/temp-api.php")
     Call<AskQuestionResponse> askquestion(
             @Field("action") String ask_question ,
             @Field("user_id") String user_id,
@@ -80,7 +93,7 @@ public interface RetrofitInterface {
     );
 
  @FormUrlEncoded()
-    @POST("/AudioWalkSystems-AdminPanel/tags/temp-api.php")
+    @POST("/tags/temp-api.php")
     Call<AddPersonalInfoResponse> updatePersonalInfo(
             @Field("action") String personal_information ,
             @Field("user_id") String user_id,
@@ -91,7 +104,7 @@ public interface RetrofitInterface {
             @Field("location") String location
     );
  @FormUrlEncoded()
-    @POST("/AudioWalkSystems-AdminPanel/tags/temp-api.php")
+    @POST("/tags/temp-api.php")
     Call<AddPersonalInfoResponse> get_userdata(
             @Field("action") String get_userdata ,
             @Field("user_id") String user_id
@@ -100,7 +113,7 @@ public interface RetrofitInterface {
 
 
  @FormUrlEncoded()
-    @POST("/AudioWalkSystems-AdminPanel/tags/temp-api.php")
+    @POST("/tags/temp-api.php")
     Call<AddPersonalInfoResponse> updatePersonalInfo(
             @Field("action") String personal_information ,
             @Field("user_id") String user_id,
@@ -114,7 +127,7 @@ public interface RetrofitInterface {
 
 
 @FormUrlEncoded()
-    @POST("/AudioWalkSystems-AdminPanel/tags/temp-api.php")
+    @POST("/tags/temp-api.php")
     Call<AddEducationDataResponse> addeducationbg(
             @Field("action") String add_education_bg ,
             @Field("user_id") String user_id,
@@ -125,7 +138,7 @@ public interface RetrofitInterface {
             @Field("subject") String subject,
             @Field("marks") String marks
     );@FormUrlEncoded()
-    @POST("/AudioWalkSystems-AdminPanel/tags/temp-api.php")
+    @POST("/tags/temp-api.php")
     Call<AddEducationDataResponse> update_education_bg(
             @Field("action") String update_education_bg ,
             @Field("user_id") String user_id,
@@ -138,7 +151,7 @@ public interface RetrofitInterface {
             @Field("marks") String marks
     );
 @FormUrlEncoded()
-    @POST("/AudioWalkSystems-AdminPanel/tags/temp-api.php")
+    @POST("/tags/temp-api.php")
     Call<AddworkexpResponse> addWorkExp(
             @Field("action") String add_work_exp ,
             @Field("user_id") String user_id,
@@ -149,7 +162,7 @@ public interface RetrofitInterface {
     );
 
 @FormUrlEncoded()
-    @POST("/AudioWalkSystems-AdminPanel/tags/temp-api.php")
+    @POST("/tags/temp-api.php")
     Call<AddworkexpResponse> update_work(
             @Field("action") String update_work ,
             @Field("user_id") String user_id,
@@ -160,7 +173,7 @@ public interface RetrofitInterface {
             @Field("current_job") String current_job
     );
 @FormUrlEncoded()
-    @POST("/AudioWalkSystems-AdminPanel/tags/temp-api.php")
+    @POST("/tags/temp-api.php")
     Call<AddEducationPreferanceResponse> addeducationpreferance(
             @Field("action") String add_education_preferance ,
             @Field("user_id") String user_id,
@@ -170,7 +183,7 @@ public interface RetrofitInterface {
             @Field("mode_of_study") String mode_of_study
     );
 @FormUrlEncoded()
-    @POST("/AudioWalkSystems-AdminPanel/tags/temp-api.php")
+    @POST("/tags/temp-api.php")
     Call<UpdateEducationPreferanceResponse> update_education_preferance(
             @Field("action") String update_education_preferance ,
             @Field("user_id") String user_id,
@@ -183,21 +196,21 @@ public interface RetrofitInterface {
 
 
 @FormUrlEncoded()
-    @POST("/AudioWalkSystems-AdminPanel/tags/temp-api.php")
+    @POST("/tags/temp-api.php")
     Call<DeleteApiResponse> delete(
             @Field("action") String update_education_preferance ,
             @Field("education_id") String education_id
 
     );
 @FormUrlEncoded()
-    @POST("/AudioWalkSystems-AdminPanel/tags/temp-api.php")
+    @POST("/tags/temp-api.php")
     Call<DeleteApiResponse> delete_workdata(
             @Field("action") String update_education_preferance ,
             @Field("work_id") String work_id
 
     );
 @FormUrlEncoded()
-    @POST("/AudioWalkSystems-AdminPanel/tags/temp-api.php")
+    @POST("/tags/temp-api.php")
     Call<DeleteApiResponse> delete_preferancedata(
             @Field("action") String delete_preferancedata ,
             @Field("preferance_id") String preferance_id
@@ -205,7 +218,7 @@ public interface RetrofitInterface {
     );
 
     @FormUrlEncoded
- @POST("/AudioWalkSystems-AdminPanel/tags/temp-api.php")
+ @POST("/tags/temp-api.php")
     Call<GetProfileDataResponse> getprofiledata(
             @Field("action") String get_profiledata ,
             @Field("user_id") String user_id
@@ -223,8 +236,13 @@ public interface RetrofitInterface {
     @GET("/testhost/users/courceById/{id}")
     Call<GetCoursesResponse> getCoursesbyId(@Path(value = "id", encoded = true) int id);
 
-    @GET("/testhost/users/getCollege/{id}")
-    Call<GetCollegeById> getCollegeById(@Path(value = "id", encoded =true) int id);
+    @FormUrlEncoded
+    @POST("/tags/college.php")
+    Call<CollegeHomeResponse> getCollegeById(
+            @Field("action") String action,
+            @Field("college_id") String college_id
+
+    );
 
     @GET("/testhost/users/getCollege/4")
     Call<GetCollegeById> getCollegeById();
@@ -244,4 +262,36 @@ public interface RetrofitInterface {
             @Field("course_name") String course_name,
             @Field("specialization_name") String specialization_name
     );
+
+    @FormUrlEncoded()
+    @POST("/tags/ques-ans-list-api.php")
+    Call<QuestionAnsResponse> getquestion(
+
+            @Field("action") String ques_ans_list,
+            @Field("user_id") String user_id
+    );
+
+    @Headers({
+            "Accept: application/json",
+            "Content-Type: application/json"
+    })
+    @POST("applyCollegeMobile")
+    Call<JsonObject> applyCollegeMobile(
+
+            @Body JsonObject locationPost
+    );
+
+
+    @GET("/testhost/users/gallery/{id}")
+    Call<GalleryResponse> getGallery(@Path(value = "id", encoded = true) String id);
+  @GET("/testhost/users/facility/{id}")
+    Call<FacilitiesResponse> getfacility(@Path(value = "id", encoded = true) String id);
+    @FormUrlEncoded()
+    @POST("tags/college.php")
+    Call<CourseResponse> coursefees(
+
+            @Field("action") String coursefees,
+            @Field("college_id") String college_id
+    );
+
 }

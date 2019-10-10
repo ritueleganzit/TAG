@@ -97,7 +97,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+android:id="@+id/nessted"
         android:layout_margin="5dp"
         tools:context=".ui.activity.AddPersonalInfoActivity">
         <LinearLayout
@@ -127,8 +127,9 @@
 
                     </TextView>
                     <EditText
-                        android:id="@+id/name"
+                        android:id="@+id/first_name"
                         android:inputType="text"
+                        android:fontFamily="@font/roboto_regular"
 
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
@@ -153,7 +154,8 @@
                     </TextView>
                     <EditText
                         android:inputType="text"
-
+                        android:fontFamily="@font/roboto_regular"
+android:id="@+id/middle_name"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
@@ -180,7 +182,8 @@
                     </TextView>
                     <EditText
                         android:inputType="text"
-
+                        android:fontFamily="@font/roboto_regular"
+android:id="@+id/last_name"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
@@ -206,12 +209,13 @@
                     </TextView>
 
                     <EditText
-                        android:id="@+id/mobile"
+                        android:id="@+id/d_o_b"
                         android:focusable="false"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
                         android:padding="9dp"
+                        android:fontFamily="@font/roboto_regular"
                         android:drawableRight="@drawable/ic_calender"
                         android:layout_width="match_parent"
                         android:background="@drawable/editbg"
@@ -234,8 +238,9 @@
                     </TextView>
 
                     <EditText
-                        android:id="@+id/user_email"
+                        android:id="@+id/gender"
                         android:drawableRight="@drawable/ic_down"
+                        android:fontFamily="@font/roboto_regular"
 
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
@@ -243,6 +248,7 @@
                         android:padding="9dp"
                         android:focusable="false"
                         android:inputType="text"
+
                         android:layout_width="match_parent"
                         android:background="@drawable/editbg"
                         android:layout_height="wrap_content"></EditText>
@@ -265,8 +271,9 @@
 
                     <EditText
                         android:drawableRight="@drawable/ic_down"
+                        android:fontFamily="@font/roboto_regular"
 
-                        android:id="@+id/location"
+                        android:id="@+id/category"
                         android:focusable="false"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
@@ -309,7 +316,8 @@
                                 android:inputType="text"
                                 android:layout_marginBottom="10dp"
                                 android:padding="9dp"
-                                android:focusable="false"
+                                android:fontFamily="@font/roboto_regular"
+                                android:id="@+id/applied_course_name"
                                 android:layout_width="match_parent"
                                 android:background="@drawable/editbg"
                                 android:layout_height="wrap_content"></EditText>
@@ -343,8 +351,8 @@
                                 android:inputType="text"
                                 android:layout_marginBottom="10dp"
                                 android:padding="9dp"
-                                android:focusable="false"
-
+                                android:fontFamily="@font/roboto_regular"
+android:id="@+id/applied_specialization_name"
                                 android:layout_width="match_parent"
                                 android:background="@drawable/editbg"
                                 android:layout_height="wrap_content"></EditText>

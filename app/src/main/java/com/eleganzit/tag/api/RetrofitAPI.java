@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
  * Created by eleganz on 30/4/19.
@@ -17,7 +18,7 @@ public class RetrofitAPI {
             .readTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)
             .build();
-    public static String BASE_URL="http://itechgaints.com/";
+    public static String BASE_URL="http://eleganzit.online/";
     public static String BASE_URLN="http://eleganzit.online/";
 
     public static Retrofit retrofit=null;
@@ -30,6 +31,7 @@ public class RetrofitAPI {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .client(okHttpClient)
+                    .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
@@ -43,6 +45,7 @@ public class RetrofitAPI {
             retrofitn = new Retrofit.Builder()
                     .baseUrl(BASE_URLN)
                     .client(okHttpClient)
+                    .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

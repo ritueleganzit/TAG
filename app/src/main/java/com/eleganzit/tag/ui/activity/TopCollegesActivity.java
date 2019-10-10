@@ -32,6 +32,7 @@ public class TopCollegesActivity extends AppCompatActivity {
     RecyclerView rc_top_colleges;
     TextView college_count;
     ImageView sort;
+    String e_sp;
     ProgressDialog progressDialog;
     UserLoggedInSession userLoggedInSession;
     ArrayList<CollegeResult> collegeResultArrayList;
@@ -44,7 +45,7 @@ public class TopCollegesActivity extends AppCompatActivity {
         sort=findViewById(R.id.sort);
         college_count=findViewById(R.id.college_count);
         userLoggedInSession=new UserLoggedInSession(this);
-
+        e_sp=getIntent().getStringExtra("e_sp");
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please Wait");
         progressDialog.setCancelable(false);
@@ -75,7 +76,7 @@ public class TopCollegesActivity extends AppCompatActivity {
         collegeResultArrayList=new ArrayList<>();
         progressDialog.show();
         RetrofitInterface myInterface = RetrofitAPI.getRetrofitN().create(RetrofitInterface.class);
-        final Call<TopCollegeResponse> collegeResponseCall=myInterface.getCollegeList("BE","CSE");
+        final Call<TopCollegeResponse> collegeResponseCall=myInterface.getCollegeList("BE","Civil");
         collegeResponseCall.enqueue(new Callback<TopCollegeResponse>() {
             @Override
             public void onResponse(Call<TopCollegeResponse> call, Response<TopCollegeResponse> response) {
@@ -88,7 +89,7 @@ public class TopCollegesActivity extends AppCompatActivity {
                         college_count.setText(response.body().getCollegeCount()+" college");
                         collegeResultArrayList.addAll(response.body().getResult());
                     }
-                        rc_top_colleges.setAdapter(new CollegeListAdapter(collegeResultArrayList,TopCollegesActivity.this));
+                        rc_top_colleges.setAdapter(new CollegeListAdapter(e_sp,collegeResultArrayList,TopCollegesActivity.this));
 
 
                     }

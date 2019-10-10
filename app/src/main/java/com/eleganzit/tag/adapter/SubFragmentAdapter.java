@@ -12,20 +12,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.eleganzit.tag.R;
+import com.eleganzit.tag.model.QuestionData;
 import com.eleganzit.tag.ui.activity.CollegeDetailActivity;
+import com.eleganzit.tag.utils.TimeAgo;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 import static android.content.Context.WINDOW_SERVICE;
 
 public class SubFragmentAdapter extends RecyclerView.Adapter<SubFragmentAdapter.MyViewHolder>
 {
+    ArrayList<QuestionData> arrayList;
 
     Context context;
     Activity activity;
-    public SubFragmentAdapter(Context context) {
+    public SubFragmentAdapter(ArrayList<QuestionData> arrayList,Context context) {
 
         this.context = context;
+        this.arrayList = arrayList;
         activity = (Activity) context;
     }
 
@@ -40,6 +51,24 @@ public class SubFragmentAdapter extends RecyclerView.Adapter<SubFragmentAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int i) {
+QuestionData questionData=arrayList.get(i);
+
+if (questionData.getCreatedDate()!=null && !(questionData.getCreatedDate().isEmpty()))
+{
+    DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    try {
+        Date date = (Date)formatter.parse(questionData.getCreatedDate());
+        String timeAgo = TimeAgo.getTimeAgo(date.getTime());
+        holder.created_date.setText(""+timeAgo);
+
+
+    } catch (ParseException e) {
+        e.printStackTrace();
+    }
+}if (questionData.getQuestionText()!=null && !(questionData.getQuestionText().isEmpty()))
+{
+    holder.question_text.setText(""+questionData.getQuestionText());
+}
 
 
 
@@ -47,16 +76,19 @@ public class SubFragmentAdapter extends RecyclerView.Adapter<SubFragmentAdapter.
 
     @Override
     public int getItemCount() {
-        return 2;
+        return arrayList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
 CardView clgcard;
 ImageView imgbg;
+TextView question_text,created_date;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             imgbg=itemView.findViewById(R.id.imgbg);
+            question_text=itemView.findViewById(R.id.question_text);
+            created_date=itemView.findViewById(R.id.created_date);
 clgcard=itemView.findViewById(R.id.clgcard);
 
         }

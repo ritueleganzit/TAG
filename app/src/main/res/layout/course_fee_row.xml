@@ -31,6 +31,7 @@ android:layout_margin="15dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
+                    android:id="@+id/course_name"
                     android:textColor="@color/colorPrimaryDark"
                     android:gravity="center_vertical"
                     android:fontFamily="@font/roboto_regular"
@@ -56,6 +57,7 @@ android:layout_margin="15dp"
                 android:textColor="@color/colorPrimaryDark"
 
                 android:gravity="right"
+                android:id="@+id/total"
                 android:layout_marginRight="6dp"
                 android:layout_gravity="center_vertical"
                 android:layout_height="wrap_content"></TextView>

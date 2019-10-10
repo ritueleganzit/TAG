@@ -26,8 +26,10 @@ import com.eleganzit.tag.adapter.CoursesHomeAdapter;
 import com.eleganzit.tag.adapter.FacilityAdapter;
 import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
+import com.eleganzit.tag.model.CourceFee;
 import com.eleganzit.tag.model.CourseDetail;
 import com.eleganzit.tag.model.EventDetail;
+import com.eleganzit.tag.model.GalleryData;
 import com.eleganzit.tag.model.GetCollegeById;
 import com.eleganzit.tag.ui.activity.AddBasicInformationActivity;
 import com.eleganzit.tag.ui.activity.CollegeDetailActivity;
@@ -55,9 +57,9 @@ public class SchoolHomeFragment extends Fragment {
     ProgressDialog progressDialog;
     UserLoggedInSession userLoggedInSession;
     RecyclerView rc_events,courses_rc,rc_facility;
-    ArrayList<CourseDetail> courseDetailArrayList;
-    ArrayList<CourseDetail> firstcourseDetailArrayList;
-    ArrayList<EventDetail> galleryDataArrayList;
+    ArrayList<CourceFee> courseDetailArrayList;
+    ArrayList<CourceFee> firstcourseDetailArrayList;
+    ArrayList<GalleryData> galleryDataArrayList;
     ImageView imgbg;
 
     @Override
@@ -92,7 +94,7 @@ public class SchoolHomeFragment extends Fragment {
         progressDialog.setCanceledOnTouchOutside(false);
         linearlayoutsize=v.findViewById(R.id.linearlayoutsize);
 
-        rc_facility.setAdapter(new FacilityAdapter(getActivity()));
+       // rc_facility.setAdapter(new FacilityAdapter(getActivity()));
         imgbg.getLayoutParams().width= (int) (getScreenWidthInPXs(getContext(),getActivity()));
         imgbg.getLayoutParams().height= (int) (getScreenWidthInPXs(getContext(),getActivity())/3.5);
         applynow.setOnClickListener(new View.OnClickListener() {
@@ -248,12 +250,11 @@ getCollegeData();
 
                         //setCourse
 
-                        if (response.body().getData().getCourseDetail()!=null)
-                        {
-                            courseDetailArrayList.addAll(response.body().getData().getCourseDetail());
+                        if (response.body().getData().getCourseDetail()!=null) {
+                           // courseDetailArrayList.addAll(response.body().getData().getCourseDetail());
 
 
-                            if (response.body().getData().getCourseDetail().size()<3)
+                       /*     if (response.body().getData().getCourseDetail().size()<3)
                             {
                                 firstcourseDetailArrayList.addAll(response.body().getData().getCourseDetail());
 
@@ -295,10 +296,10 @@ getCollegeData();
                             Log.d("fsfs",""+response.body().getData().getCourseDetail().size());
                             rc_events.setAdapter(new CollegeGalleryAdapter(galleryDataArrayList,linearlayoutsize,getActivity()));
 
+                        }*/
+
+
                         }
-
-
-
 
                     }
                 }

@@ -1,6 +1,7 @@
 package com.eleganzit.tag.ui.fragment;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -9,14 +10,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.eleganzit.tag.R;
 import com.eleganzit.tag.adapter.CollegeGalleryAdapter;
+import com.eleganzit.tag.adapter.CollegeGalleryEventAdapter;
+import com.eleganzit.tag.adapter.CollegeGalleryInfraAdapter;
+import com.eleganzit.tag.adapter.CollegeGalleryVideoAdapter;
+import com.eleganzit.tag.api.RetrofitAPI;
+import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.EventDetail;
+import com.eleganzit.tag.model.QuestionAnsResponse;
+import com.eleganzit.tag.model.homegallery.Event;
+import com.eleganzit.tag.model.homegallery.GalleryResponse;
+import com.eleganzit.tag.model.homegallery.Infrastructure;
+import com.eleganzit.tag.model.homegallery.Video;
 import com.eleganzit.tag.ui.activity.CollegeDetailActivity;
 import com.eleganzit.tag.utils.SwipeController;
+import com.eleganzit.tag.utils.UserLoggedInSession;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,10 +42,17 @@ public class CollegeGalleryFragment extends Fragment {
 
     RecyclerView rc_events,rc_infra,rc_video;
 
+
+    ArrayList<Event> eventArrayList;
+    ArrayList<Infrastructure> infrastructures;
+    ArrayList<Video> videoArrayList;
     public CollegeGalleryFragment() {
         // Required empty public constructor
-    }
-LinearLayout linearlayoutsize;
+    } ProgressDialog progressDialog;
+    UserLoggedInSession userLoggedInSession;
+    int college_id;
+
+    LinearLayout linearlayoutsize;
 ArrayList<EventDetail> arrayList=new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,12 +69,84 @@ ArrayList<EventDetail> arrayList=new ArrayList<>();
         eventDetail1.setImageUrl("https://eleganzit.online/img/tag_upload/college/images/myimage.jpeg");
         arrayList.add(eventDetail);
         arrayList.add(eventDetail1);
-        rc_infra.setAdapter(new CollegeGalleryAdapter(arrayList,linearlayoutsize,getActivity()));
-        rc_events.setAdapter(new CollegeGalleryAdapter(arrayList,linearlayoutsize,getActivity()));
-        rc_video.setAdapter(new CollegeGalleryAdapter(arrayList,linearlayoutsize,getActivity()));
+        Bundle b = getArguments();
+        college_id=b.getInt("college_id",0);
+      //
+     //
+      //
        // CollegeDetailActivity.college_nametv.setText("Gallery");
 
+        userLoggedInSession=new UserLoggedInSession(getActivity());
+
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Please Wait");
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+        getGalleryData();
         return v;
+    }
+
+    private void getGalleryData() {
+        eventArrayList=new ArrayList<>();
+        infrastructures=new ArrayList<>();
+        videoArrayList=new ArrayList<>();
+        progressDialog.show();
+        RetrofitInterface myInterface = RetrofitAPI.getRetrofitN().create(RetrofitInterface.class);
+        Call<GalleryResponse> call=myInterface.getGallery(""+college_id);
+        call.enqueue(new Callback<GalleryResponse>() {
+            @Override
+            public void onResponse(Call<GalleryResponse> call, Response<GalleryResponse> response) {
+                progressDialog.dismiss();
+                if (response.isSuccessful())
+                {
+                    if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
+
+
+                        if (response.body().getData() != null) {
+                            if (response.body().getData().getEvents() != null)
+                            {
+                                eventArrayList.addAll(response.body().getData().getEvents());
+                                rc_events.setAdapter(new CollegeGalleryEventAdapter(eventArrayList,linearlayoutsize,getActivity()));
+                            }
+
+                        }
+
+
+                        if (response.body().getData() != null) {
+                            if (response.body().getData().getInfrastructure() != null)
+                            {
+                                infrastructures.addAll(response.body().getData().getInfrastructure());
+                                rc_infra.setAdapter(new CollegeGalleryInfraAdapter(infrastructures,linearlayoutsize,getActivity()));
+                            }
+
+                        }
+
+
+                        if (response.body().getData() != null) {
+                            if (response.body().getData().getVideos() != null)
+                            {
+                                videoArrayList.addAll(response.body().getData().getVideos());
+                                rc_video.setAdapter(new CollegeGalleryVideoAdapter(videoArrayList,linearlayoutsize,getActivity()));
+                            }
+
+                        }
+                    }
+
+                        }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<GalleryResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(getActivity(), "Server and Internet Error", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
     }
 
 }

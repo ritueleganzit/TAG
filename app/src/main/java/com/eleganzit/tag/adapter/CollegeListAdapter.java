@@ -33,8 +33,10 @@ public class CollegeListAdapter extends RecyclerView.Adapter<CollegeListAdapter.
     ArrayList<CollegeResult> collegeResultArrayList;
     Context context;
     Activity activity;
-    public CollegeListAdapter( ArrayList<CollegeResult> collegeResultArrayList,Context context) {
+    String e_sp;
+    public CollegeListAdapter(String e_sp, ArrayList<CollegeResult> collegeResultArrayList, Context context) {
 
+        this.e_sp = e_sp;
         this.collegeResultArrayList = collegeResultArrayList;
         this.context = context;
         activity = (Activity) context;
@@ -57,6 +59,7 @@ final CollegeResult collegeResult=collegeResultArrayList.get(i);
             public void onClick(View v) {
                 context.startActivity(new Intent(context, CollegeDetailActivity.class)
                 .putExtra("college_id",collegeResult.getCollegeId())
+                .putExtra("e_sp",e_sp)
                 .putExtra("college_name",collegeResult.getCollegeName()));
 
 
@@ -67,6 +70,7 @@ final CollegeResult collegeResult=collegeResultArrayList.get(i);
         holder.imgbg.getLayoutParams().height= (int) (getScreenWidthInPXs(context,(Activity) context)/3.3);
 
 holder.collegename.setText(""+collegeResult.getCollegeName());
+holder.specialname.setText(""+e_sp);
         if (collegeResult.getCollegeCity()!=null  && !(collegeResult.getCollegeCity().isEmpty()))
         {
             holder.collegeaddress.setText(""+collegeResult.getCollegeCity());
@@ -146,11 +150,12 @@ holder.collegename.setText(""+collegeResult.getCollegeName());
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
 CardView clgcard;
-TextView collegename,collegeaddress,college_type,years,approved_by,accreditation,isUniversity,placement,privatetv,rank;
+TextView collegename,collegeaddress,college_type,years,approved_by,accreditation,isUniversity,placement,privatetv,rank,specialname;
 ImageView imgbg;
 RatingBar myRatingBar;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            specialname=itemView.findViewById(R.id.specialname);
             collegeaddress=itemView.findViewById(R.id.collegeaddress);
             college_type=itemView.findViewById(R.id.college_type);
             myRatingBar=itemView.findViewById(R.id.myRatingBar);

@@ -20,13 +20,14 @@
                 <TextView
                     android:textColor="@color/txtcolor"
                     android:gravity="center_vertical"
+                    android:id="@+id/specialization_name"
                     android:fontFamily="@font/roboto_regular"
                     android:layout_width="match_parent"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:text="Bachelor of Engineering[B.Tech](Civil Engineering)"
                     android:layout_height="wrap_content"></TextView>
                 <TextView
-
+android:id="@+id/years"
                     android:textColor="@color/txtcolor"
                     android:gravity="center_vertical"
                     android:fontFamily="@font/roboto_regular"
@@ -57,7 +58,7 @@
         android:orientation="vertical"
         android:layout_height="wrap_content">
         <TextView
-
+android:id="@+id/course_fees"
 
             android:textColor="@color/txtcolor"
             android:gravity="center_vertical"
@@ -68,7 +69,7 @@
             android:layout_height="wrap_content"></TextView>
         <TextView
 
-
+android:visibility="gone"
             android:textColor="@color/txtcolor"
             android:gravity="center_vertical"
             android:fontFamily="@font/roboto_regular"
@@ -78,7 +79,7 @@
             android:layout_height="wrap_content"></TextView>
         <TextView
 
-
+            android:visibility="gone"
             android:textColor="@color/txtcolor"
             android:gravity="center_vertical"
             android:fontFamily="@font/roboto_regular"
@@ -88,7 +89,7 @@
             android:layout_height="wrap_content"></TextView>
         <TextView
 
-
+            android:visibility="gone"
             android:textColor="@color/txtcolor"
             android:gravity="center_vertical"
             android:fontFamily="@font/roboto_regular"
@@ -97,7 +98,7 @@
             android:text="SAARC Country /Fees - 1.99 Lakhs/Year"
             android:layout_height="wrap_content"></TextView>
         <TextView
-
+            android:visibility="gone"
 
             android:textColor="@color/txtcolor"
             android:gravity="center_vertical"

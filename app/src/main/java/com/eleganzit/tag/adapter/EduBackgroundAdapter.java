@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,6 +29,9 @@ import com.eleganzit.tag.model.Workdata;
 import com.eleganzit.tag.ui.activity.AddEducationActivity;
 import com.eleganzit.tag.ui.activity.MyProfileActivity;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -36,6 +40,7 @@ import retrofit2.Response;
 
 public class EduBackgroundAdapter extends RecyclerView.Adapter<EduBackgroundAdapter.MyViewHolder>
 {
+    ArrayList<String> years = new ArrayList<String>();
 
     Context context;
     Activity activity;
@@ -68,13 +73,35 @@ public class EduBackgroundAdapter extends RecyclerView.Adapter<EduBackgroundAdap
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int i) {
 
         final Education workdata=accounts.get(i);
-
+        int thisYear = Calendar.getInstance().get(Calendar.YEAR);
+        for (int j = 1900; j <= thisYear; j++) {
+            years.add(Integer.toString(j));
+        }
         holder.cource_year.setText(workdata.getCourceYear());
         holder.school_name.setText(workdata.getSchoolName());
         holder.marks.setText(workdata.getMarks());
         holder.subject.setText(workdata.getSubject());
         holder.board.setText(workdata.getBoard());
         holder.cource_level.setText(workdata.getCourceLevel());
+        holder.cource_year.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Collections.reverse(years);
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, years);
+                builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        holder.cource_year.setText(""+years.get(which));
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
 holder.btnsave.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {

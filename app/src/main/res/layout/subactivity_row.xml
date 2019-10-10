@@ -26,6 +26,7 @@
                 android:textColor="@color/txtcolor"
                 android:gravity="end"
                 android:layout_weight="1"
+                android:id="@+id/created_date"
                 android:text="12 days ago"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"></TextView>
@@ -39,6 +40,7 @@
             android:layout_marginTop="5dp"
             android:textColor="@color/txtcolor"
             android:padding="10dp"
+            android:id="@+id/question_text"
 
             android:text="It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
             android:layout_width="wrap_content"

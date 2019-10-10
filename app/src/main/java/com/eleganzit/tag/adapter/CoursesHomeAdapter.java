@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.eleganzit.tag.R;
+import com.eleganzit.tag.model.CourceFee;
 import com.eleganzit.tag.model.CourseDetail;
 
 import org.w3c.dom.Text;
@@ -20,11 +21,11 @@ import java.util.ArrayList;
 
 public class CoursesHomeAdapter extends RecyclerView.Adapter<CoursesHomeAdapter.MyViewHolder>
 {
-    ArrayList<CourseDetail> courseDetailArrayList;
+    ArrayList<CourceFee> courseDetailArrayList;
 
     Context context;
     Activity activity;
-    public CoursesHomeAdapter(    ArrayList<CourseDetail> courseDetailArrayList ,Context context) {
+    public CoursesHomeAdapter(    ArrayList<CourceFee> courseDetailArrayList ,Context context) {
 
         this.context = context;
         this.courseDetailArrayList= courseDetailArrayList;
@@ -43,7 +44,7 @@ public class CoursesHomeAdapter extends RecyclerView.Adapter<CoursesHomeAdapter.
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int i) {
 
-        CourseDetail courseDetail=courseDetailArrayList.get(i);
+        CourceFee courseDetail=courseDetailArrayList.get(i);
 
         Log.d("fsfsfs",""+courseDetail.getCourseName());
 

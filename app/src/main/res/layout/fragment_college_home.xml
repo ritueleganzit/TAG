@@ -98,6 +98,7 @@ android:orientation="vertical">
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
                             android:gravity="start"
+                            android:id="@+id/e_sp"
 
                             android:text="Computer Science"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
@@ -428,7 +429,7 @@ android:id="@+id/placement"
                 android:src="@mipmap/gps"></ImageView>
             <TextView
                 android:fontFamily="@font/roboto_regular"
-
+android:id="@+id/address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="At Post Rajuri Alephata, Kalyan Nagsr Highway India 560060"></TextView>
@@ -448,7 +449,7 @@ android:id="@+id/placement"
             <TextView
                 android:padding="5dp"
                 android:fontFamily="@font/roboto_regular"
-
+android:id="@+id/mobilenum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="080 245869"></TextView>
@@ -488,7 +489,7 @@ android:id="@+id/placement"
                 android:src="@mipmap/internet"></ImageView>
             <TextView
                 android:fontFamily="@font/roboto_regular"
-
+android:id="@+id/website"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="www.example.com"></TextView>

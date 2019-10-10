@@ -10,9 +10,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.eleganzit.tag.R;
+import com.eleganzit.tag.model.homecourse.CourceFeeDatum;
+import com.eleganzit.tag.model.homecourse.Datastream;
+
+import java.util.ArrayList;
 
 public class CourseDetailsAdapter extends RecyclerView.Adapter<CourseDetailsAdapter.MyViewHolder>
 {
+    ArrayList<Datastream> datastreams;
 
     Context context;
     Activity activity;

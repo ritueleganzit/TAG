@@ -451,6 +451,7 @@ android:lines="4"
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="SUBMIT"
+                android:id="@+id/applysubmit"
                 android:textColor="@android:color/white" />
         </LinearLayout>
 

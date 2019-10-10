@@ -107,10 +107,19 @@ else
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(CollegeSelectSpecializationActivity.this,TopCollegesActivity.class));
+                if (ed_course.getText().toString().equalsIgnoreCase("BE") && (e_sp.getText().toString().equalsIgnoreCase("CSE")))
+                {
+                    startActivity(new Intent(CollegeSelectSpecializationActivity.this,TopCollegesActivity.class)
+                            .putExtra("e_sp",""+e_sp.getText().toString()));
 
 
-                        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+
+                }
+                else
+                {
+                    Toast.makeText(CollegeSelectSpecializationActivity.this, "No Data", Toast.LENGTH_SHORT).show();
+                }
 
 
             }

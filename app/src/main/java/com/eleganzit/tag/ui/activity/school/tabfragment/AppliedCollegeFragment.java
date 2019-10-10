@@ -63,7 +63,7 @@ RecyclerView rc_applied_college;
         appliedCollegeLists=new ArrayList<>();
         progressDialog.show();
         RetrofitInterface myInterface = RetrofitAPI.getRetrofitN().create(RetrofitInterface.class);
-        Call<AppliedCollegeListResponse> appliedCollegeListResponseCall=myInterface.appliedCollegeList("43");
+        Call<AppliedCollegeListResponse> appliedCollegeListResponseCall=myInterface.appliedCollegeList(""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_ID));
         appliedCollegeListResponseCall.enqueue(new Callback<AppliedCollegeListResponse>() {
             @Override
             public void onResponse(Call<AppliedCollegeListResponse> call, Response<AppliedCollegeListResponse> response) {

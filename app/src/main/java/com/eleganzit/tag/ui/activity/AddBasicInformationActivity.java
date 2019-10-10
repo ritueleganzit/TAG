@@ -1,6 +1,9 @@
 package com.eleganzit.tag.ui.activity;
 
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -15,19 +18,53 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eleganzit.tag.LoginActivity;
 import com.eleganzit.tag.R;
 import com.eleganzit.tag.adapter.CollegeListAdapter;
+import com.eleganzit.tag.api.RetrofitAPI;
+import com.eleganzit.tag.api.RetrofitInterface;
+import com.eleganzit.tag.model.AppliedCollegeListResponse;
+import com.eleganzit.tag.model.ApplyCategory;
+import com.eleganzit.tag.model.QuestionAnsResponse;
+import com.eleganzit.tag.model.appliedcollege.ApplyCollegeMobileResponse;
+import com.eleganzit.tag.utils.HideKeyBoard;
+import com.eleganzit.tag.utils.MyNestedScrollView;
 import com.eleganzit.tag.utils.SwipeController;
 import com.eleganzit.tag.utils.SwipeControllerActions;
+import com.eleganzit.tag.utils.UserLoggedInSession;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class AddBasicInformationActivity extends AppCompatActivity {
     private int edit_position;
@@ -35,22 +72,145 @@ public class AddBasicInformationActivity extends AppCompatActivity {
     private boolean add = false;
     private Paint p = new Paint();
     TextView next,addmore;
+    String stateArrayList[]={"Male","Female"};
+    String categorys[]={"Test","Test1"};
+    MyNestedScrollView nessted;
+ArrayList<ApplyCategory> categorydata=new ArrayList();
+    EditText first_name,middle_name,last_name,d_o_b,gender,category,applied_course_name,applied_specialization_name;
     AddCourseAdapter addCourseAdapter;
     RecyclerView rc_course_data;
     ArrayList numdata=new ArrayList();
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_basic_information);
         next=findViewById(R.id.next);
+        sharedPreferences=getSharedPreferences("dataapply",MODE_PRIVATE);
+        editor=sharedPreferences.edit();
         addCourseAdapter=new AddCourseAdapter();
+        nessted=findViewById(R.id.nessted);
         rc_course_data=findViewById(R.id.rc_course_data);
+        category=findViewById(R.id.category);
+        d_o_b=findViewById(R.id.d_o_b);
+        last_name=findViewById(R.id.last_name);
+        middle_name=findViewById(R.id.middle_name);
+        first_name=findViewById(R.id.first_name);
+        applied_course_name=findViewById(R.id.applied_course_name);
+        gender=findViewById(R.id.gender);
+        applied_specialization_name=findViewById(R.id.applied_specialization_name);
         addmore=findViewById(R.id.addmore);
+        HideKeyBoard.setupUI(nessted, AddBasicInformationActivity.this);
+d_o_b.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        final Calendar c = Calendar.getInstance();
+      int  mYear = c.get(Calendar.YEAR);
+        int  mMonth = c.get(Calendar.MONTH);
+        int   mDay = c.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(AddBasicInformationActivity.this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+
+
+                        int month= monthOfYear+1;
+                        String fm=""+month;
+                        String fd=""+dayOfMonth;
+                        if(month<10){
+                            fm ="0"+month;
+                        }
+                        if (dayOfMonth<10){
+                            fd="0"+dayOfMonth;
+                        }
+                        d_o_b.setText(fd + "-" + (fm) + "-" + year);
+
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+    }
+});
+gender.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        final ListAdapter adapter = new ArrayAdapter(AddBasicInformationActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, stateArrayList);
+
+        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(new ContextThemeWrapper(AddBasicInformationActivity.this, R.style.AlertDialogCustom));
+
+        builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+
+
+                gender.setText(stateArrayList[i]);
+
+
+
+
+            }
+        });
+        builder.show();
+    }
+});
+
+category.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        final ListAdapter adapter = new ArrayAdapter(AddBasicInformationActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, categorys);
+
+        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(new ContextThemeWrapper(AddBasicInformationActivity.this, R.style.AlertDialogCustom));
+
+        builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+
+
+                category.setText(categorys[i]);
+
+
+
+
+            }
+        });
+        builder.show();
+    }
+});
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AddBasicInformationActivity.this,AddPersonalInformationActivity.class));
-                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+                if (isValid())
+                {
+
+
+                    editor.putString("first_name", first_name.getText().toString())   ;
+                    editor .putString("middle_name", middle_name.getText().toString());
+                    editor  .putString("last_name", last_name.getText().toString());
+                    editor .putString("d_o_b", d_o_b.getText().toString());
+                    editor .putString("gender", gender.getText().toString());
+                    editor .putString("category", category.getText().toString());
+                    editor  .putString("applied_course_name", applied_course_name.getText().toString());
+                    editor .putString("applied_specialization_name", applied_specialization_name.getText().toString());
+                    editor.commit();
+                    startActivity(new Intent(AddBasicInformationActivity.this, AddPersonalInformationActivity.class)
+
+
+
+
+
+
+
+
+
+                        );
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
+                }
+
                // finish();
             }
         });
@@ -86,9 +246,87 @@ public class AddBasicInformationActivity extends AppCompatActivity {
                // finish();
             }
         });
-        initSwipe();
+       // initSwipe();
+        //addData();
     }
 
+    public boolean isValid() {
+
+        if (first_name.getText().toString().trim().equals("")) {
+
+
+            Toast.makeText(this, "Please Enter First Name", Toast.LENGTH_SHORT).show();
+
+            first_name.requestFocus();
+
+            return false;
+        }else if (middle_name.getText().toString().trim().equals("")) {
+
+
+            Toast.makeText(this, "Please Enter Middle Name", Toast.LENGTH_SHORT).show();
+
+            middle_name.requestFocus();
+
+            return false;
+        }
+        else if (last_name.getText().toString().trim().equals("")) {
+
+
+            Toast.makeText(this, "Please Enter Last Name", Toast.LENGTH_SHORT).show();
+
+            last_name.requestFocus();
+
+            return false;
+        } else if (d_o_b.getText().toString().trim().equals("")) {
+
+
+            Toast.makeText(this, "Please Select Date of Birth", Toast.LENGTH_SHORT).show();
+
+            d_o_b.requestFocus();
+
+            return false;
+        } else if (gender.getText().toString().trim().equals("")) {
+
+
+            Toast.makeText(this, "Please Select Gender", Toast.LENGTH_SHORT).show();
+
+            gender.requestFocus();
+
+            return false;
+        }else if (category.getText().toString().trim().equals("")) {
+
+
+            Toast.makeText(this, "Please Select Category", Toast.LENGTH_SHORT).show();
+
+            category.requestFocus();
+
+            return false;
+        }
+else if (applied_course_name.getText().toString().trim().equals("")) {
+
+
+            Toast.makeText(this, "Please enter course name", Toast.LENGTH_SHORT).show();
+
+            applied_course_name.requestFocus();
+
+            return false;
+        }
+
+
+else if (applied_specialization_name.getText().toString().trim().equals("")) {
+
+
+            Toast.makeText(this, "Please enter specialization name", Toast.LENGTH_SHORT).show();
+
+            applied_specialization_name.requestFocus();
+
+            return false;
+        }
+
+
+
+        return true;
+    }
 
     private void initSwipe(){
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -168,7 +406,7 @@ public class AddBasicInformationActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
 
-           /* myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     numdata.remove(i);
@@ -176,7 +414,7 @@ public class AddBasicInformationActivity extends AppCompatActivity {
                     addmore.setVisibility(View.VISIBLE);
 
                 }
-            });*/
+            });
         }
 
         @Override
