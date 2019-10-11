@@ -20,6 +20,7 @@ import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.CollegeResult;
 import com.eleganzit.tag.model.TopCollegeResponse;
 import com.eleganzit.tag.utils.UserLoggedInSession;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 
@@ -75,8 +76,12 @@ public class TopCollegesActivity extends AppCompatActivity {
     private void getTopCollegeList() {
         collegeResultArrayList=new ArrayList<>();
         progressDialog.show();
+        JsonObject paramObject = new JsonObject();
+        paramObject.addProperty("course_name", "BE");
+        paramObject.addProperty("specialization_name", "CSE");
+
         RetrofitInterface myInterface = RetrofitAPI.getRetrofitN().create(RetrofitInterface.class);
-        final Call<TopCollegeResponse> collegeResponseCall=myInterface.getCollegeList("BE","Civil");
+        final Call<TopCollegeResponse> collegeResponseCall=myInterface.getCollegeList(paramObject);
         collegeResponseCall.enqueue(new Callback<TopCollegeResponse>() {
             @Override
             public void onResponse(Call<TopCollegeResponse> call, Response<TopCollegeResponse> response) {

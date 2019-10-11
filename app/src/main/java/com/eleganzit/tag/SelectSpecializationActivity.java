@@ -350,8 +350,15 @@ holder.txt_c1.setOnClickListener(new View.OnClickListener() {
         }
 
         @Override
-        public int getItemCount() {
-            return getSpecializations.size();
+        public int getItemCount()
+        {
+            if (getSpecializations.size()>6)
+            {
+                return 6;
+            }
+            else {
+                return     getSpecializations.size();
+            }
         }
 
         public class MyViewHolder extends RecyclerView.ViewHolder {

@@ -30,7 +30,7 @@
             android:inputType="text"
             android:layout_marginBottom="10dp"
             android:padding="9dp"
-            android:focusable="false"
+android:id="@+id/ed_course"
             android:layout_width="match_parent"
             android:background="@drawable/editbg"
             android:layout_height="wrap_content"></EditText>
@@ -64,7 +64,7 @@
             android:inputType="text"
             android:layout_marginBottom="10dp"
             android:padding="9dp"
-            android:focusable="false"
+            android:id="@+id/ed_sp"
             android:layout_width="match_parent"
             android:background="@drawable/editbg"
             android:layout_height="wrap_content"></EditText>

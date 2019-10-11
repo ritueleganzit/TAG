@@ -2,18 +2,20 @@ package com.eleganzit.tag;
 
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.CardView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,9 +23,12 @@ import android.widget.Toast;
 import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.LoginResponse;
+import com.eleganzit.tag.model.NationalityResponse;
 import com.eleganzit.tag.utils.HideKeyBoard;
 import com.eleganzit.tag.utils.UserLoggedInSession;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,6 +41,7 @@ public class SignUpActivity extends AppCompatActivity {
     String[] listItems = {"INDIA", "UNITED STATES"};
     UserLoggedInSession userLoggedInSession;
     CardView cardhide;
+    List<String> arrayList;
 
     EditText nationality,password,edemail,edmobile,edname;
     TextView logintxt,register;
@@ -61,18 +67,20 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 HideKeyBoard.hideKeyboard(SignUpActivity.this);
-                AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
+                final ArrayAdapter adapter = new ArrayAdapter(SignUpActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, arrayList);
 
-                builder.setItems(listItems, new DialogInterface.OnClickListener() {
+                final android.support.v7.app.AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(SignUpActivity.this, R.style.AlertDialogCustom));
+
+                builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        nationality.setText(""+listItems[which]);
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+
+                       nationality.setText(""+arrayList.get(i));
 
                     }
                 });
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                builder.show();
             }
         });
         logintxt.setOnClickListener(new View.OnClickListener() {
@@ -96,10 +104,47 @@ HideKeyBoard.hideKeyboard(SignUpActivity.this);
             }
         });
         HideKeyBoard.setupUI(cardhide,SignUpActivity.this);
+
+
+        getnationality();
+    }
+
+    private void getnationality() {
+        arrayList=new ArrayList<>();
+        progressDialog.show();
+        RetrofitInterface myInterface = RetrofitAPI.getRetrofit().create(RetrofitInterface.class);
+        Call<NationalityResponse> call=myInterface.getNationalityResponse();
+        call.enqueue(new Callback<NationalityResponse>() {
+            @Override
+            public void onResponse(Call<NationalityResponse> call, Response<NationalityResponse> response) {
+                progressDialog.dismiss();
+
+
+                if (response.isSuccessful()) {
+
+                    if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
+
+                        if (response.body().getData() != null) {
+                            for (int i=0;i<response.body().getData().size();i++)
+                            {
+                                arrayList.add(response.body().getData().get(i).getNationalityName());
+                            }
+
+                        }
+                    }
+                        }
+            }
+
+            @Override
+            public void onFailure(Call<NationalityResponse> call, Throwable t) {
+
+            }
+        });
+
     }
 
 
-public void  setSignUp(){
+    public void  setSignUp(){
     progressDialog.show();
     RetrofitInterface myInterface = RetrofitAPI.getRetrofit().create(RetrofitInterface.class);
     Call<LoginResponse> call=myInterface.doSignUP(edname.getText().toString(),edmobile.getText().toString(),edemail.getText().toString(),password.getText().toString(),nationality.getText().toString());

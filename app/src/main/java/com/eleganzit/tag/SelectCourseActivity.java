@@ -263,7 +263,14 @@ if (response.body().getData()!=null)
 
         @Override
         public int getItemCount() {
-            return getSpecializations.size();
+            if (getSpecializations.size()>6)
+            {
+                return 6;
+            }
+            else {
+                return     getSpecializations.size();
+            }
+
         }
 
         public class MyViewHolder extends RecyclerView.ViewHolder {

@@ -33,6 +33,7 @@
     </TextView>
     <EditText
         android:inputType="text"
+        android:id="@+id/name_ed"
 
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -57,7 +58,7 @@
     </TextView>
     <EditText
         android:inputType="text"
-
+android:id="@+id/ed_mark"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
@@ -81,7 +82,7 @@
     </TextView>
     <EditText
         android:inputType="text"
-
+android:id="@+id/ed_rank"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"

@@ -18,6 +18,8 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -33,6 +35,7 @@ import android.widget.Toast;
 
 import com.eleganzit.tag.LoginActivity;
 import com.eleganzit.tag.R;
+import com.eleganzit.tag.adapter.AppliedAdapter;
 import com.eleganzit.tag.adapter.CollegeListAdapter;
 import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
@@ -45,6 +48,7 @@ import com.eleganzit.tag.utils.MyNestedScrollView;
 import com.eleganzit.tag.utils.SwipeController;
 import com.eleganzit.tag.utils.SwipeControllerActions;
 import com.eleganzit.tag.utils.UserLoggedInSession;
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -69,6 +73,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class AddBasicInformationActivity extends AppCompatActivity {
     private int edit_position;
     private View view;
+    boolean isData=false;
     private boolean add = false;
     private Paint p = new Paint();
     TextView next,addmore;
@@ -102,7 +107,10 @@ ArrayList<ApplyCategory> categorydata=new ArrayList();
         applied_specialization_name=findViewById(R.id.applied_specialization_name);
         addmore=findViewById(R.id.addmore);
         HideKeyBoard.setupUI(nessted, AddBasicInformationActivity.this);
-d_o_b.setOnClickListener(new View.OnClickListener() {
+        addCourseAdapter=new AddCourseAdapter();
+        rc_course_data.setAdapter(addCourseAdapter);
+
+        d_o_b.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
         final Calendar c = Calendar.getInstance();
@@ -180,40 +188,7 @@ category.setOnClickListener(new View.OnClickListener() {
         builder.show();
     }
 });
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isValid())
-                {
 
-
-                    editor.putString("first_name", first_name.getText().toString())   ;
-                    editor .putString("middle_name", middle_name.getText().toString());
-                    editor  .putString("last_name", last_name.getText().toString());
-                    editor .putString("d_o_b", d_o_b.getText().toString());
-                    editor .putString("gender", gender.getText().toString());
-                    editor .putString("category", category.getText().toString());
-                    editor  .putString("applied_course_name", applied_course_name.getText().toString());
-                    editor .putString("applied_specialization_name", applied_specialization_name.getText().toString());
-                    editor.commit();
-                    startActivity(new Intent(AddBasicInformationActivity.this, AddPersonalInformationActivity.class)
-
-
-
-
-
-
-
-
-
-                        );
-                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-
-                }
-
-               // finish();
-            }
-        });
   findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -227,12 +202,11 @@ category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (numdata.size()<=1)
+                if (categorydata.size()<=1)
                 {
-                    numdata.add("");
-                    rc_course_data.setAdapter(new AddCourseAdapter());
-
-                    if (numdata.size()>1)
+                    categorydata.add(new ApplyCategory());
+                    addCourseAdapter.notifyDataSetChanged();
+                    if (categorydata.size()>1)
                     {
                         addmore.setVisibility(View.GONE);
                     }
@@ -248,6 +222,101 @@ category.setOnClickListener(new View.OnClickListener() {
         });
        // initSwipe();
         //addData();
+
+
+
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isValid())
+                {
+
+                    if (categorydata.size()>0)
+                    {
+                        for (int i=0;i<categorydata.size();i++) {
+                            if ((categorydata.get(i).getApplied_course_name().equalsIgnoreCase("")) || (categorydata.get(i).getApplied_specialization_name().equalsIgnoreCase("")))
+                            {
+                                Log.d("eerrrr","if"+i);
+
+                                isData=true;
+                                Toast.makeText(AddBasicInformationActivity.this, "Please insert  data", Toast.LENGTH_SHORT).show();
+                                break;
+                            }
+                            else {
+                                isData=false;
+                            }
+
+                        }
+
+                        if (!isData)
+                        {
+
+                            for (int j = 0; j < categorydata.size(); j++) {
+
+                                Log.d("asdad", " " + categorydata.get(j).getApplied_course_name() + System.getProperty("line.separator"));
+
+                            }
+
+                            editor.putString("first_name", first_name.getText().toString());
+                            editor.putString("middle_name", middle_name.getText().toString());
+                            editor.putString("last_name", last_name.getText().toString());
+                            editor.putString("d_o_b", d_o_b.getText().toString());
+                            editor.putString("gender", gender.getText().toString());
+                            editor.putString("category", category.getText().toString());
+                            editor.putString("applied_course_name", applied_course_name.getText().toString());
+                            editor.putString("applied_specialization_name", applied_specialization_name.getText().toString());
+                            editor.putString("applied_specialization_name", applied_specialization_name.getText().toString());
+                            Gson gson = new Gson();
+                            String jsonCars = gson.toJson(categorydata);
+                            editor.putString("jsoncars", jsonCars);
+                            editor.commit();
+                            startActivity(new Intent(AddBasicInformationActivity.this, AddPersonalInformationActivity.class)
+
+
+                            );
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
+
+
+                        }
+
+
+                    }
+
+                    else
+                    {
+                        editor.putString("first_name", first_name.getText().toString());
+                        editor.putString("middle_name", middle_name.getText().toString());
+                        editor.putString("last_name", last_name.getText().toString());
+                        editor.putString("d_o_b", d_o_b.getText().toString());
+                        editor.putString("gender", gender.getText().toString());
+                        editor.putString("category", category.getText().toString());
+                        editor.putString("applied_course_name", applied_course_name.getText().toString());
+                        editor.putString("applied_specialization_name", applied_specialization_name.getText().toString());
+                        editor.putString("applied_specialization_name", applied_specialization_name.getText().toString());
+
+                        editor.commit();
+                        startActivity(new Intent(AddBasicInformationActivity.this, AddPersonalInformationActivity.class)
+
+
+                        );
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        finish();
+                    }
+
+
+                }
+
+
+                /*
+                 */
+
+
+                // finish();
+            }
+        });
+
     }
 
     public boolean isValid() {
@@ -404,12 +473,14 @@ else if (applied_specialization_name.getText().toString().trim().equals("")) {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
+        public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int i) {
+            myViewHolder.ed_course.setText(categorydata.get(i).getApplied_course_name());
+            myViewHolder.ed_sp.setText(categorydata.get(i).getApplied_specialization_name());
 
             myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    numdata.remove(i);
+                    categorydata.remove(i);
                     notifyDataSetChanged();
                     addmore.setVisibility(View.VISIBLE);
 
@@ -419,15 +490,53 @@ else if (applied_specialization_name.getText().toString().trim().equals("")) {
 
         @Override
         public int getItemCount() {
-            return numdata.size();
+            return categorydata.size();
         }
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
-
+EditText ed_course,ed_sp;
 
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
 
+                ed_course=itemView.findViewById(R.id.ed_course);
+                ed_sp=itemView.findViewById(R.id.ed_sp);
+                ed_course.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                        categorydata.get(getAdapterPosition()).setApplied_course_name(ed_course.getText().toString());
+                        categorydata.get(getAdapterPosition()).setApplied_specialization_name(ed_sp.getText().toString());
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
+
+                ed_sp.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                        categorydata.get(getAdapterPosition()).setApplied_specialization_name(ed_sp.getText().toString());
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
 
             }
         }

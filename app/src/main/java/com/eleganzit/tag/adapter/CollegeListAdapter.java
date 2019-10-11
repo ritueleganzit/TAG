@@ -3,6 +3,7 @@ package com.eleganzit.tag.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -14,11 +15,17 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.eleganzit.tag.HomeActivity;
 import com.eleganzit.tag.R;
 import com.eleganzit.tag.model.CollegeResult;
+import com.eleganzit.tag.ui.activity.AddBasicInformationActivity;
 import com.eleganzit.tag.ui.activity.CollegeDetailActivity;
 import com.eleganzit.tag.ui.activity.TopCollegesActivity;
 
@@ -26,6 +33,7 @@ import java.util.ArrayList;
 
 import me.nereo.multi_image_selector.bean.Image;
 
+import static android.content.Context.MODE_PRIVATE;
 import static android.content.Context.WINDOW_SERVICE;
 
 public class CollegeListAdapter extends RecyclerView.Adapter<CollegeListAdapter.MyViewHolder>
@@ -34,8 +42,11 @@ public class CollegeListAdapter extends RecyclerView.Adapter<CollegeListAdapter.
     Context context;
     Activity activity;
     String e_sp;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     public CollegeListAdapter(String e_sp, ArrayList<CollegeResult> collegeResultArrayList, Context context) {
-
+        sharedPreferences=context.getSharedPreferences("dataapply",MODE_PRIVATE);
+        editor=sharedPreferences.edit();
         this.e_sp = e_sp;
         this.collegeResultArrayList = collegeResultArrayList;
         this.context = context;
@@ -54,7 +65,7 @@ public class CollegeListAdapter extends RecyclerView.Adapter<CollegeListAdapter.
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int i) {
 final CollegeResult collegeResult=collegeResultArrayList.get(i);
-        holder.clgcard.setOnClickListener(new View.OnClickListener() {
+        holder.rel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 context.startActivity(new Intent(context, CollegeDetailActivity.class)
@@ -65,10 +76,30 @@ final CollegeResult collegeResult=collegeResultArrayList.get(i);
 
 
             }
+        });holder.apply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor.putString("college_id",""+collegeResult.getCollegeId());
+                editor.commit();
+                context.startActivity(new Intent(context, AddBasicInformationActivity.class));
+
+
+
+
+            }
         });
         holder.imgbg.getLayoutParams().width= (int) (getScreenWidthInPXs(context,(Activity) context));
         holder.imgbg.getLayoutParams().height= (int) (getScreenWidthInPXs(context,(Activity) context)/3.3);
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.drawable.schools_tri)
+                .error(R.drawable.schools_tri)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .priority(Priority.HIGH);
 
+        Glide.with(context).load(collegeResult.getCollegeImage())
+                .apply(options)
+                .into(holder.imgbg);
 holder.collegename.setText(""+collegeResult.getCollegeName());
 holder.specialname.setText(""+e_sp);
         if (collegeResult.getCollegeCity()!=null  && !(collegeResult.getCollegeCity().isEmpty()))
@@ -148,14 +179,17 @@ holder.specialname.setText(""+e_sp);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-
+RelativeLayout rel;
+TextView apply;
 CardView clgcard;
 TextView collegename,collegeaddress,college_type,years,approved_by,accreditation,isUniversity,placement,privatetv,rank,specialname;
 ImageView imgbg;
 RatingBar myRatingBar;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            rel=itemView.findViewById(R.id.rel);
             specialname=itemView.findViewById(R.id.specialname);
+            apply=itemView.findViewById(R.id.apply);
             collegeaddress=itemView.findViewById(R.id.collegeaddress);
             college_type=itemView.findViewById(R.id.college_type);
             myRatingBar=itemView.findViewById(R.id.myRatingBar);

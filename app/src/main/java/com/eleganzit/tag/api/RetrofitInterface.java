@@ -16,6 +16,7 @@ import com.eleganzit.tag.model.GetFaqListResponse;
 import com.eleganzit.tag.model.GetProfileDataResponse;
 import com.eleganzit.tag.model.GetSpecializationResponse;
 import com.eleganzit.tag.model.LoginResponse;
+import com.eleganzit.tag.model.NationalityResponse;
 import com.eleganzit.tag.model.QuestionAnsResponse;
 import com.eleganzit.tag.model.SendOtpResponse;
 import com.eleganzit.tag.model.TopCollegeResponse;
@@ -73,6 +74,8 @@ public interface RetrofitInterface {
     Call<SendOtpResponse> sendOtp(
             @Field("username") String username
     );
+
+
 
   @FormUrlEncoded()
     @POST("/tags/signup-api.php")
@@ -255,13 +258,7 @@ public interface RetrofitInterface {
     @GET("/testhost/users/appliedCollegeList/{id}")
     Call<AppliedCollegeListResponse> appliedCollegeList(@Path(value = "id", encoded = true) String id);
 
-    @FormUrlEncoded()
-    @POST("/testhost/users/getCollegeList")
-    Call<TopCollegeResponse> getCollegeList(
 
-            @Field("course_name") String course_name,
-            @Field("specialization_name") String specialization_name
-    );
 
     @FormUrlEncoded()
     @POST("/tags/ques-ans-list-api.php")
@@ -282,6 +279,14 @@ public interface RetrofitInterface {
     );
 
 
+
+    @POST("/testhost/users/getCollegeList")
+    Call<TopCollegeResponse> getCollegeList(
+@Body JsonObject jsonObject
+
+    );
+
+
     @GET("/testhost/users/gallery/{id}")
     Call<GalleryResponse> getGallery(@Path(value = "id", encoded = true) String id);
   @GET("/testhost/users/facility/{id}")
@@ -293,5 +298,7 @@ public interface RetrofitInterface {
             @Field("action") String coursefees,
             @Field("college_id") String college_id
     );
+    @GET("/testhost/users/nationalities")
+    Call<NationalityResponse> getNationalityResponse();
 
 }

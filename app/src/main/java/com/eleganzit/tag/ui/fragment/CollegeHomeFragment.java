@@ -21,6 +21,10 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.eleganzit.tag.HelpFAQActivity;
 import com.eleganzit.tag.HomeActivity;
 import com.eleganzit.tag.R;
@@ -180,6 +184,18 @@ editor.commit();
                         mobilenum.setText(response.body().getCollegeInfo().getPhone());
                         email.setText(response.body().getCollegeInfo().getEmail());
                         website.setText(response.body().getCollegeInfo().getWeb());
+
+                        RequestOptions options = new RequestOptions()
+                                .centerCrop()
+                                .placeholder(R.drawable.schools_tri)
+                                .error(R.drawable.schools_tri)
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .priority(Priority.HIGH);
+
+                        Glide.with(getActivity()).load(response.body().getCollegeInfo().getCollegeImage())
+                                .apply(options)
+                                .into(imgbg);
+
                          if (response.body().getCollegeInfo().getCollegeName()!=null  && !(response.body().getCollegeInfo().getCollegeName().isEmpty()))
                             {
                                 collegename.setText(""+response.body().getCollegeInfo().getCollegeName());

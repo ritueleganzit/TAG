@@ -53,6 +53,7 @@ public class AddPersonalInformationActivity extends AppCompatActivity {
                     editor.commit();
                     startActivity(new Intent(AddPersonalInformationActivity.this, AddEducationInformationActivity.class));
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    finish();
                 }
 
             }
@@ -60,7 +61,8 @@ public class AddPersonalInformationActivity extends AppCompatActivity {
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
             }
         });
