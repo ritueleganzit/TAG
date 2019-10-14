@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.eleganzit.tag.utils.MyNestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#f5f5f5"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragment.CollegeHomeFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <android.support.v7.widget.CardView android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            app:cardUseCompatPadding="true"
+            android:id="@+id/clgcard"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+
+
+            xmlns:android="http://schemas.android.com/apk/res/android">
+            <LinearLayout
+
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/imgbg"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:src="@drawable/schools_tri"
+                        android:scaleType="centerCrop"
+                        ></ImageView>
+                    <TextView
+
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="10dp"
+                        android:layout_margin="5dp"
+                        android:paddingRight="10dp"
+                        android:layout_gravity="bottom|right"
+                        android:gravity="center"
+
+
+                        android:fontFamily="@font/roboto_regular"
+                        android:background="@drawable/btnbgorange"
+
+
+                        android:id="@+id/apply"
+
+
+
+                        android:layout_below="@+id/frame"
+
+                        android:text="Apply"
+                        android:textColor="@android:color/white" />
+                </FrameLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/rel"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_alignParentLeft="true"
+                        android:id="@+id/collegename"
+                        android:layout_width="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:layout_toLeftOf="@+id/myRatingBar"
+                        android:text="Don Bosco school"
+                        android:fontFamily="@font/roboto_regular"
+                        android:layout_height="wrap_content"></TextView>
+
+                    <RatingBar
+                        android:id="@+id/myRatingBar"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:theme="@style/ReviewRatingBar"
+                        android:layout_alignParentRight="true"
+                        android:isIndicator="true"
+                        ></RatingBar>
+                    <TextView
+                        android:id="@+id/collegeaddress"
+                        android:textColor="#939393"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:layout_below="@+id/collegename"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Banglore, Karnataka, India "
+                        android:layout_height="wrap_content"></TextView>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_gravity="top"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_below="@+id/collegename"
+                            android:fontFamily="@font/roboto_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:gravity="start"
+
+                            android:id="@+id/specialname"
+                            android:text="Approved by -AICTE "
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_gravity="top"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+                        <TextView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            android:layout_weight="1"
+
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:layout_gravity="top"
+                            android:id="@+id/college_type"
+                            android:text="Private"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_gravity="top"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:gravity="end"
+                            android:layout_gravity="top"
+                            android:layout_weight="1"
+                            android:id="@+id/years"
+                            android:drawablePadding="5dp"
+
+                            android:text="Accredited by NAAC"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
+
+                    </LinearLayout>
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_gravity="top"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_below="@+id/collegename"
+                            android:fontFamily="@font/roboto_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:gravity="start"
+
+                            android:text="Senior Secondary School"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_gravity="top"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+                        <TextView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            android:layout_weight="1"
+
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:layout_gravity="top"
+                            android:text="1st PUC"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_gravity="top|end"
+                        android:gravity="end|center"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="1">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:src="@drawable/ic_clock"
+                            android:gravity="end"
+                            android:layout_gravity="top|end"
+                            android:layout_height="wrap_content"></ImageView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:gravity="end"
+                            android:layout_gravity="center"
+
+
+                            android:text="Full Time"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
+
+                    </LinearLayout>
+
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_gravity="top"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_below="@+id/collegename"
+                            android:fontFamily="@font/roboto_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:gravity="start"
+
+                            android:text="Non Boarding"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_gravity="top"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+                        <TextView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            android:layout_weight="1"
+
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:layout_gravity="top"
+                            android:text="Commerce"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_gravity="top"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:gravity="end"
+                            android:layout_gravity="top"
+                            android:layout_weight="1"
+                            android:drawablePadding="5dp"
+
+                            android:text="Regular state Board"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
+
+                    </LinearLayout>
+
+
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            app:cardUseCompatPadding="true"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/linearlayoutsize"
+                android:layout_gravity="center_vertical"
+                android:background="@color/colorPrimaryDark"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+
+                android:layout_height="wrap_content">
+                <TextView
+                    android:paddingStart="14dp"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@android:color/white"
+                    android:paddingEnd="12dp"
+
+                    android:layout_width="match_parent"
+                    android:text="COURSES"
+
+
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:id="@+id/courses_rc"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:padding="5dp"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="12dp"
+                    android:layout_gravity="end"
+
+                    android:gravity="end"
+
+                    android:id="@+id/viewAll"
+
+                    android:textColor="@android:color/white"
+                    android:textAppearance="?android:textAppearanceSmall"
+                    android:layout_width="match_parent"
+                    android:text="View All Courses"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_height="wrap_content"></TextView>
+
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp" app:cardUseCompatPadding="true"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:paddingStart="14dp"
+                    android:layout_marginBottom="5dp"
+                    android:paddingEnd="12dp"
+                    android:layout_width="match_parent"
+                    android:text="GALLERY"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:id="@+id/rc_events"
+                    android:orientation="horizontal"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:padding="5dp"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="12dp"
+                    android:layout_gravity="end"
+                    android:gravity="end"
+
+                    android:textAppearance="?android:textAppearanceSmall"
+                    android:layout_width="match_parent"
+                    android:text="View All"
+                    android:id="@+id/viewallgallery"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_height="wrap_content"></TextView>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            app:cardUseCompatPadding="true"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+
+                android:layout_height="wrap_content"
+                android:gravity="center"
+
+                >
+
+                <TextView
+
+
+                    android:id="@+id/txtlogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+
+                    android:background="@drawable/btnbg"
+                    android:fontFamily="@font/roboto_regular"
+
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Download Brouchure"
+                    android:textColor="@android:color/white" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            app:cardUseCompatPadding="true"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:paddingStart="14dp"
+                    android:layout_marginBottom="5dp"
+                    android:paddingEnd="12dp"
+                    android:layout_width="match_parent"
+                    android:text="CONTACT DETAILS"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ed_bg"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:scaleType="centerInside"
+                        android:padding="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/gps"></ImageView>
+                    <TextView
+                        android:fontFamily="@font/roboto_regular"
+                        android:id="@+id/address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="At Post Rajuri Alephata, Kalyan Nagsr Highway India 560060"></TextView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ed_bg"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:scaleType="centerInside"
+                        android:padding="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/phone"></ImageView>
+                    <TextView
+                        android:padding="5dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:id="@+id/mobilenum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="080 245869"></TextView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ed_bg"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:scaleType="centerInside"
+                        android:padding="5dp"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/mail"></ImageView>
+                    <TextView
+                        android:fontFamily="@font/roboto_regular"
+
+                        android:id="@+id/email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="example@gmail.com"></TextView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ed_bg"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:scaleType="centerInside"
+                        android:padding="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/internet"></ImageView>
+                    <TextView
+                        android:fontFamily="@font/roboto_regular"
+                        android:id="@+id/website"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="www.example.com"></TextView>
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            app:cardUseCompatPadding="true"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+
+                    android:layout_marginTop="10dp"
+                    android:paddingStart="14dp"
+                    android:layout_marginBottom="5dp"
+                    android:paddingEnd="12dp"
+                    android:layout_width="match_parent"
+                    android:text="FACILITIES"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:tools="http://schemas.android.com/tools"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="top|center"
+
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rc_facility"
+                        app:layoutManager="android.support.v7.widget.GridLayoutManager"
+                        app:spanCount="4"
+                        tools:context=".ui.fragment.CollegeFacilityFragment">
+
+
+                    </android.support.v7.widget.RecyclerView>
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_weight="1"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:id="@+id/applynow"
+                android:background="@drawable/btn_sq"
+                android:fontFamily="@font/roboto_regular"
+
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Apply Now"
+                android:textColor="@android:color/white" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#ffffff"></View>
+            <TextView
+                android:layout_weight="1"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+
+                android:background="@drawable/btn_sq"
+                android:fontFamily="@font/roboto_regular"
+
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Add to Compare"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+</com.eleganzit.tag.utils.MyNestedScrollView>

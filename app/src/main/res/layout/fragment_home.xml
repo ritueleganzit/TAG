@@ -104,7 +104,9 @@ android:hapticFeedbackEnabled="false"
                     android:layout_height="wrap_content"></TextView>
             </LinearLayout>
 
+
             <LinearLayout
+                android:id="@+id/linear_counselling"
                 android:layout_width="0dp"
                 android:orientation="vertical"
                 android:layout_weight="1"

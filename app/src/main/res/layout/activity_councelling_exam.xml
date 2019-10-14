@@ -1,0 +1,160 @@
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_collapseMode="pin"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_gravity="end"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:src="@drawable/ic_back_white"
+                        android:id="@+id/back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+
+                    <TextView
+                        android:layout_toRightOf="@+id/back"
+                        android:gravity="start"
+                        android:textColor="#ffffff"
+                        android:text="Exams"
+                        android:layout_marginLeft="15dp"
+
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textTitle" />
+
+
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
+    <com.eleganzit.tag.utils.MyNestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="15dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/spin2"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:textColor="#747474"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:text="Select Course"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAppearance="?android:textAppearanceListItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+                <android.support.v7.widget.CardView
+                    android:layout_marginTop="5dp"
+
+                    android:layout_width="match_parent"
+                    app:cardUseCompatPadding="true"
+                    android:layout_height="wrap_content">
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/ed_course"
+                            android:hint=""
+                            android:focusable="false"
+
+                            android:spinnerMode="dropdown"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:paddingLeft="6dp"
+                            android:textAppearance="?android:textAppearanceSmall"
+                            android:background="@android:color/transparent"
+                            android:inputType="text|textNoSuggestions"
+                            android:dropDownVerticalOffset="45dp"
+                            android:paddingBottom="12dp"
+
+                            android:paddingTop="12dp"
+                            android:paddingRight="2dp"
+                            />
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/ic_down" />
+
+                    </RelativeLayout>
+
+
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/hintt"
+                android:layout_marginTop="5dp"></View>
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:focusableInTouchMode="true"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                android:id="@+id/rc_exam_list"
+                ></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+    </com.eleganzit.tag.utils.MyNestedScrollView>
+</LinearLayout>

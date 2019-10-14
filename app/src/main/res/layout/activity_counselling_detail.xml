@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.TopCollegesActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_collapseMode="pin"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_gravity="end"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:src="@drawable/ic_back_white"
+                        android:id="@+id/back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+
+                    <TextView
+                        android:layout_toRightOf="@+id/back"
+                        android:gravity="start"
+                        android:textColor="#ffffff"
+                        android:text="Councelling"
+                        android:layout_marginLeft="15dp"
+
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textTitle" />
+
+
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
+    <com.eleganzit.tag.utils.MyNestedScrollView
+        android:layout_width="match_parent"
+        android:fillViewport="true"
+        android:background="@android:color/white"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:descendantFocusability="blocksDescendants"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <FrameLayout android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                xmlns:android="http://schemas.android.com/apk/res/android">
+                <LinearLayout
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. "></TextView>
+
+
+
+
+
+
+
+
+                    <LinearLayout
+                        android:layout_marginTop="15dp"
+                        android:background="@color/txtcolor"
+                        android:layout_width = "fill_parent"
+                        android:layout_height = "wrap_content"
+                        >
+
+                        <TextView
+                            android:layout_width = "0dp"
+                            android:layout_height = "wrap_content"
+                            android:layout_weight = "2"
+                            android:gravity = "start"
+                            android:padding = "5dp"
+                            android:text = "Exam Result"
+                            android:textColor = "#ffffff" />
+
+                        <TextView
+                            android:layout_width = "0dp"
+                            android:layout_height = "wrap_content"
+                            android:layout_weight = "1"
+                            android:gravity = "start"
+                            android:padding = "5dp"
+                            android:text = "Dates"
+                            android:textColor = "#ffffff" />
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id = "@+id/relativeLayout1"
+                        android:layout_width = "fill_parent"
+                        android:layout_height = "wrap_content"
+                        >
+
+                        <TextView
+                            android:id = "@+id/sNo"
+                            android:layout_width = "0dp"
+                            android:layout_height = "match_parent"
+                            android:layout_weight = "2"
+                            android:background = "@drawable/cell_shape"
+                            android:ellipsize = "end"
+                            android:padding = "5dp"
+                            android:text = "GATE"
+                            android:singleLine = "true" />
+
+                        <TextView
+                            android:id = "@+id/product"
+                            android:layout_width = "0dp"
+                            android:layout_height = "match_parent"
+                            android:layout_weight = "1"
+                            android:background = "@drawable/cell_shape"
+                            android:ellipsize = "end"
+                            android:padding = "5dp"
+                            android:text = "January 28, 2019"
+                            android:singleLine = "true" />
+
+
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width = "fill_parent"
+                        android:layout_height = "wrap_content"
+                        >
+
+                        <TextView
+                            android:layout_width = "0dp"
+                            android:layout_height = "match_parent"
+                            android:layout_weight = "2"
+                            android:background = "@drawable/cell_shape"
+                            android:ellipsize = "end"
+                            android:padding = "5dp"
+                            android:text = "JEE MAIN"
+                            android:singleLine = "true" />
+
+                        <TextView
+                            android:layout_width = "0dp"
+                            android:layout_height = "match_parent"
+                            android:layout_weight = "1"
+                            android:background = "@drawable/cell_shape"
+                            android:ellipsize = "end"
+                            android:padding = "5dp"
+                            android:text = "March 28, 2019"
+                            android:singleLine = "true" />
+
+
+
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_marginTop="15dp"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem "></TextView>
+
+
+
+                </LinearLayout>
+
+
+            </FrameLayout>
+        </LinearLayout>
+    </com.eleganzit.tag.utils.MyNestedScrollView>
+</LinearLayout>

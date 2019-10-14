@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.eleganzit.tag.R;
 import com.eleganzit.tag.ui.activity.school.subfragments.ClassFeesFragment;
+import com.eleganzit.tag.ui.activity.school.subfragments.SchoolFacilityFragment;
 import com.eleganzit.tag.ui.activity.school.subfragments.SchoolGalleryFragment;
 import com.eleganzit.tag.ui.activity.school.tabfragment.SchoolHomeFragment;
 import com.eleganzit.tag.ui.fragment.CollegeFacilityFragment;
@@ -44,7 +45,7 @@ public class SchoolDetailActivity extends AppCompatActivity {
         adapter.addFrag(new SchoolHomeFragment(),"Home");
         adapter.addFrag(new ClassFeesFragment(),"Class & Fees");
         adapter.addFrag(new SchoolGalleryFragment(),"Gallery");
-        adapter.addFrag(new CollegeFacilityFragment(),"Facility");
+        adapter.addFrag(new SchoolFacilityFragment(),"Facility");
 
         viewPager.setAdapter(adapter);
         htab_tabs.setupWithViewPager(htab_viewpager);

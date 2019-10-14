@@ -33,6 +33,7 @@ import com.eleganzit.tag.model.GalleryData;
 import com.eleganzit.tag.model.GetCollegeById;
 import com.eleganzit.tag.ui.activity.AddBasicInformationActivity;
 import com.eleganzit.tag.ui.activity.CollegeDetailActivity;
+import com.eleganzit.tag.ui.activity.school.ApplySchoolBasicInfoActivity;
 import com.eleganzit.tag.utils.UserLoggedInSession;
 
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ public class SchoolHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v=inflater.inflate(R.layout.fragment_college_home, container, false);
+        View v=inflater.inflate(R.layout.fragment_school_home, container, false);
         applynow=v.findViewById(R.id.applynow);
         myRatingBar=v.findViewById(R.id.myRatingBar);
         email=v.findViewById(R.id.email);
@@ -100,7 +101,7 @@ public class SchoolHomeFragment extends Fragment {
         applynow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  startActivity(new Intent(getActivity(), AddBasicInformationActivity.class));
+                startActivity(new Intent(getActivity(), ApplySchoolBasicInfoActivity.class));
 
             }
         });
@@ -125,7 +126,7 @@ public class SchoolHomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-getCollegeData();
+//getCollegeData();
     }
 
     public void getCollegeData(){

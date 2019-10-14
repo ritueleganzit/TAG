@@ -28,6 +28,7 @@ import android.widget.RelativeLayout;
 
 
 import com.eleganzit.tag.R;
+import com.eleganzit.tag.ui.activity.councelling.CouncellingExamActivity;
 import com.eleganzit.tag.ui.activity.exam.ExamActivity;
 import com.eleganzit.tag.ui.activity.result.ResultsActivity;
 import com.eleganzit.tag.utils.HomeFirstSliderAdapter;
@@ -46,7 +47,7 @@ public class HomeFragment extends Fragment {
     ViewPager viewPager;
     TabLayout indicator;
     RecyclerView firstrc,secondrc,thirdrc,fourthrc;
-    LinearLayout linearLayout,lin2,lin3,lin4,lin5,lin6,linear_exam,linresult;
+    LinearLayout linearLayout,lin2,lin3,lin4,lin5,lin6,linear_exam,linresult,linear_counselling;
 
     List<Integer> color;
     ArrayList colorName;
@@ -62,6 +63,7 @@ public class HomeFragment extends Fragment {
         lin4=root.findViewById(R.id.lin4);
         lin6=root.findViewById(R.id.lin6);
         lin5=root.findViewById(R.id.lin5);
+        linear_counselling=root.findViewById(R.id.linear_counselling);
         linresult=root.findViewById(R.id.linresult);
         firstrc=root.findViewById(R.id.firstrc);
         secondrc=root.findViewById(R.id.secondrc);
@@ -153,6 +155,11 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), ResultsActivity.class));
+            }
+        });linear_counselling.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), CouncellingExamActivity.class));
             }
         });
         /*ViewGroup.LayoutParams params = indicator.getLayoutParams();

@@ -1,30 +1,29 @@
-package com.eleganzit.tag.ui.activity.school.adpater;
+package com.eleganzit.tag.ui.activity.councelling.adapter;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.eleganzit.tag.R;
-import com.eleganzit.tag.ui.activity.CollegeDetailActivity;
-import com.eleganzit.tag.ui.activity.school.SchoolDetailActivity;
+import com.eleganzit.tag.ui.activity.councelling.CounsellingDetailActivity;
+import com.eleganzit.tag.ui.activity.exam.ExamDetailActivity;
 
 import static android.content.Context.WINDOW_SERVICE;
 
-public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.MyViewHolder>
+public class CouncellingAdapter extends RecyclerView.Adapter<CouncellingAdapter.MyViewHolder>
 {
 
     Context context;
     Activity activity;
-    public SchoolListAdapter(Context context) {
+    public CouncellingAdapter(Context context) {
 
         this.context = context;
         activity = (Activity) context;
@@ -33,7 +32,7 @@ public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.My
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.school_list_row,viewGroup,false);
+        View v=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.exam_row,viewGroup,false);
         MyViewHolder myViewHolder=new MyViewHolder(v);
 
         return myViewHolder;
@@ -41,17 +40,12 @@ public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.My
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int i) {
-
-        holder.clgcard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                context.startActivity(new Intent(context, SchoolDetailActivity.class));
-
-            }
-        });
-        holder.imgbg.getLayoutParams().width= (int) (getScreenWidthInPXs(context,(Activity) context));
-        holder.imgbg.getLayoutParams().height= (int) (getScreenWidthInPXs(context,(Activity) context)/3.3);
-
+holder.viewdetail.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        context.startActivity(new Intent(context, CounsellingDetailActivity.class));
+    }
+});
 
 
     }
@@ -62,14 +56,11 @@ public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.My
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-
-CardView clgcard;
-ImageView imgbg;
+ TextView viewdetail;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgbg=itemView.findViewById(R.id.imgbg);
-clgcard=itemView.findViewById(R.id.clgcard);
 
+            viewdetail=itemView.findViewById(R.id.viewdetail);
         }
     }
     public static int getScreenWidthInPXs(Context context, Activity activity){

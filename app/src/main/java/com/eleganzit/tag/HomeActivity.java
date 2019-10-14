@@ -27,6 +27,7 @@ import android.view.View;
 import com.eleganzit.tag.ui.activity.AskAQuestionActivity;
 import com.eleganzit.tag.ui.activity.CollegeSelectSpecializationActivity;
 import com.eleganzit.tag.ui.activity.MyProfileActivity;
+import com.eleganzit.tag.ui.activity.NotificationActivity;
 import com.eleganzit.tag.ui.activity.TopCollegesActivity;
 import com.eleganzit.tag.ui.activity.collegepredictor.CollegePredictorActivity;
 import com.eleganzit.tag.ui.activity.school.SchoolSelectSpecializationActivity;
@@ -36,6 +37,7 @@ import com.infideap.drawerbehavior.AdvanceDrawerLayout;
 
 
 import android.view.Menu;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class HomeActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
@@ -43,6 +45,7 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
     UserLoggedInSession userLoggedInSession;
 
     ActionBarDrawerToggle mDrawerToggle;
+    ImageView notification_ic;
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,7 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
         setSupportActionBar(toolbar);
 
          drawer = findViewById(R.id.drawer_layout);
+        notification_ic = findViewById(R.id.notification_ic);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -82,7 +86,13 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
         TextView text = (TextView) header.findViewById(R.id.name);
         TextView mobiletv = (TextView) header.findViewById(R.id.mobiletv);
         TextView emailtv = (TextView) header.findViewById(R.id.emailtv);
-
+        notification_ic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, NotificationActivity.class));
+                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+            }
+        });
 
         if(userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_NAME)!=null && !(userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_NAME).isEmpty()))
         {
@@ -150,14 +160,17 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
         } if (id==R.id.nav__menushare)
         {
           startActivity(new Intent(HomeActivity.this, AskAQuestionActivity.class));
+            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
 
         }if (id==R.id.nav_menu_terms)
         {
           startActivity(new Intent(HomeActivity.this, TermsAndCondition.class));
+            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
 
         }if (id==R.id.nav__menu_college_p)
         {
           startActivity(new Intent(HomeActivity.this, CollegePredictorActivity.class));
+            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
 
         }if (id==R.id.nav_share)
         {
@@ -176,6 +189,7 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
         }if (id==R.id.nav_menu_privacy)
         {
           startActivity(new Intent(HomeActivity.this, PrivacyPolicy.class));
+            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
 
         }if (id==R.id.nav_logout)
         {
@@ -209,7 +223,7 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
 
         }if (id==R.id.nav_slideshow)
         {
-           // startActivity(new Intent(HomeActivity.this, SchoolSelectSpecializationActivity.class));
+            startActivity(new Intent(HomeActivity.this, SchoolSelectSpecializationActivity.class));
 
         }if (id==R.id.nav_menu_courses)
         {

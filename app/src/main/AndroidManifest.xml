@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.eleganzit.tag">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:anyDensity="true"
@@ -14,16 +16,46 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         android:xlargeScreens="true">
-        <activity android:name=".ui.activity.result.ResultsActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".ui.activity.exam.ExamDetailActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.exam.ExamActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.collegepredictor.CollegePredictorDetail"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.collegepredictor.CollegePredictorActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.NotificationActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" ></activity>
+        <activity android:name=".ui.activity.councelling.CounsellingDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.activity.councelling.CouncellingExamActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.school.ApplyEducationInfoActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.school.ApplyPersonalInfoActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.school.ApplySchoolBasicInfoActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.result.ResultsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.exam.ExamDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.exam.ExamActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.collegepredictor.CollegePredictorDetail"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.collegepredictor.CollegePredictorActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.activity.AddEducationInformationActivity"
             android:screenOrientation="portrait"
@@ -185,7 +217,5 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
