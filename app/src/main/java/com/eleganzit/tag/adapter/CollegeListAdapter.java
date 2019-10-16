@@ -65,7 +65,18 @@ public class CollegeListAdapter extends RecyclerView.Adapter<CollegeListAdapter.
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int i) {
 final CollegeResult collegeResult=collegeResultArrayList.get(i);
-        holder.rel.setOnClickListener(new View.OnClickListener() {
+        holder.imgbg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity(new Intent(context, CollegeDetailActivity.class)
+                .putExtra("college_id",collegeResult.getCollegeId())
+                .putExtra("e_sp",e_sp)
+                .putExtra("college_name",collegeResult.getCollegeName()));
+
+
+
+            }
+        }); holder.rel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 context.startActivity(new Intent(context, CollegeDetailActivity.class)

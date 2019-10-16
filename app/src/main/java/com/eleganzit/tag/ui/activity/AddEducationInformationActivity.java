@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import me.nereo.multi_image_selector.bean.Image;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -283,7 +285,7 @@ public class AddEducationInformationActivity extends AppCompatActivity {
             myViewHolder.edmarks.setText(categorydata.get(i).getMarks());
             myViewHolder.edremarks.setText(categorydata.get(i).getRemarks());
 
-            myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            myViewHolder.deleteimg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     categorydata.remove(i);
@@ -301,11 +303,12 @@ public class AddEducationInformationActivity extends AppCompatActivity {
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
             EditText edname,edyear,edmarks,edremarks;
-
+ImageView deleteimg;
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
 
                 edname=itemView.findViewById(R.id.edname);
+                deleteimg=itemView.findViewById(R.id.deleteimg);
                 edyear=itemView.findViewById(R.id.edyear);
                 edmarks=itemView.findViewById(R.id.edmarks);
                 edremarks=itemView.findViewById(R.id.edremarks);
@@ -403,7 +406,7 @@ public class AddEducationInformationActivity extends AppCompatActivity {
             myViewHolder.ed_rank.setText(applyCompetitives.get(i).getRank());
 
 
-            myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            myViewHolder.deleteimg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     applyCompetitives.remove(i);
@@ -421,10 +424,12 @@ public class AddEducationInformationActivity extends AppCompatActivity {
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
 EditText ed_mark,ed_rank,name_ed;
+ImageView deleteimg;
 
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
 
+                deleteimg=itemView.findViewById(R.id.deleteimg);
                 ed_mark=itemView.findViewById(R.id.ed_mark);
                 name_ed=itemView.findViewById(R.id.name_ed);
                 ed_rank=itemView.findViewById(R.id.ed_rank);
@@ -495,7 +500,7 @@ try {
     JsonObject paramObject = new JsonObject();
     paramObject.addProperty("user_id", userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_ID));
     paramObject.addProperty("college_id", "" + sharedPreferences.getString("college_id", "4"));
-    paramObject.addProperty("course_list_id", 3);
+    paramObject.addProperty("course_list_id", 79);
     paramObject.addProperty("mobile", sharedPreferences.getString("", ""));
     paramObject.addProperty("first_name", sharedPreferences.getString("first_name", ""));
     paramObject.addProperty("middle_name", sharedPreferences.getString("middle_name", ""));
@@ -668,6 +673,8 @@ else
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 // Log.d("reeeee",""+t.getLocalizedMessage());
                 Log.d("reeeee","saS"+t.getStackTrace());
+                progressDialog.dismiss();
+                Toast.makeText(AddEducationInformationActivity.this, "Server and Internet Error", Toast.LENGTH_SHORT).show();
 
             }
         });

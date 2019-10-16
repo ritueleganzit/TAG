@@ -11,8 +11,11 @@ import android.widget.Toast;
 
 import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
+import com.eleganzit.tag.model.LoginNodeResponse;
 import com.eleganzit.tag.model.LoginResponse;
 import com.eleganzit.tag.model.SendOtpResponse;
+import com.eleganzit.tag.model.VerifiedResponse;
+import com.google.gson.JsonObject;
 
 import me.philio.pinentry.PinEntryView;
 import retrofit2.Call;
@@ -73,8 +76,11 @@ TextView submit,resend;
     }
     public void sendotp(){
         progressDialog.show();
+        JsonObject paramObject = new JsonObject();
+        paramObject.addProperty("username", ""+data);
+
         RetrofitInterface myInterface = RetrofitAPI.getRetrofit().create(RetrofitInterface.class);
-        Call<SendOtpResponse> call=myInterface.sendOtp(data);
+        Call<SendOtpResponse> call=myInterface.sendOtp(paramObject);
         call.enqueue(new Callback<SendOtpResponse>() {
             @Override
             public void onResponse(Call<SendOtpResponse> call, Response<SendOtpResponse> response) {
@@ -105,17 +111,21 @@ TextView submit,resend;
     }
     private void matchOtp() {
         progressDialog.show();
+        JsonObject paramObject = new JsonObject();
+        paramObject.addProperty("username", ""+data);
+        paramObject.addProperty("sentcode", ""+pinentered);
+
         RetrofitInterface myInterface = RetrofitAPI.getRetrofit().create(RetrofitInterface.class);
-        Call<LoginResponse> call=myInterface.checkcode(data,pinentered);
-        call.enqueue(new Callback<LoginResponse>() {
+        Call<VerifiedResponse> call=myInterface.checkcode(paramObject);
+        call.enqueue(new Callback<VerifiedResponse>() {
             @Override
-            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+            public void onResponse(Call<VerifiedResponse> call, Response<VerifiedResponse> response) {
                 progressDialog.dismiss();
                 if (response.isSuccessful()) {
 
                     if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
                         startActivity(new Intent(VerificationActivity.this, ChangePasswordActivity.class)
-                        .putExtra("user_id",""+response.body().getData().get(0).getUserId()));
+                        .putExtra("user_id",""+response.body().getUserId()));
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                     }
@@ -128,7 +138,7 @@ TextView submit,resend;
             }
 
             @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
+            public void onFailure(Call<VerifiedResponse> call, Throwable t) {
                 progressDialog.dismiss();
 
                 Toast.makeText(VerificationActivity.this, "Server and Internet Error", Toast.LENGTH_SHORT).show();

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:padding="5dp"
+
+        android:gravity="center_vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="50dp"
+            android:gravity="center"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:fontFamily="@font/roboto_bold"
+            android:layout_height="wrap_content"
+            android:text="JAN 2nd"></TextView>
+
+        <LinearLayout
+
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical">
+            <TextView
+                android:fontFamily="@font/roboto_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Exam Fees"></TextView>
+            <TextView
+                android:fontFamily="@font/roboto_regular"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3rd Semester"></TextView>
+
+        </LinearLayout>
+        <TextView
+            android:layout_weight="1"
+            android:layout_gravity="end"
+            android:gravity="end"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:fontFamily="@font/roboto_bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="12000"></TextView>
+
+
+    </LinearLayout>
+    <View
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/hintt"></View>
+</LinearLayout>

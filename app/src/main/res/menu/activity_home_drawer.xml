@@ -39,7 +39,11 @@
             android:icon="@drawable/ic_clg_menu"
 
             android:id="@+id/nav__menu_college_p"
-            android:title="@string/menu_college_p" />
+            android:title="@string/menu_college_p" /><item
+            android:icon="@drawable/ic_rank_predict"
+
+            android:id="@+id/nav__menu_rank_p"
+            android:title="Rank Predictor" />
         <item
             android:icon="@drawable/ic_clg_menu_compare"
 

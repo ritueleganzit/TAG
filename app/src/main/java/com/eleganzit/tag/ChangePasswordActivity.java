@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.LoginResponse;
+import com.eleganzit.tag.model.ResetPasswordResponse;
+import com.google.gson.JsonObject;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -57,11 +59,15 @@ public class ChangePasswordActivity extends AppCompatActivity {
     private void changepassword() {
 
             progressDialog.show();
-            RetrofitInterface myInterface = RetrofitAPI.getRetrofit().create(RetrofitInterface.class);
-            Call<LoginResponse> call=myInterface.get_restpassword("get_restpassword",user_id,ed_new_password.getText().toString());
-            call.enqueue(new Callback<LoginResponse>() {
+        JsonObject paramObject = new JsonObject();
+        paramObject.addProperty("user_id", ""+user_id);
+        paramObject.addProperty("new_password", ""+ed_new_password.getText().toString());
+
+        RetrofitInterface myInterface = RetrofitAPI.getRetrofit().create(RetrofitInterface.class);
+            Call<ResetPasswordResponse> call=myInterface.get_restpassword(paramObject);
+            call.enqueue(new Callback<ResetPasswordResponse>() {
                 @Override
-                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                public void onResponse(Call<ResetPasswordResponse> call, Response<ResetPasswordResponse> response) {
                     progressDialog.dismiss();
                     if (response.isSuccessful()) {
 
@@ -81,7 +87,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<LoginResponse> call, Throwable t) {
+                public void onFailure(Call<ResetPasswordResponse> call, Throwable t) {
                     progressDialog.dismiss();
 
                     Toast.makeText(ChangePasswordActivity.this, "Server and Internet Error", Toast.LENGTH_SHORT).show();

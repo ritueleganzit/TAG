@@ -98,9 +98,10 @@ android:layout_alignParentEnd="true"
         android:layout_height="wrap_content"
         android:gravity="start"
         android:id="@+id/question"
+
         android:maxLines="5"
-        android:backgroundTint="@color/txtcolor"
-        android:inputType="text"
-        android:fontFamily="@font/roboto_regular"
+        android:backgroundTint="@color/hintt"
+        android:inputType="text|textNoSuggestions"
+        android:fontFamily="@font/roboto_light"
         android:hint="Type Your Question"/>
 </LinearLayout>

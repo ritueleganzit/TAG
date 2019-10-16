@@ -97,7 +97,35 @@ public class CurrentEduBackgroundAdapter extends RecyclerView.Adapter<CurrentEdu
 holder.btnsave.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        updateEduPref(holder,workdata.getPreferance_id(),workdata.getUserId());
+
+        if (holder.stream.getText().toString().trim().equals("")) {
+
+
+            Toast.makeText(context, "Please enter education stream", Toast.LENGTH_SHORT).show();
+
+            holder.stream.requestFocus();
+
+        }
+
+        else if (holder.course.getText().toString().trim().equals("")) {
+
+            Toast.makeText(context, "Please enter course", Toast.LENGTH_SHORT).show();
+
+
+            holder.course.requestFocus();
+
+        }else if (holder.mode_of_study.getText().toString().trim().equals("")) {
+
+            Toast.makeText(context, "Please enter mode of study", Toast.LENGTH_SHORT).show();
+
+
+            holder.mode_of_study.requestFocus();
+
+        }
+        else {
+            updateEduPref(holder,workdata.getPreferance_id(),workdata.getUserId());
+
+        }
     }
 });
 

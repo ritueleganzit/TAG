@@ -10,17 +10,21 @@ import com.eleganzit.tag.model.AppliedCollegeListResponse;
 import com.eleganzit.tag.model.AskQuestionResponse;
 import com.eleganzit.tag.model.CollegeHomeResponse;
 import com.eleganzit.tag.model.DeleteApiResponse;
+import com.eleganzit.tag.model.FetchedUserResponse;
 import com.eleganzit.tag.model.GetCollegeById;
 import com.eleganzit.tag.model.GetCoursesResponse;
 import com.eleganzit.tag.model.GetFaqListResponse;
 import com.eleganzit.tag.model.GetProfileDataResponse;
 import com.eleganzit.tag.model.GetSpecializationResponse;
+import com.eleganzit.tag.model.LoginNodeResponse;
 import com.eleganzit.tag.model.LoginResponse;
 import com.eleganzit.tag.model.NationalityResponse;
 import com.eleganzit.tag.model.QuestionAnsResponse;
+import com.eleganzit.tag.model.ResetPasswordResponse;
 import com.eleganzit.tag.model.SendOtpResponse;
 import com.eleganzit.tag.model.TopCollegeResponse;
 import com.eleganzit.tag.model.UpdateEducationPreferanceResponse;
+import com.eleganzit.tag.model.VerifiedResponse;
 import com.eleganzit.tag.model.appliedcollege.ApplyCollegeMobileResponse;
 import com.eleganzit.tag.model.homecourse.CourseResponse;
 import com.eleganzit.tag.model.homefacility.FacilitiesResponse;
@@ -46,46 +50,53 @@ import retrofit2.http.Path;
 
 public interface RetrofitInterface {
 
-    @FormUrlEncoded()
-    @POST("/tags/login-api.php")
-    Call<LoginResponse> doLogin(
-            @Field("username") String username ,
-            @Field("password") String password
+
+    @POST("/testhost/users/userLogin")
+    Call<LoginNodeResponse> doLogin(
+            @Body JsonObject jsonObject
+
     );
 
+    @POST("/testhost/users/userSignUp")
+    Call<LoginNodeResponse> doSignUP(
+            @Body JsonObject jsonObject
 
-    @FormUrlEncoded()
+    );
+
+   /* @FormUrlEncoded()
     @POST("/tags/checkcode.php")
     Call<LoginResponse> checkcode(
             @Field("username") String username ,
             @Field("sentcode") String sentcode
-    );
- @FormUrlEncoded()
+    );*/
+
+   @POST("/testhost/users/verifyOtp")
+   Call<VerifiedResponse> checkcode(
+           @Body JsonObject jsonObject
+
+   );
+
+ /*@FormUrlEncoded()
     @POST("/tags/temp-api.php")
     Call<LoginResponse> get_restpassword(
             @Field("action") String get_restpassword ,
             @Field("user_id") String user_id ,
             @Field("new_password") String new_password
+    );*/
+    @POST("/testhost/users/resetPassword")
+    Call<ResetPasswordResponse> get_restpassword(
+            @Body JsonObject jsonObject
     );
 
 
-    @FormUrlEncoded()
-    @POST("/tags/send-otp.php")
+    @POST("/testhost/users/sendOtp")
     Call<SendOtpResponse> sendOtp(
-            @Field("username") String username
+            @Body JsonObject jsonObject
     );
 
 
 
-  @FormUrlEncoded()
-    @POST("/tags/signup-api.php")
-    Call<LoginResponse> doSignUP(
-            @Field("name") String name ,
-            @Field("mobile") String mobile,
-            @Field("user_email") String user_email,
-            @Field("password") String password,
-            @Field("nationality") String nationality
-    );
+
 
  @FormUrlEncoded()
     @POST("/tags/temp-api.php")
@@ -300,5 +311,10 @@ public interface RetrofitInterface {
     );
     @GET("/testhost/users/nationalities")
     Call<NationalityResponse> getNationalityResponse();
+
+    @GET("/testhost/users/getUserById/{id}")
+    Call<FetchedUserResponse> getUserById(@Path(value = "id", encoded = true) String id);
+
+
 
 }

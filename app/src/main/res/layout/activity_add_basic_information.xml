@@ -98,15 +98,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 android:id="@+id/nessted"
-        android:layout_margin="5dp"
         tools:context=".ui.activity.AddPersonalInfoActivity">
         <LinearLayout
+
             android:layout_width="match_parent"
-            android:padding="10dp"
             android:orientation="vertical"
             android:layout_height="wrap_content">
 
                 <LinearLayout
+                    android:layout_margin="5dp"
+                    android:padding="10dp"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -360,23 +362,24 @@ android:id="@+id/applied_specialization_name"
                         </LinearLayout>
 
                     </LinearLayout>
-                    <android.support.v7.widget.RecyclerView
-                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-                        android:orientation="vertical"
-                        android:id="@+id/rc_course_data"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
 
-                    </android.support.v7.widget.RecyclerView>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:text="Add more"
-                        android:id="@+id/addmore"
-                        android:padding="8dp"
-                        android:gravity="center_vertical"
-                        android:drawableLeft="@drawable/ic_plus"
-                        android:layout_height="wrap_content"></TextView>
                 </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                android:orientation="vertical"
+                android:id="@+id/rc_course_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+            <TextView
+                android:layout_width="match_parent"
+                android:text="Add more"
+                android:id="@+id/addmore"
+                android:padding="8dp"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/ic_plus"
+                android:layout_height="wrap_content"></TextView>
         </LinearLayout>
 
     </com.eleganzit.tag.utils.MyNestedScrollView>

@@ -95,6 +95,7 @@ call.enqueue(new Callback<AskQuestionResponse>() {
 
     @Override
     public void onFailure(Call<AskQuestionResponse> call, Throwable t) {
+        progressDialog.dismiss();
         Toast.makeText(AskAQuestionActivity.this, "Server and Internet Error", Toast.LENGTH_SHORT).show();
 
     }

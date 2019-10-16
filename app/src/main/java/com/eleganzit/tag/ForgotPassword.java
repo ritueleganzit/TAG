@@ -14,6 +14,7 @@ import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.LoginResponse;
 import com.eleganzit.tag.model.SendOtpResponse;
+import com.google.gson.JsonObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -62,8 +63,11 @@ public class ForgotPassword extends AppCompatActivity {
     }
     public void sendotp(){
         progressDialog.show();
+        JsonObject paramObject = new JsonObject();
+        paramObject.addProperty("username", ""+login_emailid.getText().toString());
+
         RetrofitInterface myInterface = RetrofitAPI.getRetrofit().create(RetrofitInterface.class);
-        Call<SendOtpResponse> call=myInterface.sendOtp(login_emailid.getText().toString());
+        Call<SendOtpResponse> call=myInterface.sendOtp(paramObject);
         call.enqueue(new Callback<SendOtpResponse>() {
             @Override
             public void onResponse(Call<SendOtpResponse> call, Response<SendOtpResponse> response) {

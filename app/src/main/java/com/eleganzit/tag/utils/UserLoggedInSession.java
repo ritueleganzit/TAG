@@ -77,7 +77,31 @@ public class UserLoggedInSession {
 
 
 
-    }public void createSignUpSession(String email,String user_id,String user_name,String photo,String phone){
+    }
+
+    public void updateData(String email,String user_id,String user_name,String phone){
+        // Storing login value as TRUE
+
+        // Storing name in pref   ,
+        editor.putString(USER_ID, user_id);
+
+        editor.putString(EMAIL, email);
+
+        editor.putString(USER_NAME, user_name);
+
+        editor.putString(USER_PHONE, phone);
+
+
+        // commit changes
+        editor.commit();
+
+
+
+
+
+    }
+
+    public void createSignUpSession(String email,String user_id,String user_name,String photo,String phone){
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
 
@@ -106,6 +130,8 @@ public class UserLoggedInSession {
 
 
     }
+
+
     public void checkLogin(){
         // Check login status
         if(!this.isLoggedIn()){

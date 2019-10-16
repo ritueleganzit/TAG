@@ -91,12 +91,12 @@
                android:layout_height="wrap_content"
                android:layout_marginTop="10dp"
                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-               android:text="List of colleges in India based on your search"></TextView>
+               android:text="List of schools in India based on your search"></TextView>
            <TextView
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:textAppearance="?android:textAppearanceSmall"
-               android:text="2456 colleges"></TextView>
+               android:text="2456 schools"></TextView>
 
        </LinearLayout>
        </android.support.v7.widget.CardView>

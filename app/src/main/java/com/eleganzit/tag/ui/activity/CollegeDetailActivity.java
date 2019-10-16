@@ -9,14 +9,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.eleganzit.tag.R;
-import com.eleganzit.tag.ui.fragment.ActivityFragment;
-import com.eleganzit.tag.ui.fragment.CollegeCourses;
 import com.eleganzit.tag.ui.fragment.CollegeFacilityFragment;
 import com.eleganzit.tag.ui.fragment.CollegeGalleryFragment;
 import com.eleganzit.tag.ui.fragment.CollegeHomeFragment;
 import com.eleganzit.tag.ui.fragment.CourseFeesFragment;
-import com.eleganzit.tag.ui.fragment.MyProfileFragment;
-import com.eleganzit.tag.ui.fragment.PaymentFragment;
 import com.eleganzit.tag.utils.ViewPagerAdapter;
 
 public class CollegeDetailActivity extends AppCompatActivity {

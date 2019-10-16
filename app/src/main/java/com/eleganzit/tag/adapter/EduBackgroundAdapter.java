@@ -105,8 +105,56 @@ public class EduBackgroundAdapter extends RecyclerView.Adapter<EduBackgroundAdap
 holder.btnsave.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
+        if (holder.cource_level.getText().toString().trim().equals("")) {
+
+
+            Toast.makeText(context, "Please select course level", Toast.LENGTH_SHORT).show();
+
+            //  name.requestFocus();
+
+        }
+
+        else if (holder.school_name.getText().toString().trim().equals("")) {
+
+            Toast.makeText(context, "Please enter school name", Toast.LENGTH_SHORT).show();
+
+
+            holder.school_name.requestFocus();
+
+        }else if (holder.cource_year.getText().toString().trim().equals("")) {
+
+            Toast.makeText(context, "Please select year", Toast.LENGTH_SHORT).show();
+
+
+
+        }else if (holder.board.getText().toString().trim().equals("")) {
+
+            Toast.makeText(context, "Please enter board", Toast.LENGTH_SHORT).show();
+
+
+            holder.board.requestFocus();
+
+        }else if (holder.subject.getText().toString().trim().equals("")) {
+
+            Toast.makeText(context, "Please enter subject", Toast.LENGTH_SHORT).show();
+
+
+            holder.subject.requestFocus();
+
+        }else if (holder.marks.getText().toString().trim().equals("")) {
+
+            Toast.makeText(context, "Please enter marks", Toast.LENGTH_SHORT).show();
+
+
+            holder. marks.requestFocus();
+
+        }
+        else
+        {
+            updateEducation(holder,workdata.getEducationId());
+
+        }
         //Toast.makeText(context, ""+workdata.getEducationId(), Toast.LENGTH_SHORT).show();
-        updateEducation(holder,workdata.getEducationId());
     }
 });
         holder.delete.setOnClickListener(new View.OnClickListener() {
@@ -219,4 +267,6 @@ EditText cource_level,school_name,marks,subject,board,cource_year;
 
         }
     }
+
+
 }

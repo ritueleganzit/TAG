@@ -477,12 +477,14 @@ else if (applied_specialization_name.getText().toString().trim().equals("")) {
             myViewHolder.ed_course.setText(categorydata.get(i).getApplied_course_name());
             myViewHolder.ed_sp.setText(categorydata.get(i).getApplied_specialization_name());
 
-            myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            myViewHolder.deleteimg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     categorydata.remove(i);
                     notifyDataSetChanged();
                     addmore.setVisibility(View.VISIBLE);
+
+
 
                 }
             });
@@ -495,11 +497,13 @@ else if (applied_specialization_name.getText().toString().trim().equals("")) {
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
 EditText ed_course,ed_sp;
+ImageView deleteimg;
 
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
 
                 ed_course=itemView.findViewById(R.id.ed_course);
+                deleteimg=itemView.findViewById(R.id.deleteimg);
                 ed_sp=itemView.findViewById(R.id.ed_sp);
                 ed_course.addTextChangedListener(new TextWatcher() {
                     @Override

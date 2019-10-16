@@ -309,7 +309,7 @@ public class SchoolHomeFragment extends Fragment {
             @Override
             public void onFailure(Call<GetCollegeById> call, Throwable t) {
                 progressDialog.dismiss();
-                Toast.makeText(getActivity(), "Error "+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Server and Internet Error ", Toast.LENGTH_SHORT).show();
             }
         });
     }

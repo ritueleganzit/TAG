@@ -47,10 +47,11 @@ public class CoursesHomeAdapter extends RecyclerView.Adapter<CoursesHomeAdapter.
         CourceFee courseDetail=courseDetailArrayList.get(i);
 
         Log.d("fsfsfs",""+courseDetail.getCourseName());
+        Log.d("fsfsfs",""+courseDetail.getCourseFees());
 
         if (courseDetail.getCourseName()!=null && !(courseDetail.getCourseName().isEmpty()))
         {
-            holder.course_name.setText("");
+            holder.course_name.setText(""+courseDetail.getCourseName());
 
         }
         if (courseDetail.getCourseFees()!=null && !(courseDetail.getCourseFees().isEmpty()))

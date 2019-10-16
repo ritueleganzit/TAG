@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.eleganzit.tag.R;
 import com.eleganzit.tag.adapter.CoursesAdapter;
+import com.eleganzit.tag.ui.activity.school.adpater.CoursesSchoolAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,7 +32,7 @@ public class ClassFeesFragment extends Fragment {
 
         View v=inflater.inflate(R.layout.fragment_course_fees, container, false);
         rc_course_fees=v.findViewById(R.id.rc_course_fees);
-        rc_course_fees.setAdapter(new CoursesAdapter(getActivity()));
+        rc_course_fees.setAdapter(new CoursesSchoolAdapter(getActivity()));
 
         return v;
 

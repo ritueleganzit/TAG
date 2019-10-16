@@ -175,6 +175,8 @@ findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onFailure(Call<AddPersonalInfoResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(AddPersonalInfoActivity.this, "Server and Internet Error", Toast.LENGTH_SHORT).show();
 
             }
         });

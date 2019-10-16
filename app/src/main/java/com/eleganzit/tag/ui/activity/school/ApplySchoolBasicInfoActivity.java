@@ -27,7 +27,7 @@ public class ApplySchoolBasicInfoActivity extends AppCompatActivity {
     String categorys[]={"Test","Test1"};
     TextView next;
     LinearLayout lintouch;
-    EditText first_name,middle_name,last_name,d_o_b,gender,category,category_ed,applied_specialization_name;
+    EditText first_name,middle_name,last_name,d_o_b,gender,category_ed,applied_specialization_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +39,6 @@ public class ApplySchoolBasicInfoActivity extends AppCompatActivity {
         last_name=findViewById(R.id.last_name);
         d_o_b=findViewById(R.id.d_o_b);
         gender=findViewById(R.id.gender);
-        category=findViewById(R.id.category);
         category_ed=findViewById(R.id.category_ed);
         applied_specialization_name=findViewById(R.id.applied_specialization_name);
         HideKeyBoard.setupUI(lintouch,ApplySchoolBasicInfoActivity.this);
@@ -84,29 +83,6 @@ public class ApplySchoolBasicInfoActivity extends AppCompatActivity {
             }
         });
 
-        category.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final ListAdapter adapter = new ArrayAdapter(ApplySchoolBasicInfoActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, categorys);
-
-                final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(new ContextThemeWrapper(ApplySchoolBasicInfoActivity.this, R.style.AlertDialogCustom));
-
-                builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-
-
-                        category.setText(categorys[i]);
-
-
-
-
-                    }
-                });
-                builder.show();
-            }
-        });
 
         d_o_b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,14 +159,6 @@ public class ApplySchoolBasicInfoActivity extends AppCompatActivity {
             Toast.makeText(this, "Please Select Gender", Toast.LENGTH_SHORT).show();
 
             gender.requestFocus();
-
-            return false;
-        }else if (category.getText().toString().trim().equals("")) {
-
-
-            Toast.makeText(this, "Please Select Category", Toast.LENGTH_SHORT).show();
-
-            category.requestFocus();
 
             return false;
         }

@@ -7,26 +7,34 @@ public class LoginData {
 
     @SerializedName("user_id")
     @Expose
-    private String userId;
+    private Integer userId;
+    @SerializedName("user_email")
+    @Expose
+    private String userEmail;
     @SerializedName("name")
     @Expose
     private String name;
     @SerializedName("mobile")
     @Expose
     private String mobile;
-    @SerializedName("user_email")
-    @Expose
-    private String userEmail;
     @SerializedName("nationality")
     @Expose
     private String nationality;
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public String getName() {
@@ -43,14 +51,6 @@ public class LoginData {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
-    }
-
-    public String getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
     }
 
     public String getNationality() {

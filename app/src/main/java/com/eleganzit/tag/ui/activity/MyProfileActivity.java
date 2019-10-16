@@ -1,12 +1,12 @@
 package com.eleganzit.tag.ui.activity;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,18 +14,26 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.eleganzit.tag.R;
+import com.eleganzit.tag.adapter.HomeFacilityAdapter;
+import com.eleganzit.tag.api.RetrofitAPI;
+import com.eleganzit.tag.api.RetrofitInterface;
+import com.eleganzit.tag.model.FetchedUserResponse;
+import com.eleganzit.tag.model.homefacility.FacilitiesResponse;
+import com.eleganzit.tag.ui.activity.payment.PaymentFragment;
 import com.eleganzit.tag.ui.fragment.ActivityFragment;
 import com.eleganzit.tag.ui.fragment.MyProfileFragment;
-import com.eleganzit.tag.ui.fragment.PaymentFragment;
-import com.eleganzit.tag.ui.home.HomeFragment;
 import com.eleganzit.tag.utils.UserLoggedInSession;
 import com.eleganzit.tag.utils.ViewPagerAdapter;
 
 import java.util.ArrayList;
 
 import me.nereo.multi_image_selector.MultiImageSelector;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyProfileActivity extends AppCompatActivity {
 ViewPager htab_viewpager;
@@ -36,6 +44,7 @@ TextView namedata;
     private ArrayList<String> mSelectPath;
 public static TextView emailtv,phonetv;
 FrameLayout frameimg;
+    ProgressDialog progressDialog;
 String user_id;
     UserLoggedInSession userLoggedInSession;
 
@@ -50,7 +59,10 @@ String user_id;
                 onBackPressed();
             }
         });
-
+        progressDialog = new ProgressDialog(MyProfileActivity.this);
+        progressDialog.setMessage("Please Wait");
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
         emailtv=findViewById(R.id.emailtv);
         htab_tabs=findViewById(R.id.htab_tabs);
         frameimg=findViewById(R.id.frameimg);
@@ -131,4 +143,59 @@ setupViewPager(htab_viewpager);
             ActivityCompat.requestPermissions(MyProfileActivity.this, new String[]{permission}, requestCode);
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getFacilityData();
+
+    }
+
+    private void getFacilityData() {
+        progressDialog.show();
+        RetrofitInterface myInterface = RetrofitAPI.getRetrofitN().create(RetrofitInterface.class);
+        Call<FetchedUserResponse> call=myInterface.getUserById(""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_ID));
+        call.enqueue(new Callback<FetchedUserResponse>() {
+            @Override
+            public void onResponse(Call<FetchedUserResponse> call, Response<FetchedUserResponse> response) {
+                progressDialog.dismiss();
+                if (response.isSuccessful()) {
+                    if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
+
+if (response.body().getResponse()!=null)
+{
+    if (response.body().getResponse().getName()!=null && !(response.body().getResponse().getName().isEmpty()))
+    {
+        namedata.setText(""+response.body().getResponse().getName());
+    }
+    if (response.body().getResponse().getMobile()!=null && !(response.body().getResponse().getMobile().isEmpty()))
+    {
+        phonetv.setText(""+response.body().getResponse().getMobile());
+    }
+
+    if (response.body().getResponse().getUserEmail()!=null && !(response.body().getResponse().getUserEmail().isEmpty()))
+    {
+        emailtv.setText(""+response.body().getResponse().getUserEmail());
+    }
+    userLoggedInSession.updateData(response.body().getResponse().getUserEmail(),""+response.body().getResponse().getUserId(),response.body().getResponse().getName(),response.body().getResponse().getMobile());
+
+
+
+}
+
+
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FetchedUserResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(MyProfileActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
 }

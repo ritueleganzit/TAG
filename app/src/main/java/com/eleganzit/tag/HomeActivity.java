@@ -30,6 +30,8 @@ import com.eleganzit.tag.ui.activity.MyProfileActivity;
 import com.eleganzit.tag.ui.activity.NotificationActivity;
 import com.eleganzit.tag.ui.activity.TopCollegesActivity;
 import com.eleganzit.tag.ui.activity.collegepredictor.CollegePredictorActivity;
+import com.eleganzit.tag.ui.activity.rankpredictor.RankPredictorActivity;
+import com.eleganzit.tag.ui.activity.salarytrendreport.PackageTrendReport;
 import com.eleganzit.tag.ui.activity.school.SchoolSelectSpecializationActivity;
 import com.eleganzit.tag.ui.home.HomeFragment;
 import com.eleganzit.tag.utils.UserLoggedInSession;
@@ -43,7 +45,7 @@ import android.widget.TextView;
 public class HomeActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
     DrawerLayout drawer;
     UserLoggedInSession userLoggedInSession;
-
+    TextView text,emailtv,mobiletv;
     ActionBarDrawerToggle mDrawerToggle;
     ImageView notification_ic;
     @SuppressLint("RestrictedApi")
@@ -83,9 +85,9 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
         });
         navigationView.setNavigationItemSelectedListener(this);
         View header = navigationView.getHeaderView(0);
-        TextView text = (TextView) header.findViewById(R.id.name);
-        TextView mobiletv = (TextView) header.findViewById(R.id.mobiletv);
-        TextView emailtv = (TextView) header.findViewById(R.id.emailtv);
+         text = (TextView) header.findViewById(R.id.name);
+         mobiletv = (TextView) header.findViewById(R.id.mobiletv);
+         emailtv = (TextView) header.findViewById(R.id.emailtv);
         notification_ic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,19 +96,7 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
             }
         });
 
-        if(userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_NAME)!=null && !(userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_NAME).isEmpty()))
-        {
-            text.setText(""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_NAME));
-        }
-        if(userLoggedInSession.getUserDetails().get(UserLoggedInSession.EMAIL)!=null && !(userLoggedInSession.getUserDetails().get(UserLoggedInSession.EMAIL).isEmpty()))
-        {
-            emailtv.setText(""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.EMAIL));
-        }
 
-        if(userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_PHONE)!=null && !userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_PHONE).isEmpty())
-        {
-            mobiletv.setText(""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_PHONE));
-        }
 
 
 
@@ -129,6 +119,19 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
     @Override
     protected void onResume() {
         super.onResume();
+        if(userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_NAME)!=null && !(userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_NAME).isEmpty()))
+        {
+            text.setText(""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_NAME));
+        }
+        if(userLoggedInSession.getUserDetails().get(UserLoggedInSession.EMAIL)!=null && !(userLoggedInSession.getUserDetails().get(UserLoggedInSession.EMAIL).isEmpty()))
+        {
+            emailtv.setText(""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.EMAIL));
+        }
+
+        if(userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_PHONE)!=null && !userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_PHONE).isEmpty())
+        {
+            mobiletv.setText(""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_PHONE));
+        }
       //  Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_back, getTheme());
        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
        // getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(false);
@@ -170,6 +173,16 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
         }if (id==R.id.nav__menu_college_p)
         {
           startActivity(new Intent(HomeActivity.this, CollegePredictorActivity.class));
+            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+
+        }if (id==R.id.nav__menu_rank_p)
+        {
+          startActivity(new Intent(HomeActivity.this, RankPredictorActivity.class));
+            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+
+        }if (id==R.id.nav_menu_salary_trend)
+        {
+          startActivity(new Intent(HomeActivity.this, PackageTrendReport.class));
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
 
         }if (id==R.id.nav_share)

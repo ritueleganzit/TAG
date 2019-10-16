@@ -90,7 +90,7 @@ public class CourseFeesFragment extends Fragment {
             @Override
             public void onFailure(Call<CourseResponse> call, Throwable t) {
                 progressDialog.dismiss();
-                Toast.makeText(getActivity(), "Server Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Server and Internet Error", Toast.LENGTH_SHORT).show();
             }
         });
     }

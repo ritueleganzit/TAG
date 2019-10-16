@@ -12,7 +12,13 @@
         android:background="@color/hintt"
         ></View>
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_weight="0.8"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dp"
@@ -121,4 +127,16 @@ android:id="@+id/edmarks"
 
 
     </LinearLayout>
+    <ImageView
+        android:layout_margin="5dp"
+        android:layout_width="18dp"
+        android:layout_gravity="top|right"
+        android:id="@+id/deleteimg"
+        android:scaleType="centerInside"
+        android:layout_weight="0.2"
+        android:layout_height="18dp"
+        android:src="@drawable/ic_close"></ImageView>
+    </LinearLayout>
+
+
 </LinearLayout>

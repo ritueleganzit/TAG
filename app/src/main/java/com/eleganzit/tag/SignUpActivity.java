@@ -22,10 +22,12 @@ import android.widget.Toast;
 
 import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
+import com.eleganzit.tag.model.LoginNodeResponse;
 import com.eleganzit.tag.model.LoginResponse;
 import com.eleganzit.tag.model.NationalityResponse;
 import com.eleganzit.tag.utils.HideKeyBoard;
 import com.eleganzit.tag.utils.UserLoggedInSession;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +37,7 @@ import java.util.regex.Pattern;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Field;
 
 public class SignUpActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
@@ -42,7 +45,8 @@ public class SignUpActivity extends AppCompatActivity {
     UserLoggedInSession userLoggedInSession;
     CardView cardhide;
     List<String> arrayList;
-
+    List<String> arrayListid;
+String nationalityid="";
     EditText nationality,password,edemail,edmobile,edname;
     TextView logintxt,register;
     @Override
@@ -75,7 +79,7 @@ HideKeyBoard.hideKeyboard(SignUpActivity.this);
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
-
+                        nationalityid=""+arrayListid.get(i);
                        nationality.setText(""+arrayList.get(i));
 
                     }
@@ -111,6 +115,7 @@ HideKeyBoard.hideKeyboard(SignUpActivity.this);
 
     private void getnationality() {
         arrayList=new ArrayList<>();
+        arrayListid=new ArrayList<>();
         progressDialog.show();
         RetrofitInterface myInterface = RetrofitAPI.getRetrofit().create(RetrofitInterface.class);
         Call<NationalityResponse> call=myInterface.getNationalityResponse();
@@ -128,6 +133,7 @@ HideKeyBoard.hideKeyboard(SignUpActivity.this);
                             for (int i=0;i<response.body().getData().size();i++)
                             {
                                 arrayList.add(response.body().getData().get(i).getNationalityName());
+                                arrayListid.add(""+response.body().getData().get(i).getNationalityId());
                             }
 
                         }
@@ -137,7 +143,8 @@ HideKeyBoard.hideKeyboard(SignUpActivity.this);
 
             @Override
             public void onFailure(Call<NationalityResponse> call, Throwable t) {
-
+                progressDialog.dismiss();
+                Toast.makeText(SignUpActivity.this, "Server or Internet Error", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -146,21 +153,30 @@ HideKeyBoard.hideKeyboard(SignUpActivity.this);
 
     public void  setSignUp(){
     progressDialog.show();
-    RetrofitInterface myInterface = RetrofitAPI.getRetrofit().create(RetrofitInterface.class);
-    Call<LoginResponse> call=myInterface.doSignUP(edname.getText().toString(),edmobile.getText().toString(),edemail.getText().toString(),password.getText().toString(),nationality.getText().toString());
-    call.enqueue(new Callback<LoginResponse>() {
+
+
+        JsonObject paramObject = new JsonObject();
+        paramObject.addProperty("user_email", ""+edemail.getText().toString());
+        paramObject.addProperty("name", ""+edname.getText().toString());
+        paramObject.addProperty("mobile", ""+edmobile.getText().toString());
+        paramObject.addProperty("nationality", ""+nationality.getText().toString());
+        paramObject.addProperty("password", ""+password.getText().toString());
+
+        RetrofitInterface myInterface = RetrofitAPI.getRetrofitN().create(RetrofitInterface.class);
+    Call<LoginNodeResponse> call=myInterface.doSignUP(paramObject);
+    call.enqueue(new Callback<LoginNodeResponse>() {
         @Override
-        public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+        public void onResponse(Call<LoginNodeResponse> call, Response<LoginNodeResponse> response) {
             progressDialog.dismiss();
             if (response.isSuccessful()) {
 
                 if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
                     Toast.makeText(SignUpActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                    userLoggedInSession.createSignUpSession(response.body().getData().get(0).getUserEmail()
-                            ,response.body().getData().get(0).getUserId()
-                            ,response.body().getData().get(0).getName()
+                    userLoggedInSession.createSignUpSession(response.body().getData().getUserEmail()
+                            ,""+response.body().getData().getUserId()
+                            ,response.body().getData().getName()
                             ,""
-                    ,response.body().getData().get(0).getMobile());
+                    ,response.body().getData().getMobile());
 
                 }
                 else
@@ -169,10 +185,11 @@ HideKeyBoard.hideKeyboard(SignUpActivity.this);
 
                 }
             }
+
         }
 
         @Override
-        public void onFailure(Call<LoginResponse> call, Throwable t) {
+        public void onFailure(Call<LoginNodeResponse> call, Throwable t) {
             progressDialog.dismiss();
 
             Toast.makeText(SignUpActivity.this, "Server and Internet Error", Toast.LENGTH_SHORT).show();

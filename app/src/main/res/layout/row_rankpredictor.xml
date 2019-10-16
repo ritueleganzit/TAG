@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ed_bg">
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <ImageView
+
+            android:src="@drawable/school"
+            android:layout_width="80dp"
+            android:scaleType="centerCrop"
+            android:layout_height="80dp">
+
+        </ImageView>
+        <LinearLayout
+            android:layout_weight="1"
+
+            android:paddingLeft="10dp"
+
+
+
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:id="@+id/collegename"
+
+                android:layout_width="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:layout_toLeftOf="@+id/myRatingBar"
+                android:text="RV College of Engineering "
+                android:fontFamily="@font/roboto_regular"
+                android:layout_height="wrap_content"></TextView>
+
+            <TextView
+
+                android:textColor="#939393"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:layout_below="@+id/collegename"
+                android:fontFamily="@font/roboto_regular"
+                android:text="E &amp; CE"
+                android:layout_height="wrap_content"></TextView>
+            <TextView
+
+                android:textColor="#939393"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:layout_below="@+id/collegename"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Banglore"
+                android:layout_height="wrap_content"></TextView>
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+<TextView
+    android:layout_width="wrap_content"
+    android:fontFamily="@font/roboto_regular"
+    android:textSize="12sp"
+    android:layout_height="wrap_content"
+    android:text="Close at 3077"></TextView>
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

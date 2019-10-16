@@ -368,7 +368,8 @@ editor.commit();
             @Override
             public void onFailure(Call<CollegeHomeResponse> call, Throwable t) {
                 progressDialog.dismiss();
-                Toast.makeText(getActivity(), "Error "+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(getActivity(), "Server and Internet  "+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

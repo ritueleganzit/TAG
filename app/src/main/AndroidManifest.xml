@@ -16,13 +16,35 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         android:xlargeScreens="true">
-        <activity android:name=".ui.activity.NotificationActivity"
+        <activity android:name=".ui.activity.salarytrendreport.PackageTrendReport"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" ></activity>
-        <activity android:name=".ui.activity.councelling.CounsellingDetailActivity"
+        <activity
+            android:name=".ui.activity.rankpredictor.RankPredictorList"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.activity.councelling.CouncellingExamActivity"
+        <activity
+            android:name=".ui.activity.rankpredictor.RankPredictorSearchActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.rankpredictor.RankPredictorActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.payment.ChoosePaymentModeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.NotificationActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.councelling.CounsellingDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.councelling.CouncellingExamActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity

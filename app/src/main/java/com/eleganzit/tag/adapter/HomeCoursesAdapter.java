@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,9 +63,10 @@ public class HomeCoursesAdapter extends RecyclerView.Adapter<HomeCoursesAdapter.
      });
 
      holder.course_name.setText(datastream.getCourseName());
+        Log.d("myyyadapter ",datastream.getCollegeId()+" --"+datastreams.get(i).getDatastream().get(i));
      holder.total.setText(datastreams.get(i).getDatastream().size()+" course");
      datastreamArrayList.addAll(datastreams.get(i).getDatastream());
-        holder.hidetxt.setAdapter(new CourseDetailAdapter(datastreamArrayList,context));
+        holder.hidetxt.setAdapter(new CourseDetailAdapter(datastreams.get(i).getDatastream(),context));
         holder.hidetxt.setNestedScrollingEnabled(false);
 
 

@@ -106,6 +106,16 @@
                         android:fontFamily="@font/roboto_regular"
                         android:text="Banglore, Karnataka, India "
                         android:layout_height="wrap_content"></TextView>
+                    <TextView
+                        android:id="@+id/ranktv"
+                        android:textColor="#939393"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:layout_below="@+id/myRatingBar"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Rank 10"
+                        android:layout_height="wrap_content"></TextView>
                 </RelativeLayout>
 
                 <LinearLayout

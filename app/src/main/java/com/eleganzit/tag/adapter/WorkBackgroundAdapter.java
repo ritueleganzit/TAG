@@ -75,7 +75,41 @@ public class WorkBackgroundAdapter extends RecyclerView.Adapter<WorkBackgroundAd
 holder.btnsave.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        updateWork(holder,workdata.getWork_id());
+
+        if (holder.employee_name.getText().toString().trim().equals("")) {
+
+
+            Toast.makeText(context, "Please enter employee name", Toast.LENGTH_SHORT).show();
+
+            holder.employee_name.requestFocus();
+
+        }
+
+        else if (holder.designation.getText().toString().trim().equals("")) {
+
+            Toast.makeText(context, "Please enter designation", Toast.LENGTH_SHORT).show();
+
+
+            holder.designation.requestFocus();
+
+        }else if (holder.department.getText().toString().trim().equals("")) {
+
+            Toast.makeText(context, "Please enter department", Toast.LENGTH_SHORT).show();
+
+            holder.department.requestFocus();
+
+        }else if (holder.current_job.getText().toString().trim().equals("")) {
+
+            Toast.makeText(context, "Please enter data", Toast.LENGTH_SHORT).show();
+
+
+            holder.current_job.requestFocus();
+
+        }
+        else {
+
+            updateWork(holder, workdata.getWork_id());
+        }
 
     }
 });

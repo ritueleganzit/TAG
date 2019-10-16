@@ -14,14 +14,15 @@ import com.eleganzit.tag.R;
 import com.eleganzit.tag.model.homecourse.Datastream;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CourseDetailAdapter extends RecyclerView.Adapter<CourseDetailAdapter.MyViewHolder>
 {
-    ArrayList<Datastream> datastreams;
+    List<Datastream> datastreams;
 
     Context context;
     Activity activity;
-    public CourseDetailAdapter(ArrayList<Datastream> datastreams, Context context) {
+    public CourseDetailAdapter(List<Datastream> datastreams, Context context) {
 
         this.context = context;
         this.datastreams = datastreams;
