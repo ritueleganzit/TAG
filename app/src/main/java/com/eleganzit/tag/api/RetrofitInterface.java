@@ -20,6 +20,7 @@ import com.eleganzit.tag.model.LoginNodeResponse;
 import com.eleganzit.tag.model.LoginResponse;
 import com.eleganzit.tag.model.NationalityResponse;
 import com.eleganzit.tag.model.QuestionAnsResponse;
+import com.eleganzit.tag.model.RegisterOtpSent;
 import com.eleganzit.tag.model.ResetPasswordResponse;
 import com.eleganzit.tag.model.SendOtpResponse;
 import com.eleganzit.tag.model.TopCollegeResponse;
@@ -91,6 +92,11 @@ public interface RetrofitInterface {
 
     @POST("/testhost/users/sendOtp")
     Call<SendOtpResponse> sendOtp(
+            @Body JsonObject jsonObject
+    );
+
+ @POST("/testhost/users/sendOtp")
+    Call<RegisterOtpSent> sendregOtp(
             @Body JsonObject jsonObject
     );
 

@@ -24,6 +24,8 @@ import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.LoginNodeResponse;
 import com.eleganzit.tag.model.LoginResponse;
+import com.eleganzit.tag.ui.activity.LoginVerificationActivity;
+import com.eleganzit.tag.ui.activity.RegVerificationActivity;
 import com.eleganzit.tag.utils.HideKeyBoard;
 import com.eleganzit.tag.utils.UserLoggedInSession;
 import com.google.gson.JsonObject;
@@ -166,7 +168,16 @@ public class LoginActivity extends AppCompatActivity {
                             editor.clear();
                             editor.commit();
                         }
-                        setLogin();                    }
+                        Intent i = new Intent(LoginActivity.this, LoginVerificationActivity.class);
+                        i.putExtra("user_email",""+login_emailid.getText().toString());
+
+                        i.putExtra("password",""+login_password.getText().toString());
+
+                        // Add new Flag to start new Activity
+                        startActivity(i);
+
+                        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+                    }
                     else
                     {
                         Toast.makeText(LoginActivity.this, "Please agree the terms and condition", Toast.LENGTH_SHORT).show();
@@ -203,50 +214,6 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
-    public void setLogin(){
-        progressDialog.show();
-        JsonObject paramObject = new JsonObject();
-        paramObject.addProperty("user_name", ""+login_emailid.getText().toString());
-        paramObject.addProperty("password", ""+login_password.getText().toString());
 
-        RetrofitInterface myInterface = RetrofitAPI.getRetrofitN().create(RetrofitInterface.class);
-        Call<LoginNodeResponse> call=myInterface.doLogin(paramObject);
-        call.enqueue(new Callback<LoginNodeResponse>() {
-            @Override
-            public void onResponse(Call<LoginNodeResponse> call, Response<LoginNodeResponse> response) {
-                progressDialog.dismiss();
-
-
-                if (response.isSuccessful()) {
-
-                    if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
-                        Log.d("MYDATA",""+response.body().getData().getName());
-                        Toast.makeText(LoginActivity.this, "Login Succesful", Toast.LENGTH_SHORT).show();
-
-                       userLoggedInSession.createLoginSession(response.body().getData().getUserEmail()
-                       ,""+response.body().getData().getUserId()
-                       ,response.body().getData().getName()
-                       ,""
-                       ,response.body().getData().getMobile());
-
-                    }
-                    else
-                    {
-                        Toast.makeText(LoginActivity.this, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<LoginNodeResponse> call, Throwable t) {
-                progressDialog.dismiss();
-
-                Toast.makeText(LoginActivity.this, "Server and Internet Error"+t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-    }
 
 }

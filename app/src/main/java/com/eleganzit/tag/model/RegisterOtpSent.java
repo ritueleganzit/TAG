@@ -3,18 +3,16 @@ package com.eleganzit.tag.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
-public class LoginNodeResponse {
+public class RegisterOtpSent {
     @SerializedName("status")
     @Expose
     private Integer status;
     @SerializedName("message")
     @Expose
     private String message;
-    @SerializedName("data")
+    @SerializedName("response")
     @Expose
-    private List<LoginData> data = null;
+    private OtpResponse response;
 
     public Integer getStatus() {
         return status;
@@ -32,12 +30,11 @@ public class LoginNodeResponse {
         this.message = message;
     }
 
-    public List<LoginData> getData() {
-        return data;
+    public OtpResponse getResponse() {
+        return response;
     }
 
-    public void setData(List<LoginData> data) {
-        this.data = data;
+    public void setResponse(OtpResponse response) {
+        this.response = response;
     }
-
 }

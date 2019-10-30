@@ -14,6 +14,7 @@ import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.LoginResponse;
 import com.eleganzit.tag.model.SendOtpResponse;
+import com.eleganzit.tag.ui.activity.LoginVerificationActivity;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
@@ -65,6 +66,7 @@ public class ForgotPassword extends AppCompatActivity {
         progressDialog.show();
         JsonObject paramObject = new JsonObject();
         paramObject.addProperty("username", ""+login_emailid.getText().toString());
+        paramObject.addProperty("type", "2");
 
         RetrofitInterface myInterface = RetrofitAPI.getRetrofit().create(RetrofitInterface.class);
         Call<SendOtpResponse> call=myInterface.sendOtp(paramObject);
@@ -75,6 +77,8 @@ public class ForgotPassword extends AppCompatActivity {
                 if (response.isSuccessful()) {
 
                     if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
+                        Toast.makeText(ForgotPassword.this, "Verification Code has been send to Email", Toast.LENGTH_SHORT).show();
+
                         startActivity(new Intent(ForgotPassword.this, VerificationActivity.class).putExtra("data",login_emailid.getText().toString()));
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();

@@ -5,21 +5,74 @@ import com.google.gson.annotations.SerializedName;
 
 public class LoginData {
 
+
     @SerializedName("user_id")
     @Expose
     private Integer userId;
-    @SerializedName("user_email")
+    @SerializedName("first_name")
     @Expose
-    private String userEmail;
-    @SerializedName("name")
+    private String firstName;
+    @SerializedName("last_name")
     @Expose
-    private String name;
+    private String lastName;
     @SerializedName("mobile")
     @Expose
     private String mobile;
+    @SerializedName("user_email")
+    @Expose
+    private String userEmail;
     @SerializedName("nationality")
     @Expose
     private String nationality;
+    @SerializedName("location_lat")
+    @Expose
+    private String locationLat;
+    @SerializedName("location_long")
+    @Expose
+    private String locationLong;
+    @SerializedName("device_token")
+    @Expose
+    private String deviceToken;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getLocationLat() {
+        return locationLat;
+    }
+
+    public void setLocationLat(String locationLat) {
+        this.locationLat = locationLat;
+    }
+
+    public String getLocationLong() {
+        return locationLong;
+    }
+
+    public void setLocationLong(String locationLong) {
+        this.locationLong = locationLong;
+    }
+
+    public String getDeviceToken() {
+        return deviceToken;
+    }
+
+    public void setDeviceToken(String deviceToken) {
+        this.deviceToken = deviceToken;
+    }
 
     public Integer getUserId() {
         return userId;
@@ -37,13 +90,7 @@ public class LoginData {
         this.userEmail = userEmail;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getMobile() {
         return mobile;

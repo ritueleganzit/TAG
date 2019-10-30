@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardUseCompatPadding="true"
+    android:id="@+id/clgcard"
+    android:layout_marginBottom="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginLeft="5dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+android:id="@+id/rel"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imgbg"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/schools_tri"
+            android:scaleType="centerCrop"
+            ></ImageView>
+            <TextView
+
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="10dp"
+                android:layout_margin="5dp"
+                android:paddingRight="10dp"
+                android:layout_gravity="bottom|right"
+                android:gravity="center"
+
+
+                android:fontFamily="@font/roboto_regular"
+                android:background="@drawable/btnbgorange"
+
+
+                android:id="@+id/apply"
+
+
+
+                android:layout_below="@+id/frame"
+
+                android:text="Apply"
+                android:textColor="@android:color/white" />
+        </FrameLayout>
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+          <TextView
+              android:layout_gravity="left"
+              android:id="@+id/collegename"
+              android:textColor="@android:color/black"
+              android:layout_marginTop="5dp"
+              android:layout_alignParentLeft="true"
+              android:layout_width="wrap_content"
+              android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+              android:layout_toLeftOf="@+id/myRatingBar"
+              android:text="RV College of Engineering "
+              android:fontFamily="@font/roboto_medium"
+              android:layout_height="wrap_content"></TextView>
+          <RatingBar
+              android:layout_marginTop="5dp"
+
+              android:id="@+id/myRatingBar"
+              style="?android:attr/ratingBarStyleSmall"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:numStars="5"
+              android:layout_gravity="end"
+              android:theme="@style/ReviewRatingBar"
+              android:layout_alignParentRight="true"
+              android:isIndicator="true"
+              ></RatingBar>
+      </RelativeLayout>
+
+        <TextView
+            android:layout_gravity="left"
+
+            android:id="@+id/collegeaddress"
+            android:textColor="#939393"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:layout_below="@+id/collegename"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Banglore, Karnataka, India "
+            android:layout_height="wrap_content"></TextView>
+
+        <TextView
+            android:id="@+id/specialname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/collegename"
+            android:fontFamily="@font/roboto_regular"
+
+            android:gravity="start"
+
+            android:text="Computer Science"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="#939393"></TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+           <LinearLayout
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:layout_height="wrap_content"
+               android:orientation="vertical">
+               <TextView
+                   android:textColor="#939393"
+
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:gravity="start"
+
+                   android:layout_alignParentLeft="true"
+                   android:layout_weight="1"
+                   android:text="Approved by:"
+                   android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
+               <TextView
+                   android:textColor="#939393"
+
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:gravity="start"
+                   android:id="@+id/approved_by"
+
+                   android:layout_alignParentLeft="true"
+                   android:layout_weight="1"
+                   android:text=""
+                   android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
+
+           </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:textColor="#939393"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:layout_weight="1"
+                    android:text="Accredited by:"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
+                <TextView
+                    android:textColor="#939393"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/accreditation"
+                    android:layout_alignParentLeft="true"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:textColor="#939393"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:layout_alignParentLeft="true"
+                    android:layout_weight="1"
+                    android:text="Affiliated to:"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
+ <TextView
+                    android:textColor="#939393"
+     android:id="@+id/isUniversity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:layout_alignParentLeft="true"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:textColor="#939393"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+
+                android:layout_alignParentLeft="true"
+                android:layout_weight="1"
+                android:text="Placement:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
+            <TextView
+                android:textColor="#939393"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:id="@+id/placement"
+
+                android:layout_alignParentLeft="true"
+                android:layout_weight="1"
+                android:text=""
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:textColor="#939393"
+                android:id="@+id/privatetv"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_alignParentLeft="true"
+                android:layout_weight="1"
+                android:text=""
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:textColor="#939393"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:layout_alignParentLeft="true"
+                android:layout_weight="1"
+                android:text=""
+                android:id="@+id/rank"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
+
+        </LinearLayout>
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <LinearLayout
+                android:layout_gravity="start|end"
+                android:gravity="start|center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_clock"
+                    android:gravity="end"
+                    android:layout_gravity="top|end"
+                    android:layout_height="wrap_content"></ImageView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:layout_gravity="center"
+                    android:id="@+id/college_type"
+                    android:text="Full Time"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_gravity="top|end"
+                android:gravity="end|center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_cal"
+                    android:gravity="end"
+                    android:layout_gravity="top|end"
+                    android:layout_height="wrap_content"></ImageView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:gravity="end"
+                    android:layout_gravity="center"
+                    android:id="@+id/years"
+                    android:text="Year"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

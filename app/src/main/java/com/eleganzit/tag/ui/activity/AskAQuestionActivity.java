@@ -3,14 +3,17 @@ package com.eleganzit.tag.ui.activity;
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eleganzit.tag.DiscussionActivity;
 import com.eleganzit.tag.HomeActivity;
 import com.eleganzit.tag.R;
 import com.eleganzit.tag.SignUpActivity;
+import com.eleganzit.tag.adapter.DiscussionAdapter;
 import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.AskQuestionResponse;
@@ -27,7 +30,7 @@ public class AskAQuestionActivity extends AppCompatActivity {
     TextView submit;
     ProgressDialog progressDialog;
     UserLoggedInSession userLoggedInSession;
-
+RecyclerView rc_discussion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +44,9 @@ public class AskAQuestionActivity extends AppCompatActivity {
         progressDialog.setMessage("Please Wait");
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
+
+        rc_discussion=findViewById(R.id.rc_discussion);
+        rc_discussion.setAdapter(new DiscussionAdapter(AskAQuestionActivity.this));
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

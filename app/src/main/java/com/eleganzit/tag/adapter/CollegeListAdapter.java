@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -142,25 +143,25 @@ holder.specialname.setText(""+e_sp);
             holder.years.setText(""+collegeResult.getYears()+"");
         }if (collegeResult.getApprovedBy()!=null  && !(collegeResult.getApprovedBy().isEmpty()))
         {
-            holder.approved_by.setText("Approved by - "+collegeResult.getApprovedBy()+"");
+            holder.approved_by.setText(""+collegeResult.getApprovedBy()+"");
         }if (collegeResult.getAccreditation()!=null  && !(collegeResult.getAccreditation().isEmpty()))
         {
-            holder.accreditation.setText("Accredited by  - "+collegeResult.getAccreditation()+"");
+            holder.accreditation.setText(""+collegeResult.getAccreditation()+"");
         }
 
         if (collegeResult.getPlacement()!=null  && !(collegeResult.getPlacement().isEmpty()))
         {
-            holder.placement.setText("Placement : "+collegeResult.getPlacement()+"");
+            holder.placement.setText(""+collegeResult.getPlacement()+"");
         }
 
 
         if (collegeResult.getIsUniversity()==1)
         {
            if (collegeResult.getUniversityName()!=null  && !(collegeResult.getUniversityName().isEmpty()))
-         holder.isUniversity.setText("Affiliated to "+collegeResult.getUniversityName());
+         holder.isUniversity.setText(""+collegeResult.getUniversityName());
         }
         else {
-            holder.isUniversity.setText("Affiliated to Deemed university");
+            holder.isUniversity.setText("Deemed university");
         }
 
 
@@ -190,7 +191,7 @@ holder.specialname.setText(""+e_sp);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-RelativeLayout rel;
+LinearLayout rel;
 TextView apply;
 CardView clgcard;
 TextView collegename,collegeaddress,college_type,years,approved_by,accreditation,isUniversity,placement,privatetv,rank,specialname;

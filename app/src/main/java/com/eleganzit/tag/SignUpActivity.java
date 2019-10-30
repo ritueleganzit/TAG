@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.LoginNodeResponse;
 import com.eleganzit.tag.model.LoginResponse;
 import com.eleganzit.tag.model.NationalityResponse;
+import com.eleganzit.tag.ui.activity.RegVerificationActivity;
 import com.eleganzit.tag.utils.HideKeyBoard;
 import com.eleganzit.tag.utils.UserLoggedInSession;
 import com.google.gson.JsonObject;
@@ -47,7 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
     List<String> arrayList;
     List<String> arrayListid;
 String nationalityid="";
-    EditText nationality,password,edemail,edmobile,edname;
+    EditText nationality,password,edemail,edmobile,edname,edlname;
     TextView logintxt,register;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,7 @@ String nationalityid="";
         progressDialog.setMessage("Please Wait");
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
+        edlname=findViewById(R.id.edlname);
         edname=findViewById(R.id.edname);
         userLoggedInSession=new UserLoggedInSession(SignUpActivity.this);
 
@@ -100,7 +103,28 @@ HideKeyBoard.hideKeyboard(SignUpActivity.this);
 
                 if (isValid())
                 {
-                    setSignUp();
+
+
+
+
+
+                    Intent i = new Intent(SignUpActivity.this, RegVerificationActivity.class);
+                    i.putExtra("user_email",""+edemail.getText().toString());
+                    i.putExtra("first_name",""+edname.getText().toString());
+                    i.putExtra("last_name",""+edlname.getText().toString());
+                    i.putExtra("mobile",""+edmobile.getText().toString());
+                    i.putExtra("location_lat","23.0225");
+                    i.putExtra("location_long","72.5714");
+                    i.putExtra("device_type","android");
+                    i.putExtra("device_token","3pBNjvpqo:APA91bEE51saF1gwcK05-nGZAQOzvaxoGLvSq8hrIeKGjAPtkZye3MFvoMVX6ODz_c0ISDOyUItaXEjHyKW3Ojf_W_xHS5IgGbrMTH3Cf1c-W63vem5njqj98axr66zc6ArZAZpvmApW");
+                    i.putExtra("nationality",""+nationality.getText().toString());
+                    i.putExtra("password",""+password.getText().toString());
+
+                    // Add new Flag to start new Activity
+                    startActivity(i);
+
+                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+
 
                 }
 
@@ -151,51 +175,7 @@ HideKeyBoard.hideKeyboard(SignUpActivity.this);
     }
 
 
-    public void  setSignUp(){
-    progressDialog.show();
 
-
-        JsonObject paramObject = new JsonObject();
-        paramObject.addProperty("user_email", ""+edemail.getText().toString());
-        paramObject.addProperty("name", ""+edname.getText().toString());
-        paramObject.addProperty("mobile", ""+edmobile.getText().toString());
-        paramObject.addProperty("nationality", ""+nationality.getText().toString());
-        paramObject.addProperty("password", ""+password.getText().toString());
-
-        RetrofitInterface myInterface = RetrofitAPI.getRetrofitN().create(RetrofitInterface.class);
-    Call<LoginNodeResponse> call=myInterface.doSignUP(paramObject);
-    call.enqueue(new Callback<LoginNodeResponse>() {
-        @Override
-        public void onResponse(Call<LoginNodeResponse> call, Response<LoginNodeResponse> response) {
-            progressDialog.dismiss();
-            if (response.isSuccessful()) {
-
-                if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
-                    Toast.makeText(SignUpActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                    userLoggedInSession.createSignUpSession(response.body().getData().getUserEmail()
-                            ,""+response.body().getData().getUserId()
-                            ,response.body().getData().getName()
-                            ,""
-                    ,response.body().getData().getMobile());
-
-                }
-                else
-                {
-                    Toast.makeText(SignUpActivity.this, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
-                }
-            }
-
-        }
-
-        @Override
-        public void onFailure(Call<LoginNodeResponse> call, Throwable t) {
-            progressDialog.dismiss();
-
-            Toast.makeText(SignUpActivity.this, "Server and Internet Error", Toast.LENGTH_SHORT).show();
-        }
-    });
-}
     public boolean isValid() {
         final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
         Pattern pattern;
@@ -207,9 +187,17 @@ HideKeyBoard.hideKeyboard(SignUpActivity.this);
         if (edname.getText().toString().trim().equals("")) {
 
 
-            Toast.makeText(this, "Please enter name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter first name", Toast.LENGTH_SHORT).show();
 
             edname.requestFocus();
+
+            return false;
+        } else if (edlname.getText().toString().trim().equals("")) {
+
+
+            Toast.makeText(this, "Please enter last name", Toast.LENGTH_SHORT).show();
+
+            edlname.requestFocus();
 
             return false;
         }

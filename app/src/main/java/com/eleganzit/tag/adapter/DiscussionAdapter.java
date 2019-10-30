@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.eleganzit.tag.HelpFAQActivity;
@@ -46,14 +47,27 @@ public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.My
                 {
                     holder.viewcomment.setText("Hide Comments");
                     holder.reply.setText("Add Reply");
+
                 }
                 else
                 {           holder.reply.setText("Reply");         holder.viewcomment.setText("View Comments");
 
 
                 }
+
+                if (holder.viewcomment.getText().toString().equalsIgnoreCase("Add Reply"))
+                {
+                    holder.addcomment.setVisibility(View.VISIBLE);
+
+                }
+                else
+                {
+                    holder.addcomment.setVisibility(View.GONE);
+                }
             }
         });
+
+
     }
 
     @Override
@@ -65,11 +79,13 @@ public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.My
 
 TextView viewcomment,reply;
 RecyclerView rc_discussion_comment;
+LinearLayout addcomment;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             viewcomment=itemView.findViewById(R.id.viewcomment);
             reply=itemView.findViewById(R.id.reply);
             rc_discussion_comment=itemView.findViewById(R.id.rc_discussion_comment);
+            addcomment=itemView.findViewById(R.id.addcomment);
 
 
         }

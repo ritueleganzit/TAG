@@ -144,6 +144,7 @@
 
 
             <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:layout_height="wrap_content">
@@ -177,6 +178,56 @@
                     android:layout_width="match_parent"
                     android:text="Reply"
                     android:layout_height="wrap_content"></TextView>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/addcomment"
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <EditText
+                        android:layout_marginLeft="10dp"
+                        android:padding="5dp"
+                        android:layout_weight="0.2"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:hint="Type your answer"
+                        android:fontFamily="@font/roboto_bold"
+                        android:layout_height="wrap_content">
+
+                    </EditText>
+
+                    <LinearLayout
+                        android:gravity="end"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_marginLeft="10dp"
+                            android:padding="5dp"
+
+                            android:fontFamily="@font/roboto_bold"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:gravity="center_vertical|end"
+                            android:layout_width="wrap_content"
+                            android:text="Cancel"
+                            android:textSize="?attr/textAppearanceButton"
+                            android:layout_height="wrap_content"></TextView>
+                        <TextView
+                            android:layout_marginLeft="10dp"
+                            android:padding="5dp"
+
+                            android:fontFamily="@font/roboto_bold"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:gravity="center_vertical|end"
+                            android:layout_width="wrap_content"
+                            android:text="Post"
+                            android:layout_height="wrap_content"></TextView>
+                    </LinearLayout>
+
 
                 </LinearLayout>
             </LinearLayout>

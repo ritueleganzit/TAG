@@ -141,18 +141,31 @@ android:id="@+id/approved_by"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_weight="1">
-    <TextView
+
+    <LinearLayout
+        android:layout_gravity="top|end"
+        android:gravity="end|center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_weight="1"
-        android:drawablePadding="5dp"
-        android:drawableLeft="@drawable/ic_clock"
-        android:gravity="center"
-        android:layout_gravity="top"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_clock"
+            android:gravity="end"
+            android:layout_gravity="top|end"
+            android:layout_height="wrap_content"></ImageView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="end"
+            android:layout_gravity="center"
 android:id="@+id/college_type"
-        android:text="Full Time"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
+            android:text="Full Time"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -172,19 +185,30 @@ android:id="@+id/accreditation"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_weight="1">
-    <TextView
+    <LinearLayout
+        android:layout_gravity="top|end"
+        android:gravity="end|center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:gravity="start"
-        android:layout_gravity="top"
-        android:layout_weight="1"
-android:id="@+id/years"
-        android:drawablePadding="5dp"
-        android:drawableLeft="@drawable/ic_cal"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_cal"
+            android:gravity="end"
+            android:layout_gravity="top|end"
+            android:layout_height="wrap_content"></ImageView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="end"
+            android:layout_gravity="center"
+            android:id="@+id/years"
+            android:text="Year"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
 
-        android:text="3 Years"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
+    </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
