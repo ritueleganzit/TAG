@@ -21,9 +21,14 @@ import com.eleganzit.tag.adapter.WorkAdapter;
 import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.Education;
+import com.eleganzit.tag.model.FetchedUserResponse;
 import com.eleganzit.tag.model.GetProfileDataResponse;
 import com.eleganzit.tag.model.Preferancedata;
 import com.eleganzit.tag.model.Workdata;
+import com.eleganzit.tag.model.profileinfo.EducationDetail;
+import com.eleganzit.tag.model.profileinfo.ExperienceInfo;
+import com.eleganzit.tag.model.profileinfo.PreferenceInfo;
+import com.eleganzit.tag.model.profileinfo.ProfileInfoDataResponse;
 import com.eleganzit.tag.ui.activity.AddPersonalInfoActivity;
 import com.eleganzit.tag.ui.activity.GetCurrentEducation;
 import com.eleganzit.tag.ui.activity.GetEducationActivity;
@@ -51,9 +56,9 @@ RecyclerView rc_edu_pref;
     public MyProfileFragment() {
         // Required empty public constructor
     }
-    ArrayList<Education> educationArrayList;
-    ArrayList<Workdata> workdata;
-    ArrayList<Preferancedata> prefdata;
+    ArrayList<EducationDetail> educationArrayList;
+    ArrayList<ExperienceInfo> workdata;
+    ArrayList<PreferenceInfo> prefdata;
     String user_id;
     UserLoggedInSession userLoggedInSession;
 
@@ -128,70 +133,74 @@ RecyclerView rc_edu_pref;
         workdata=new ArrayList<>();
         prefdata=new ArrayList<>();
         progressDialog.show();
-        RetrofitInterface myInterface = RetrofitAPI.getRetrofit().create(RetrofitInterface.class);
-        Call<GetProfileDataResponse> call=myInterface.getprofiledata("get_profiledata",""+user_id);
-        call.enqueue(new Callback<GetProfileDataResponse>() {
+        RetrofitInterface myInterface = RetrofitAPI.getRetrofitN().create(RetrofitInterface.class);
+        Call<ProfileInfoDataResponse> call=myInterface.getProfileById(user_id);
+        call.enqueue(new Callback<ProfileInfoDataResponse>() {
             @Override
-            public void onResponse(Call<GetProfileDataResponse> call, Response<GetProfileDataResponse> response) {
+            public void onResponse(Call<ProfileInfoDataResponse> call, Response<ProfileInfoDataResponse> response) {
                 progressDialog.dismiss();
                 if (response.isSuccessful())
                 {
-                    if (response.body().getPersonaldata()!=null)
+                    if (response.body().getData()!=null)
                     {
-                        for (int i=0; i<response.body().getPersonaldata().size();i++)
+                        if (response.body().getData().getPersonalInfo()!=null)
                         {
-                            if (response.body().getPersonaldata().get(i).getMobile()!=null && !(response.body().getPersonaldata().get(i).getMobile().isEmpty()))
-                            {
-                                mobile.setText(""+response.body().getPersonaldata().get(i).getMobile());
-                                MyProfileActivity.phonetv.setText(""+""+response.body().getPersonaldata().get(i).getMobile());
+                            if (response.body().getData().getPersonalInfo().getMobile()!=null && !(response.body().getData().getPersonalInfo().getMobile().isEmpty())) {
+                                mobile.setText(""+response.body().getData().getPersonalInfo().getMobile());
+                                MyProfileActivity.phonetv.setText(""+""+response.body().getData().getPersonalInfo().getMobile());
                             }
+                            if (response.body().getData().getPersonalInfo().getNationality()!=null && !(response.body().getData().getPersonalInfo().getNationality().isEmpty()))
+                            {
+                                location.setText(""+response.body().getData().getPersonalInfo().getNationality());
+                            }
+                            if (response.body().getData().getPersonalInfo().getEmail()!=null && !(response.body().getData().getPersonalInfo().getEmail().isEmpty()))
+                            {
+                                user_email.setText(""+response.body().getData().getPersonalInfo().getEmail());
 
-                            if (response.body().getPersonaldata().get(i).getLocation()!=null && !(response.body().getPersonaldata().get(i).getLocation().isEmpty()))
-                            {
-                                location.setText(""+response.body().getPersonaldata().get(i).getLocation());
-                            }
-                             if (response.body().getPersonaldata().get(i).getUserEmail()!=null && !(response.body().getPersonaldata().get(i).getUserEmail().isEmpty()))
-                            {
-                                user_email.setText(""+response.body().getPersonaldata().get(i).getUserEmail());
                             }
 
                         }
-                    }
+                        if (response.body().getData().getEducationDetail()!=null)
+                        {
+                            {educationArrayList.addAll(response.body().getData().getEducationDetail());
 
-                    if (response.body().getEducation()!=null)
-                    {educationArrayList.addAll(response.body().getEducation());
-
-                        Log.d("myprofileee",""+response.body().getEducation().size());
-                        rc_educations.setAdapter(new EducationAdapter(response.body().getEducation(),getActivity()));
-
-
-                    } if (response.body().getWorkdata()!=null)
-                    {workdata.addAll(response.body().getWorkdata());
-
-                        Log.d("myprofileee",""+response.body().getWorkdata().size());
-                        rc_work.setAdapter(new WorkAdapter(response.body().getWorkdata(),getActivity()));
+                                Log.d("myprofileee",""+response.body().getData().getEducationDetail().size());
+                                rc_educations.setAdapter(new EducationAdapter(response.body().getData().getEducationDetail(),getActivity()));
 
 
-                    }if (response.body().getPreferanceData()!=null)
-                    {
-                        prefdata.addAll(response.body().getPreferanceData());
-                        Log.d("myprofileee",""+response.body().getPreferanceData().size());
-                        rc_edu_pref.setAdapter(new CurrentEduAdapter(prefdata,getActivity()));
+                            }
+                        }
+                        if (response.body().getData().getExperienceInfo()!=null)
+                        {
+                            if (response.body().getData().getExperienceInfo()!=null)
+                            {workdata.addAll(response.body().getData().getExperienceInfo());
+
+                                Log.d("myprofileee",""+response.body().getData().getExperienceInfo().size());
+                                rc_work.setAdapter(new WorkAdapter(response.body().getData().getExperienceInfo(),getActivity()));
 
 
+                            }
+                        }
+
+                        if (response.body().getData().getPreferenceInfo()!=null)
+                        {
+                            prefdata.addAll(response.body().getData().getPreferenceInfo());
+                            Log.d("myprofileee",""+response.body().getData().getPreferenceInfo().size());
+                            rc_edu_pref.setAdapter(new CurrentEduAdapter(prefdata,getActivity()));
+
+
+                        }
                     }
                 }
-
-
             }
 
             @Override
-            public void onFailure(Call<GetProfileDataResponse> call, Throwable t) {
+            public void onFailure(Call<ProfileInfoDataResponse> call, Throwable t) {
                 progressDialog.dismiss();
-
-                Toast.makeText(getActivity(), "Server or Internet Error", Toast.LENGTH_SHORT).show();
             }
         });
+
+
 
     }
 

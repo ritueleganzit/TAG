@@ -26,6 +26,7 @@ import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.LoginNodeResponse;
 import com.eleganzit.tag.model.LoginResponse;
 import com.eleganzit.tag.model.NationalityResponse;
+import com.eleganzit.tag.model.RegisterOtpSent;
 import com.eleganzit.tag.ui.activity.RegVerificationActivity;
 import com.eleganzit.tag.utils.HideKeyBoard;
 import com.eleganzit.tag.utils.UserLoggedInSession;
@@ -73,21 +74,36 @@ String nationalityid="";
         nationality.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
 HideKeyBoard.hideKeyboard(SignUpActivity.this);
-                final ArrayAdapter adapter = new ArrayAdapter(SignUpActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, arrayList);
+if (arrayList!=null)
+{
+    if (arrayList.size()>0)
+    {
+        final ArrayAdapter adapter = new ArrayAdapter(SignUpActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, arrayList);
 
-                final android.support.v7.app.AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(SignUpActivity.this, R.style.AlertDialogCustom));
+        final android.support.v7.app.AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(SignUpActivity.this, R.style.AlertDialogCustom));
 
-                builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                        nationalityid=""+arrayListid.get(i);
-                       nationality.setText(""+arrayList.get(i));
+        builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+                nationalityid=""+arrayListid.get(i);
+                nationality.setText(""+arrayList.get(i));
 
-                    }
-                });
-                builder.show();
+            }
+        });
+        builder.show();
+    }
+    else
+    {
+        getnationality();
+    }
+}
+
+
             }
         });
         logintxt.setOnClickListener(new View.OnClickListener() {
@@ -106,24 +122,9 @@ HideKeyBoard.hideKeyboard(SignUpActivity.this);
 
 
 
+                    sendotp();
 
 
-                    Intent i = new Intent(SignUpActivity.this, RegVerificationActivity.class);
-                    i.putExtra("user_email",""+edemail.getText().toString());
-                    i.putExtra("first_name",""+edname.getText().toString());
-                    i.putExtra("last_name",""+edlname.getText().toString());
-                    i.putExtra("mobile",""+edmobile.getText().toString());
-                    i.putExtra("location_lat","23.0225");
-                    i.putExtra("location_long","72.5714");
-                    i.putExtra("device_type","android");
-                    i.putExtra("device_token","3pBNjvpqo:APA91bEE51saF1gwcK05-nGZAQOzvaxoGLvSq8hrIeKGjAPtkZye3MFvoMVX6ODz_c0ISDOyUItaXEjHyKW3Ojf_W_xHS5IgGbrMTH3Cf1c-W63vem5njqj98axr66zc6ArZAZpvmApW");
-                    i.putExtra("nationality",""+nationality.getText().toString());
-                    i.putExtra("password",""+password.getText().toString());
-
-                    // Add new Flag to start new Activity
-                    startActivity(i);
-
-                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
 
 
                 }
@@ -136,7 +137,57 @@ HideKeyBoard.hideKeyboard(SignUpActivity.this);
 
         getnationality();
     }
+    public void sendotp(){
+        progressDialog.show();
+        JsonObject paramObject = new JsonObject();
+        paramObject.addProperty("username", ""+edemail.getText().toString());
+        paramObject.addProperty("type", "1");
 
+        RetrofitInterface myInterface = RetrofitAPI.getRetrofit().create(RetrofitInterface.class);
+        Call<RegisterOtpSent> call=myInterface.sendregOtp(paramObject);
+        call.enqueue(new Callback<RegisterOtpSent>() {
+            @Override
+            public void onResponse(Call<RegisterOtpSent> call, Response<RegisterOtpSent> response) {
+                progressDialog.dismiss();
+                if (response.isSuccessful()) {
+
+                    if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
+                        Toast.makeText(SignUpActivity.this, "Verification Code has been send to Email", Toast.LENGTH_SHORT).show();
+
+                        Intent i = new Intent(SignUpActivity.this, RegVerificationActivity.class);
+                        i.putExtra("user_email",""+edemail.getText().toString());
+                        i.putExtra("first_name",""+edname.getText().toString());
+                        i.putExtra("last_name",""+edlname.getText().toString());
+                        i.putExtra("mobile",""+edmobile.getText().toString());
+                        i.putExtra("code",""+response.body().getResponse().getOtp());
+
+                        i.putExtra("nationality",""+nationality.getText().toString());
+                        i.putExtra("password",""+password.getText().toString());
+
+                        // Add new Flag to start new Activity
+                        startActivity(i);
+
+                        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+
+                    }
+                    else
+                    {
+                        Toast.makeText(SignUpActivity.this, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RegisterOtpSent> call, Throwable t) {
+                progressDialog.dismiss();
+
+                Toast.makeText(SignUpActivity.this, "Server and Internet Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
     private void getnationality() {
         arrayList=new ArrayList<>();
         arrayListid=new ArrayList<>();

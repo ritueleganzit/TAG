@@ -12,36 +12,173 @@
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/lin_uni_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:layout_weight="1"
+
+            android:text="Stream"
+            android:ellipsize="end"
+            android:textColor="@color/txtcolor"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+
+            >
+
+        </TextView>
+        <TextView
+
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:layout_weight="1"
+android:gravity="end"
+            android:text=""
+            android:ellipsize="end"
+            android:textColor="@color/txtcolor"
+
+            android:id="@+id/tvcourse"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+
+            >
+
+        </TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:layout_weight="1"
+
+            android:text="Specialization"
+            android:ellipsize="end"
+            android:textColor="@color/txtcolor"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+
+            >
+
+        </TextView>
+
     <TextView
 
-        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+        android:textColor="@color/txtcolor"
+        android:layout_weight="1"
+
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxLines="2"
+        android:gravity="end"
         android:text=""
-        android:ellipsize="end"
-        android:textColor="@color/txtcolor"
-
-        android:id="@+id/tvcourse"
-        android:fontFamily="@font/roboto_regular"
-        android:textAppearance="?android:textAppearanceSmall"
-
-        >
-
-    </TextView>
-    <TextView
-
-        android:textColor="@color/txtcolor"
-
-        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxLines="2"
-        android:text=""
-        android:id="@+id/mode_of_study"
+        android:id="@+id/secialization_txt"
         android:ellipsize="end"
         android:fontFamily="@font/roboto_regular"
         android:textAppearance="?android:textAppearanceSmall"
     >
 
     </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:layout_weight="1"
+
+            android:text="Course"
+            android:ellipsize="end"
+            android:textColor="@color/txtcolor"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+
+            >
+
+        </TextView>
+
+    <TextView
+
+        android:textColor="@color/txtcolor"
+        android:layout_weight="1"
+
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:gravity="end"
+        android:text=""
+        android:id="@+id/Course_txt"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto_regular"
+        android:textAppearance="?android:textAppearanceSmall"
+    >
+
+    </TextView>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:layout_weight="1"
+
+            android:text="Mode of Study"
+            android:ellipsize="end"
+            android:textColor="@color/txtcolor"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+
+            >
+
+        </TextView>
+
+        <TextView
+
+            android:textColor="@color/txtcolor"
+            android:layout_weight="1"
+
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:gravity="end"
+            android:text=""
+            android:id="@+id/mode_of_study_txt"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+            >
+
+        </TextView>
+    </LinearLayout>
 </LinearLayout>
 </LinearLayout>

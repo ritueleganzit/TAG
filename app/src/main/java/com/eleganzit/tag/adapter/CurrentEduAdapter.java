@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.eleganzit.tag.R;
 import com.eleganzit.tag.model.Preferancedata;
+import com.eleganzit.tag.model.profileinfo.PreferenceInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +21,8 @@ public class CurrentEduAdapter extends RecyclerView.Adapter<CurrentEduAdapter.My
 
     Context context;
     Activity activity;
-    List<Preferancedata> accounts;
-    public CurrentEduAdapter(List<Preferancedata> accounts, Context context) {
+    List<PreferenceInfo> accounts;
+    public CurrentEduAdapter(List<PreferenceInfo> accounts, Context context) {
 
         this.context = context;
         this.accounts = accounts;
@@ -40,16 +41,26 @@ public class CurrentEduAdapter extends RecyclerView.Adapter<CurrentEduAdapter.My
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int i) {
 
-        Preferancedata preferancedata=accounts.get(i);
-        holder.tvcourse.setText(""+preferancedata.getStream());
-        if (preferancedata.getSpecialisation()!=null  && !(preferancedata.getSpecialisation().isEmpty()))
+        PreferenceInfo preferancedata=accounts.get(i);
+        if (preferancedata.getStream()!=null  && !(preferancedata.getStream().isEmpty()))
         {
-            holder.mode_of_study.setText(""+preferancedata.getCourse()+" ("+preferancedata.getSpecialisation()+")");
+            holder.tvcourse.setText(""+preferancedata.getStream());
+
         }
-        else
+        if (preferancedata.getSpecialization()!=null  && !(preferancedata.getSpecialization().isEmpty()))
         {
-            holder.mode_of_study.setText(""+preferancedata.getCourse());
+            holder.secialization_txt.setText(preferancedata.getSpecialization());
         }
+ if (preferancedata.getCourse()!=null  && !(preferancedata.getCourse().isEmpty()))
+        {
+            holder.Course_txt.setText(preferancedata.getCourse());
+        }
+
+ if (preferancedata.getStudyMode()!=null  && !(preferancedata.getStudyMode().isEmpty()))
+        {
+            holder.mode_of_study_txt.setText(preferancedata.getStudyMode());
+        }
+
 
 
 
@@ -63,11 +74,13 @@ public class CurrentEduAdapter extends RecyclerView.Adapter<CurrentEduAdapter.My
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-TextView tvcourse,mode_of_study;
+TextView tvcourse,secialization_txt,Course_txt,mode_of_study_txt;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            mode_of_study=itemView.findViewById(R.id.mode_of_study);
+            secialization_txt=itemView.findViewById(R.id.secialization_txt);
+            Course_txt=itemView.findViewById(R.id.Course_txt);
             tvcourse=itemView.findViewById(R.id.tvcourse);
+            mode_of_study_txt=itemView.findViewById(R.id.mode_of_study_txt);
 
 
         }

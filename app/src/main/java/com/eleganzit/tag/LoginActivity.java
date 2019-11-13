@@ -168,15 +168,7 @@ public class LoginActivity extends AppCompatActivity {
                             editor.clear();
                             editor.commit();
                         }
-                        Intent i = new Intent(LoginActivity.this, LoginVerificationActivity.class);
-                        i.putExtra("user_email",""+login_emailid.getText().toString());
-
-                        i.putExtra("password",""+login_password.getText().toString());
-
-                        // Add new Flag to start new Activity
-                        startActivity(i);
-
-                        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+                        setLogin();
                     }
                     else
                     {
@@ -189,7 +181,58 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    public void setLogin(){
+        progressDialog.show();
+        JsonObject paramObject = new JsonObject();
+        paramObject.addProperty("user_name", ""+login_emailid.getText().toString());
+        paramObject.addProperty("password", ""+login_password.getText().toString());
+        paramObject.addProperty("device_type", "android");
+        paramObject.addProperty("location_lat", "23.0810287");
+        paramObject.addProperty("location_long", "72.5768002");
+        paramObject.addProperty("device_token", "dE2pBNjvpqo:APA91bEE51saF1gwcK05-nGZAQOzvaxoGLvSq8hrIeKGjAPtkZye3MFvoMVX6ODz_c0ISDOyUItaXEjHyKW3Ojf_W_xHS5IgGbrMTH3Cf1c-W63vem5njqj98axr66zc6ArZAZpvmApW");
 
+
+        RetrofitInterface myInterface = RetrofitAPI.getRetrofitN().create(RetrofitInterface.class);
+        Call<LoginNodeResponse> call=myInterface.doLogin(paramObject);
+        call.enqueue(new Callback<LoginNodeResponse>() {
+            @Override
+            public void onResponse(Call<LoginNodeResponse> call, Response<LoginNodeResponse> response) {
+                progressDialog.dismiss();
+
+
+                if (response.isSuccessful()) {
+
+                    if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
+                        Log.d("MYDATA",""+response.body().getData().get(0).getUserId());
+                        Log.d("MYDATA",""+response.body().getData().get(0).getFirstName());
+                        Log.d("MYDATA",""+response.body().getData().get(0).getLastName());
+                        Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+
+                        userLoggedInSession.createLoginSession(response.body().getData().get(0).getUserEmail()
+                                ,""+response.body().getData().get(0).getUserId()
+                                ,response.body().getData().get(0).getFirstName()+" "+response.body().getData().get(0).getLastName()
+                                ,""
+                                ,response.body().getData().get(0).getMobile());
+
+                    }
+                    else
+                    {
+                        Toast.makeText(LoginActivity.this, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginNodeResponse> call, Throwable t) {
+                progressDialog.dismiss();
+
+                Toast.makeText(LoginActivity.this, "Server and Internet Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
     public boolean isValid() {
 
         if (login_emailid.getText().toString().trim().equals("")) {

@@ -30,6 +30,7 @@ import com.eleganzit.tag.model.appliedcollege.ApplyCollegeMobileResponse;
 import com.eleganzit.tag.model.homecourse.CourseResponse;
 import com.eleganzit.tag.model.homefacility.FacilitiesResponse;
 import com.eleganzit.tag.model.homegallery.GalleryResponse;
+import com.eleganzit.tag.model.profileinfo.ProfileInfoDataResponse;
 import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
@@ -320,6 +321,13 @@ public interface RetrofitInterface {
 
     @GET("/testhost/users/getUserById/{id}")
     Call<FetchedUserResponse> getUserById(@Path(value = "id", encoded = true) String id);
+
+
+
+
+
+    @GET("/testhost/users/getProfileById/{id}")
+    Call<ProfileInfoDataResponse> getProfileById(@Path(value = "id", encoded = true) String id);
 
 
 

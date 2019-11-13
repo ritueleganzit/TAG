@@ -22,6 +22,7 @@ import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.FetchedUserResponse;
 import com.eleganzit.tag.model.homefacility.FacilitiesResponse;
+import com.eleganzit.tag.model.profileinfo.ProfileInfoDataResponse;
 import com.eleganzit.tag.ui.activity.payment.PaymentFragment;
 import com.eleganzit.tag.ui.fragment.ActivityFragment;
 import com.eleganzit.tag.ui.fragment.MyProfileFragment;
@@ -154,30 +155,32 @@ setupViewPager(htab_viewpager);
     private void getFacilityData() {
         progressDialog.show();
         RetrofitInterface myInterface = RetrofitAPI.getRetrofitN().create(RetrofitInterface.class);
-        Call<FetchedUserResponse> call=myInterface.getUserById(""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_ID));
-        call.enqueue(new Callback<FetchedUserResponse>() {
+        Call<ProfileInfoDataResponse> call=myInterface.getProfileById(""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_ID));
+        call.enqueue(new Callback<ProfileInfoDataResponse>() {
             @Override
-            public void onResponse(Call<FetchedUserResponse> call, Response<FetchedUserResponse> response) {
+            public void onResponse(Call<ProfileInfoDataResponse> call, Response<ProfileInfoDataResponse> response) {
                 progressDialog.dismiss();
                 if (response.isSuccessful()) {
                     if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
 
-if (response.body().getResponse()!=null)
+if (response.body().getData()!=null)
 {
-    if (response.body().getResponse().getName()!=null && !(response.body().getResponse().getName().isEmpty()))
+    if (response.body().getData().getPersonalInfo().getFirstName()!=null && !(response.body().getData().getPersonalInfo().getFirstName().isEmpty()))
     {
-        namedata.setText(""+response.body().getResponse().getName());
+        namedata.setText(""+response.body().getData().getPersonalInfo().getFirstName());
     }
-    if (response.body().getResponse().getMobile()!=null && !(response.body().getResponse().getMobile().isEmpty()))
+    if (response.body().getData().getPersonalInfo().getMobile()!=null && !(response.body().getData().getPersonalInfo().getMobile().isEmpty()))
     {
-        phonetv.setText(""+response.body().getResponse().getMobile());
+        phonetv.setText(""+response.body().getData().getPersonalInfo().getMobile());
     }
 
-    if (response.body().getResponse().getUserEmail()!=null && !(response.body().getResponse().getUserEmail().isEmpty()))
+    if (response.body().getData().getPersonalInfo().getEmail()!=null && !(response.body().getData().getPersonalInfo().getEmail().isEmpty()))
     {
-        emailtv.setText(""+response.body().getResponse().getUserEmail());
+        emailtv.setText(""+response.body().getData().getPersonalInfo().getEmail());
     }
-    userLoggedInSession.updateData(response.body().getResponse().getUserEmail(),""+response.body().getResponse().getUserId(),response.body().getResponse().getName(),response.body().getResponse().getMobile());
+    userLoggedInSession.updateData(response.body().getData().getPersonalInfo().getEmail(),
+            ""+response.body().getData().getPersonalInfo().getUserId(),
+            response.body().getData().getPersonalInfo().getFirstName(),response.body().getData().getPersonalInfo().getMobile());
 
 
 
@@ -190,7 +193,7 @@ if (response.body().getResponse()!=null)
             }
 
             @Override
-            public void onFailure(Call<FetchedUserResponse> call, Throwable t) {
+            public void onFailure(Call<ProfileInfoDataResponse> call, Throwable t) {
                 progressDialog.dismiss();
                 Toast.makeText(MyProfileActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
             }

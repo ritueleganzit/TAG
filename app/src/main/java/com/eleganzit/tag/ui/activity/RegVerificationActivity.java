@@ -55,6 +55,7 @@ UserLoggedInSession userLoggedInSession;
 
             }
         });
+        code=getIntent().getStringExtra("code");
         resend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +84,7 @@ UserLoggedInSession userLoggedInSession;
                 }
             }
         });
+
 
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -198,6 +200,13 @@ finish();
                 if (response.isSuccessful()) {
 
                     if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
+                        Log.d("dataaaa",""+response.body().getData().get(0).getFirstName());
+                        Log.d("dataaaa",""+response.body().getData().get(0).getLastName());
+                        Log.d("dataaaa",""+response.body().getData().get(0).getUserId());
+                        Log.d("dataaaa",""+response.body().getData().get(0).getMobile());
+                        Log.d("dataaaa",""+response.body().getData().get(0).getNationality());
+
+
                         Toast.makeText(RegVerificationActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
                         userLoggedInSession.createSignUpSession(response.body().getData().get(0).getUserEmail()
                                 ,""+response.body().getData().get(0).getUserId()

@@ -41,7 +41,7 @@ UserLoggedInSession userLoggedInSession;
         old_password=findViewById(R.id.old_password);
         user_email=findViewById(R.id.user_email);
         mobile=findViewById(R.id.mobile);
-        name=findViewById(R.id.name);
+        name=findViewById(R.id.edname);
         location=findViewById(R.id.location);
 
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {

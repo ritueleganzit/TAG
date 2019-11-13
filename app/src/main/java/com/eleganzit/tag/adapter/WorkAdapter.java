@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.eleganzit.tag.R;
 import com.eleganzit.tag.model.Workdata;
+import com.eleganzit.tag.model.profileinfo.ExperienceInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +21,8 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.MyViewHolder>
 
     Context context;
     Activity activity;
-   List<Workdata> accounts;
-    public WorkAdapter(List<Workdata> accounts, Context context) {
+   List<ExperienceInfo> accounts;
+    public WorkAdapter(List<ExperienceInfo> accounts, Context context) {
 
         this.context = context;
         this.accounts = accounts;
@@ -40,9 +41,11 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.MyViewHolder>
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int i) {
 
-        Workdata workdata=accounts.get(i);
+        ExperienceInfo workdata=accounts.get(i);
 holder.designation.setText(""+workdata.getDesignation());
-holder.employee_name.setText(""+workdata.getDepartment());
+holder.employee_name.setText(""+workdata.getEmployeeName());
+holder.iscurrent.setText(""+workdata.getCurrentJobQue());
+holder.depart.setText(""+workdata.getDepartment());
 
 
     }
@@ -54,10 +57,12 @@ holder.employee_name.setText(""+workdata.getDepartment());
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-TextView designation,employee_name;
+TextView designation,employee_name,depart,iscurrent;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             employee_name=itemView.findViewById(R.id.employee_name);
+            iscurrent=itemView.findViewById(R.id.iscurrent);
+            depart=itemView.findViewById(R.id.depart);
             designation=itemView.findViewById(R.id.designation);
 
 

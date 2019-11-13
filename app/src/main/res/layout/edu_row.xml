@@ -12,36 +12,345 @@
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical">
-    <TextView
-
-        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLines="2"
+        android:orientation="horizontal">
+        <TextView
 
-        android:text=""
-        android:ellipsize="end"
-android:textColor="@color/txtcolor"
-        android:id="@+id/cource_level"
-        android:fontFamily="@font/roboto_regular"
-        android:textAppearance="?android:textAppearanceSmall"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:layout_weight="1"
 
-        >
+            android:text="Course Level"
+            android:ellipsize="end"
+            android:textColor="@color/txtcolor"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
 
-    </TextView>
-    <TextView
+            >
 
-        android:textColor="@color/txtcolor"
+        </TextView>
+        <TextView
+            android:layout_weight="1"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+android:gravity="end"
+            android:text=""
+            android:ellipsize="end"
+            android:textColor="@color/txtcolor"
+            android:id="@+id/cource_level"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
 
-        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+            >
+
+        </TextView>
+    </LinearLayout>
+    <LinearLayout
+    android:id="@+id/lin_uni_name"
+    android:visibility="gone"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLines="2"
-        android:id="@+id/cource_year"
-        android:text=""
-        android:ellipsize="end"
-        android:fontFamily="@font/roboto_regular"
-        android:textAppearance="?android:textAppearanceSmall"
-    >
+        android:orientation="horizontal">
+        <TextView
 
-    </TextView>
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:layout_weight="1"
+
+            android:text="University Name"
+            android:ellipsize="end"
+            android:textColor="@color/txtcolor"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+
+            >
+
+        </TextView>
+        <TextView
+            android:layout_weight="1"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+android:gravity="end"
+            android:text=""
+            android:ellipsize="end"
+            android:textColor="@color/txtcolor"
+            android:id="@+id/uni_name"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+
+            >
+
+        </TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:layout_weight="1"
+
+            android:id="@+id/school_name_txt"
+            android:text="School Name"
+            android:ellipsize="end"
+            android:textColor="@color/txtcolor"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+
+            >
+
+        </TextView>
+        <TextView
+
+            android:textColor="@color/txtcolor"
+            android:layout_weight="1"
+
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:id="@+id/cource_schoolname"
+            android:text=""
+            android:ellipsize="end"
+            android:gravity="end"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+            >
+
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/lin_degree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:layout_weight="1"
+
+            android:id="@+id/degree_txt"
+            android:text="Degree/Diploma Name"
+            android:ellipsize="end"
+            android:textColor="@color/txtcolor"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+
+            >
+
+        </TextView>
+        <TextView
+
+            android:textColor="@color/txtcolor"
+            android:layout_weight="1"
+
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:id="@+id/degree"
+            android:text=""
+            android:ellipsize="end"
+            android:gravity="end"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+            >
+
+        </TextView>
+    </LinearLayout><LinearLayout
+        android:visibility="gone"
+        android:id="@+id/lin_specialization"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:layout_weight="1"
+
+            android:text="Specialization"
+            android:ellipsize="end"
+            android:textColor="@color/txtcolor"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+
+            >
+
+        </TextView>
+        <TextView
+
+            android:textColor="@color/txtcolor"
+            android:layout_weight="1"
+
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:id="@+id/specialization_txt"
+            android:text=""
+            android:ellipsize="end"
+            android:gravity="end"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+            >
+
+        </TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:layout_weight="1"
+
+            android:text="Course Completion Year"
+            android:ellipsize="end"
+            android:textColor="@color/txtcolor"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+
+            >
+
+        </TextView>
+        <TextView
+
+            android:textColor="@color/txtcolor"
+
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:gravity="end"
+            android:layout_weight="1"
+
+            android:id="@+id/cource_year"
+            android:text=""
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+            >
+
+        </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lin_cource_Board"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:layout_weight="1"
+
+            android:text="Board"
+            android:ellipsize="end"
+            android:textColor="@color/txtcolor"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+
+            >
+
+        </TextView>
+
+        <TextView
+
+            android:textColor="@color/txtcolor"
+            android:layout_weight="1"
+
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:id="@+id/cource_Board"
+            android:text=""
+            android:ellipsize="end"
+            android:gravity="end"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+            >
+
+        </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:layout_weight="1"
+
+            android:text="Marks"
+            android:ellipsize="end"
+            android:textColor="@color/txtcolor"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+
+            >
+
+
+
+        </TextView>
+        <TextView
+            android:layout_weight="1"
+
+            android:textColor="@color/txtcolor"
+android:gravity="end"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:id="@+id/cource_marks"
+            android:text=""
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+            >
+
+        </TextView>
+
+
+    </LinearLayout>
+
+
+
 </LinearLayout>
 </LinearLayout>

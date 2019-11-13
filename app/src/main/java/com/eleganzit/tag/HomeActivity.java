@@ -19,6 +19,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -96,7 +97,7 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
             }
         });
 
-
+        Log.d("asdasda",""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_NAME));
 
 
 
@@ -119,6 +120,8 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d("asdasdasde",""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_NAME));
+
         if(userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_NAME)!=null && !(userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_NAME).isEmpty()))
         {
             text.setText(""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_NAME));

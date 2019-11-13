@@ -97,6 +97,8 @@ android:id="@+id/cardviewhide"
                             android:text="Email id/Mobile number"
                             android:textColor="@color/txtcolor" />
                         <EditText
+                            android:textAppearance="?android:textAppearanceSmall"
+
                             android:id="@+id/login_emailid"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -105,7 +107,7 @@ android:id="@+id/cardviewhide"
                             android:gravity="center_vertical"
                             android:hint="example@gmail.com"
                             android:inputType="textEmailAddress"
-                            android:padding="9dp"
+                            android:padding="13dp"
                             android:singleLine="true"
                             android:fontFamily="@font/roboto_regular"
                             android:textColor="@color/txtcolor"
@@ -135,6 +137,8 @@ android:id="@+id/cardviewhide"
                             app:passwordToggleEnabled="true">
 
                             <EditText
+                                android:textAppearance="?android:textAppearanceSmall"
+
                                 android:id="@+id/login_password"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
