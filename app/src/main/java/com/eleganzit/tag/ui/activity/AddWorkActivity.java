@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,17 +14,28 @@ import com.eleganzit.tag.R;
 import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.AddworkexpResponse;
+import com.eleganzit.tag.model.addeducation.EducationDeleteResponse;
+import com.eleganzit.tag.model.addeducation.EducationUpdateResponse;
+import com.eleganzit.tag.model.addwork.AddWorkExperience;
 import com.eleganzit.tag.utils.UserLoggedInSession;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class AddWorkActivity extends AppCompatActivity {
     String user_id;
     TextView submit;
+    String iscurrent="nodata";
+
+    RadioGroup current_job;
     ProgressDialog progressDialog;
-EditText current_job,department,designation,employee_name;
+EditText department,designation,employee_name,employee_exp;
     UserLoggedInSession userLoggedInSession;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +54,7 @@ EditText current_job,department,designation,employee_name;
             }
         });
         employee_name=findViewById(R.id.employee_name);
+        employee_exp=findViewById(R.id.employee_exp);
         current_job=findViewById(R.id.current_job);
         department=findViewById(R.id.department);
         designation=findViewById(R.id.designation);
@@ -56,47 +69,74 @@ EditText current_job,department,designation,employee_name;
                 }
             }
         });
+
+        current_job.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId==R.id.rb1)
+                {
+                    iscurrent="yes";
+                } if (checkedId==R.id.rb2)
+                {
+                    iscurrent="no";
+                }
+            }
+        });
     }
 
     private void addWorkData() {
+
+
         progressDialog.show();
-        Log.d("add_work_exp",""+user_id);
-        Log.d("add_work_exp",""+employee_name.getText().toString());
-        Log.d("add_work_exp",""+designation.getText().toString());
-        Log.d("add_work_exp",""+department.getText().toString());
-        Log.d("add_work_exp",""+current_job.getText().toString());
-        RetrofitInterface myInterface = RetrofitAPI.getRetrofit().create(RetrofitInterface.class);
-        Call<AddworkexpResponse> call=myInterface.addWorkExp(
-                "add_work_exp"
-                ,user_id
-                ,employee_name.getText().toString()
-                ,designation.getText().toString()
-                ,department.getText().toString()
-                ,current_job.getText().toString()
-        );
-        call.enqueue(new Callback<AddworkexpResponse>() {
+        JsonObject paramObject = new JsonObject();
+        paramObject.addProperty("user_id", user_id);
+        paramObject.addProperty("total_exp", employee_exp.getText().toString());
+
+        JsonObject paramObject2=new JsonObject();
+        paramObject2.addProperty("employee_name",employee_name.getText().toString());
+        paramObject2.addProperty("designation",designation.getText().toString());
+        paramObject2.addProperty("department",department.getText().toString());
+        paramObject2.addProperty("current_job_que",iscurrent);
+        JsonArray jsonArray=new JsonArray();
+
+        jsonArray.add(paramObject2);
+
+        paramObject.add("work_details", jsonArray);
+
+
+
+        Log.d("dataaaa","-"+paramObject.toString());
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://eleganzit.online/testhost/users/")
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        RetrofitInterface myInterface = retrofit.create(RetrofitInterface.class);
+        Call<AddWorkExperience> call=myInterface.updateWorkExperience(paramObject);
+        call.enqueue(new Callback<AddWorkExperience>() {
             @Override
-            public void onResponse(Call<AddworkexpResponse> call, Response<AddworkexpResponse> response) {
+            public void onResponse(Call<AddWorkExperience> call, Response<AddWorkExperience> response) {
                 progressDialog.dismiss();
                 if (response.isSuccessful())
                 {
-                    if (response.body().getData()!=null)
+                    if (response.body().getStatus().toString().equalsIgnoreCase("1"))
                     {
-
-                        Log.d("ddddd",""+response.body().getData().get(0).getWorkId());
-                        Log.d("ddddd",""+response.message());
-                        Log.d("ddddd",""+response.body().getData().get(0).getEmployeeName());
-                        Toast.makeText(AddWorkActivity.this, "Successfully Inserted", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddWorkActivity.this, "Successfully Updated", Toast.LENGTH_SHORT).show();
                         finish();
+                    }
+                    else
+                    {
+                        Toast.makeText(AddWorkActivity.this, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
                     }
                 }
             }
 
             @Override
-            public void onFailure(Call<AddworkexpResponse> call, Throwable t) {
+            public void onFailure(Call<AddWorkExperience> call, Throwable t) {
                 progressDialog.dismiss();
                 Toast.makeText(AddWorkActivity.this, "Server and Internet Error", Toast.LENGTH_SHORT).show();
-
             }
         });
     }
@@ -104,7 +144,15 @@ EditText current_job,department,designation,employee_name;
     private boolean isValid() {
 
 
-        if (employee_name.getText().toString().trim().equals("")) {
+        if (employee_exp.getText().toString().trim().equals("")) {
+
+
+            Toast.makeText(this, "Please enter total exp", Toast.LENGTH_SHORT).show();
+
+            employee_exp.requestFocus();
+
+            return false;
+        } if (employee_name.getText().toString().trim().equals("")) {
 
 
             Toast.makeText(this, "Please enter employee name", Toast.LENGTH_SHORT).show();
@@ -129,9 +177,9 @@ EditText current_job,department,designation,employee_name;
             department.requestFocus();
 
             return false;
-        }else if (current_job.getText().toString().trim().equals("")) {
+        }else if (iscurrent.equalsIgnoreCase("nodata")) {
 
-            Toast.makeText(this, "Please enter data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please select whether it is existing job", Toast.LENGTH_SHORT).show();
 
 
             current_job.requestFocus();

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,23 +26,37 @@ import com.eleganzit.tag.model.DeleteApiResponse;
 import com.eleganzit.tag.model.Preferancedata;
 import com.eleganzit.tag.model.UpdateEducationPreferanceResponse;
 import com.eleganzit.tag.model.Workdata;
+import com.eleganzit.tag.model.addeducation.EducationDeleteResponse;
+import com.eleganzit.tag.model.dropdowndata.DropDownListResponse;
+import com.eleganzit.tag.model.profileinfo.PreferenceInfo;
 import com.eleganzit.tag.ui.activity.AddEducationPreference;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class CurrentEduBackgroundAdapter extends RecyclerView.Adapter<CurrentEduBackgroundAdapter.MyViewHolder>
 {
 
     ProgressDialog progressDialog;
-
+    private ArrayList<String> streamname;
+    private ArrayList<String> streamid;
+    private ArrayList<String> coursename;
+    private ArrayList<String> couseid;
+    private ArrayList<String> modename;
+    private ArrayList<String> specialization;
     Context context;
     Activity activity;
-   List<Preferancedata> accounts;
-    public CurrentEduBackgroundAdapter(List<Preferancedata> accounts, Context context) {
+   List<PreferenceInfo> accounts;
+    public CurrentEduBackgroundAdapter(List<PreferenceInfo> accounts, Context context) {
 
         this.context = context;
         this.accounts = accounts;
@@ -65,14 +80,88 @@ public class CurrentEduBackgroundAdapter extends RecyclerView.Adapter<CurrentEdu
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int i) {
 
-        final Preferancedata workdata=accounts.get(i);
+        if (i==0)
+        {
+            getPref();
+        }
+        final PreferenceInfo workdata=accounts.get(i);
 
         holder.stream.setText(workdata.getStream());
         holder.course.setText(workdata.getCourse());
-        holder.specialisation.setText(workdata.getSpecialisation());
-        holder.mode_of_study.setText(workdata.getMode_of_study());
+        holder.specialisation.setText(workdata.getSpecialization());
+        holder.mode_of_study.setText(workdata.getStudyMode());
 
+        holder.course.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, coursename);
+                builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
+                        holder.course.setText(""+coursename.get(which));
+                        Toast.makeText(context, ""+couseid.get(which), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });    holder.mode_of_study.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, modename);
+                builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        holder.mode_of_study.setText(""+modename.get(which));
+                        Toast.makeText(context, ""+modename.get(which), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+        holder.stream.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, streamname);
+                builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        holder.stream.setText(""+streamname.get(which));
+                        Toast.makeText(context, ""+streamid.get(which), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+        holder.specialisation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, specialization);
+                builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        holder. specialisation.setText(""+specialization.get(which));
+                        Toast.makeText(context, ""+specialization.get(which), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +171,7 @@ public class CurrentEduBackgroundAdapter extends RecyclerView.Adapter<CurrentEdu
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.dismiss();
-                                deleteData(workdata.getPreferance_id());
+                                deleteData(""+workdata.getPreferenceId());
                                 //signOut();
                             }
                         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -123,7 +212,7 @@ holder.btnsave.setOnClickListener(new View.OnClickListener() {
 
         }
         else {
-            updateEduPref(holder,workdata.getPreferance_id(),workdata.getUserId());
+            updateEduPref(holder,""+workdata.getPreferenceId(),""+workdata.getUserId());
 
         }
     }
@@ -133,12 +222,16 @@ holder.btnsave.setOnClickListener(new View.OnClickListener() {
 
     private void deleteData(String preferance_id) {
         progressDialog.show();
-        RetrofitInterface myInterface = RetrofitAPI.getRetrofit().create(RetrofitInterface.class);
-
-        Call<DeleteApiResponse> call=myInterface.delete_preferancedata("delete_preferancedata",preferance_id);
-        call.enqueue(new Callback<DeleteApiResponse>() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://eleganzit.online/testhost/users/")
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        RetrofitInterface myInterface = retrofit.create(RetrofitInterface.class);
+        Call<EducationDeleteResponse> call=myInterface.deletePreferanceData(preferance_id);
+        call.enqueue(new Callback<EducationDeleteResponse>() {
             @Override
-            public void onResponse(Call<DeleteApiResponse> call, Response<DeleteApiResponse> response) {
+            public void onResponse(Call<EducationDeleteResponse> call, Response<EducationDeleteResponse> response) {
                 progressDialog.dismiss();
                 if (response.isSuccessful()) {
                     Log.d("ddddd", "" + response.message());
@@ -146,11 +239,10 @@ holder.btnsave.setOnClickListener(new View.OnClickListener() {
                     ((Activity)context).finish();
 
                 }
-
             }
 
             @Override
-            public void onFailure(Call<DeleteApiResponse> call, Throwable t) {
+            public void onFailure(Call<EducationDeleteResponse> call, Throwable t) {
                 progressDialog.dismiss();
                 Toast.makeText(context, "Server and Internet Error", Toast.LENGTH_SHORT).show();
             }
@@ -160,50 +252,74 @@ holder.btnsave.setOnClickListener(new View.OnClickListener() {
 
     private void updateEduPref(MyViewHolder holder, String preferance_id, String userId) {
         progressDialog.show();
-        Log.d("specialisation",""+userId);
-        Log.d("specialisation",""+preferance_id);
-        Log.d("specialisation",""+holder.stream.getText().toString());
-        Log.d("specialisation",""+holder.course.getText().toString());
-        Log.d("specialisation",""+holder.specialisation.getText().toString());
-        Log.d("specialisation",""+holder.mode_of_study.getText().toString());
-        RetrofitInterface myInterface = RetrofitAPI.getRetrofit().create(RetrofitInterface.class);
-        Call<UpdateEducationPreferanceResponse> call=myInterface.update_education_preferance(
-                "update_education_preferance"
-                ,userId
-                ,preferance_id
-                ,holder.stream.getText().toString()
-                ,holder.course.getText().toString()
-                ,holder.specialisation.getText().toString()
-                ,holder.mode_of_study.getText().toString()
-        );
-        call.enqueue(new Callback<UpdateEducationPreferanceResponse>() {
-            @Override
-            public void onResponse(Call<UpdateEducationPreferanceResponse> call, Response<UpdateEducationPreferanceResponse> response) {
-                progressDialog.dismiss();
-                if (response.isSuccessful())
-                {                        Log.d("ddddd",""+response.message());
 
-                    if (response.body().getData()!=null)
+
+        JsonObject paramObject = new JsonObject();
+        paramObject.addProperty("user_id", userId);
+
+        JsonObject paramObject2=new JsonObject();
+        paramObject2.addProperty("preference_id",preferance_id);
+        paramObject2.addProperty("course",holder.course.getText().toString());
+        paramObject2.addProperty("stream",holder.stream.getText().toString());
+        paramObject2.addProperty("specialization",holder.specialisation.getText().toString());
+        paramObject2.addProperty("study_mode",holder.mode_of_study.getText().toString());
+        JsonArray jsonArray=new JsonArray();
+
+        jsonArray.add(paramObject2);
+
+        paramObject.add("preference_details", jsonArray);
+
+
+
+
+
+
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://eleganzit.online/testhost/users/")
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        RetrofitInterface myInterface = retrofit.create(RetrofitInterface.class);
+        Call<EducationDeleteResponse> call=myInterface.updatePreferences(paramObject);
+
+        call.enqueue(new Callback<EducationDeleteResponse>() {
+            @Override
+            public void onResponse(Call<EducationDeleteResponse> call, Response<EducationDeleteResponse> response) {
+                if (response.isSuccessful())
+                {
+                    if (response.isSuccessful())
                     {
 
-                        Log.d("ddddd",""+response.body().getData().get(0).getPreferance_id());
-                        Log.d("ddddd",""+response.body().getData().get(0).getModeOfStudy());
-                        Log.d("ddddd",""+response.body().getData().get(0).getCourse());
-                        Log.d("ddddd",""+response.body().getData().get(0).getSpecialisation());
-                        Toast.makeText(context, "Successfully Updated", Toast.LENGTH_SHORT).show();
-                        ((Activity)context).finish();
 
+                        Toast.makeText(context, "Successfully Inserted", Toast.LENGTH_SHORT).show();
+                        activity.finish();
                     }
                 }
-
             }
 
             @Override
-            public void onFailure(Call<UpdateEducationPreferanceResponse> call, Throwable t) {
+            public void onFailure(Call<EducationDeleteResponse> call, Throwable t) {
                 progressDialog.dismiss();
                 Toast.makeText(context, "Server and Internet Error", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     }
@@ -229,5 +345,71 @@ EditText stream,course,specialisation,mode_of_study;
 
 
         }
+    }
+
+
+    public void getPref(){
+        progressDialog.show();
+        streamid=new ArrayList<>();
+        streamname=new ArrayList<>();
+        modename=new ArrayList<>();
+        specialization=new ArrayList<>();
+
+        couseid=new ArrayList<>();
+        coursename=new ArrayList<>();
+        RetrofitInterface myInterface = RetrofitAPI.getRetrofitN().create(RetrofitInterface.class);
+        Call<DropDownListResponse> call=myInterface.dropDownList();
+        call.enqueue(new Callback<DropDownListResponse>() {
+            @Override
+            public void onResponse(Call<DropDownListResponse> call, Response<DropDownListResponse> response) {
+                progressDialog.dismiss();
+                if (response.isSuccessful())
+                {
+
+                    if (response.body().getData().getStreamList()!=null)
+                    {
+
+                        for (int i=0;i<response.body().getData().getStreamList().size();i++)
+                        {
+                            streamid.add(""+response.body().getData().getStreamList().get(i).getSpecializationId());
+                            streamname.add(response.body().getData().getStreamList().get(i).getSpecializationName());
+
+                        }
+                    } if (response.body().getData().getStudyMode()!=null)
+                {
+
+                    for (int i=0;i<response.body().getData().getStreamList().size();i++)
+                    {
+                        modename.add(""+response.body().getData().getStudyMode().get(i).getModeName());
+
+                    }
+                }if (response.body().getData().getCourseList()!=null)
+                {
+
+                    for (int i=0;i<response.body().getData().getCourseList().size();i++)
+                    {
+                        couseid.add(""+response.body().getData().getCourseList().get(i).getCourceId());
+                        coursename.add(response.body().getData().getCourseList().get(i).getCourseName());
+
+                    }
+                }if (response.body().getData().getSpecializationFieldList()!=null)
+                {
+
+                    for (int i=0;i<response.body().getData().getSpecializationFieldList().size();i++)
+                    {
+                        specialization.add(""+response.body().getData().getSpecializationFieldList().get(i).getSpeFieldName());
+
+                    }
+                }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DropDownListResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(context, "Server or Internet error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }

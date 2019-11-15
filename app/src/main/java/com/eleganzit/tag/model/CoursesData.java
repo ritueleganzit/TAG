@@ -6,6 +6,11 @@ public class CoursesData {
 
     int id;
 
+    public CoursesData(String title, int id) {
+        this.title = title;
+        this.id = id;
+    }
+
     public CoursesData(int id, String title, String course_overview, String course_specialization, String course_eligibility) {
         this.id = id;
         this.title = title;

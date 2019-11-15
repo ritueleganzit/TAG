@@ -48,7 +48,7 @@ import retrofit2.Response;
 public class MyProfileFragment extends Fragment {
 
 RecyclerView rc_educations;
-TextView location,user_email,mobile;
+TextView location,user_email,mobile,dob,numofexp;
 RecyclerView rc_work;
 ImageView ed_profile,ed_edu,ed_work,ed_edu_pref;
 RecyclerView rc_edu_pref;
@@ -59,7 +59,7 @@ RecyclerView rc_edu_pref;
     ArrayList<EducationDetail> educationArrayList;
     ArrayList<ExperienceInfo> workdata;
     ArrayList<PreferenceInfo> prefdata;
-    String user_id;
+    String user_id,exp;
     UserLoggedInSession userLoggedInSession;
 
     ProgressDialog progressDialog;
@@ -70,10 +70,12 @@ RecyclerView rc_edu_pref;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.fragment_my_profile, container, false);
+        numofexp=v.findViewById(R.id.numofexp);
         rc_educations=v.findViewById(R.id.rc_educations);
         ed_edu=v.findViewById(R.id.ed_edu);
         ed_work=v.findViewById(R.id.ed_work);
         rc_edu_pref=v.findViewById(R.id.rc_edu_pref);
+        dob=v.findViewById(R.id.dob);
         ed_profile=v.findViewById(R.id.ed_profile);
         ed_edu_pref=v.findViewById(R.id.ed_edu_pref);
         rc_work=v.findViewById(R.id.rc_work);
@@ -100,7 +102,7 @@ RecyclerView rc_edu_pref;
         });ed_work.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), GetWorkActivty.class).putParcelableArrayListExtra("workdata",workdata));
+                startActivity(new Intent(getActivity(), GetWorkActivty.class).putExtra("exp",exp).putParcelableArrayListExtra("workdata",workdata));
 
             }
         });ed_edu_pref.setOnClickListener(new View.OnClickListener() {
@@ -143,6 +145,8 @@ RecyclerView rc_edu_pref;
                 {
                     if (response.body().getData()!=null)
                     {
+
+
                         if (response.body().getData().getPersonalInfo()!=null)
                         {
                             if (response.body().getData().getPersonalInfo().getMobile()!=null && !(response.body().getData().getPersonalInfo().getMobile().isEmpty())) {
@@ -157,21 +161,43 @@ RecyclerView rc_edu_pref;
                             {
                                 user_email.setText(""+response.body().getData().getPersonalInfo().getEmail());
 
+                            } if (response.body().getData().getPersonalInfo().getDob()!=null && !(response.body().getData().getPersonalInfo().getDob().isEmpty()))
+                            {
+                                dob.setText(""+response.body().getData().getPersonalInfo().getDob());
+
                             }
 
+                        }
+                        if (response.body().getData().getTotalExp()!=null)
+                        {
+                            if (response.body().getData().getTotalExp().get(0).getTotalExp().equalsIgnoreCase("0"))
+                            {
+                                numofexp.setText(" : 0");
+
+                            }
+                            else
+                            {
+                                numofexp.setText(" : "+response.body().getData().getTotalExp().get(0).getTotalExp());
+
+                            }
                         }
                         if (response.body().getData().getEducationDetail()!=null)
                         {
                             {educationArrayList.addAll(response.body().getData().getEducationDetail());
 
-                                Log.d("myprofileee",""+response.body().getData().getEducationDetail().size());
+                               // Log.d("myprofileee",""+response.body().getData().getEducationDetail().size());
                                 rc_educations.setAdapter(new EducationAdapter(response.body().getData().getEducationDetail(),getActivity()));
 
 
                             }
                         }
+                        if (response.body().getData().getTotalExp()!=null)
+                        {
+                            exp=response.body().getData().getTotalExp().get(0).getTotalExp();
+                        }
                         if (response.body().getData().getExperienceInfo()!=null)
                         {
+
                             if (response.body().getData().getExperienceInfo()!=null)
                             {workdata.addAll(response.body().getData().getExperienceInfo());
 
@@ -197,6 +223,7 @@ RecyclerView rc_edu_pref;
             @Override
             public void onFailure(Call<ProfileInfoDataResponse> call, Throwable t) {
                 progressDialog.dismiss();
+                Toast.makeText(getActivity(), "Server or Internet Error", Toast.LENGTH_SHORT).show();
             }
         });
 

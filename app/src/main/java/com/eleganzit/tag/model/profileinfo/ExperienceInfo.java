@@ -26,6 +26,35 @@ public class ExperienceInfo implements Parcelable {
     @Expose
     private String currentJobQue;
 
+    protected ExperienceInfo(Parcel in) {
+        if (in.readByte() == 0) {
+            experienceId = null;
+        } else {
+            experienceId = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            userId = null;
+        } else {
+            userId = in.readInt();
+        }
+        employeeName = in.readString();
+        designation = in.readString();
+        department = in.readString();
+        currentJobQue = in.readString();
+    }
+
+    public static final Creator<ExperienceInfo> CREATOR = new Creator<ExperienceInfo>() {
+        @Override
+        public ExperienceInfo createFromParcel(Parcel in) {
+            return new ExperienceInfo(in);
+        }
+
+        @Override
+        public ExperienceInfo[] newArray(int size) {
+            return new ExperienceInfo[size];
+        }
+    };
+
     public Integer getExperienceId() {
         return experienceId;
     }
@@ -82,6 +111,21 @@ public class ExperienceInfo implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        if (experienceId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(experienceId);
+        }
+        if (userId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(userId);
+        }
+        dest.writeString(employeeName);
+        dest.writeString(designation);
+        dest.writeString(department);
+        dest.writeString(currentJobQue);
     }
 }

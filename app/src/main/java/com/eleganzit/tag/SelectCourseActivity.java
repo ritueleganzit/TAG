@@ -27,6 +27,8 @@ import com.eleganzit.tag.model.GetCoursesData;
 import com.eleganzit.tag.model.GetCoursesResponse;
 import com.eleganzit.tag.model.GetSpecialization;
 import com.eleganzit.tag.model.LoginResponse;
+import com.eleganzit.tag.model.dropdowndata.DropDownListResponse;
+import com.eleganzit.tag.ui.activity.AddEducationPreference;
 import com.eleganzit.tag.utils.UserLoggedInSession;
 
 import java.util.ArrayList;
@@ -37,7 +39,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SelectCourseActivity extends AppCompatActivity {
-
+    private ArrayList<String> coursename;
+    private ArrayList<String> couseid;
     TextView next,txt_c1,txt_c2,txt_c3,txt_c4,txt_c5,txt_c6;
     List<String> coursesArrayList=new ArrayList<>();
     List<CoursesData> coursesList=new ArrayList<>();
@@ -113,7 +116,7 @@ RecyclerView courserc;
             }
         });
 
-        getCourses();
+        getPref();
 
 
 
@@ -144,7 +147,7 @@ if (response.body().getData()!=null)
         coursesList.add(coursesData);
 
         coursesArrayList.add(response.body().getData().get(i).getCourceName());
-        courserc.setAdapter(new CourseAdapter(coursesArrayList,SelectCourseActivity.this));
+       // courserc.setAdapter(new CourseAdapter(coursesArrayList,SelectCourseActivity.this));
 
     }
 
@@ -183,7 +186,7 @@ if (response.body().getData()!=null)
 
     void showCourseDialog() {
 
-        final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, android.R.id.text1, coursesArrayList);
+        final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, android.R.id.text1, coursename);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AlertDialogCustom));
 
@@ -192,8 +195,8 @@ if (response.body().getData()!=null)
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
 
-                ed_course.setText(coursesList.get(i).getTitle());
-                getCoursesData.setCourceName(getCoursesResponseList.get(i).getCourceName());
+                ed_course.setText(coursename.get(i));
+                /*getCoursesData.setCourceName(getCoursesResponseList.get(i).getCourceName());
                 getCoursesData.setCourceDescription(getCoursesResponseList.get(i).getCourceDescription());
                 getCoursesData.setEligibility(getCoursesResponseList.get(i).getEligibility());
                 getCoursesData.setOverview(getCoursesResponseList.get(i).getOverview());
@@ -203,7 +206,7 @@ if (response.body().getData()!=null)
                 course_name=coursesList.get(i).getTitle();
                 course_overview=coursesList.get(i).getCourse_overview();
                 course_specialization=coursesList.get(i).getCourse_specialization();
-                course_eligibility=coursesList.get(i).getCourse_eligibility();
+                course_eligibility=coursesList.get(i).getCourse_eligibility();*/
 
             }
         });
@@ -219,10 +222,10 @@ if (response.body().getData()!=null)
 
     public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.MyViewHolder>
     {
-        List<String> getSpecializations;
+        List<CoursesData> getSpecializations;
         Context context;
         Activity activity;
-        public CourseAdapter( List<String> getSpecializations,Context context) {
+        public CourseAdapter( List<CoursesData> getSpecializations,Context context) {
 
             this.getSpecializations = getSpecializations;
             this.context = context;
@@ -240,12 +243,15 @@ if (response.body().getData()!=null)
 
         @Override
         public void onBindViewHolder(@NonNull final CourseAdapter.MyViewHolder holder, final int i) {
-            holder.txt_c1.setText(getSpecializations.get(i));
+
+         final CoursesData coursesData=getSpecializations.get(i);
+            holder.txt_c1.setText(coursesData.getTitle());
             holder.txt_c1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ed_course.setText(""+getSpecializations.get(i));
-                    getCoursesData.setCourceName(getCoursesResponseList.get(i).getCourceName());
+                    ed_course.setText(""+coursesData.getTitle());
+
+                   /* getCoursesData.setCourceName(getCoursesResponseList.get(i).getCourceName());
                     getCoursesData.setCourceDescription(getCoursesResponseList.get(i).getCourceDescription());
                     getCoursesData.setEligibility(getCoursesResponseList.get(i).getEligibility());
                     getCoursesData.setOverview(getCoursesResponseList.get(i).getOverview());
@@ -255,7 +261,7 @@ if (response.body().getData()!=null)
                     course_name=coursesList.get(i).getTitle();
                     course_overview=coursesList.get(i).getCourse_overview();
                     course_specialization=coursesList.get(i).getCourse_specialization();
-                    course_eligibility=coursesList.get(i).getCourse_eligibility();
+                    course_eligibility=coursesList.get(i).getCourse_eligibility();*/
                 }
             });
 
@@ -283,5 +289,49 @@ if (response.body().getData()!=null)
 
             }
         }
+    }
+
+
+    public void getPref(){
+        progressDialog.show();
+
+
+        couseid=new ArrayList<>();
+        coursename=new ArrayList<>();
+        RetrofitInterface myInterface = RetrofitAPI.getRetrofitN().create(RetrofitInterface.class);
+        Call<DropDownListResponse> call=myInterface.dropDownList();
+        call.enqueue(new Callback<DropDownListResponse>() {
+            @Override
+            public void onResponse(Call<DropDownListResponse> call, Response<DropDownListResponse> response) {
+                progressDialog.dismiss();
+                if (response.isSuccessful())
+                {
+
+                    if (response.body().getData().getCourseList()!=null)
+                {
+
+                    for (int i=0;i<response.body().getData().getCourseList().size();i++)
+                    {
+                        couseid.add(""+response.body().getData().getCourseList().get(i).getCourceId());
+                        coursename.add(response.body().getData().getCourseList().get(i).getCourseName());
+                        CoursesData coursesData=new CoursesData(response.body().getData().getCourseList().get(i).getCourseName(),response.body().getData().getCourseList().get(i).getCourceId());
+
+                        coursesList.add(coursesData);
+
+                        coursesArrayList.add(response.body().getData().getCourseList().get(i).getCourseName());
+
+                        courserc.setAdapter(new CourseAdapter(coursesList,SelectCourseActivity.this));
+                    }
+                }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DropDownListResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(SelectCourseActivity.this, "Server or Internet error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }

@@ -26,7 +26,13 @@ import com.eleganzit.tag.model.SendOtpResponse;
 import com.eleganzit.tag.model.TopCollegeResponse;
 import com.eleganzit.tag.model.UpdateEducationPreferanceResponse;
 import com.eleganzit.tag.model.VerifiedResponse;
+import com.eleganzit.tag.model.accountsettings.PasswordUpdateResponse;
+import com.eleganzit.tag.model.addeducation.EducationDeleteResponse;
+import com.eleganzit.tag.model.addeducation.EducationUpdateResponse;
+import com.eleganzit.tag.model.addprofileinfo.UpdateProfileResponse;
+import com.eleganzit.tag.model.addwork.AddWorkExperience;
 import com.eleganzit.tag.model.appliedcollege.ApplyCollegeMobileResponse;
+import com.eleganzit.tag.model.dropdowndata.DropDownListResponse;
 import com.eleganzit.tag.model.homecourse.CourseResponse;
 import com.eleganzit.tag.model.homefacility.FacilitiesResponse;
 import com.eleganzit.tag.model.homegallery.GalleryResponse;
@@ -39,6 +45,7 @@ import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -303,10 +310,59 @@ public interface RetrofitInterface {
 @Body JsonObject jsonObject
 
     );
+    @POST("/testhost/users/profile")
+    Call<UpdateProfileResponse> updateProfileResponse(
+@Body JsonObject jsonObject
+
+    );
+ @POST("/testhost/users/changePassword")
+    Call<PasswordUpdateResponse> passwordUpdateResponse(
+@Body JsonObject jsonObject
+
+    );
+
+
+
+
+    @POST("/testhost/users/updateEducationBackground")
+    Call<EducationUpdateResponse> educationUpdateResponse(
+            @Body JsonObject jsonObject
+
+    );
+ @POST("/testhost/users/deleteEducationData")
+    Call<EducationDeleteResponse> deleteEducationData(
+            @Body JsonObject jsonObject
+
+    );
+ @POST("/testhost/users/updateWorkExperience")
+    Call<AddWorkExperience> updateWorkExperience(
+            @Body JsonObject jsonObject
+
+    );
+
+ @DELETE("/testhost/users/deleteWorkData/{id}")
+    Call<EducationDeleteResponse> deleteWorkData(
+         @Path(value = "id", encoded = true) String id
+
+    );@DELETE("/testhost/users/deletePreferanceData/{id}")
+    Call<EducationDeleteResponse> deletePreferanceData(
+         @Path(value = "id", encoded = true) String id
+
+    );
+
+ @POST("/testhost/users/updatePreferences")
+    Call<EducationDeleteResponse> updatePreferences(
+         @Body JsonObject jsonObject
+
+    );
 
 
     @GET("/testhost/users/gallery/{id}")
     Call<GalleryResponse> getGallery(@Path(value = "id", encoded = true) String id);
+
+
+    @GET("/testhost/users/dropDownList")
+    Call<DropDownListResponse> dropDownList();
   @GET("/testhost/users/facility/{id}")
     Call<FacilitiesResponse> getfacility(@Path(value = "id", encoded = true) String id);
     @FormUrlEncoded()

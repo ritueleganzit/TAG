@@ -301,16 +301,27 @@ android:layout_gravity="center"
 
 
 
-            <android.support.design.widget.TabLayout
-                android:id="@+id/htab_tabs"
+            <LinearLayout
+                android:layout_gravity="bottom"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@android:color/white">
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/htab_tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:tabMaxWidth="0dp"
 
-                android:layout_gravity="bottom"
-                app:tabBackground="@android:color/white"
-                app:tabIndicatorColor="@color/colorPrimaryDark"
-                app:tabSelectedTextColor="@color/colorPrimaryDark"
-                app:tabTextColor="@color/txtcolor"/>
+                    app:tabGravity="center"
+                    app:tabMode="scrollable"
+                    android:layout_gravity="bottom"
+                    app:tabBackground="@android:color/white"
+                    app:tabIndicatorColor="@color/colorPrimaryDark"
+                    app:tabSelectedTextColor="@color/colorPrimaryDark"
+                    app:tabTextColor="@color/txtcolor"/>
+            </LinearLayout>
+
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>

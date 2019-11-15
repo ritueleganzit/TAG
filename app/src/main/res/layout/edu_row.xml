@@ -13,6 +13,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical">
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -54,6 +55,8 @@ android:gravity="end"
     <LinearLayout
     android:id="@+id/lin_uni_name"
     android:visibility="gone"
+        android:layout_marginTop="6dp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -93,6 +96,8 @@ android:gravity="end"
         </TextView>
     </LinearLayout>
     <LinearLayout
+        android:layout_marginTop="6dp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -136,6 +141,8 @@ android:gravity="end"
 
     <LinearLayout
         android:visibility="gone"
+        android:layout_marginTop="6dp"
+
         android:id="@+id/lin_degree"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -178,7 +185,9 @@ android:gravity="end"
         </TextView>
     </LinearLayout><LinearLayout
         android:visibility="gone"
-        android:id="@+id/lin_specialization"
+    android:layout_marginTop="6dp"
+
+    android:id="@+id/lin_specialization"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -219,6 +228,8 @@ android:gravity="end"
         </TextView>
     </LinearLayout>
     <LinearLayout
+        android:layout_marginTop="6dp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -263,6 +274,7 @@ android:gravity="end"
 
     <LinearLayout
         android:id="@+id/lin_cource_Board"
+        android:layout_marginTop="6dp"
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -304,9 +316,55 @@ android:gravity="end"
 
         </TextView>
 
+    </LinearLayout> <LinearLayout
+        android:id="@+id/lin_cource_stream"
+        android:layout_marginTop="6dp"
+android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:layout_weight="1"
+
+            android:text="Stream"
+            android:ellipsize="end"
+            android:textColor="@color/txtcolor"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+
+            >
+
+        </TextView>
+
+        <TextView
+
+            android:textColor="@color/txtcolor"
+            android:layout_weight="1"
+
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:id="@+id/cource_stream_Board"
+            android:text=""
+            android:ellipsize="end"
+            android:gravity="end"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+            >
+
+        </TextView>
+
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginTop="6dp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">

@@ -24,6 +24,7 @@ import com.eleganzit.tag.model.FetchedUserResponse;
 import com.eleganzit.tag.model.homefacility.FacilitiesResponse;
 import com.eleganzit.tag.model.profileinfo.ProfileInfoDataResponse;
 import com.eleganzit.tag.ui.activity.payment.PaymentFragment;
+import com.eleganzit.tag.ui.fragment.AccountSettingFragment;
 import com.eleganzit.tag.ui.fragment.ActivityFragment;
 import com.eleganzit.tag.ui.fragment.MyProfileFragment;
 import com.eleganzit.tag.utils.UserLoggedInSession;
@@ -104,6 +105,7 @@ setupViewPager(htab_viewpager);
         adapter.addFrag(new MyProfileFragment(),"PROFILE");
         adapter.addFrag(new ActivityFragment(),"ACTIVITY");
         adapter.addFrag(new PaymentFragment(),"PAYMENT");
+        adapter.addFrag(new AccountSettingFragment(),"ACCOUNT SETTINGS");
 
         viewPager.setAdapter(adapter);
         htab_tabs.setupWithViewPager(htab_viewpager);

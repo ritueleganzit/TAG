@@ -61,147 +61,21 @@ android:id="@+id/cource_level"
             android:layout_width="match_parent"
             android:background="@drawable/editbg"
             android:layout_height="wrap_content"></EditText>
-        <TextView
-            android:textColor="@color/txtcolor"
-            android:layout_marginBottom="10dp"
 
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:fontFamily="@font/roboto_regular"
-            android:textAppearance="?android:textAppearanceSmall"
+    <com.eleganzit.tag.utils.MyNestedScrollView android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
 
-            android:layout_width="match_parent"
-            android:text="School Name"
-            android:layout_height="wrap_content">
-
-        </TextView>
-
-        <EditText
-
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:padding="9dp"
-            android:id="@+id/school_name"
-            android:layout_width="match_parent"
-            android:inputType="text"
-            android:background="@drawable/editbg"
-            android:layout_height="wrap_content"></EditText>
-
-        <TextView
-            android:textColor="@color/txtcolor"
-            android:layout_marginBottom="10dp"
-
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:fontFamily="@font/roboto_regular"
-            android:textAppearance="?android:textAppearanceSmall"
-
-            android:layout_width="match_parent"
-            android:text="Course Completion Year"
-            android:layout_height="wrap_content">
-
-        </TextView>
-
-        <EditText
-            android:drawableRight="@drawable/ic_down"
-
-            android:layout_marginLeft="10dp"
-            android:id="@+id/cource_year"
-            android:focusable="false"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:padding="9dp"
-            android:layout_width="match_parent"
-            android:background="@drawable/editbg"
-            android:layout_height="wrap_content"></EditText>
-
-        <TextView
-            android:textColor="@color/txtcolor"
-            android:layout_marginBottom="10dp"
-
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:fontFamily="@font/roboto_regular"
-            android:textAppearance="?android:textAppearanceSmall"
-
-            android:layout_width="match_parent"
-            android:text="Board"
-            android:layout_height="wrap_content">
-
-        </TextView>
-
-        <EditText
-
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:padding="9dp"
-            android:id="@+id/board"
-            android:inputType="text"
-            android:layout_width="match_parent"
-            android:background="@drawable/editbg"
-            android:layout_height="wrap_content"></EditText>
-
-
-        <TextView
-            android:textColor="@color/txtcolor"
-            android:layout_marginBottom="10dp"
-
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:fontFamily="@font/roboto_regular"
-            android:textAppearance="?android:textAppearanceSmall"
-
-            android:layout_width="match_parent"
-            android:text="Subject"
-            android:layout_height="wrap_content">
-
-        </TextView>
-
-        <EditText
-
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:padding="9dp"
-            android:inputType="text"
-            android:id="@+id/subject"
-            android:layout_width="match_parent"
-            android:background="@drawable/editbg"
-            android:layout_height="wrap_content"></EditText>   <TextView
-        android:textColor="@color/txtcolor"
-        android:layout_marginBottom="10dp"
-
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:fontFamily="@font/roboto_regular"
-        android:textAppearance="?android:textAppearanceSmall"
-
-        android:layout_width="match_parent"
-        android:text="Marks"
-        android:layout_height="wrap_content">
-
-    </TextView>
-
-        <EditText
-
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:padding="9dp"
-            android:id="@+id/marks"
-            android:inputType="text"
-            android:layout_width="match_parent"
-            android:background="@drawable/editbg"
-            android:layout_height="wrap_content"></EditText>
-
-
+        android:layout_height="wrap_content"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <include layout="@layout/edu_row_bg_tenth"></include>
+        <include layout="@layout/edu_row_bg_twelth"></include>
+        <include layout="@layout/edu_row_bg_ug"></include>
+        <include layout="@layout/edu_row_bg_pg"></include>
         <Button
             android:text="Save"
 
@@ -217,5 +91,7 @@ android:id="@+id/cource_level"
             android:layout_height="wrap_content">
 
         </Button>
+    </LinearLayout>
+    </com.eleganzit.tag.utils.MyNestedScrollView>
     </LinearLayout>
 </android.support.v7.widget.CardView>

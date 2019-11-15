@@ -1,0 +1,183 @@
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/lin_twelth"
+    android:visibility="gone"
+
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <LinearLayout
+        android:paddingBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <LinearLayout
+        android:paddingBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+
+            android:layout_gravity="end"
+
+            android:orientation="vertical">
+
+
+
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:textColor="@color/txtcolor"
+            android:layout_marginBottom="10dp"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+
+            android:layout_width="match_parent"
+            android:text="School Name"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/twelth_school_name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:fontFamily="@font/roboto_regular"
+            android:inputType="text"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="9dp"
+            android:layout_width="match_parent"
+            android:background="@drawable/editbg"
+            android:layout_height="wrap_content"></EditText>
+
+        <TextView
+            android:textColor="@color/txtcolor"
+            android:layout_marginBottom="10dp"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+
+            android:layout_width="match_parent"
+            android:text="Course Completion Year"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+        <EditText
+            android:drawableRight="@drawable/ic_down"
+            android:id="@+id/twelth_year"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:fontFamily="@font/roboto_regular"
+            android:focusable="false"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="9dp"
+            android:layout_width="match_parent"
+            android:background="@drawable/editbg"
+            android:layout_height="wrap_content"></EditText>
+
+        <TextView
+            android:textColor="@color/txtcolor"
+            android:layout_marginBottom="10dp"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+
+            android:layout_width="match_parent"
+            android:text="Board"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/twelth_board"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:fontFamily="@font/roboto_regular"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="9dp"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:background="@drawable/editbg"
+            android:layout_height="wrap_content"></EditText>
+
+
+        <TextView
+            android:textColor="@color/txtcolor"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="?android:textAppearanceSmall"
+
+            android:layout_width="match_parent"
+            android:text="Stream"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+        <EditText
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:fontFamily="@font/roboto_regular"
+            android:inputType="text"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/twelth_stream"
+            android:padding="9dp"
+            android:layout_width="match_parent"
+            android:background="@drawable/editbg"
+            android:layout_height="wrap_content"></EditText>   <TextView
+        android:textColor="@color/txtcolor"
+        android:layout_marginBottom="10dp"
+
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:fontFamily="@font/roboto_regular"
+        android:textAppearance="?android:textAppearanceSmall"
+
+        android:layout_width="match_parent"
+        android:text="Marks"
+        android:layout_height="wrap_content">
+
+    </TextView>
+
+        <EditText
+            android:inputType="number"
+            android:id="@+id/twelth_marks"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:fontFamily="@font/roboto_regular"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="9dp"
+            android:layout_width="match_parent"
+            android:background="@drawable/editbg"
+            android:layout_height="wrap_content"></EditText>
+
+
+    </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

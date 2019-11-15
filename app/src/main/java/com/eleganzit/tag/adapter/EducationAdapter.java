@@ -54,13 +54,25 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.MyVi
 
         EducationDetail education=educationArrayList.get(i);
 
-
+Log.d("adpaterrrr",""+education.getStream());
+Log.d("adpaterrrr",""+education.getSubject());
 if (education.getType()!=null  && !(education.getType().isEmpty()))
 {
     if (education.getType().equalsIgnoreCase("school"))
     {        holder.school_name_txt.setText("School Name");
 
         holder.cource_level.setText(""+education.getCourseLevel());
+        if (education.getCourseLevel().equalsIgnoreCase("10"))
+        {
+            holder.lin_cource_stream.setVisibility(View.GONE);
+
+        }
+        else
+        {
+            holder.lin_cource_stream.setVisibility(View.VISIBLE);
+            holder.cource_stream_Board.setText(""+education.getSubject());
+
+        }
         holder.cource_year.setText(""+education.getCompletionYear());
         holder.cource_schoolname.setText(""+education.getSchoolName());
         holder.cource_marks.setText(""+education.getMarks());
@@ -106,12 +118,14 @@ if (education.getType()!=null  && !(education.getType().isEmpty()))
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        LinearLayout lin_degree,lin_specialization,lin_cource_Board,lin_uni_name;
+        LinearLayout lin_degree,lin_specialization,lin_cource_Board,lin_uni_name,lin_cource_stream;
 
-TextView cource_level,cource_year,cource_Board,cource_marks,cource_schoolname,school_name_txt,degree,specialization_txt,uni_name;
+TextView cource_level,cource_year,cource_Board,cource_marks,cource_schoolname,school_name_txt,degree,specialization_txt,uni_name,cource_stream_Board;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            lin_cource_stream=itemView.findViewById(R.id.lin_cource_stream  );
+            cource_stream_Board=itemView.findViewById(R.id.cource_stream_Board  );
             cource_schoolname=itemView.findViewById(R.id.cource_schoolname  );
             lin_uni_name=itemView.findViewById(R.id.lin_uni_name  );
             uni_name=itemView.findViewById(R.id.uni_name  );

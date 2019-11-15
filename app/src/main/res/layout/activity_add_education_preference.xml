@@ -150,16 +150,20 @@
 
                     </TextView>
                     <EditText
+                        android:drawableRight="@drawable/ic_down"
                         android:id="@+id/stream"
-                        android:inputType="text"
+                        android:hint="Select Stream"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
+                        android:focusable="false"
                         android:padding="9dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:fontFamily="@font/roboto_regular"
                         android:layout_width="match_parent"
                         android:background="@drawable/editbg"
                         android:layout_height="wrap_content"></EditText>
-                    <TextView
+                     <TextView
                         android:textColor="@color/txtcolor"
                         android:layout_marginBottom="10dp"
 
@@ -174,17 +178,21 @@
                         android:layout_height="wrap_content">
 
                     </TextView>
-
                     <EditText
+                        android:drawableRight="@drawable/ic_down"
                         android:id="@+id/course"
-                        android:inputType="text"
+                        android:hint="Select Course"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
+                        android:focusable="false"
                         android:padding="9dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:fontFamily="@font/roboto_regular"
                         android:layout_width="match_parent"
                         android:background="@drawable/editbg"
                         android:layout_height="wrap_content"></EditText>
+
 
                     <TextView
                         android:textColor="@color/txtcolor"
@@ -201,17 +209,22 @@
                         android:layout_height="wrap_content">
 
                     </TextView>
-
                     <EditText
-                        android:inputType="text"
-android:id="@+id/specialisation"
+                        android:drawableRight="@drawable/ic_down"
+                        android:id="@+id/specialisation"
+                        android:hint="Select Specialization"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
+                        android:focusable="false"
                         android:padding="9dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:fontFamily="@font/roboto_regular"
                         android:layout_width="match_parent"
                         android:background="@drawable/editbg"
                         android:layout_height="wrap_content"></EditText>
+
+
 
                     <TextView
                         android:textColor="@color/txtcolor"
@@ -229,14 +242,18 @@ android:id="@+id/specialisation"
 
                     </TextView>
 
-                    <EditText
-                        android:inputType="text"
 
+                    <EditText
+                        android:drawableRight="@drawable/ic_down"
+                        android:id="@+id/mode_of_study"
+                        android:hint="Select Mode of Study"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
+                        android:focusable="false"
                         android:padding="9dp"
-                        android:id="@+id/mode_of_study"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:fontFamily="@font/roboto_regular"
                         android:layout_width="match_parent"
                         android:background="@drawable/editbg"
                         android:layout_height="wrap_content"></EditText>

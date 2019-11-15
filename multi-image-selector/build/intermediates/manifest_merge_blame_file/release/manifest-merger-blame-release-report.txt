@@ -8,7 +8,7 @@
 8    <uses-sdk
 9        android:minSdkVersion="19"
 9-->/home/eleganz2/StudioProjects/TAG/multi-image-selector/src/main/AndroidManifest.xml
-10        android:targetSdkVersion="28" />
+10        android:targetSdkVersion="29" />
 10-->/home/eleganz2/StudioProjects/TAG/multi-image-selector/src/main/AndroidManifest.xml
 11
 12    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />

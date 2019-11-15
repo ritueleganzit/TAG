@@ -13,6 +13,7 @@ import com.eleganzit.tag.adapter.EduBackgroundAdapter;
 import com.eleganzit.tag.model.Education;
 import com.eleganzit.tag.model.Preferancedata;
 import com.eleganzit.tag.model.Workdata;
+import com.eleganzit.tag.model.profileinfo.PreferenceInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.List;
 public class GetCurrentEducation extends AppCompatActivity {
     CardView add_edu_pref;
 RecyclerView rc_edu_pref_cr;
-    List<Preferancedata> educations=new ArrayList<>();
+    List<PreferenceInfo> educations=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

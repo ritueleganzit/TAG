@@ -55,6 +55,8 @@ android:id="@+id/delete"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:padding="9dp"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:inputType="text"
             android:layout_width="match_parent"
             android:background="@drawable/editbg"
@@ -81,6 +83,9 @@ android:id="@+id/delete"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:padding="9dp"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+
             android:inputType="text"
             android:layout_width="match_parent"
             android:background="@drawable/editbg"
@@ -104,6 +109,9 @@ android:id="@+id/delete"
 
         <EditText
             android:id="@+id/department"
+            android:fontFamily="@font/roboto_regular"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+
 
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -130,17 +138,38 @@ android:id="@+id/delete"
 
         </TextView>
 
-        <EditText
+        <RadioGroup
             android:id="@+id/current_job"
+            android:fontFamily="@font/roboto_regular"
 
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:padding="9dp"
+            android:orientation="horizontal"
             android:inputType="text"
             android:layout_width="match_parent"
-            android:background="@drawable/editbg"
-            android:layout_height="wrap_content"></EditText>
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/rb1"
+                android:text="Yes"
+                android:fontFamily="@font/roboto_regular"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </RadioButton>
+            <RadioButton
+                android:fontFamily="@font/roboto_regular"
+                android:id="@+id/rb2"
+                android:layout_weight="1"
+
+                android:text="No"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </RadioButton>
+        </RadioGroup>
 
 
 

@@ -55,6 +55,48 @@ public class EducationDetail implements Parcelable {
     @Expose
     private String specialization;
 
+    protected EducationDetail(Parcel in) {
+        if (in.readByte() == 0) {
+            detailsId = null;
+        } else {
+            detailsId = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            userId = null;
+        } else {
+            userId = in.readInt();
+        }
+        courseLevel = in.readString();
+        schoolName = in.readString();
+        completionYear = in.readString();
+        board = in.readString();
+        subject = in.readString();
+        marks = in.readString();
+        stream = in.readString();
+        type = in.readString();
+        if (in.readByte() == 0) {
+            educationCollegeId = null;
+        } else {
+            educationCollegeId = in.readInt();
+        }
+        collegeName = in.readString();
+        university = in.readString();
+        degree = in.readString();
+        specialization = in.readString();
+    }
+
+    public static final Creator<EducationDetail> CREATOR = new Creator<EducationDetail>() {
+        @Override
+        public EducationDetail createFromParcel(Parcel in) {
+            return new EducationDetail(in);
+        }
+
+        @Override
+        public EducationDetail[] newArray(int size) {
+            return new EducationDetail[size];
+        }
+    };
+
     public Integer getDetailsId() {
         return detailsId;
     }
@@ -183,6 +225,35 @@ public class EducationDetail implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        if (detailsId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(detailsId);
+        }
+        if (userId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(userId);
+        }
+        dest.writeString(courseLevel);
+        dest.writeString(schoolName);
+        dest.writeString(completionYear);
+        dest.writeString(board);
+        dest.writeString(subject);
+        dest.writeString(marks);
+        dest.writeString(stream);
+        dest.writeString(type);
+        if (educationCollegeId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(educationCollegeId);
+        }
+        dest.writeString(collegeName);
+        dest.writeString(university);
+        dest.writeString(degree);
+        dest.writeString(specialization);
     }
 }

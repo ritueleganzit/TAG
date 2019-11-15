@@ -19,6 +19,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -40,6 +41,8 @@ import com.infideap.drawerbehavior.AdvanceDrawerLayout;
 
 
 import android.view.Menu;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -68,6 +71,7 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        setfullwidth(navigationView);
         userLoggedInSession = new UserLoggedInSession(HomeActivity.this);
 
         userLoggedInSession.checkLogin();
@@ -150,6 +154,15 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
             super.onBackPressed();
         }
     }
+    private void setfullwidth(NavigationView mNavigationView){
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mNavigationView.getLayoutParams();
+        params.width = displayMetrics.widthPixels;
+        mNavigationView.setLayoutParams(params);
+
+    }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

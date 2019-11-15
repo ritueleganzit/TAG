@@ -11,6 +11,7 @@ import com.eleganzit.tag.R;
 import com.eleganzit.tag.adapter.CurrentEduAdapter;
 import com.eleganzit.tag.adapter.EduBackgroundAdapter;
 import com.eleganzit.tag.model.Education;
+import com.eleganzit.tag.model.profileinfo.EducationDetail;
 import com.eleganzit.tag.utils.UserLoggedInSession;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ CardView add_edu;
     UserLoggedInSession userLoggedInSession;
 
 RecyclerView rc_edu_get;
-List<Education> educations=new ArrayList<>();
+List<EducationDetail> educations=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

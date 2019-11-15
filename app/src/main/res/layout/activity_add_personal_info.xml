@@ -142,7 +142,7 @@
                         android:fontFamily="@font/roboto_regular"
                         android:textAppearance="?android:textAppearanceSmall"
                         android:layout_width="match_parent"
-                        android:text="Name"
+                        android:text="First Name"
                         android:layout_height="wrap_content">
 
 
@@ -154,6 +154,35 @@ android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:padding="9dp"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/editbg"
+                        android:layout_height="wrap_content"></EditText>
+
+
+                    <TextView
+                        android:textColor="@color/txtcolor"
+
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textAppearance="?android:textAppearanceSmall"
+                        android:layout_width="match_parent"
+                        android:text="Last Name"
+                        android:layout_height="wrap_content">
+
+
+                    </TextView>
+                    <EditText
+                        android:id="@+id/edlastname"
+                        android:inputType="text"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/roboto_regular"
                         android:padding="9dp"
                         android:layout_width="match_parent"
                         android:background="@drawable/editbg"
@@ -183,9 +212,11 @@ android:id="@+id/mobile"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
+
                         android:padding="9dp"
+                        android:fontFamily="@font/roboto_regular"
                         android:layout_width="match_parent"
-                        android:background="@drawable/editbg"
+                        android:background="@drawable/fixeditbg"
                         android:layout_height="wrap_content"></EditText>
 
                     <TextView
@@ -211,10 +242,12 @@ android:id="@+id/mobile"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
                         android:padding="9dp"
+
                         android:focusable="false"
+                        android:fontFamily="@font/roboto_regular"
                         android:inputType="textEmailAddress"
                         android:layout_width="match_parent"
-                        android:background="@drawable/editbg"
+                        android:background="@drawable/fixeditbg"
                         android:layout_height="wrap_content"></EditText>
 
                     <TextView
@@ -228,28 +261,27 @@ android:id="@+id/mobile"
                         android:textAppearance="?android:textAppearanceSmall"
 
                         android:layout_width="match_parent"
-                        android:text="Location"
+                        android:text="Nationality"
                         android:layout_height="wrap_content">
 
                     </TextView>
 
                     <EditText
 android:id="@+id/location"
+                        android:focusable="false"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:inputType="textPostalAddress"
                         android:layout_marginBottom="10dp"
                         android:padding="9dp"
+                        android:fontFamily="@font/roboto_regular"
                         android:layout_width="match_parent"
-                        android:background="@drawable/editbg"
+                        android:background="@drawable/fixeditbg"
                         android:layout_height="wrap_content"></EditText>
-
-
                     <TextView
                         android:textColor="@color/txtcolor"
                         android:layout_marginBottom="10dp"
-
 
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="10dp"
@@ -258,103 +290,24 @@ android:id="@+id/location"
                         android:textAppearance="?android:textAppearanceSmall"
 
                         android:layout_width="match_parent"
-                        android:text="Change Password"
+                        android:text="Date of Birth"
                         android:layout_height="wrap_content">
 
                     </TextView>
 
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        app:hintEnabled="false"
-                        android:layout_marginTop="5dp"
-
-                        android:layout_height="wrap_content"
-                        app:passwordToggleEnabled="true">
-
-                        <EditText
-                            android:id="@+id/old_password"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:background="@drawable/editbg"
-                            android:drawablePadding="8dp"
-                            android:gravity="center_vertical"
-                            android:hint="Old Password"
-                            android:textAppearance="?android:textAppearanceSmall"
-
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:fontFamily="@font/roboto_regular"
-                            android:inputType="textWebPassword"
-                            android:paddingLeft="5dp"
-                            android:singleLine="true"
-                            android:textColor="@color/txtcolor"
-                            android:textColorHint="@color/hintt"
-
-                            />
-                    </android.support.design.widget.TextInputLayout>
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:hintEnabled="false"
-                        android:layout_marginTop="10dp"
-
-                        app:passwordToggleEnabled="true">
-
-                        <EditText
-                            android:id="@+id/new_password"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:background="@drawable/editbg"
-                            android:drawablePadding="8dp"
-                            android:gravity="center_vertical"
-                            android:hint="New Password"
-
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:fontFamily="@font/roboto_regular"
-                            android:inputType="textWebPassword"
-                            android:paddingLeft="5dp"
-                            android:singleLine="true"
-                            android:textAppearance="?android:textAppearanceSmall"
-
-                            android:textColor="@color/txtcolor"
-                            android:textColorHint="@color/hintt"
-
-                            />
-                    </android.support.design.widget.TextInputLayout>
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:hintEnabled="false"
+                    <EditText
+                        android:id="@+id/eddob"
+                        android:focusable="false"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:inputType="textPostalAddress"
                         android:layout_marginBottom="10dp"
-                        android:layout_marginTop="10dp"
-
-                        app:passwordToggleEnabled="true">
-
-                        <EditText
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-android:id="@+id/cnf_password"
-                            android:background="@drawable/editbg"
-                            android:drawablePadding="8dp"
-                            android:gravity="center_vertical"
-                            android:hint="Confirm Password"
-                            android:textAppearance="?android:textAppearanceSmall"
-
-                            android:fontFamily="@font/roboto_regular"
-                            android:inputType="textWebPassword"
-                            android:paddingLeft="5dp"
-                            android:singleLine="true"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:textColor="@color/txtcolor"
-                            android:textColorHint="@color/hintt"
-
-                            />
-                    </android.support.design.widget.TextInputLayout>
+                        android:padding="9dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/editbg"
+                        android:layout_height="wrap_content"></EditText>
 
 
 
