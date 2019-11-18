@@ -20,6 +20,8 @@ import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.QuestionAnsResponse;
 import com.eleganzit.tag.model.QuestionData;
+import com.eleganzit.tag.model.askquestion.UserQuestionListResponse;
+import com.eleganzit.tag.model.askquestion.Userquestion;
 import com.eleganzit.tag.ui.activity.TopCollegesActivity;
 import com.eleganzit.tag.utils.UserLoggedInSession;
 
@@ -36,7 +38,7 @@ import retrofit2.Response;
  */
 public class SubActivityFragment extends Fragment {
 
-    ArrayList<QuestionData> arrayList;
+    ArrayList<Userquestion> arrayList;
 RecyclerView rc_supplied_college;
 FrameLayout nodataframe;
 LinearLayout lin_sub;
@@ -72,10 +74,10 @@ LinearLayout lin_sub;
         progressDialog.show();
         Log.d("asdad",""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_ID));
         RetrofitInterface myInterface = RetrofitAPI.getRetrofitN().create(RetrofitInterface.class);
-        Call<QuestionAnsResponse> call=myInterface.getquestion("ques_ans_list",""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_ID));
-        call.enqueue(new Callback<QuestionAnsResponse>() {
+        Call<UserQuestionListResponse> call=myInterface.getquestion(userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_ID));
+        call.enqueue(new Callback<UserQuestionListResponse>() {
             @Override
-            public void onResponse(Call<QuestionAnsResponse> call, Response<QuestionAnsResponse> response) {
+            public void onResponse(Call<UserQuestionListResponse> call, Response<UserQuestionListResponse> response) {
                 progressDialog.dismiss();
                 if (response.isSuccessful()) {
                     nodataframe.setVisibility(View.GONE);
@@ -84,11 +86,13 @@ LinearLayout lin_sub;
                     if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
 
 
-                        if (response.body().getData()!=null)
+                        if (response.body().getUserquestions()!=null)
                         {
+                            Log.d("asdad","sadad"+response.body().getUserquestions().size());
 
-                            numofquestion.setText(""+response.body().getData().size());
-                            arrayList.addAll(response.body().getData());
+
+                            numofquestion.setText(""+response.body().getUserquestions().size());
+                            arrayList.addAll(response.body().getUserquestions());
                             rc_supplied_college.setAdapter(new SubFragmentAdapter(arrayList,getActivity()));
 
                         }
@@ -103,7 +107,7 @@ LinearLayout lin_sub;
             }
 
             @Override
-            public void onFailure(Call<QuestionAnsResponse> call, Throwable t) {
+            public void onFailure(Call<UserQuestionListResponse> call, Throwable t) {
                 progressDialog.dismiss();
                 lin_sub.setVisibility(View.GONE);
                 nodataframe.setVisibility(View.VISIBLE);

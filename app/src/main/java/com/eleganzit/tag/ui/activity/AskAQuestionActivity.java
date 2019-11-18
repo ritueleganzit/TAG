@@ -4,21 +4,25 @@ import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.eleganzit.tag.DiscussionActivity;
-import com.eleganzit.tag.HomeActivity;
 import com.eleganzit.tag.R;
-import com.eleganzit.tag.SignUpActivity;
 import com.eleganzit.tag.adapter.DiscussionAdapter;
+import com.eleganzit.tag.adapter.SubFragmentAdapter;
 import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
-import com.eleganzit.tag.model.AskQuestionResponse;
-import com.eleganzit.tag.model.LoginResponse;
+import com.eleganzit.tag.model.askquestion.UserQuestionListResponse;
+import com.eleganzit.tag.model.askquestion.Userquestion;
 import com.eleganzit.tag.utils.UserLoggedInSession;
+import com.google.gson.JsonObject;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,6 +35,7 @@ public class AskAQuestionActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     UserLoggedInSession userLoggedInSession;
 RecyclerView rc_discussion;
+ArrayList<Userquestion> arrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +51,6 @@ RecyclerView rc_discussion;
         progressDialog.setCanceledOnTouchOutside(false);
 
         rc_discussion=findViewById(R.id.rc_discussion);
-        rc_discussion.setAdapter(new DiscussionAdapter(AskAQuestionActivity.this));
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,7 +74,7 @@ RecyclerView rc_discussion;
                 }
             }
         });
-
+getQues();
     }
     @Override
     public void onBackPressed() {
@@ -78,18 +82,72 @@ RecyclerView rc_discussion;
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         finish();
     }
+
+    private void getQues() {
+        arrayList=new ArrayList<>();
+        progressDialog.show();
+        Log.d("asdad",""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_ID));
+        RetrofitInterface myInterface = RetrofitAPI.getRetrofitN().create(RetrofitInterface.class);
+        Call<UserQuestionListResponse> call=myInterface.getquestion(userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_ID));
+        call.enqueue(new Callback<UserQuestionListResponse>() {
+            @Override
+            public void onResponse(Call<UserQuestionListResponse> call, Response<UserQuestionListResponse> response) {
+                progressDialog.dismiss();
+                if (response.isSuccessful()) {
+
+                    if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
+
+
+                        if (response.body().getUserquestions()!=null)
+                        {
+                            Log.d("asdad","sadad"+response.body().getUserquestions().size());
+
+
+                            arrayList.addAll(response.body().getUserquestions());
+
+                            rc_discussion.setAdapter(new DiscussionAdapter(arrayList,AskAQuestionActivity.this));
+
+                        }
+
+                    }
+                }
+                else
+                {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserQuestionListResponse> call, Throwable t) {
+                progressDialog.dismiss();
+
+                Toast.makeText(AskAQuestionActivity.this, "Server and Internet Error", Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+    }
     private void askquestion() {
         progressDialog.show();
         RetrofitInterface myInterface = RetrofitAPI.getRetrofit().create(RetrofitInterface.class);
-        Call<AskQuestionResponse> call=myInterface.askquestion("ask_question",""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_ID),""+question.getText().toString());
-call.enqueue(new Callback<AskQuestionResponse>() {
+        JsonObject jsonObject=new JsonObject();
+        String pattern = "EEE, dd MMM yyyy hh:mm:ss";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String date = simpleDateFormat.format(new Date());
+        System.out.println(date);
+        jsonObject.addProperty("user_id",""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_ID));
+        jsonObject.addProperty("question_text",""+question.getText().toString().trim());
+        jsonObject.addProperty("created_date",""+date);
+        Call<com.eleganzit.tag.model.askquestion.AskQuestionResponse> call=myInterface.askquestion(jsonObject);
+call.enqueue(new Callback<com.eleganzit.tag.model.askquestion.AskQuestionResponse>() {
     @Override
-    public void onResponse(Call<AskQuestionResponse> call, Response<AskQuestionResponse> response) {
+    public void onResponse(Call<com.eleganzit.tag.model.askquestion.AskQuestionResponse> call, Response<com.eleganzit.tag.model.askquestion.AskQuestionResponse> response) {
         progressDialog.dismiss();
         if (response.isSuccessful()) {
 
             if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
                 Toast.makeText(AskAQuestionActivity.this, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                finish();
             }
             else
             {
@@ -100,7 +158,7 @@ call.enqueue(new Callback<AskQuestionResponse>() {
             }
 
     @Override
-    public void onFailure(Call<AskQuestionResponse> call, Throwable t) {
+    public void onFailure(Call<com.eleganzit.tag.model.askquestion.AskQuestionResponse> call, Throwable t) {
         progressDialog.dismiss();
         Toast.makeText(AskAQuestionActivity.this, "Server and Internet Error", Toast.LENGTH_SHORT).show();
 

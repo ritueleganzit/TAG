@@ -47,6 +47,7 @@
                 <ImageView
                     android:id="@+id/ed_profile"
                     android:layout_weight="0.2"
+                    android:paddingLeft="5dp"
                     android:layout_gravity="end"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -147,6 +148,8 @@ android:id="@+id/dob"
                         android:id="@+id/ed_edu"
                         android:layout_weight="0.2"
                         android:layout_gravity="end"
+                        android:paddingLeft="5dp"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_edit"/>
@@ -216,6 +219,8 @@ android:id="@+id/dob"
                     <ImageView
                         android:layout_weight="0.2"
                         android:id="@+id/ed_work"
+                        android:paddingLeft="5dp"
+
 
                         android:layout_gravity="end"
                         android:layout_width="wrap_content"

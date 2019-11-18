@@ -23,7 +23,7 @@ RecyclerView rc_discussion;
         });
 
         rc_discussion=findViewById(R.id.rc_discussion);
-        rc_discussion.setAdapter(new DiscussionAdapter(DiscussionActivity.this));
+       // rc_discussion.setAdapter(new DiscussionAdapter(DiscussionActivity.this));
     }@Override
     public void onBackPressed() {
         super.onBackPressed();

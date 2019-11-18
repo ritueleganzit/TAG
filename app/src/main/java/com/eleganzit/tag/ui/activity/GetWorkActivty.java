@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eleganzit.tag.R;
@@ -52,8 +53,12 @@ public class GetWorkActivty extends AppCompatActivity {
     CardView add_work;
     RecyclerView rc_work_get;
     Button btnsave;
+    TextView submit;
+    boolean isValid;
+    WorkBackgroundAdapter workBackgroundAdapter;
     EditText employee_exp;
     List<ExperienceInfo> workdata=new ArrayList<>();
+    List<ExperienceInfo> accounts2=new ArrayList<>();
     String user_id,exp;
     ProgressDialog progressDialog;
     UserLoggedInSession userLoggedInSession;
@@ -62,6 +67,7 @@ public class GetWorkActivty extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_work_activty);
         employee_exp=findViewById(R.id.employee_exp);
+        submit=findViewById(R.id.submit);
         btnsave=findViewById(R.id.btnsave);
         rc_work_get=findViewById(R.id.rc_work_get);
         workdata=getIntent().getParcelableArrayListExtra("workdata");
@@ -88,6 +94,90 @@ public class GetWorkActivty extends AppCompatActivity {
             }
         });
 
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                JsonObject paramObject = new JsonObject();
+                paramObject.addProperty("user_id", user_id);
+                paramObject.addProperty("total_exp", employee_exp.getText().toString());
+                JsonArray jsonArray=new JsonArray();
+
+
+
+                for (int i=0;i<workBackgroundAdapter.getArrayList().size();i++)
+                {
+
+
+                    ExperienceInfo experienceInfo=workBackgroundAdapter.getArrayList().get(i);
+                    Log.d("sdaad",""+experienceInfo.getEmployeeName());
+                    if (experienceInfo.getEmployeeName().trim().equals("")) {
+
+
+                        Toast.makeText(GetWorkActivty.this, "Please fill all the details", Toast.LENGTH_SHORT).show();
+                        isValid=false;
+
+                        break;
+
+
+                    }
+
+                    else if (experienceInfo.getDesignation().trim().equals("")) {
+
+                        Toast.makeText(GetWorkActivty.this, "Please fill all the details", Toast.LENGTH_SHORT).show();
+                        isValid=false;
+
+
+                        break;
+
+
+                    }else if (experienceInfo.getDepartment().trim().equals("")) {
+
+                        Toast.makeText(GetWorkActivty.this, "Please fill all the details", Toast.LENGTH_SHORT).show();
+                        isValid=false;
+
+                        break;
+
+                    }else if (experienceInfo.getCurrentJobQue().equalsIgnoreCase("nodata")) {
+
+                        Toast.makeText(GetWorkActivty.this, "Please fill all the details", Toast.LENGTH_SHORT).show();
+                        isValid=false;
+
+
+                        break;
+
+                    }
+                    else {
+                        isValid=true;
+
+                        JsonObject paramObject2=new JsonObject();
+                        paramObject2.addProperty("experience_id",experienceInfo.getExperienceId());
+                        paramObject2.addProperty("employee_name",experienceInfo.getEmployeeName());
+                        paramObject2.addProperty("designation",experienceInfo.getDesignation());
+                        paramObject2.addProperty("department",experienceInfo.getDepartment());
+                        paramObject2.addProperty("current_job_que",experienceInfo.getCurrentJobQue());
+
+                        jsonArray.add(paramObject2);
+                    }
+
+
+                }
+
+                if (isValid)
+                {
+                    paramObject.add("work_details", jsonArray);
+
+
+
+
+                    Log.d("dataaaa","-"+paramObject.toString());
+
+                    updateWork2(paramObject);
+                }
+
+            }
+        });
         add_work=findViewById(R.id.add_work);
         add_work.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,11 +186,12 @@ public class GetWorkActivty extends AppCompatActivity {
                 finish();
             }
         });
-        rc_work_get.setAdapter(new WorkBackgroundAdapter(workdata,GetWorkActivty.this,user_id));
+        workBackgroundAdapter= new WorkBackgroundAdapter (workdata,GetWorkActivty.this,user_id);
+        rc_work_get.setAdapter(workBackgroundAdapter);
 
     }
 
-    public class WorkBackgroundAdapter extends RecyclerView.Adapter<WorkBackgroundAdapter.MyViewHolder>
+    public  class WorkBackgroundAdapter extends RecyclerView.Adapter<WorkBackgroundAdapter.MyViewHolder>
     {
         ProgressDialog progressDialog;
         String iscurrent="nodata";
@@ -130,6 +221,9 @@ public class GetWorkActivty extends AppCompatActivity {
 
             return myViewHolder;
         }
+        public  List<ExperienceInfo> getArrayList(){
+            return accounts;
+        }
 
         @Override
         public void onBindViewHolder(@NonNull final MyViewHolder holder, final int i) {
@@ -140,12 +234,66 @@ public class GetWorkActivty extends AppCompatActivity {
             holder.designation.setText(workdata.getDesignation());
             holder.department.setText(workdata.getDepartment());
 
+
+           holder.employee_name.addTextChangedListener(new TextWatcher() {
+               @Override
+               public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+               }
+
+               @Override
+               public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+               }
+
+               @Override
+               public void afterTextChanged(Editable s) {
+            workdata.setEmployeeName(s.toString());
+               }
+           });
+holder.designation.addTextChangedListener(new TextWatcher() {
+               @Override
+               public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+               }
+
+               @Override
+               public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+               }
+
+               @Override
+               public void afterTextChanged(Editable s) {
+            workdata.setDesignation(s.toString());
+               }
+           });holder.department.addTextChangedListener(new TextWatcher() {
+               @Override
+               public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+               }
+
+               @Override
+               public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+               }
+
+               @Override
+               public void afterTextChanged(Editable s) {
+            workdata.setDepartment(s.toString());
+               }
+           });
+
+
             if (workdata.getCurrentJobQue().equalsIgnoreCase("No"))
             {
 
                 holder.rb1.setChecked(false);
                 holder.rb2.setChecked(true);
                 iscurrent="no";
+
 
             }
             else
@@ -162,9 +310,11 @@ public class GetWorkActivty extends AppCompatActivity {
                     if (checkedId==R.id.rb1)
                     {
                         iscurrent="yes";
+                        workdata.setCurrentJobQue(iscurrent);
                     } if (checkedId==R.id.rb2)
                     {
                         iscurrent="no";
+                        workdata.setCurrentJobQue(iscurrent);
                     }
                 }
             });
@@ -298,6 +448,8 @@ public class GetWorkActivty extends AppCompatActivity {
 
 
         }
+
+
         private void deleteData(String work_id) {
             progressDialog.show();
             Retrofit retrofit = new Retrofit.Builder()
@@ -418,4 +570,54 @@ public class GetWorkActivty extends AppCompatActivity {
 
 
     }
+    private void updateWork2(JsonObject params) {
+
+
+
+
+
+        progressDialog.show();
+
+
+
+        Log.d("dataaaa","-"+params.toString());
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://eleganzit.online/testhost/users/")
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        RetrofitInterface myInterface = retrofit.create(RetrofitInterface.class);
+        Call<AddWorkExperience> call=myInterface.updateWorkExperience(params);
+        call.enqueue(new Callback<AddWorkExperience>() {
+            @Override
+            public void onResponse(Call<AddWorkExperience> call, Response<AddWorkExperience> response) {
+                progressDialog.dismiss();
+                if (response.isSuccessful())
+                {
+                    if (response.body().getStatus().toString().equalsIgnoreCase("1"))
+                    {
+                        Toast.makeText(GetWorkActivty.this, "Successfully Updated", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                    else
+                    {
+                        Toast.makeText(GetWorkActivty.this, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AddWorkExperience> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(GetWorkActivty.this, "Server and Internet Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+    }
+
 }

@@ -7,20 +7,26 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.eleganzit.tag.HelpFAQActivity;
 import com.eleganzit.tag.R;
+import com.eleganzit.tag.model.askquestion.Userquestion;
+
+import java.util.ArrayList;
 
 public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.MyViewHolder>
 {
 
     Context context;
     Activity activity;
-    public DiscussionAdapter(Context context) {
+    ArrayList<Userquestion> arrayList;
+    public DiscussionAdapter(ArrayList<Userquestion> arrayList,Context context) {
 
         this.context = context;
+        this.arrayList = arrayList;
         activity = (Activity) context;
     }
 
@@ -35,6 +41,11 @@ public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.My
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int i) {
+
+        Userquestion userquestion=arrayList.get(i);
+        holder.emailtv.setText(userquestion.getFirstName());
+        holder.hidetxt.setText(userquestion.getQuestionText());
+        holder.created_date.setText(userquestion.getCreatedDate());
         holder.rc_discussion_comment.setAdapter(new CommentAdapter(context));
 
         holder.viewcomment.setOnClickListener(new View.OnClickListener() {
@@ -46,16 +57,23 @@ public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.My
                 if (holder.rc_discussion_comment.getVisibility()==View.VISIBLE)
                 {
                     holder.viewcomment.setText("Hide Comments");
-                    holder.reply.setText("Add Reply");
 
                 }
                 else
-                {           holder.reply.setText("Reply");         holder.viewcomment.setText("View Comments");
+                {
+                holder.viewcomment.setText("View Comments");
 
 
                 }
 
-                if (holder.viewcomment.getText().toString().equalsIgnoreCase("Add Reply"))
+
+            }
+        }); holder.reply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.addcomment.setVisibility((holder.addcomment.getVisibility() == View.VISIBLE)
+                        ? View.GONE : View.VISIBLE);
+                /*if (holder.reply.getText().toString().equalsIgnoreCase("Add Answer"))
                 {
                     holder.addcomment.setVisibility(View.VISIBLE);
 
@@ -63,7 +81,8 @@ public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.My
                 else
                 {
                     holder.addcomment.setVisibility(View.GONE);
-                }
+                }*/
+
             }
         });
 
@@ -72,16 +91,21 @@ public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.My
 
     @Override
     public int getItemCount() {
-        return 2;
+        return arrayList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-TextView viewcomment,reply;
+TextView viewcomment,reply,emailtv,hidetxt,created_date;
+EditText answer_edit;
 RecyclerView rc_discussion_comment;
 LinearLayout addcomment;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            emailtv=itemView.findViewById(R.id.emailtv);
+            answer_edit=itemView.findViewById(R.id.answer_edit);
+            hidetxt=itemView.findViewById(R.id.hidetxt);
+            created_date=itemView.findViewById(R.id.created_date);
             viewcomment=itemView.findViewById(R.id.viewcomment);
             reply=itemView.findViewById(R.id.reply);
             rc_discussion_comment=itemView.findViewById(R.id.rc_discussion_comment);

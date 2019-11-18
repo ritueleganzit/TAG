@@ -55,6 +55,7 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         /><TextView
                     android:gravity="center"
+                    android:id="@+id/created_date"
                     android:layout_width="wrap_content"
                     android:textColor="@color/txtcolor"
                     android:layout_height="wrap_content"
@@ -166,7 +167,9 @@
                         android:fontFamily="@font/roboto_bold"
                         android:layout_height="wrap_content">
 
-                    </TextView> <TextView
+                    </TextView>
+
+                    <TextView
                     android:layout_weight="1"
                     android:layout_marginLeft="10dp"
                     android:padding="5dp"
@@ -176,7 +179,7 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:gravity="center_vertical|end"
                     android:layout_width="match_parent"
-                    android:text="Reply"
+                    android:text="Add Answer"
                     android:layout_height="wrap_content"></TextView>
 
                 </LinearLayout>
@@ -187,18 +190,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <EditText
-                        android:layout_marginLeft="10dp"
-                        android:padding="5dp"
-                        android:layout_weight="0.2"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:gravity="center_vertical"
-                        android:layout_width="match_parent"
-                        android:hint="Type your answer"
-                        android:fontFamily="@font/roboto_bold"
-                        android:layout_height="wrap_content">
 
-                    </EditText>
+
+                    <EditText
+                        android:id="@+id/answer_edit"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:fontFamily="@font/roboto_regular"
+                        android:inputType="text"
+                        android:hint="Type your answer"
+
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:padding="9dp"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/editbg"
+                        android:layout_height="wrap_content"></EditText>
+
 
                     <LinearLayout
                         android:gravity="end"
@@ -214,7 +222,6 @@
                             android:gravity="center_vertical|end"
                             android:layout_width="wrap_content"
                             android:text="Cancel"
-                            android:textSize="?attr/textAppearanceButton"
                             android:layout_height="wrap_content"></TextView>
                         <TextView
                             android:layout_marginLeft="10dp"

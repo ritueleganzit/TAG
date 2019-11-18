@@ -47,6 +47,8 @@
                     <ImageView
                         android:src="@drawable/ic_back_white"
                         android:id="@+id/back"
+                        android:padding="5dp"
+
                         android:layout_centerVertical="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
@@ -71,6 +73,8 @@
                         android:textColor="#ffffff"
                         android:text="Next"
                         android:gravity="end"
+                        android:padding="5dp"
+
                         android:layout_marginRight="20dp"
                         android:id="@+id/next"
                         android:layout_alignParentEnd="true"

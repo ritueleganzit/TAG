@@ -2,12 +2,10 @@ package com.eleganzit.tag.api;
 
 
 import com.eleganzit.tag.model.AddEducationDataResponse;
-import com.eleganzit.tag.model.AddEducationPreferance;
 import com.eleganzit.tag.model.AddEducationPreferanceResponse;
 import com.eleganzit.tag.model.AddPersonalInfoResponse;
 import com.eleganzit.tag.model.AddworkexpResponse;
 import com.eleganzit.tag.model.AppliedCollegeListResponse;
-import com.eleganzit.tag.model.AskQuestionResponse;
 import com.eleganzit.tag.model.CollegeHomeResponse;
 import com.eleganzit.tag.model.DeleteApiResponse;
 import com.eleganzit.tag.model.FetchedUserResponse;
@@ -17,7 +15,6 @@ import com.eleganzit.tag.model.GetFaqListResponse;
 import com.eleganzit.tag.model.GetProfileDataResponse;
 import com.eleganzit.tag.model.GetSpecializationResponse;
 import com.eleganzit.tag.model.LoginNodeResponse;
-import com.eleganzit.tag.model.LoginResponse;
 import com.eleganzit.tag.model.NationalityResponse;
 import com.eleganzit.tag.model.QuestionAnsResponse;
 import com.eleganzit.tag.model.RegisterOtpSent;
@@ -31,17 +28,16 @@ import com.eleganzit.tag.model.addeducation.EducationDeleteResponse;
 import com.eleganzit.tag.model.addeducation.EducationUpdateResponse;
 import com.eleganzit.tag.model.addprofileinfo.UpdateProfileResponse;
 import com.eleganzit.tag.model.addwork.AddWorkExperience;
-import com.eleganzit.tag.model.appliedcollege.ApplyCollegeMobileResponse;
+import com.eleganzit.tag.model.askquestion.UserQuestionListResponse;
+import com.eleganzit.tag.model.coursedetails.CourseDetailsResponse;
 import com.eleganzit.tag.model.dropdowndata.DropDownListResponse;
 import com.eleganzit.tag.model.homecourse.CourseResponse;
 import com.eleganzit.tag.model.homefacility.FacilitiesResponse;
 import com.eleganzit.tag.model.homegallery.GalleryResponse;
 import com.eleganzit.tag.model.profileinfo.ProfileInfoDataResponse;
+import com.eleganzit.tag.model.specialization.SpecialsationDetailsResponse;
+import com.eleganzit.tag.model.askquestion.AskQuestionResponse;
 import com.google.gson.JsonObject;
-
-import org.json.JSONObject;
-
-import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -112,12 +108,9 @@ public interface RetrofitInterface {
 
 
 
- @FormUrlEncoded()
-    @POST("/tags/temp-api.php")
+    @POST("/testhost/users/askQuestions")
     Call<AskQuestionResponse> askquestion(
-            @Field("action") String ask_question ,
-            @Field("user_id") String user_id,
-            @Field("question_text") String question_text
+            @Body JsonObject jsonObject
     );
 
  @FormUrlEncoded()
@@ -279,18 +272,22 @@ public interface RetrofitInterface {
     @GET("/testhost/users/specialization/{name}")
     Call<GetSpecializationResponse> getSpecialization(@Path(value = "name", encoded = true) String name);
 
+    @POST("testhost/users/specialization")
+    Call<SpecialsationDetailsResponse> getspecializations(
+
+            @Body JsonObject locationPost
+    );
+
+
 
     @GET("/testhost/users/appliedCollegeList/{id}")
     Call<AppliedCollegeListResponse> appliedCollegeList(@Path(value = "id", encoded = true) String id);
 
 
 
-    @FormUrlEncoded()
-    @POST("/tags/ques-ans-list-api.php")
-    Call<QuestionAnsResponse> getquestion(
-
-            @Field("action") String ques_ans_list,
-            @Field("user_id") String user_id
+    @GET("/testhost/users/quesList/{id}")
+    Call<UserQuestionListResponse> getquestion(
+            @Path(value = "id", encoded = true) String id
     );
 
     @Headers({
@@ -380,7 +377,8 @@ public interface RetrofitInterface {
 
 
 
-
+    @GET("/testhost/users/courceById/{id}")
+    Call<CourseDetailsResponse> courceById(@Path(value = "id", encoded = true) String id);
 
     @GET("/testhost/users/getProfileById/{id}")
     Call<ProfileInfoDataResponse> getProfileById(@Path(value = "id", encoded = true) String id);

@@ -1,5 +1,6 @@
 package com.eleganzit.tag;
 
+import android.app.ProgressDialog;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -7,24 +8,36 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.eleganzit.tag.adapter.viewPagerAdapter;
+import com.eleganzit.tag.api.RetrofitAPI;
+import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.CoursesData;
 import com.eleganzit.tag.model.GetSpecialization;
+import com.eleganzit.tag.model.coursedetails.CourseDetailsResponse;
+import com.eleganzit.tag.model.profileinfo.ProfileInfoDataResponse;
 import com.eleganzit.tag.ui.fragment.EligibilityCriteriaFragment;
 import com.eleganzit.tag.ui.fragment.OverviewFragment;
 import com.eleganzit.tag.ui.fragment.SpecializationFragment;
+import com.eleganzit.tag.utils.UserLoggedInSession;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SelectedCourseActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener  {
 
-
+    ProgressDialog progressDialog;
+    UserLoggedInSession userLoggedInSession;
     TabLayout tabLayout;
     ViewPager viewPager;
     TextView textTitle;
-    String course_name,course_overview,course_specialization,course_eligibility,special;
+    String course_name,course_overview,course_specialization,course_eligibility,special,overview,cirrculum,eligibility;
     int course_id;
-    GetSpecialization object;
-
+    String object;
+   public
+   static CoursesData coursesData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +54,12 @@ public class SelectedCourseActivity extends AppCompatActivity implements TabLayo
         viewPager = findViewById(R.id.viewpager);
         textTitle = findViewById(R.id.textTitle);
 
+        userLoggedInSession=new UserLoggedInSession(this);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Please Wait");
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
 
 
 
@@ -51,15 +70,19 @@ public class SelectedCourseActivity extends AppCompatActivity implements TabLayo
 
             if (special!=null && !(special.isEmpty()))
             {
-                object= (GetSpecialization) getIntent().getSerializableExtra ("object");
+                object= getIntent().getStringExtra ("object");
+                overview= getIntent().getStringExtra ("overview");
+                cirrculum= getIntent().getStringExtra ("cirrculum");
+                eligibility= getIntent().getStringExtra ("eligibility");
+                tabLayout.addTab(tabLayout.newTab().setText("Overview"));
                 tabLayout.addTab(tabLayout.newTab().setText("Overview"));
                 tabLayout.addTab(tabLayout.newTab().setText("Eligibility Criteria"));
 
                 tabLayout.addTab(tabLayout.newTab().setText("Course cirrculum"));
                 tabLayout.setOnTabSelectedListener(this);
-                Log.d("ngiua",""+object.getOverview());
+                Log.d("ngiua",""+object);
 
-                textTitle.setText(object.getCourceName()+"");
+                textTitle.setText(object+"");
                 setupViewPager2(viewPager);
                 tabLayout.setupWithViewPager(viewPager);
              }
@@ -67,41 +90,99 @@ public class SelectedCourseActivity extends AppCompatActivity implements TabLayo
             {
                 course_id=getIntent().getIntExtra("course_id",0);
                 course_name=getIntent().getStringExtra("course_name");
-                course_overview=getIntent().getStringExtra("course_overview");
-                course_specialization=getIntent().getStringExtra("course_specialization");
-                course_eligibility=getIntent().getStringExtra("course_eligibility");
+
 
                 textTitle.setText(course_name+"");
-                tabLayout.addTab(tabLayout.newTab().setText("Overview"));
-                tabLayout.addTab(tabLayout.newTab().setText("Specialization"));
-                tabLayout.addTab(tabLayout.newTab().setText("Eligibility Criteria"));
-                tabLayout.setOnTabSelectedListener(this);
-
-                setupViewPager(viewPager);
-                tabLayout.setupWithViewPager(viewPager);
+               getCourseDetails();
             }
         }
         //Adding the tabs using addTab() method
 
 
 
-
+      //  getCourseDetails();
 
 
 
     }
 
+    public void getCourseDetails()
+    {
+        progressDialog.show();
+        RetrofitInterface myInterface = RetrofitAPI.getRetrofitN().create(RetrofitInterface.class);
+        Call<CourseDetailsResponse> call=myInterface.courceById(""+course_id);
+        call.enqueue(new Callback<CourseDetailsResponse>() {
+            @Override
+            public void onResponse(Call<CourseDetailsResponse> call, Response<CourseDetailsResponse> response) {
+                progressDialog.dismiss();
+                if (response.isSuccessful())
+                    if (response.body().getData()!=null)
+                    {
+                        course_overview=""+response.body().getData().get(0).getOverview();
+                        course_specialization=response.body().getData().get(0).getSpecialization();
+                        course_eligibility=response.body().getData().get(0).getEligibilityCriteria();
+
+
+
+                        setupViewPager(viewPager);
+
+                    }
+            }
+
+            @Override
+            public void onFailure(Call<CourseDetailsResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(SelectedCourseActivity.this, "Server or Internet error", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
     private void setupViewPager(ViewPager viewPager) {
+        tabLayout.addTab(tabLayout.newTab().setText("Overview"));
+        tabLayout.addTab(tabLayout.newTab().setText("Specialization"));
+        tabLayout.addTab(tabLayout.newTab().setText("Eligibility Criteria"));
+
+        tabLayout.setupWithViewPager(viewPager);
         viewPagerAdapter adapter = new viewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new OverviewFragment(), "Overview");
 
-        adapter.addFragment(new SpecializationFragment(), "Specialization");
+        OverviewFragment overviewFragment=new OverviewFragment();
+        Bundle bundle=new Bundle();
+        bundle.putString("edttext",course_overview);
+        overviewFragment.setArguments(bundle);
+        if (course_overview!=null && !(course_overview.isEmpty()))
+        {
+            adapter.addFragment(overviewFragment, "Overview");
 
-        adapter.addFragment(new EligibilityCriteriaFragment(), "Eligibility Criteria");
+        }
+
+
+        SpecializationFragment specializationFragment=new SpecializationFragment();
+        Bundle bundle2=new Bundle();
+        bundle2.putString("edttext",course_specialization);
+        specializationFragment.setArguments(bundle2);
+
+        if (course_specialization!=null && !(course_specialization.isEmpty()))
+        {
+            adapter.addFragment(specializationFragment, "Specialization");
+
+        }
+
+        EligibilityCriteriaFragment eligibilityCriteriaFragment=new EligibilityCriteriaFragment();
+        Bundle bundle3=new Bundle();
+        bundle3.putString("edttext",course_eligibility);
+        eligibilityCriteriaFragment.setArguments(bundle3);
+
+        if (course_eligibility!=null && !(course_eligibility.isEmpty()))
+        {
+            adapter.addFragment(eligibilityCriteriaFragment, "Eligibility Criteria");
+
+        }
+
+        // adapter.addFragment(new EligibilityCriteriaFragment(), "Eligibility Criteria");
 
         viewPager.setAdapter(adapter);
 
-        CoursesData coursesData=new CoursesData(course_id,course_name,course_overview,course_specialization,course_eligibility);
 
 
     }
@@ -109,31 +190,40 @@ public class SelectedCourseActivity extends AppCompatActivity implements TabLayo
         viewPagerAdapter adapter = new viewPagerAdapter(getSupportFragmentManager());
         OverviewFragment overviewFragment=new OverviewFragment();
         Bundle bundle=new Bundle();
-        bundle.putString("edttext","edttext");
+        bundle.putString("edttext",overview);
         overviewFragment.setArguments(bundle);
 
 
+        if (overview!=null && !(overview.isEmpty()))
+        {
+            adapter.addFragment(overviewFragment, "Overview");
 
-        adapter.addFragment(overviewFragment, "Overview");
+        }
 
         SpecializationFragment specializationFragment=new SpecializationFragment();
         Bundle bundle1=new Bundle();
-        bundle1.putString("edttext","edttext");
+        bundle1.putString("edttext",eligibility);
         specializationFragment.setArguments(bundle1);
 
+        if (eligibility!=null && !(eligibility.isEmpty()))
+        {
+            adapter.addFragment(specializationFragment, "Eligibility Criteria");
+
+        }
 
 
-        adapter.addFragment(specializationFragment, "Eligibility Criteria");
 
 
         EligibilityCriteriaFragment eligibilityCriteriaFragment=new EligibilityCriteriaFragment();
         Bundle bundle2=new Bundle();
-        bundle2.putString("edttext","edttext");
+        bundle2.putString("edttext",cirrculum);
         eligibilityCriteriaFragment.setArguments(bundle2);
+        if (cirrculum!=null && !(cirrculum.isEmpty())) {
+            adapter.addFragment(eligibilityCriteriaFragment, "Course cirrculum");
+
+        }
 
 
-
-        adapter.addFragment(eligibilityCriteriaFragment, "Course cirrculum");
 
         viewPager.setAdapter(adapter);
 

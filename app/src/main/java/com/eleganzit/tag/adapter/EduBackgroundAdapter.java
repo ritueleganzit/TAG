@@ -160,7 +160,7 @@ holder.subject.setText(workdata.getSubject());
         }
 
 
-        holder.cource_level.setOnClickListener(new View.OnClickListener() {
+        /*holder.cource_level.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -183,6 +183,12 @@ holder.subject.setText(workdata.getSubject());
                                 AlertDialog dialog2 = builder.create();
                                 dialog2.show();
                             } else {
+
+                                tenth=false;
+                                Toast.makeText(context, ""+tenth, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, ""+twelth, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, ""+ug, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, ""+pg, Toast.LENGTH_SHORT).show();
                                 holder.cource_level.setText("" + level.get(which));
                                 if (holder.cource_level.getText().toString().equalsIgnoreCase("10")) {
                                     holder.lin_tenth.setVisibility(View.VISIBLE);
@@ -208,6 +214,11 @@ holder.subject.setText(workdata.getSubject());
                                 AlertDialog dialog2 = builder.create();
                                 dialog2.show();
                             } else {
+                                twelth=false;
+                                Toast.makeText(context, ""+tenth, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, ""+twelth, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, ""+ug, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, ""+pg, Toast.LENGTH_SHORT).show();
                                 holder.cource_level.setText("" + level.get(which));
                                 if (holder.cource_level.getText().toString().equalsIgnoreCase("12")) {
                                     holder.lin_tenth.setVisibility(View.GONE);
@@ -231,6 +242,11 @@ holder.subject.setText(workdata.getSubject());
                                 AlertDialog dialog2 = builder.create();
                                 dialog2.show();
                             } else {
+                                ug=false;
+                                Toast.makeText(context, ""+tenth, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, ""+twelth, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, ""+ug, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, ""+pg, Toast.LENGTH_SHORT).show();
                                 holder.cource_level.setText("" + level.get(which));
                                 if (holder.cource_level.getText().toString().equalsIgnoreCase("UG")) {
                                     holder.lin_tenth.setVisibility(View.GONE);
@@ -254,6 +270,11 @@ holder.subject.setText(workdata.getSubject());
                                 AlertDialog dialog2 = builder.create();
                                 dialog2.show();
                             } else {
+                                pg=false;
+                                Toast.makeText(context, ""+tenth, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, ""+twelth, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, ""+ug, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, ""+pg, Toast.LENGTH_SHORT).show();
                                 holder.cource_level.setText("" + level.get(which));
                                 if (holder.cource_level.getText().toString().equalsIgnoreCase("PG")) {
                                     holder.lin_tenth.setVisibility(View.GONE);
@@ -262,6 +283,178 @@ holder.subject.setText(workdata.getSubject());
                                     holder.lin_pg.setVisibility(View.VISIBLE);
                                 }
                             }
+                        }
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });*/
+
+        holder.cource_level.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, level);
+                builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("fffff","10"+tenth);
+                        Log.d("fffff","12"+twelth);
+                        Log.d("fffff","ug"+ug);
+                        Log.d("fffff","pg"+pg);
+
+                        if (level.get(which).equalsIgnoreCase("10"))
+                        {
+
+                            if (tenth)
+                            {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                builder.setMessage("The course level 10th already exists. Please update information in the form below");
+                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                                builder.setCancelable(false);
+                                AlertDialog dialog2 = builder.create();
+                                dialog2.show();
+                            }
+                            else {
+                                tenth=true;
+                                if (holder.cource_level.getText().toString().equalsIgnoreCase("12"))
+                                {
+                                    twelth=false;
+                                }
+                                else if (holder.cource_level.getText().toString().equalsIgnoreCase("UG"))
+                                {
+                                    ug=false;
+                                }
+                                else if (holder.cource_level.getText().toString().equalsIgnoreCase("PG"))
+                                {
+                                    pg=false;
+                                }
+                                holder.cource_level.setText("" + level.get(which));
+                                holder.lin_tenth.setVisibility(View.VISIBLE);
+                                holder.lin_twelth.setVisibility(View.GONE);
+                                holder.lin_ug.setVisibility(View.GONE);
+                                holder.lin_pg.setVisibility(View.GONE);
+                            }
+
+                        }
+                        else if (level.get(which).equalsIgnoreCase("12")) {
+                            if (twelth) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                builder.setMessage("The course level 12th already exists. Please update information in the form below");
+                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                                builder.setCancelable(false);
+                                AlertDialog dialog2 = builder.create();
+                                dialog2.show();
+                            } else{
+                                twelth=true;
+                                if (holder.cource_level.getText().toString().equalsIgnoreCase("10"))
+                                {
+                                tenth=false;
+                                }
+                                else if (holder.cource_level.getText().toString().equalsIgnoreCase("UG"))
+                                {
+                                    ug=false;
+                                }
+                                else if (holder.cource_level.getText().toString().equalsIgnoreCase("PG"))
+                                {
+                                    pg=false;
+                                }
+
+                                holder.cource_level.setText("" + level.get(which));
+                                holder.lin_tenth.setVisibility(View.GONE);
+                                holder.lin_twelth.setVisibility(View.VISIBLE);
+                                holder.lin_ug.setVisibility(View.GONE);
+                                holder.lin_pg.setVisibility(View.GONE);
+                            }
+                        } else if (level.get(which).equalsIgnoreCase("UG"))
+                        {
+                            if (ug)
+                            {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                builder.setMessage("The course level UG already exists. Please update information in the form below");
+                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                                builder.setCancelable(false);
+                                AlertDialog dialog2 = builder.create();
+                                dialog2.show();
+                            }
+                            else
+                            {
+                                ug=true;
+                                if (holder.cource_level.getText().toString().equalsIgnoreCase("10"))
+                                {
+                                    tenth=false;
+                                }
+                                else if (holder.cource_level.getText().toString().equalsIgnoreCase("12"))
+                                {
+                                    twelth=false;
+                                }
+                                else if (holder.cource_level.getText().toString().equalsIgnoreCase("PG"))
+                                {
+                                    pg=false;
+                                }
+                                holder.cource_level.setText("" + level.get(which));
+                                holder.lin_tenth.setVisibility(View.GONE);
+                                holder.lin_twelth.setVisibility(View.GONE);
+                                holder.lin_ug.setVisibility(View.VISIBLE);
+                                holder.lin_pg.setVisibility(View.GONE);
+                            }
+
+                        } else if (level.get(which).equalsIgnoreCase("PG"))
+                        {
+
+                            if (pg)
+                            {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                builder.setMessage("The course level PG already exists. Please update information in the form below");
+                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                                builder.setCancelable(false);
+                                AlertDialog dialog2 = builder.create();
+                                dialog2.show();
+                            }
+                            else
+                            {
+                                pg=true;
+                                if (holder.cource_level.getText().toString().equalsIgnoreCase("10"))
+                                {
+                                    tenth=false;
+                                }
+                                else if (holder.cource_level.getText().toString().equalsIgnoreCase("12"))
+                                {
+                                    twelth=false;
+                                }
+                                else if (holder.cource_level.getText().toString().equalsIgnoreCase("UG"))
+                                {
+                                    ug=false;
+                                }
+                                holder.cource_level.setText("" + level.get(which));
+                                holder.lin_tenth.setVisibility(View.GONE);
+                                holder.lin_twelth.setVisibility(View.GONE);
+                                holder.lin_ug.setVisibility(View.GONE);
+                                holder.lin_pg.setVisibility(View.VISIBLE);
+                            }
+
                         }
                     }
                 });

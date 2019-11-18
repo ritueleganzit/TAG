@@ -2,8 +2,10 @@ package com.eleganzit.tag.ui.fragment;
 
 
 import android.app.ProgressDialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,14 +59,17 @@ public class OverviewFragment extends Fragment {
 
         if (strtext!=null && !(strtext.isEmpty()))
         {
-            txt_content.setText(SelectSpecializationActivity.getSpecialization.getOverview());
+            //txt_content.setText(SelectSpecializationActivity.getSpecialization.getOverview());
 
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                txt_content.setText(Html.fromHtml(strtext, Html.FROM_HTML_MODE_LEGACY));
+            } else {
+                txt_content.setText(Html.fromHtml(strtext));
+            }
 
 
         }
-        else {
-            txt_content.setText(SelectCourseActivity.coursesData.getCourse_overview());
-        }
+
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Please Wait");
         progressDialog.setCancelable(false);

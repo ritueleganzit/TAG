@@ -178,6 +178,7 @@ android:id="@+id/delete"
 
             android:id="@+id/btnsave"
             android:paddingLeft="10dp"
+            android:visibility="gone"
             android:paddingRight="10dp"
             android:gravity="center"
             android:layout_gravity="center"

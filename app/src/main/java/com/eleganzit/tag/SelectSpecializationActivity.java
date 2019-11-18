@@ -29,7 +29,11 @@ import com.eleganzit.tag.model.CoursesData;
 import com.eleganzit.tag.model.GetCoursesResponse;
 import com.eleganzit.tag.model.GetSpecialization;
 import com.eleganzit.tag.model.GetSpecializationResponse;
+import com.eleganzit.tag.model.dropdowndata.DropDownListResponse;
+import com.eleganzit.tag.model.specialization.SpecialsationDetailsResponse;
+import com.eleganzit.tag.ui.activity.CollegeSelectSpecializationActivity;
 import com.eleganzit.tag.utils.UserLoggedInSession;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,6 +52,8 @@ public class SelectSpecializationActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     UserLoggedInSession userLoggedInSession;
     List<String> getSpecializations;
+
+    String overview,eligibility,cirrculum;
     RecyclerView courserc;
     TextView txt_c1,txt_c2,txt_c3,txt_c4,txt_c5,txt_c6;
     public static  GetSpecialization                 getSpecialization=new GetSpecialization();
@@ -126,7 +132,10 @@ else
                 {
                     startActivity(new Intent(SelectSpecializationActivity.this,SelectedCourseActivity.class)
                             .putExtra("special","special")
-                            .putExtra("object",getSpecialization)
+                            .putExtra("overview",overview)
+                            .putExtra("cirrculum",cirrculum)
+                            .putExtra("eligibility",eligibility)
+                            .putExtra("object",e_sp.getText().toString())
 
 
                     );
@@ -142,13 +151,14 @@ else
     }
 
     public void getCourses(){
+
         getSpecializations=new ArrayList<>();
         progressDialog.show();
         RetrofitInterface myInterface = RetrofitAPI.getRetrofitN().create(RetrofitInterface.class);
-        Call<GetCoursesResponse> call=myInterface.getCourses();
-        call.enqueue(new Callback<GetCoursesResponse>() {
+        Call<DropDownListResponse> call=myInterface.dropDownList();
+        call.enqueue(new Callback<DropDownListResponse>() {
             @Override
-            public void onResponse(Call<GetCoursesResponse> call, Response<GetCoursesResponse> response) {
+            public void onResponse(Call<DropDownListResponse> call, Response<DropDownListResponse> response) {
                 progressDialog.dismiss();
 
 
@@ -157,31 +167,20 @@ else
                     if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
 
 
-                        for(int i=0;i<response.body().getData().size();i++){
+                        for(int i=0;i<response.body().getData().getCourseList().size();i++){
 
-                            ed_course.setText(response.body().getData().get(0).getCourceName());
+                            ed_course.setText(response.body().getData().getCourseList().get(0).getCourseName());
 
-                            getSpecializations.add(response.body().getData().get(i).getCourceName());
-                            Log.d("zfsdfsf",""+response.body().getData().get(i).getCourceName());
+                            getSpecializations.add(response.body().getData().getCourseList().get(i).getCourseName());
+                            Log.d("zfsdfsf",""+response.body().getData().getCourseList().get(i).getCourseName());
 
 
                         }
                         setGetSpecializations(getSpecializations.get(0));
-                        courserc.setAdapter(new CourseAdapter(getSpecializations,SelectSpecializationActivity.this));
+                        courserc.setAdapter(new CourseAdapter(getSpecializations, SelectSpecializationActivity.this));
 
-                        /*if(response.body().getData().get(0)!=null)
-                            txt_c1.setText(response.body().getData().get(0).getCourceName());
-                        if(response.body().getData().get(1)!=null)
-                            txt_c2.setText(response.body().getData().get(1).getCourceName());
-                        if(response.body().getData().get(2)!=null)
-                            txt_c3.setText(response.body().getData().get(2).getCourceName());
-                        if(response.body().getData().get(3)!=null)
-                            txt_c4.setText(response.body().getData().get(3).getCourceName());
-                        if(response.body().getData().get(4)!=null)
-                            txt_c5.setText(response.body().getData().get(4).getCourceName());
-                        if(response.body().getData().get(5)!=null)
-                            txt_c6.setText(response.body().getData().get(5).getCourceName());*/
-                      
+
+
                     }
                     else
                     {
@@ -198,13 +197,12 @@ else
             }
 
             @Override
-            public void onFailure(Call<GetCoursesResponse> call, Throwable t) {
+            public void onFailure(Call<DropDownListResponse> call, Throwable t) {
                 progressDialog.dismiss();
 
                 Toast.makeText(SelectSpecializationActivity.this, "Server and Internet Error", Toast.LENGTH_SHORT).show();
             }
         });
-
 
     }
 
@@ -239,10 +237,7 @@ else
                 dialogInterface.dismiss();
 
                 e_sp.setText(getSpecializationsCourse.get(i));
-                getSpecialization.setCourceName(getSpecializationResponseList.get(i).getCourceName());
-                getSpecialization.setCirrculum(getSpecializationResponseList.get(i).getCirrculum());
-                getSpecialization.setEligibility(getSpecializationResponseList.get(i).getEligibility());
-                getSpecialization.setOverview(getSpecializationResponseList.get(i).getOverview());
+
                // setGetSpecializations(getSpecializationsCourse.get(i));
 
             }
@@ -256,26 +251,31 @@ else
         getSpecializationResponseList=new ArrayList<>();
         progressDialog.show();
         RetrofitInterface myInterface = RetrofitAPI.getRetrofitN().create(RetrofitInterface.class);
-        Call<GetSpecializationResponse> call=myInterface.getSpecialization(coursename);
-        call.enqueue(new Callback<GetSpecializationResponse>() {
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("cource_name",""+coursename);
+        Call<SpecialsationDetailsResponse> call=myInterface.getspecializations(jsonObject);
+        call.enqueue(new Callback<SpecialsationDetailsResponse>() {
             @Override
-            public void onResponse(Call<GetSpecializationResponse> call, Response<GetSpecializationResponse> response) {
+            public void onResponse(Call<SpecialsationDetailsResponse> call, Response<SpecialsationDetailsResponse> response) {
                 progressDialog.dismiss();
 
 
                 if (response.isSuccessful()) {
 
                     if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
-                        getSpecializationResponseList.addAll(response.body().getData());
+                       // getSpecializationResponseList.addAll(response.body().getData().get());
 
                         for(int i=0;i<response.body().getData().size();i++){
 
 
                             e_sp.setText(""+response.body().getData().get(0).getSpecializationName());
-                            getSpecialization.setCourceName(response.body().getData().get(0).getCourceName());
+                            overview=response.body().getData().get(i).getOverview();
+                            cirrculum=response.body().getData().get(i).getCirrculum();
+                            eligibility=response.body().getData().get(i).getEligibility();
+                            /*getSpecialization.setCourceName(response.body().getData().get(0).getCourceName());
                             getSpecialization.setCirrculum(response.body().getData().get(0).getCirrculum());
                             getSpecialization.setEligibility(response.body().getData().get(0).getEligibility());
-                            getSpecialization.setOverview(response.body().getData().get(0).getOverview());
+                            getSpecialization.setOverview(response.body().getData().get(0).getOverview());*/
                             getSpecializationsCourse.add(response.body().getData().get(i).getSpecializationName());
                         }
 
@@ -303,7 +303,7 @@ else
             }
 
             @Override
-            public void onFailure(Call<GetSpecializationResponse> call, Throwable t) {
+            public void onFailure(Call<SpecialsationDetailsResponse> call, Throwable t) {
                 progressDialog.dismiss();
                 e_sp.setText("");
 

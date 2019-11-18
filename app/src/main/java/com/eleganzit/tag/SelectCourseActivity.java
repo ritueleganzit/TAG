@@ -91,15 +91,14 @@ RecyclerView courserc;
 
                 if(!ed_course.getText().toString().isEmpty()){
 
-                    coursesData=new CoursesData(course_id,course_name,course_overview,course_specialization,course_eligibility);
+                  //  coursesData=new CoursesData(course_id,course_name,course_overview,course_specialization,course_eligibility);
                     startActivity(new Intent(SelectCourseActivity.this,SelectedCourseActivity.class)
                             .putExtra("course_id",course_id)
                             .putExtra("course_name",course_name+"")
-                            .putExtra("course_overview",course_overview+"")
-                            .putExtra("course_specialization",course_specialization+"")
-                            .putExtra("course_eligibility",course_eligibility+"")
+
                     );
                     overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+
                 }
                 else
                 {
@@ -196,6 +195,8 @@ if (response.body().getData()!=null)
                 dialogInterface.dismiss();
 
                 ed_course.setText(coursename.get(i));
+                course_id=coursesList.get(i).getId();
+                course_name=coursesList.get(i).getTitle();
                 /*getCoursesData.setCourceName(getCoursesResponseList.get(i).getCourceName());
                 getCoursesData.setCourceDescription(getCoursesResponseList.get(i).getCourceDescription());
                 getCoursesData.setEligibility(getCoursesResponseList.get(i).getEligibility());
@@ -250,6 +251,8 @@ if (response.body().getData()!=null)
                 @Override
                 public void onClick(View v) {
                     ed_course.setText(""+coursesData.getTitle());
+                    course_id=coursesData.getId();
+                    course_name=coursesData.getTitle();
 
                    /* getCoursesData.setCourceName(getCoursesResponseList.get(i).getCourceName());
                     getCoursesData.setCourceDescription(getCoursesResponseList.get(i).getCourceDescription());

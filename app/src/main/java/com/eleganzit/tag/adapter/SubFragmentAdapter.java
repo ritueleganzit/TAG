@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.eleganzit.tag.R;
 import com.eleganzit.tag.model.QuestionData;
+import com.eleganzit.tag.model.askquestion.Userquestion;
 import com.eleganzit.tag.ui.activity.CollegeDetailActivity;
 import com.eleganzit.tag.utils.TimeAgo;
 
@@ -29,11 +30,11 @@ import static android.content.Context.WINDOW_SERVICE;
 
 public class SubFragmentAdapter extends RecyclerView.Adapter<SubFragmentAdapter.MyViewHolder>
 {
-    ArrayList<QuestionData> arrayList;
+    ArrayList<Userquestion> arrayList;
 
     Context context;
     Activity activity;
-    public SubFragmentAdapter(ArrayList<QuestionData> arrayList,Context context) {
+    public SubFragmentAdapter(ArrayList<Userquestion> arrayList, Context context) {
 
         this.context = context;
         this.arrayList = arrayList;
@@ -51,11 +52,11 @@ public class SubFragmentAdapter extends RecyclerView.Adapter<SubFragmentAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int i) {
-QuestionData questionData=arrayList.get(i);
+        Userquestion questionData=arrayList.get(i);
 
 if (questionData.getCreatedDate()!=null && !(questionData.getCreatedDate().isEmpty()))
 {
-    DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    DateFormat formatter = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss");
     try {
         Date date = (Date)formatter.parse(questionData.getCreatedDate());
         String timeAgo = TimeAgo.getTimeAgo(date.getTime());

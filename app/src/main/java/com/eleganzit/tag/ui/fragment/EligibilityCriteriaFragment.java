@@ -1,8 +1,10 @@
 package com.eleganzit.tag.ui.fragment;
 
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,15 +41,17 @@ public class EligibilityCriteriaFragment extends Fragment {
 
         }
 
+
+        Log.d("asda",""+strtext);
         if (strtext!=null && !(strtext.isEmpty()))
         {
-            txt_content.setText(SelectSpecializationActivity.getSpecialization.getCirrculum());
 
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                txt_content.setText(Html.fromHtml(strtext, Html.FROM_HTML_MODE_LEGACY));
+            } else {
+                txt_content.setText(Html.fromHtml(strtext));
+            }
 
-
-        }
-        else {
-            txt_content.setText(SelectCourseActivity.coursesData.getCourse_eligibility());
         }
 
         return v;
