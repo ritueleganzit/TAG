@@ -28,8 +28,10 @@ import com.eleganzit.tag.model.addeducation.EducationDeleteResponse;
 import com.eleganzit.tag.model.addeducation.EducationUpdateResponse;
 import com.eleganzit.tag.model.addprofileinfo.UpdateProfileResponse;
 import com.eleganzit.tag.model.addwork.AddWorkExperience;
+import com.eleganzit.tag.model.askquestion.QuestionAnswerListResponse;
 import com.eleganzit.tag.model.askquestion.UserQuestionListResponse;
 import com.eleganzit.tag.model.coursedetails.CourseDetailsResponse;
+import com.eleganzit.tag.model.discussion.DiscussionListResponse;
 import com.eleganzit.tag.model.dropdowndata.DropDownListResponse;
 import com.eleganzit.tag.model.homecourse.CourseResponse;
 import com.eleganzit.tag.model.homefacility.FacilitiesResponse;
@@ -110,6 +112,11 @@ public interface RetrofitInterface {
 
     @POST("/testhost/users/askQuestions")
     Call<AskQuestionResponse> askquestion(
+            @Body JsonObject jsonObject
+    );
+
+    @POST("/testhost/users/addAnswer")
+    Call<AskQuestionResponse> addAnswer(
             @Body JsonObject jsonObject
     );
 
@@ -257,6 +264,9 @@ public interface RetrofitInterface {
     @GET("/testhost/users/courceById/{id}")
     Call<GetCoursesResponse> getCoursesbyId(@Path(value = "id", encoded = true) int id);
 
+@GET("/testhost/users/discussionList/{id}")
+    Call<DiscussionListResponse> discussionList(@Path(value = "id", encoded = true) int id);
+
     @FormUrlEncoded
     @POST("/tags/college.php")
     Call<CollegeHomeResponse> getCollegeById(
@@ -383,6 +393,11 @@ public interface RetrofitInterface {
     @GET("/testhost/users/getProfileById/{id}")
     Call<ProfileInfoDataResponse> getProfileById(@Path(value = "id", encoded = true) String id);
 
+
+    @GET("/testhost/users/quesAnsList/{id}")
+    Call<QuestionAnswerListResponse> questionListByUser(
+            @Path(value = "id", encoded = true) String id
+    );
 
 
 }

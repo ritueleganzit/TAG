@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginLeft="60dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/comment_profile_image"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/female"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relLayout1"
+        android:layout_toRightOf="@+id/comment_profile_image"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/grey_bg">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="60dp"
+            android:layout_marginBottom="10dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/answer_tv"
+                android:layout_marginLeft="6dp"
+                android:textColor="@color/txtcolor"
+                android:fontFamily="@font/roboto_regular"
+
+                />
+
+
+            <TextView
+                android:id="@+id/comment_time_posted"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:layout_marginLeft="6dp"
+
+                android:text="6d"
+                android:layout_below="@+id/answer_tv"
+                android:textColor="#cecece" />
+
+
+
+        </RelativeLayout>
+
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

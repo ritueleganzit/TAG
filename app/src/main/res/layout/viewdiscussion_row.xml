@@ -19,128 +19,85 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:paddingBottom="5dp"
-                android:layout_marginBottom="5dp"
+                android:id="@+id/lin_main"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#ffffff"
+                android:orientation="vertical">
 
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
-                <LinearLayout
-
-                    android:paddingTop="10dp"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.3"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:id="@+id/profile_pic"
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="60dp"
-                        android:layout_gravity="center"
-                        android:scaleType="centerInside"
-                        app:srcCompat="@drawable/female"
-
-                        tools:ignore="UnusedAttribute"/>
-                    <TextView
-                        android:gravity="center"
-                        android:layout_width="wrap_content"
-                        android:textColor="@color/txtcolor"
-                        android:layout_height="wrap_content"
-
-                        android:id="@+id/emailtv"
-                        android:text="Chetan Kumar"
-                        android:fontFamily="@font/roboto_medium"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        /><TextView
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:textColor="@color/txtcolor"
+                <RelativeLayout
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:orientation="horizontal">
 
-                    android:text="21st June"
-                    android:fontFamily="@font/roboto_regular"
-                    android:textAppearance="?android:textAppearanceSmall"
-                    />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="0.7"
-                    android:paddingTop="10dp"
-                    android:layout_gravity="bottom"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_marginLeft="10dp"
-                        android:id="@+id/hidetxt"
-                        android:padding="5dp"
-                        android:textColor="@color/txtcolor"
-                        android:gravity="center_vertical"
-                        android:layout_width="match_parent"
-                        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-                        android:layout_height="wrap_content"></TextView>
+                    <ImageView
+                        android:id="@+id/profilePic"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/female"
+                        android:scaleType="fitCenter" />
 
                     <LinearLayout
-                        android:layout_gravity="bottom"
-                        android:gravity="bottom|right"
-                        android:layout_width="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_height="match_parent">
-                        <LinearLayout
-                            android:layout_marginTop="2dp"
-                            android:layout_marginBottom="2dp"
+                        android:id="@+id/profile_click"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/profilePic"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="10dp" >
 
-                            android:layout_marginRight="10dp"
-                            android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/first_name"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Username"
+
+                            android:textColor="#000"
+                            android:textSize="15dp" />
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            >
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="bottom"
-                                android:src="@drawable/ic_thumbs_up">
-
-                            </ImageView>
+                            android:layout_gravity="center"
+                            android:paddingRight="5dp" >
                             <TextView
+                                android:id="@+id/created_date"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="2"
-                                android:padding="5dp"
-                                android:layout_gravity="bottom">
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="Apr 30 at 10:10 PM"
+                                android:textSize="12dp" />
 
-                            </TextView>
+
+
                         </LinearLayout>
-                        <LinearLayout
-                            android:layout_marginTop="2dp"
-                            android:layout_marginBottom="2dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            >
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="bottom"
-                                android:src="@drawable/ic_thumbs_down"></ImageView>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="2"
-                                android:padding="5dp"
-
-                                android:layout_gravity="bottom">
-
-                            </TextView>
-                        </LinearLayout>
-
                     </LinearLayout>
-                </LinearLayout>
+
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/question_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="#000"
+                    android:gravity="left"
+                    android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"/>
             </LinearLayout>
 
 

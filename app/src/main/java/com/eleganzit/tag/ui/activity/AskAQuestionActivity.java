@@ -15,6 +15,8 @@ import com.eleganzit.tag.adapter.DiscussionAdapter;
 import com.eleganzit.tag.adapter.SubFragmentAdapter;
 import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
+import com.eleganzit.tag.model.askquestion.Datum;
+import com.eleganzit.tag.model.askquestion.QuestionAnswerListResponse;
 import com.eleganzit.tag.model.askquestion.UserQuestionListResponse;
 import com.eleganzit.tag.model.askquestion.Userquestion;
 import com.eleganzit.tag.utils.UserLoggedInSession;
@@ -35,7 +37,7 @@ public class AskAQuestionActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     UserLoggedInSession userLoggedInSession;
 RecyclerView rc_discussion;
-ArrayList<Userquestion> arrayList;
+ArrayList<Datum> arrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,22 +90,22 @@ getQues();
         progressDialog.show();
         Log.d("asdad",""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_ID));
         RetrofitInterface myInterface = RetrofitAPI.getRetrofitN().create(RetrofitInterface.class);
-        Call<UserQuestionListResponse> call=myInterface.getquestion(userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_ID));
-        call.enqueue(new Callback<UserQuestionListResponse>() {
+        Call<QuestionAnswerListResponse> call=myInterface.questionListByUser(userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_ID));
+        call.enqueue(new Callback<QuestionAnswerListResponse>() {
             @Override
-            public void onResponse(Call<UserQuestionListResponse> call, Response<UserQuestionListResponse> response) {
+            public void onResponse(Call<QuestionAnswerListResponse> call, Response<QuestionAnswerListResponse> response) {
                 progressDialog.dismiss();
                 if (response.isSuccessful()) {
 
                     if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
 
 
-                        if (response.body().getUserquestions()!=null)
+                        if (response.body().getData()!=null)
                         {
-                            Log.d("asdad","sadad"+response.body().getUserquestions().size());
+                            Log.d("asdad","sadad"+response.body().getData().size());
 
 
-                            arrayList.addAll(response.body().getUserquestions());
+                            arrayList.addAll(response.body().getData());
 
                             rc_discussion.setAdapter(new DiscussionAdapter(arrayList,AskAQuestionActivity.this));
 
@@ -118,7 +120,7 @@ getQues();
             }
 
             @Override
-            public void onFailure(Call<UserQuestionListResponse> call, Throwable t) {
+            public void onFailure(Call<QuestionAnswerListResponse> call, Throwable t) {
                 progressDialog.dismiss();
 
                 Toast.makeText(AskAQuestionActivity.this, "Server and Internet Error", Toast.LENGTH_SHORT).show();

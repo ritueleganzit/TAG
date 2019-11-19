@@ -23,7 +23,6 @@ import com.eleganzit.tag.model.askquestion.AskQuestionResponse;
 import com.google.gson.JsonObject;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,17 +30,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHolder>
+public class DisCommentAdapter extends RecyclerView.Adapter<DisCommentAdapter.MyViewHolder>
 {
 
     Context context;
     Activity activity;
-    List<AnsList> ansLists;
+    List<com.eleganzit.tag.model.discussion.AnsList> ansLists;
+    List<com.eleganzit.tag.model.discussion.ReplyList> reply;
     ProgressDialog progressDialog;
 
-    public CommentAdapter(List<AnsList> ansLists, Context context) {
+    public DisCommentAdapter(List<com.eleganzit.tag.model.discussion.ReplyList> reply,List<com.eleganzit.tag.model.discussion.AnsList> ansLists, Context context) {
 
         this.ansLists = ansLists;
+        this.reply = reply;
         this.context = context;
         activity = (Activity) context;
         progressDialog = new ProgressDialog(context);
@@ -61,11 +62,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int i) {
-        final AnsList ans=ansLists.get(i);
+        final com.eleganzit.tag.model.discussion.AnsList ans=ansLists.get(i);
         holder.answer_tv.setText(Html.fromHtml("<font color=#000000> <b>" + ans.getFirstName() + " </b> </font> &nbsp;" +""+ans.getAnsText()));
 
-        holder.rc__replies.setAdapter(new ReplyAdapter(ans.getReplyList(),context));
-        holder.viewcomment.setText("Replies ("+ans.getReplyList().size()+")");
+          holder.rc__replies.setAdapter(new DisReplyAdapter(reply,context));
+       holder.viewcomment.setText("Replies ("+reply.size()+")");
 
         holder.replytv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,7 +153,7 @@ RecyclerView rc__replies;
         Call<AskQuestionResponse> call=myInterface.addAnswer(jsonObject);
         call.enqueue(new Callback<AskQuestionResponse>() {
             @Override
-            public void onResponse(Call<com.eleganzit.tag.model.askquestion.AskQuestionResponse> call, Response<AskQuestionResponse> response) {
+            public void onResponse(Call<AskQuestionResponse> call, Response<AskQuestionResponse> response) {
                 progressDialog.dismiss();
                 if (response.isSuccessful()) {
 
@@ -169,7 +170,7 @@ RecyclerView rc__replies;
             }
 
             @Override
-            public void onFailure(Call<com.eleganzit.tag.model.askquestion.AskQuestionResponse> call, Throwable t) {
+            public void onFailure(Call<AskQuestionResponse> call, Throwable t) {
                 progressDialog.dismiss();
                 Toast.makeText(context, "Server and Internet Error", Toast.LENGTH_SHORT).show();
 
