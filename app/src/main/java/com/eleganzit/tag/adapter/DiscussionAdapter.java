@@ -3,13 +3,16 @@ package com.eleganzit.tag.adapter;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +24,7 @@ import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.askquestion.AskQuestionResponse;
 import com.eleganzit.tag.model.askquestion.Datum;
 import com.eleganzit.tag.model.askquestion.Userquestion;
+import com.eleganzit.tag.model.unanswered.UnansweredQuestionsResponse;
 import com.eleganzit.tag.ui.activity.AskAQuestionActivity;
 import com.eleganzit.tag.utils.UserLoggedInSession;
 import com.google.gson.JsonObject;
@@ -36,11 +40,12 @@ import retrofit2.Response;
 public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.MyViewHolder>
 {
     String id;
+    boolean clicked,click;
     ProgressDialog progressDialog;
     Context context;
     Activity activity;
     ArrayList<Datum> arrayList;
-    public DiscussionAdapter(ArrayList<Datum> arrayList, Context context) {
+    public DiscussionAdapter(String id,ArrayList<Datum> arrayList, Context context) {
 
         this.context = context;
         this.arrayList = arrayList;
@@ -70,6 +75,8 @@ public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.My
         holder.created_date.setText(userquestion.getCreatedDate());
         holder.rc_discussion_comment.setAdapter(new CommentAdapter(userquestion.getAnsList(),context));
         holder.viewcomment.setText("View Comments ("+userquestion.getAnsList().size()+")");
+
+
         holder.viewcomment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,6 +133,53 @@ holder.cancel_tv.setOnClickListener(new View.OnClickListener() {
             }
         });
 
+        /*holder.dislikelin.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onClick(View v) {
+                if(click) {
+
+                    holder.ic_dislike.setImageDrawable(context.getDrawable(R.drawable.ic_dislike));
+
+                    click=false;
+                    likeDislikeQuestion(id,""+userquestion.getQuestionId(),"is_dislike","0");
+                }
+                else {
+
+
+                    holder.ic_dislike.setImageDrawable(context.getDrawable(R.drawable.ic_dislike_user));
+                    holder.likeimg.setImageDrawable(context.getDrawable(R.drawable.ic_like));
+
+                    click=true;
+                    likeDislikeQuestion(id,""+userquestion.getQuestionId(),"is_dislike","1");
+
+                }
+
+
+            }
+        });  holder.likelin.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onClick(View v) {
+                if(clicked) {
+
+                    holder.likeimg.setImageDrawable(context.getDrawable(R.drawable.ic_like));
+                    clicked=false;
+                    likeDislikeQuestion(id,""+userquestion.getQuestionId(),"is_like","0");
+
+                }
+                else {
+                    holder.ic_dislike.setImageDrawable(context.getDrawable(R.drawable.ic_dislike));
+
+                    holder.likeimg.setImageDrawable(context.getDrawable(R.drawable.ic_like_user));
+
+                    clicked=true;
+                    likeDislikeQuestion(id,""+userquestion.getQuestionId(),"is_like","1");
+                }
+
+            }
+        });*/
+
     }
 
     @Override
@@ -134,13 +188,17 @@ holder.cancel_tv.setOnClickListener(new View.OnClickListener() {
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-
+ImageView likeimg,ic_dislike;
 TextView viewcomment,reply,emailtv,hidetxt,created_date,post,cancel_tv;
 EditText answer_edit;
 RecyclerView rc_discussion_comment;
-LinearLayout addcomment;
+LinearLayout addcomment,likelin,dislikelin;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            ic_dislike=itemView.findViewById(R.id.ic_dislike);
+            dislikelin=itemView.findViewById(R.id.dislikelin);
+            likelin=itemView.findViewById(R.id.likelin);
+            likeimg=itemView.findViewById(R.id.likeimg);
             cancel_tv=itemView.findViewById(R.id.cancel_tv);
             post=itemView.findViewById(R.id.post);
             emailtv=itemView.findViewById(R.id.emailtv);
@@ -199,4 +257,54 @@ LinearLayout addcomment;
             }
         });
     }
+
+      public void likeDislikeQuestion(String userid,String question_id,String liketype,String likestatus)
+    {
+        progressDialog.show();
+        RetrofitInterface myInterface = RetrofitAPI.getRetrofit().create(RetrofitInterface.class);
+        JsonObject jsonObject=new JsonObject();
+
+        jsonObject.addProperty("user_id",""+userid);
+        jsonObject.addProperty("question_id",""+question_id);
+        if (liketype.equalsIgnoreCase("is_like"))
+        {
+            jsonObject.addProperty("is_like",likestatus);
+        }
+        else
+        {
+            jsonObject.addProperty("is_dislike",likestatus);
+
+        }
+
+
+        Log.d("sdfsff","---"+jsonObject);
+        Call<UnansweredQuestionsResponse> call=myInterface.likeDislikeQuestion(jsonObject);
+        call.enqueue(new Callback<UnansweredQuestionsResponse>() {
+            @Override
+            public void onResponse(Call<UnansweredQuestionsResponse> call, Response<UnansweredQuestionsResponse> response) {
+                progressDialog.dismiss();
+                if (response.isSuccessful()) {
+
+                    if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
+                        Toast.makeText(context, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        activity.finish();
+                    }
+                    else
+                    {
+                        Toast.makeText(context, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UnansweredQuestionsResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(context, "Server and Internet Error", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+
 }

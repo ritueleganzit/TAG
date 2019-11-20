@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,11 +17,12 @@ import android.widget.Toast;
 import com.eleganzit.tag.R;
 import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
-import com.eleganzit.tag.model.askquestion.AnsList;
 import com.eleganzit.tag.model.askquestion.AskQuestionResponse;
+import com.eleganzit.tag.model.unanswered.Datum;
 import com.google.gson.JsonObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,19 +30,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DisCommentAdapter extends RecyclerView.Adapter<DisCommentAdapter.MyViewHolder>
+public class UnansweredAdapter extends RecyclerView.Adapter<UnansweredAdapter.MyViewHolder>
 {
-
+    String id;
+    ProgressDialog progressDialog;
     Context context;
     Activity activity;
-    List<com.eleganzit.tag.model.discussion.AnsList> ansLists;
-    ProgressDialog progressDialog;
+    List<Datum> arrayList;
+    public UnansweredAdapter(String id,List<Datum> arrayList, Context context) {
 
-    public DisCommentAdapter(List<com.eleganzit.tag.model.discussion.AnsList> ansLists, Context context) {
-
-        this.ansLists = ansLists;
         this.context = context;
+        this.arrayList = arrayList;
         activity = (Activity) context;
+        this.id = id;
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Please Wait");
         progressDialog.setCancelable(false);
@@ -52,7 +52,7 @@ public class DisCommentAdapter extends RecyclerView.Adapter<DisCommentAdapter.My
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.comment_row,viewGroup,false);
+        View v=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.discussion_row,viewGroup,false);
         MyViewHolder myViewHolder=new MyViewHolder(v);
 
         return myViewHolder;
@@ -60,13 +60,13 @@ public class DisCommentAdapter extends RecyclerView.Adapter<DisCommentAdapter.My
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int i) {
-        final com.eleganzit.tag.model.discussion.AnsList ans=ansLists.get(i);
-        holder.answer_tv.setText(Html.fromHtml("<font color=#000000> <b>" + ans.getFirstName() + " </b> </font> &nbsp;" +""+ans.getAnsText()));
-        Log.d("fghfhf",""+ans.getAnsText());
-          holder.rc__replies.setAdapter(new DisReplyAdapter(ans.getReplyList(),context));
-       holder.viewcomment.setText("Replies ("+ans.getReplyList().size()+")");
 
-        holder.replytv.setOnClickListener(new View.OnClickListener() {
+        final Datum userquestion=arrayList.get(i);
+        holder.emailtv.setText("Name");
+        holder.hidetxt.setText(userquestion.getQuestionText());
+        holder.created_date.setText(userquestion.getCreatedDate());
+        holder.viewcomment.setVisibility(View.GONE);
+        holder.reply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 holder.addcomment.setVisibility((holder.addcomment.getVisibility() == View.VISIBLE)
@@ -83,51 +83,50 @@ public class DisCommentAdapter extends RecyclerView.Adapter<DisCommentAdapter.My
 
             }
         });
+holder.dislikelin.setVisibility(View.GONE);
+holder.likelin.setVisibility(View.GONE);
         holder.post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addAnswer(""+ans.getSubmitedBy(),""+ans.getQuestionId(),""+ans.getAnsId(),holder.answer_edit.getText().toString(),ans.getAnsText());
+                addAnswer(""+id,""+userquestion.getQuestionId(),"0",holder.answer_edit.getText().toString(),userquestion.getQuestionText());
             }
         });
-        holder.cancel_tv.setOnClickListener(new View.OnClickListener() {
+holder.cancel_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 holder.addcomment.setVisibility(View.GONE);
 
             }
         });
-holder.viewcomment.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
 
-        holder.rc__replies.setVisibility((holder.rc__replies.getVisibility() == View.VISIBLE)
-                ? View.GONE : View.VISIBLE);
-    }
-});
     }
 
     @Override
     public int getItemCount() {
-        return ansLists.size();
+        return arrayList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-TextView answer_tv,viewcomment,replytv,post,cancel_tv;;
-RecyclerView rc__replies;
-        EditText answer_edit;
-
-        LinearLayout addcomment;
+TextView viewcomment,reply,emailtv,hidetxt,created_date,post,cancel_tv;
+EditText answer_edit;
+RecyclerView rc_discussion_comment;
+LinearLayout addcomment,likelin,dislikelin;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            answer_edit=itemView.findViewById(R.id.answer_edit);
-            replytv=itemView.findViewById(R.id.replytv);
-            answer_tv=itemView.findViewById(R.id.answer_tv);
-            rc__replies=itemView.findViewById(R.id.rc__replies);
-            viewcomment=itemView.findViewById(R.id.viewcomment);
-            addcomment=itemView.findViewById(R.id.addcomment);
             cancel_tv=itemView.findViewById(R.id.cancel_tv);
             post=itemView.findViewById(R.id.post);
+            dislikelin=itemView.findViewById(R.id.dislikelin);
+            likelin=itemView.findViewById(R.id.likelin);
+            emailtv=itemView.findViewById(R.id.emailtv);
+            answer_edit=itemView.findViewById(R.id.answer_edit);
+            hidetxt=itemView.findViewById(R.id.hidetxt);
+            created_date=itemView.findViewById(R.id.created_date);
+            viewcomment=itemView.findViewById(R.id.viewcomment);
+            reply=itemView.findViewById(R.id.reply);
+            rc_discussion_comment=itemView.findViewById(R.id.rc_discussion_comment);
+            addcomment=itemView.findViewById(R.id.addcomment);
+
 
         }
     }

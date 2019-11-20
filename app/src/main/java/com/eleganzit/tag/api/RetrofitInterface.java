@@ -39,6 +39,7 @@ import com.eleganzit.tag.model.homegallery.GalleryResponse;
 import com.eleganzit.tag.model.profileinfo.ProfileInfoDataResponse;
 import com.eleganzit.tag.model.specialization.SpecialsationDetailsResponse;
 import com.eleganzit.tag.model.askquestion.AskQuestionResponse;
+import com.eleganzit.tag.model.unanswered.UnansweredQuestionsResponse;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
@@ -290,6 +291,7 @@ public interface RetrofitInterface {
 
 
 
+
     @GET("/testhost/users/appliedCollegeList/{id}")
     Call<AppliedCollegeListResponse> appliedCollegeList(@Path(value = "id", encoded = true) String id);
 
@@ -398,6 +400,20 @@ public interface RetrofitInterface {
     Call<QuestionAnswerListResponse> questionListByUser(
             @Path(value = "id", encoded = true) String id
     );
+    @POST("testhost/users/discussionByQuesId")
+    Call<DiscussionListResponse> discussionByQuesId(
+
+            @Body JsonObject locationPost
+    );
+    @GET("/testhost/users/unAnsQuesList")
+    Call<UnansweredQuestionsResponse> unAnsQuesList();
+
+
+
+@POST("/testhost/users/likeDislikeQuestion")
+    Call<UnansweredQuestionsResponse> likeDislikeQuestion(
+        @Body JsonObject locationPost
+);
 
 
 }

@@ -129,12 +129,12 @@ holder.specialname.setText(""+e_sp);
         }
         else
         {
-            holder.collegeaddress.setText(""+holder.collegeaddress.getText().toString());
+            holder.collegeaddress.setText(""+holder.collegeaddress.getText().toString()+",");
         }
 
         if (collegeResult.getCollegeCountry()!=null  && !(collegeResult.getCollegeCountry().isEmpty()))
         {
-            holder.collegeaddress.append(", "+collegeResult.getCollegeCountry()+"");
+            holder.collegeaddress.append(" "+collegeResult.getCollegeCountry()+"");
         } if (collegeResult.getCollegeType()!=null  && !(collegeResult.getCollegeType().isEmpty()))
         {
             holder.college_type.setText(""+collegeResult.getCollegeType()+"");
@@ -154,16 +154,22 @@ holder.specialname.setText(""+e_sp);
             holder.placement.setText(""+collegeResult.getPlacement()+"");
         }
 
-
-        if (collegeResult.getIsUniversity()==1)
+        if (collegeResult.getIsUniversity()!=null)
         {
-           if (collegeResult.getUniversityName()!=null  && !(collegeResult.getUniversityName().isEmpty()))
-         holder.isUniversity.setText(""+collegeResult.getUniversityName());
-        }
-        else {
-            holder.isUniversity.setText("Deemed university");
-        }
+            if (collegeResult.getIsUniversity()==1)
+            {
+                if (collegeResult.getUniversityName()!=null  && !(collegeResult.getUniversityName().isEmpty()))
+                    holder.isUniversity.setText(""+collegeResult.getUniversityName());
+            }
+            else {
+                holder.isUniversity.setText("Deemed university");
+            }
 
+        }
+/*
+
+
+*/
 
 
         if (collegeResult.getUniversityName()!=null && !(collegeResult.getUniversityName().isEmpty()))
@@ -191,7 +197,7 @@ holder.specialname.setText(""+e_sp);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-LinearLayout rel;
+RelativeLayout rel;
 TextView apply;
 CardView clgcard;
 TextView collegename,collegeaddress,college_type,years,approved_by,accreditation,isUniversity,placement,privatetv,rank,specialname;

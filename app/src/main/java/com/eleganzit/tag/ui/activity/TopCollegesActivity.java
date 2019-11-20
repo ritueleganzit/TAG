@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,7 +34,7 @@ public class TopCollegesActivity extends AppCompatActivity {
     RecyclerView rc_top_colleges;
     TextView college_count;
     ImageView sort;
-    String e_sp;
+    String e_sp,e_course;
     ProgressDialog progressDialog;
     UserLoggedInSession userLoggedInSession;
     ArrayList<CollegeResult> collegeResultArrayList;
@@ -47,6 +48,7 @@ public class TopCollegesActivity extends AppCompatActivity {
         college_count=findViewById(R.id.college_count);
         userLoggedInSession=new UserLoggedInSession(this);
         e_sp=getIntent().getStringExtra("e_sp");
+        e_course=getIntent().getStringExtra("e_course");
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please Wait");
         progressDialog.setCancelable(false);
@@ -77,8 +79,10 @@ public class TopCollegesActivity extends AppCompatActivity {
         collegeResultArrayList=new ArrayList<>();
         progressDialog.show();
         JsonObject paramObject = new JsonObject();
-        paramObject.addProperty("course_name", "BE");
-        paramObject.addProperty("specialization_name", "CSE");
+        paramObject.addProperty("course_name", e_course);
+        paramObject.addProperty("specialization_name", ""+e_sp);
+
+        Log.d("sadfsdf","sd"+paramObject);
 
         RetrofitInterface myInterface = RetrofitAPI.getRetrofitN().create(RetrofitInterface.class);
         final Call<TopCollegeResponse> collegeResponseCall=myInterface.getCollegeList(paramObject);

@@ -36,7 +36,7 @@ public class Datum implements Parcelable {
     @SerializedName("like_count")
     @Expose
     private Integer likeCount;
-    @SerializedName("dislike_list")
+    @SerializedName("dislike_count")
     @Expose
     private Integer dislikeList;
     @SerializedName("user_status")
