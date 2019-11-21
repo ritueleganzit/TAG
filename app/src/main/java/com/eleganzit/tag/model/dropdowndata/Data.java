@@ -12,6 +12,28 @@ public class Data {
     public List<StreamList> getStreamList() {
         return streamList;
     }
+    @SerializedName("class_list")
+    @Expose
+    private List<ClassList> classList = null;
+    @SerializedName("stream_list_2")
+    @Expose
+    private List<StreamList2> streamList2 = null;
+
+    public List<ClassList> getClassList() {
+        return classList;
+    }
+
+    public void setClassList(List<ClassList> classList) {
+        this.classList = classList;
+    }
+
+    public List<StreamList2> getStreamList2() {
+        return streamList2;
+    }
+
+    public void setStreamList2(List<StreamList2> streamList2) {
+        this.streamList2 = streamList2;
+    }
 
     public void setStreamList(List<StreamList> streamList) {
         this.streamList = streamList;

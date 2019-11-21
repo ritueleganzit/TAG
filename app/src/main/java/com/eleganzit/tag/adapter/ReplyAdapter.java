@@ -9,8 +9,11 @@ import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.eleganzit.tag.R;
 import com.eleganzit.tag.model.askquestion.AnsList;
 import com.eleganzit.tag.model.askquestion.ReplyList;
@@ -49,6 +52,7 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.MyViewHolder
         holder.answer_tv.setText(Html.fromHtml("<font color=#000000> <b>" + ans.getFirstName() + " </b> </font> &nbsp;" +""+ans.getAnsText()));
 
         String pattern = "EEE, dd MMM yyyy hh:mm:ss";
+        Glide.with(context).load(ans.getPhoto()).apply(new RequestOptions().circleCrop()).into(holder.comment_profile_image);
 
         SimpleDateFormat sdf = new SimpleDateFormat(pattern);
         sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
@@ -85,11 +89,12 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.MyViewHolder
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-
+ImageView comment_profile_image;
 TextView answer_tv,comment_time_posted;
 RecyclerView rc__replies;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            comment_profile_image=itemView.findViewById(R.id.comment_profile_image);
             answer_tv=itemView.findViewById(R.id.answer_tv);
             comment_time_posted=itemView.findViewById(R.id.comment_time_posted);
             rc__replies=itemView.findViewById(R.id.rc__replies);

@@ -211,7 +211,7 @@ public class LoginActivity extends AppCompatActivity {
                         userLoggedInSession.createLoginSession(response.body().getData().get(0).getUserEmail()
                                 ,""+response.body().getData().get(0).getUserId()
                                 ,response.body().getData().get(0).getFirstName()+" "+response.body().getData().get(0).getLastName()
-                                ,""
+                                ,""+response.body().getData().get(0).getProfile()
                                 ,response.body().getData().get(0).getMobile());
 
                     }

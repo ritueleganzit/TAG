@@ -151,6 +151,7 @@ android:lines="3"
               android:id="@+id/rc_discussion"
               android:layout_marginTop="10dp"
               android:layout_margin="5dp"
+              app:reverseLayout="true"
               app:layoutManager="android.support.v7.widget.LinearLayoutManager"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">

@@ -53,6 +53,7 @@ ArrayList<Datum> arrayList;
         progressDialog.setCanceledOnTouchOutside(false);
 
         rc_discussion=findViewById(R.id.rc_discussion);
+
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,7 +108,7 @@ getQues();
 
                             arrayList.addAll(response.body().getData());
 
-                            rc_discussion.setAdapter(new DiscussionAdapter(userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_ID),arrayList,AskAQuestionActivity.this));
+                            rc_discussion.setAdapter(new DiscussionAdapter(userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_NAME),userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_PHOTO),userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_ID),arrayList,AskAQuestionActivity.this));
 
                         }
 

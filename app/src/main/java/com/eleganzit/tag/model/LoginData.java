@@ -5,7 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class LoginData {
 
-
+    @SerializedName("profile")
+    @Expose
+    private String profile;
     @SerializedName("user_id")
     @Expose
     private Integer userId;
@@ -40,6 +42,13 @@ public class LoginData {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+ public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
 
     public String getLastName() {

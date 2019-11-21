@@ -95,7 +95,7 @@ public class DiscussionFragment extends Fragment {
 
             @Override
             public void onFailure(Call<DiscussionListResponse> call, Throwable t) {
-
+progressDialog.dismiss();
             }
         });
 

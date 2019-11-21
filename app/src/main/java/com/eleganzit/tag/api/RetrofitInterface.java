@@ -14,6 +14,7 @@ import com.eleganzit.tag.model.GetCoursesResponse;
 import com.eleganzit.tag.model.GetFaqListResponse;
 import com.eleganzit.tag.model.GetProfileDataResponse;
 import com.eleganzit.tag.model.GetSpecializationResponse;
+import com.eleganzit.tag.model.ImageUploadedResponse;
 import com.eleganzit.tag.model.LoginNodeResponse;
 import com.eleganzit.tag.model.NationalityResponse;
 import com.eleganzit.tag.model.QuestionAnsResponse;
@@ -37,11 +38,14 @@ import com.eleganzit.tag.model.homecourse.CourseResponse;
 import com.eleganzit.tag.model.homefacility.FacilitiesResponse;
 import com.eleganzit.tag.model.homegallery.GalleryResponse;
 import com.eleganzit.tag.model.profileinfo.ProfileInfoDataResponse;
+import com.eleganzit.tag.model.schoolstream.StreamResponse;
 import com.eleganzit.tag.model.specialization.SpecialsationDetailsResponse;
 import com.eleganzit.tag.model.askquestion.AskQuestionResponse;
 import com.eleganzit.tag.model.unanswered.UnansweredQuestionsResponse;
 import com.google.gson.JsonObject;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -49,7 +53,9 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 /**
@@ -414,6 +420,23 @@ public interface RetrofitInterface {
     Call<UnansweredQuestionsResponse> likeDislikeQuestion(
         @Body JsonObject locationPost
 );
+@POST("/testhost//users/updatePhoto")
+    Call<UnansweredQuestionsResponse> updatePhoto
+        (
+        @Body JsonObject locationPost
+);@POST("/testhost//users/stream")
+    Call<StreamResponse> stream
+        (
+        @Body JsonObject stream
+);
+
+    @Multipart
+    @POST("/been2/api/test")
+    Call<ImageUploadedResponse> updateProfile(
+
+
+            @Part MultipartBody.Part photo
+    );
 
 
 }

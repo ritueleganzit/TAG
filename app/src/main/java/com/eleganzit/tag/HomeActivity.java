@@ -26,6 +26,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.eleganzit.tag.ui.activity.AskAQuestionActivity;
 import com.eleganzit.tag.ui.activity.CollegeSelectSpecializationActivity;
 import com.eleganzit.tag.ui.activity.MyProfileActivity;
@@ -50,6 +52,7 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
     DrawerLayout drawer;
     UserLoggedInSession userLoggedInSession;
     TextView text,emailtv,mobiletv;
+    ImageView profile_pic;
     ActionBarDrawerToggle mDrawerToggle;
     ImageView notification_ic;
     @SuppressLint("RestrictedApi")
@@ -91,6 +94,7 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
         navigationView.setNavigationItemSelectedListener(this);
         View header = navigationView.getHeaderView(0);
          text = (TextView) header.findViewById(R.id.name);
+        profile_pic =  header.findViewById(R.id.profile_pic);
          mobiletv = (TextView) header.findViewById(R.id.mobiletv);
          emailtv = (TextView) header.findViewById(R.id.emailtv);
         notification_ic.setOnClickListener(new View.OnClickListener() {
@@ -139,6 +143,14 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
         {
             mobiletv.setText(""+userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_PHONE));
         }
+
+
+        Glide.with(getApplicationContext())
+                .load("" + userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_PHOTO)).
+
+                apply(RequestOptions.circleCropTransform().placeholder(R.drawable.user_shape))
+
+                .into(profile_pic);
       //  Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_back, getTheme());
        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
        // getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(false);

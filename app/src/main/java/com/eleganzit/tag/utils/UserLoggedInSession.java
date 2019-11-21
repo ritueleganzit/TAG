@@ -99,6 +99,22 @@ public class UserLoggedInSession {
 
 
 
+    }    public void updateData(String photo){
+        // Storing login value as TRUE
+
+        // Storing name in pref   ,
+        editor.putString(USER_PHOTO, photo);
+
+
+
+
+        // commit changes
+        editor.commit();
+
+
+
+
+
     }
 
     public void createSignUpSession(String email,String user_id,String user_name,String photo,String phone){

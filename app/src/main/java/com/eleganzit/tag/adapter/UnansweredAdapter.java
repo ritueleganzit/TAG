@@ -19,6 +19,8 @@ import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.askquestion.AskQuestionResponse;
 import com.eleganzit.tag.model.unanswered.Datum;
+import com.eleganzit.tag.model.unanswered.UnansweredQuestionsResponse;
+import com.eleganzit.tag.utils.UserLoggedInSession;
 import com.google.gson.JsonObject;
 
 import java.text.SimpleDateFormat;
@@ -88,7 +90,15 @@ holder.likelin.setVisibility(View.GONE);
         holder.post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addAnswer(""+id,""+userquestion.getQuestionId(),"0",holder.answer_edit.getText().toString(),userquestion.getQuestionText());
+                if (holder.answer_edit.getText().toString().equalsIgnoreCase(""))
+                {
+                    Toast.makeText(context, "Please fill the data", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    addAnswer(""+id,""+userquestion.getQuestionId(),"0",holder.answer_edit.getText().toString(),userquestion.getQuestionText());
+                }
+
             }
         });
 holder.cancel_tv.setOnClickListener(new View.OnClickListener() {
@@ -156,7 +166,7 @@ LinearLayout addcomment,likelin,dislikelin;
 
                     if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
                         Toast.makeText(context, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                        activity.finish();
+viewQuestions();
                     }
                     else
                     {
@@ -173,5 +183,41 @@ LinearLayout addcomment,likelin,dislikelin;
 
             }
         });
+    }
+
+
+    private void viewQuestions() {
+        arrayList=new ArrayList<>();
+        progressDialog.show();
+        RetrofitInterface myInterface = RetrofitAPI.getRetrofitN().create(RetrofitInterface.class);
+        Call<UnansweredQuestionsResponse> call=myInterface.unAnsQuesList();
+        call.enqueue(new Callback<UnansweredQuestionsResponse>() {
+            @Override
+            public void onResponse(Call<UnansweredQuestionsResponse> call, Response<UnansweredQuestionsResponse> response) {
+                progressDialog.dismiss();
+
+
+                if (response.isSuccessful()) {
+
+                    if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
+                        if (response.body().getData()!=null)
+                        {
+
+                            arrayList.addAll(response.body().getData());
+
+
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UnansweredQuestionsResponse> call, Throwable t) {
+
+                progressDialog.dismiss();
+                Toast.makeText(context, "Server or Internet Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }

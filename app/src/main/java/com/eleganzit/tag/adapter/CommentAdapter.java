@@ -11,10 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.eleganzit.tag.R;
 import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
@@ -66,6 +69,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
 
         holder.rc__replies.setAdapter(new ReplyAdapter(ans.getReplyList(),context));
         holder.viewcomment.setText("Replies ("+ans.getReplyList().size()+")");
+        holder.comment_time_posted.setText(""+ans.getCreatedDate());;
+
+        Log.d("timingggg","dsf"+ans.getCreatedDate());
 
         holder.replytv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +103,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
 
             }
         });
-holder.viewcomment.setOnClickListener(new View.OnClickListener() {
+        Glide.with(context).load(ans.getPhoto()).apply(new RequestOptions().circleCrop()).into(holder.comment_profile_image);
+
+
+        holder.viewcomment.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
 
@@ -114,13 +123,15 @@ holder.viewcomment.setOnClickListener(new View.OnClickListener() {
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-TextView answer_tv,viewcomment,replytv,post,cancel_tv;;
+TextView answer_tv,viewcomment,replytv,post,cancel_tv,comment_time_posted;;
 RecyclerView rc__replies;
         EditText answer_edit;
-
+ImageView comment_profile_image;
         LinearLayout addcomment;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            comment_time_posted=itemView.findViewById(R.id.comment_time_posted);
+            comment_profile_image=itemView.findViewById(R.id.comment_profile_image);
             answer_edit=itemView.findViewById(R.id.answer_edit);
             replytv=itemView.findViewById(R.id.replytv);
             answer_tv=itemView.findViewById(R.id.answer_tv);

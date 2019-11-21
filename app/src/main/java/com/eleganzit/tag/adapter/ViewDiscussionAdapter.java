@@ -18,6 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.eleganzit.tag.DiscussionActivity;
 import com.eleganzit.tag.ForgotPassword;
 import com.eleganzit.tag.R;
@@ -25,7 +27,9 @@ import com.eleganzit.tag.VerificationActivity;
 import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.discussion.Datum;
+import com.eleganzit.tag.model.discussion.DiscussionListResponse;
 import com.eleganzit.tag.model.unanswered.UnansweredQuestionsResponse;
+import com.eleganzit.tag.utils.UserLoggedInSession;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
@@ -76,6 +80,8 @@ public class ViewDiscussionAdapter extends RecyclerView.Adapter<ViewDiscussionAd
        /* holder.like_count.setText(""+datum.getLikeCount());
         holder.dislike_list.setText(""+datum.getDislikeList());*/
         holder.first_name.setText(datum.getFirstName());
+        Glide.with(context).load(datum.getPhoto()).apply(new RequestOptions().circleCrop().error(R.drawable.user_shape).placeholder(R.drawable.user_shape)).into(holder.profilePic);
+
         if (datum.getUserStatus().get(0).getIsDislike().toString().equalsIgnoreCase("1"))
         {
             holder.ic_dislike.setImageDrawable(context.getDrawable(R.drawable.ic_dislike_user));
@@ -167,13 +173,14 @@ public class ViewDiscussionAdapter extends RecyclerView.Adapter<ViewDiscussionAd
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView likeimg,ic_dislike;
+        ImageView likeimg,ic_dislike,profilePic;
 
 TextView view,question_text,first_name,created_date,dislikecount,likecount;
 RecyclerView rc_discussion_comment;
 LinearLayout likelin,dislikelin;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            profilePic=itemView.findViewById(R.id.profilePic);
             likecount=itemView.findViewById(R.id.likecount);
             ic_dislike=itemView.findViewById(R.id.ic_dislike);
             dislikecount=itemView.findViewById(R.id.dislikecount);
@@ -213,18 +220,23 @@ LinearLayout likelin,dislikelin;
         call.enqueue(new Callback<UnansweredQuestionsResponse>() {
             @Override
             public void onResponse(Call<UnansweredQuestionsResponse> call, Response<UnansweredQuestionsResponse> response) {
-                progressDialog.dismiss();
+
                 if (response.isSuccessful()) {
 
                     if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
-                        Toast.makeText(context, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                        activity.finish();
+                        viewQuestions();
+//notifyDataSetChanged();
                     }
                     else
                     {
+                        progressDialog.dismiss();
                         Toast.makeText(context, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                     }
+                }
+                else
+                {
+                    progressDialog.dismiss();
                 }
             }
 
@@ -235,5 +247,37 @@ LinearLayout likelin,dislikelin;
 
             }
         });
+    }
+
+    public void viewQuestions()
+    {
+        data=new ArrayList<>();
+        RetrofitInterface myInterface = RetrofitAPI.getRetrofitN().create(RetrofitInterface.class);
+        Call<DiscussionListResponse> call=myInterface.discussionList(Integer.parseInt(id));
+        call.enqueue(new Callback<DiscussionListResponse>() {
+            @Override
+            public void onResponse(Call<DiscussionListResponse> call, Response<DiscussionListResponse> response) {
+                progressDialog.dismiss();
+
+
+                if (response.isSuccessful()) {
+
+                    if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
+                        if (response.body().getData()!=null)
+                        {
+                            data.addAll(response.body().getData());
+                            notifyDataSetChanged();
+
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DiscussionListResponse> call, Throwable t) {
+
+            }
+        });
+
     }
 }

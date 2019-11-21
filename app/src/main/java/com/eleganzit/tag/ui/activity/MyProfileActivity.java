@@ -3,36 +3,49 @@ package com.eleganzit.tag.ui.activity;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.eleganzit.tag.R;
 import com.eleganzit.tag.adapter.HomeFacilityAdapter;
 import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.FetchedUserResponse;
+import com.eleganzit.tag.model.ImageUploadedResponse;
 import com.eleganzit.tag.model.homefacility.FacilitiesResponse;
 import com.eleganzit.tag.model.profileinfo.ProfileInfoDataResponse;
+import com.eleganzit.tag.model.unanswered.UnansweredQuestionsResponse;
 import com.eleganzit.tag.ui.activity.payment.PaymentFragment;
 import com.eleganzit.tag.ui.fragment.AccountSettingFragment;
 import com.eleganzit.tag.ui.fragment.ActivityFragment;
 import com.eleganzit.tag.ui.fragment.MyProfileFragment;
 import com.eleganzit.tag.utils.UserLoggedInSession;
 import com.eleganzit.tag.utils.ViewPagerAdapter;
+import com.google.gson.JsonObject;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import me.nereo.multi_image_selector.MultiImageSelector;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,9 +59,13 @@ TextView namedata;
     private ArrayList<String> mSelectPath;
 public static TextView emailtv,phonetv;
 FrameLayout frameimg;
+    String mediapath = "";
+
+ImageView myprofile;
     ProgressDialog progressDialog;
 String user_id;
     UserLoggedInSession userLoggedInSession;
+    private File file;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,13 +85,14 @@ String user_id;
         emailtv=findViewById(R.id.emailtv);
         htab_tabs=findViewById(R.id.htab_tabs);
         frameimg=findViewById(R.id.frameimg);
+        myprofile=findViewById(R.id.myprofile);
         htab_viewpager=findViewById(R.id.htab_viewpager);
         phonetv=findViewById(R.id.phonetv);
         namedata=findViewById(R.id.namedata);
         frameimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+pickImage();
             }
         });
 
@@ -121,8 +139,8 @@ setupViewPager(htab_viewpager);
         } else {
 
             MultiImageSelector selector = MultiImageSelector.create(MyProfileActivity.this);
-            selector.multi();
-            selector.count(6);
+            selector.single();
+
             selector.showCamera(false);
 
             selector.origin(mSelectPath);
@@ -150,7 +168,15 @@ setupViewPager(htab_viewpager);
     @Override
     protected void onResume() {
         super.onResume();
+        Glide.with(getApplicationContext())
+                .load("" + userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_PHOTO)).
+
+                apply(RequestOptions.circleCropTransform().placeholder(R.drawable.user_shape))
+
+                .into(myprofile);
+
         getFacilityData();
+
 
     }
 
@@ -203,4 +229,109 @@ if (response.body().getData()!=null)
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE) {
+            if (resultCode == RESULT_OK) {
+                mSelectPath = data.getStringArrayListExtra(MultiImageSelector.EXTRA_RESULT);
+                StringBuilder sb = new StringBuilder();
+                for (String p : mSelectPath) {
+                    sb.append(p);
+                    sb.append("\n");
+                }
+
+                mediapath = "" + sb.toString();
+
+
+                Glide.with(getApplicationContext())
+                        .load("" + mediapath.trim()).
+
+                        apply(RequestOptions.circleCropTransform().placeholder(R.drawable.user_shape))
+
+                        .into(myprofile);
+                Log.d("sdadad", "" + mediapath);
+                file=new File(""+mediapath.trim());
+                updateImage();
+            }
+
+
+        }
+
+
+
+    }
+
+    public  void updateImage()
+    {        progressDialog.show();
+
+
+        RetrofitInterface myInterface= RetrofitAPI.getRetrofit().create(RetrofitInterface.class);
+        RequestBody requestFile = RequestBody.create(MediaType.parse("*/*"), file);
+
+        MultipartBody.Part multipartBody = MultipartBody.Part.createFormData("imgUploader",file.getName(),requestFile);
+
+        Call<ImageUploadedResponse> getUserResponseCall=myInterface.updateProfile(multipartBody);
+        getUserResponseCall.enqueue(new Callback<ImageUploadedResponse>() {
+            @Override
+            public void onResponse(Call<ImageUploadedResponse> call, Response<ImageUploadedResponse> response) {
+                Log.d("sadadas","ffff"+response.body().getPath());
+                
+                updatepath(response.body().getPath());
+
+            }
+
+            @Override
+            public void onFailure(Call<ImageUploadedResponse> call, Throwable t) {
+progressDialog.dismiss();
+                Toast.makeText(MyProfileActivity.this, "Server or Internet Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void updatepath(final String path) {
+        RetrofitInterface myInterface = RetrofitAPI.getRetrofit().create(RetrofitInterface.class);
+        JsonObject jsonObject=new JsonObject();
+
+        jsonObject.addProperty("user_id",""+user_id);
+        jsonObject.addProperty("photo",""+path);
+
+        Log.d("pathhhh",""+jsonObject.toString());
+        Call<UnansweredQuestionsResponse> call=myInterface.updatePhoto(jsonObject);
+        call.enqueue(new Callback<UnansweredQuestionsResponse>() {
+            @Override
+            public void onResponse(Call<UnansweredQuestionsResponse> call, Response<UnansweredQuestionsResponse> response) {
+
+                progressDialog.dismiss();
+                if (response.isSuccessful()) {
+
+                    if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
+
+                        Log.d("hrhrhr",""+response.body().getMessage());
+                        userLoggedInSession.updateData(path);
+                        Toast.makeText(MyProfileActivity.this, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+//notifyDataSetChanged();
+                    }
+                    else
+                    {
+                        progressDialog.dismiss();
+                        Toast.makeText(MyProfileActivity.this, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+                else
+                {
+                    progressDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UnansweredQuestionsResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(MyProfileActivity.this, "Server and Internet Error", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
 }

@@ -7,10 +7,13 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.eleganzit.tag.adapter.CommentAdapter;
 import com.eleganzit.tag.adapter.DisCommentAdapter;
 import com.eleganzit.tag.adapter.DiscussionAdapter;
@@ -37,6 +40,7 @@ import retrofit2.Response;
 public class DiscussionActivity extends AppCompatActivity {
 RecyclerView rc_discussion;
 Datum datum;
+ImageView profilePic;
 ArrayList<AnsList> ansListsss;
     UserLoggedInSession userLoggedInSession;
     TextView viewcomment,reply,emailtv,hidetxt,created_date,post,cancel_tv;
@@ -67,6 +71,7 @@ ArrayList<AnsList> ansListsss;
     progressDialog.setMessage("Please Wait");
     progressDialog.setCancelable(false);
     progressDialog.setCanceledOnTouchOutside(false);
+    profilePic=findViewById(R.id.profilePic);
     hidetxt=findViewById(R.id.hidetxt);
     viewcomment=findViewById(R.id.viewcomment);
     created_date=findViewById(R.id.created_date);
@@ -81,6 +86,7 @@ ArrayList<AnsList> ansListsss;
     hidetxt.setText(datum.getQuestionText());
     created_date.setText(datum.getCreatedDate());
         rc_discussion=findViewById(R.id.rc_discussion);
+    Glide.with(DiscussionActivity.this).load(datum.getPhoto()).apply(new RequestOptions().circleCrop().error(R.drawable.user_shape).placeholder(R.drawable.user_shape)).into(profilePic);
 
 
     discussionByQuesId();
@@ -123,7 +129,16 @@ ArrayList<AnsList> ansListsss;
     post.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            addAnswer(""+datum.getUserId(),""+datum.getQuestionId(),"0",answer_edit.getText().toString(),datum.getQuestionText());
+
+            if (answer_edit.getText().toString().equalsIgnoreCase(""))
+            {
+                Toast.makeText(DiscussionActivity.this, "Please fill the data", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                addAnswer(""+datum.getUserId(),""+datum.getQuestionId(),"0",answer_edit.getText().toString(),datum.getQuestionText());
+
+            }
         }
     });
     cancel_tv.setOnClickListener(new View.OnClickListener() {
@@ -169,7 +184,7 @@ ArrayList<AnsList> ansListsss;
 
                     if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
                         Toast.makeText(DiscussionActivity.this, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                        finish();
+                        discussionByQuesId();
                     }
                     else
                     {

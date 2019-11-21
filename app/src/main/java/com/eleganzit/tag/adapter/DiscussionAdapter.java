@@ -17,6 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.eleganzit.tag.HelpFAQActivity;
 import com.eleganzit.tag.R;
 import com.eleganzit.tag.api.RetrofitAPI;
@@ -39,18 +41,20 @@ import retrofit2.Response;
 
 public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.MyViewHolder>
 {
-    String id;
+    String id,photo,name;
     boolean clicked,click;
     ProgressDialog progressDialog;
     Context context;
     Activity activity;
     ArrayList<Datum> arrayList;
-    public DiscussionAdapter(String id,ArrayList<Datum> arrayList, Context context) {
+    public DiscussionAdapter(String name,String photo,String id,ArrayList<Datum> arrayList, Context context) {
 
         this.context = context;
         this.arrayList = arrayList;
         activity = (Activity) context;
+        this.name = name;
         this.id = id;
+        this.photo = photo;
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Please Wait");
         progressDialog.setCancelable(false);
@@ -70,12 +74,31 @@ public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.My
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int i) {
 
         final Datum userquestion=arrayList.get(i);
-        holder.emailtv.setText("Name");
-        holder.hidetxt.setText(userquestion.getQuestionText());
-        holder.created_date.setText(userquestion.getCreatedDate());
-        holder.rc_discussion_comment.setAdapter(new CommentAdapter(userquestion.getAnsList(),context));
-        holder.viewcomment.setText("View Comments ("+userquestion.getAnsList().size()+")");
+        if (name!=null && !name.isEmpty())
+        {
+            holder.emailtv.setText(""+name);
 
+        }
+
+        if (userquestion.getQuestionText()!=null && !userquestion.getQuestionText().isEmpty())
+        {
+            holder.hidetxt.setText(userquestion.getQuestionText());
+
+        }
+
+        if (userquestion.getCreatedDate()!=null && !userquestion.getCreatedDate().isEmpty())
+        {
+            holder.created_date.setText(userquestion.getCreatedDate());
+
+        }
+
+            holder.viewcomment.setText("View Comments ("+userquestion.getAnsList().size()+")");
+
+
+
+            holder.rc_discussion_comment.setAdapter(new CommentAdapter(userquestion.getAnsList(),context));
+
+        Glide.with(context).load(photo).apply(new RequestOptions().circleCrop().error(R.drawable.user_shape).placeholder(R.drawable.user_shape)).into(holder.profilePic);
 
         holder.viewcomment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +156,7 @@ holder.cancel_tv.setOnClickListener(new View.OnClickListener() {
             }
         });
 
+
         /*holder.dislikelin.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
@@ -179,6 +203,8 @@ holder.cancel_tv.setOnClickListener(new View.OnClickListener() {
 
             }
         });*/
+        holder.likelin.setVisibility(View.GONE);
+        holder.dislikelin.setVisibility(View.GONE);
 
     }
 
@@ -188,13 +214,14 @@ holder.cancel_tv.setOnClickListener(new View.OnClickListener() {
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-ImageView likeimg,ic_dislike;
+ImageView likeimg,ic_dislike,profilePic;
 TextView viewcomment,reply,emailtv,hidetxt,created_date,post,cancel_tv;
 EditText answer_edit;
 RecyclerView rc_discussion_comment;
 LinearLayout addcomment,likelin,dislikelin;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            profilePic=itemView.findViewById(R.id.profilePic);
             ic_dislike=itemView.findViewById(R.id.ic_dislike);
             dislikelin=itemView.findViewById(R.id.dislikelin);
             likelin=itemView.findViewById(R.id.likelin);

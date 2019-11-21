@@ -188,14 +188,15 @@ android:layout_gravity="center"
                 >
 
               <FrameLayout
-                  android:id="@+id/frameimg"
-                  android:layout_width="70dp"
-                  android:layout_height="70dp">
-                  <ImageView
-                      android:layout_gravity="bottom"
 
-                      android:layout_width="65dp"
-                      android:layout_height="65dp"
+                  android:id="@+id/frameimg"
+                  android:layout_width="80dp"
+                  android:layout_height="80dp">
+                  <ImageView
+                      android:layout_gravity="center"
+                      android:id="@+id/myprofile"
+                      android:layout_width="60dp"
+                      android:layout_height="60dp"
                       android:src="@drawable/female" />
                   <ImageView
 
