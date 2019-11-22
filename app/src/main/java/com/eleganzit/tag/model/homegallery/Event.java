@@ -1,10 +1,13 @@
 package com.eleganzit.tag.model.homegallery;
 
+import com.eleganzit.tag.model.GalleryData;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Event {
-    @SerializedName("college_gallery_id")
+    @SerializedName("college_gallery_category_id")
     @Expose
     private Integer collegeGalleryId;
     @SerializedName("college_id")
@@ -16,6 +19,10 @@ public class Event {
     @SerializedName("image_url")
     @Expose
     private String imageUrl;
+
+    @SerializedName("gallery_data")
+    @Expose
+    private List<GalleryData>  gallery_data;
 
     public Integer getCollegeGalleryId() {
         return collegeGalleryId;
@@ -49,4 +56,11 @@ public class Event {
         this.imageUrl = imageUrl;
     }
 
+    public List<GalleryData> getGallery_data() {
+        return gallery_data;
+    }
+
+    public void setGallery_data(List<GalleryData> gallery_data) {
+        this.gallery_data = gallery_data;
+    }
 }

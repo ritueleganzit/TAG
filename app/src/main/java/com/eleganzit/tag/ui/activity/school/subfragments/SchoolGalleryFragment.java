@@ -32,10 +32,10 @@ ArrayList<EventDetail> arrayList=new ArrayList<>();
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.fragment_college_gallery, container, false);
-        rc_video=v.findViewById(R.id.rc_video);
+        //rc_video=v.findViewById(R.id.rc_video);
         linearlayoutsize=v.findViewById(R.id.linearlayoutsize);
         rc_events=v.findViewById(R.id.rc_events);
-        rc_infra=v.findViewById(R.id.rc_infra);
+        //rc_infra=v.findViewById(R.id.rc_infra);
         EventDetail eventDetail=new EventDetail();
         eventDetail.setImageUrl("https://eleganzit.online/img/tag_upload/college/images/myimage.jpeg");
         EventDetail eventDetail1=new EventDetail();

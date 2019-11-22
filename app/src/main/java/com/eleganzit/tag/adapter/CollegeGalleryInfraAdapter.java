@@ -77,7 +77,7 @@ public class CollegeGalleryInfraAdapter extends RecyclerView.Adapter<CollegeGall
 
             super(itemView);
             img=itemView.findViewById(R.id.img);
-            rel_main=itemView.findViewById(R.id.rel_main);
+           // rel_main=itemView.findViewById(R.id.rel_main);
 
 
 

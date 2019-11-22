@@ -56,13 +56,13 @@ public class HomeFacilityAdapter extends RecyclerView.Adapter<HomeFacilityAdapte
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
 Datum facilityData=facilityDataArrayList.get(i);
-        myViewHolder.imageView.getLayoutParams().width= (int) (getScreenWidthInPXs(context,activity)/3.3);
-        myViewHolder.imageView.getLayoutParams().height=getScreenWidthInPXs(context,activity)/4;
-        Log.d("dsadad",""+facilityData.getImageUrl());
+       // myViewHolder.imageView.getLayoutParams().width= (int) (getScreenWidthInPXs(context,activity)/3.3);
+        //myViewHolder.imageView.getLayoutParams().height=getScreenWidthInPXs(context,activity)/4;
+        Log.d("dsadad",""+facilityData.getFacility_icon());
 myViewHolder.nam.setText(""+facilityData.getFacilityName());
         Glide
                 .with(context)
-                .load(facilityData.getImageUrl())
+                .load(facilityData.getFacility_icon())
 
                 .into(myViewHolder.imageView);
 

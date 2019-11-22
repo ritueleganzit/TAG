@@ -339,7 +339,7 @@ editor.commit();
                                 for (int i=0;i<3;i++)
                                 {
                                     GalleryData courseDetail=new GalleryData();
-                                    courseDetail.setImageUrl(""+response.body().getGallery().get(i).getImageUrl());
+                                   // courseDetail.setImageUrl(""+response.body().getGallery().get(i).getImageUrl());
 
                     galleryDataArrayList.add(courseDetail);
                                 }

@@ -3,6 +3,7 @@ package com.eleganzit.tag.adapter;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -145,7 +146,17 @@ public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.My
         holder.post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addAnswer(""+userquestion.getUserId(),""+userquestion.getQuestionId(),"0",holder.answer_edit.getText().toString(),userquestion.getQuestionText());
+
+                if (holder.answer_edit.getText().toString().equalsIgnoreCase(""))
+
+                {
+                    Toast.makeText(context, "Please enter data", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    addAnswer(""+userquestion.getUserId(),""+userquestion.getQuestionId(),"0",holder.answer_edit.getText().toString(),userquestion.getQuestionText());
+                }
+
             }
         });
 holder.cancel_tv.setOnClickListener(new View.OnClickListener() {
@@ -266,6 +277,9 @@ LinearLayout addcomment,likelin,dislikelin;
 
                     if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
                         Toast.makeText(context, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
+                        activity.startActivity(new Intent(context,AskAQuestionActivity.class));
+                        activity.overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                         activity.finish();
                     }
                     else

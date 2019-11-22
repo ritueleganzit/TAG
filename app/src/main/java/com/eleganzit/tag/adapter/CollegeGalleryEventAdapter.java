@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.eleganzit.tag.R;
@@ -53,13 +54,14 @@ public class CollegeGalleryEventAdapter extends RecyclerView.Adapter<CollegeGall
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
         Event courseDetail=arr.get(i);
-        myViewHolder.img.getLayoutParams().width= (int) (getScreenWidthInPXs(context,activity)/3.3);
-        myViewHolder.img.getLayoutParams().height=getScreenWidthInPXs(context,activity)/4;
-        myViewHolder.rel_main.getLayoutParams().width= (int) (getScreenWidthInPXs(context,activity)/3.3);
-        myViewHolder.rel_main.getLayoutParams().height=getScreenWidthInPXs(context,activity)/4;
+     //   myViewHolder.img.getLayoutParams().width= (int) (getScreenWidthInPXs(context,activity)/3.3);
+      //  myViewHolder.img.getLayoutParams().height=getScreenWidthInPXs(context,activity)/4;
+       // myViewHolder.rel_main.getLayoutParams().width= (int) (getScreenWidthInPXs(context,activity)/3.3);
+       // myViewHolder.rel_main.getLayoutParams().height=getScreenWidthInPXs(context,activity)/4;
+        myViewHolder.categoryname.setText(courseDetail.getSectionName());
         Glide
                 .with(context)
-                .load(R.drawable.school)
+                .load(courseDetail.getImageUrl())
 
                 .into(myViewHolder.img);
     }
@@ -72,12 +74,13 @@ public class CollegeGalleryEventAdapter extends RecyclerView.Adapter<CollegeGall
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         ImageView img;
+        TextView categoryname;
         RelativeLayout rel_main;
         public MyViewHolder(@NonNull View itemView) {
 
             super(itemView);
+            categoryname=itemView.findViewById(R.id.categoryname);
             img=itemView.findViewById(R.id.img);
-            rel_main=itemView.findViewById(R.id.rel_main);
 
 
 

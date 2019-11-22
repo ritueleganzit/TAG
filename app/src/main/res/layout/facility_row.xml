@@ -1,31 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal" android:layout_width="wrap_content"
-    android:layout_marginTop="8dp"
-    android:layout_marginRight="15dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginBottom="8dp"
-    android:id="@+id/chlin1"
-    android:layout_height="wrap_content">
-    <LinearLayout
+<com.eleganzit.tag.utils.SquareRelativeLayout android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
 
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout
+        android:layout_margin="1dp"
+        android:padding="1dp"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/framelayout"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+android:layout_gravity="center"
         android:gravity="center_vertical|center_horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
 
         >
              <ImageView
-                android:layout_width="45dp"
+                android:layout_width="30dp"
                 android:text="ADMISSION"
                 android:id="@+id/img"
                 android:scaleType="centerCrop"
 android:src="@drawable/swimming"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:fontFamily="@font/roboto_regular"
-                android:layout_height="45dp"></ImageView>
+
+                android:layout_height="30dp"></ImageView>
 
 
 
@@ -33,6 +36,7 @@ android:src="@drawable/swimming"
             android:textColor="@color/txtcolor"
             android:fontFamily="@font/roboto_regular"
             android:textSize="12sp"
+android:gravity="center"
             android:layout_marginTop="2dp"
             android:layout_width="wrap_content"
             android:text="Swimming"
@@ -41,5 +45,6 @@ android:id="@+id/nam"
     </LinearLayout>
 
 
+</FrameLayout>
 
-</LinearLayout>
+</com.eleganzit.tag.utils.SquareRelativeLayout>

@@ -3,6 +3,8 @@ package com.eleganzit.tag.model.homegallery;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class GalleryResponse {
     @SerializedName("status")
     @Expose
@@ -12,7 +14,7 @@ public class GalleryResponse {
     private String message;
     @SerializedName("data")
     @Expose
-    private Data data;
+    private List<Event> data;
 
     public Integer getStatus() {
         return status;
@@ -30,12 +32,11 @@ public class GalleryResponse {
         this.message = message;
     }
 
-    public Data getData() {
+    public List<Event> getData() {
         return data;
     }
 
-    public void setData(Data data) {
+    public void setData(List<Event> data) {
         this.data = data;
     }
-
 }

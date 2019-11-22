@@ -55,8 +55,8 @@ public class CollegeGalleryAdapter extends RecyclerView.Adapter<CollegeGalleryAd
         GalleryData courseDetail=arr.get(i);
         myViewHolder.img.getLayoutParams().width= (int) (getScreenWidthInPXs(context,activity)/3.3);
         myViewHolder.img.getLayoutParams().height=getScreenWidthInPXs(context,activity)/4;
-        myViewHolder.rel_main.getLayoutParams().width= (int) (getScreenWidthInPXs(context,activity)/3.3);
-        myViewHolder.rel_main.getLayoutParams().height=getScreenWidthInPXs(context,activity)/4;
+       // myViewHolder.rel_main.getLayoutParams().width= (int) (getScreenWidthInPXs(context,activity)/3.3);
+       // myViewHolder.rel_main.getLayoutParams().height=getScreenWidthInPXs(context,activity)/4;
         Glide
                 .with(context)
                 .load(R.drawable.school)
@@ -77,7 +77,7 @@ public class CollegeGalleryAdapter extends RecyclerView.Adapter<CollegeGalleryAd
 
             super(itemView);
             img=itemView.findViewById(R.id.img);
-            rel_main=itemView.findViewById(R.id.rel_main);
+         //   rel_main=itemView.findViewById(R.id.rel_main);
 
 
 

@@ -3,6 +3,7 @@ package com.eleganzit.tag.adapter;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -15,11 +16,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eleganzit.tag.DiscussionActivity;
 import com.eleganzit.tag.R;
 import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.askquestion.AnsList;
 import com.eleganzit.tag.model.askquestion.AskQuestionResponse;
+import com.eleganzit.tag.ui.activity.AskAQuestionActivity;
 import com.google.gson.JsonObject;
 
 import java.text.SimpleDateFormat;
@@ -157,6 +160,8 @@ RecyclerView rc__replies;
 
                     if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
                         Toast.makeText(context, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
+                        activity.overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                         activity.finish();
                     }
                     else

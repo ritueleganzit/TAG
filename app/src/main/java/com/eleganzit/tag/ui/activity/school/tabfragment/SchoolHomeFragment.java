@@ -126,7 +126,7 @@ public class SchoolHomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-//getCollegeData();
+getCollegeData();
     }
 
     public void getCollegeData(){

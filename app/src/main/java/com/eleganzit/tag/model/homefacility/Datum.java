@@ -4,18 +4,16 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Datum {
-    @SerializedName("college_facility_id")
+    @SerializedName("facility_id")
     @Expose
     private Integer collegeFacilityId;
-    @SerializedName("college_id")
-    @Expose
-    private Integer collegeId;
+
     @SerializedName("facility_name")
     @Expose
     private String facilityName;
-    @SerializedName("image_url")
+    @SerializedName("facility_icon")
     @Expose
-    private String imageUrl;
+    private String facility_icon;
 
     public Integer getCollegeFacilityId() {
         return collegeFacilityId;
@@ -23,14 +21,6 @@ public class Datum {
 
     public void setCollegeFacilityId(Integer collegeFacilityId) {
         this.collegeFacilityId = collegeFacilityId;
-    }
-
-    public Integer getCollegeId() {
-        return collegeId;
-    }
-
-    public void setCollegeId(Integer collegeId) {
-        this.collegeId = collegeId;
     }
 
     public String getFacilityName() {
@@ -41,13 +31,11 @@ public class Datum {
         this.facilityName = facilityName;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getFacility_icon() {
+        return facility_icon;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setFacility_icon(String facility_icon) {
+        this.facility_icon = facility_icon;
     }
-
-
 }

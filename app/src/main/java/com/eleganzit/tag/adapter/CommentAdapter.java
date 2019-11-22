@@ -3,6 +3,7 @@ package com.eleganzit.tag.adapter;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -23,6 +24,7 @@ import com.eleganzit.tag.api.RetrofitAPI;
 import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.askquestion.AnsList;
 import com.eleganzit.tag.model.askquestion.AskQuestionResponse;
+import com.eleganzit.tag.ui.activity.AskAQuestionActivity;
 import com.google.gson.JsonObject;
 
 import java.text.SimpleDateFormat;
@@ -93,7 +95,15 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
         holder.post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addAnswer(""+ans.getSubmitedBy(),""+ans.getQuestionId(),""+ans.getAnsId(),holder.answer_edit.getText().toString(),ans.getAnsText());
+                if (holder.answer_edit.getText().toString().equalsIgnoreCase(""))
+                {
+                    Toast.makeText(context, "Please enter data", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    addAnswer(""+ans.getSubmitedBy(),""+ans.getQuestionId(),""+ans.getAnsId(),holder.answer_edit.getText().toString(),ans.getAnsText());
+                }
+
             }
         });
         holder.cancel_tv.setOnClickListener(new View.OnClickListener() {
@@ -169,6 +179,8 @@ ImageView comment_profile_image;
 
                     if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
                         Toast.makeText(context, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        activity.startActivity(new Intent(context, AskAQuestionActivity.class));
+                        activity.overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                         activity.finish();
                     }
                     else
