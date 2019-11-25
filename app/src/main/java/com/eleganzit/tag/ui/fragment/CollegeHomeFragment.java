@@ -40,6 +40,8 @@ import com.eleganzit.tag.model.EventDetail;
 import com.eleganzit.tag.model.FacilityData;
 import com.eleganzit.tag.model.GalleryData;
 import com.eleganzit.tag.model.GetCollegeById;
+import com.eleganzit.tag.model.homegallery.Event;
+import com.eleganzit.tag.model.newhome.CourseResult;
 import com.eleganzit.tag.ui.activity.AddBasicInformationActivity;
 import com.eleganzit.tag.ui.activity.CollegeDetailActivity;
 import com.eleganzit.tag.utils.UserLoggedInSession;
@@ -68,9 +70,9 @@ public class CollegeHomeFragment extends Fragment {
     ProgressDialog progressDialog;
     UserLoggedInSession userLoggedInSession;
     RecyclerView rc_events,courses_rc,rc_facility;
-    ArrayList<CourceFee> courseDetailArrayList;
-    ArrayList<CourceFee> firstcourseDetailArrayList;
-    ArrayList<GalleryData> galleryDataArrayList;
+    ArrayList<CourseResult> courseDetailArrayList;
+    ArrayList<CourseResult> firstcourseDetailArrayList;
+    ArrayList<Event> galleryDataArrayList;
     ArrayList<FacilityData> facilityDataArrayList;
     ImageView imgbg;
     int college_id;
@@ -171,19 +173,23 @@ editor.commit();
         RetrofitInterface myInterface = RetrofitAPI.getRetrofitN().create(RetrofitInterface.class);
        // Toast.makeText(getActivity(), "asdsa"+college_id, Toast.LENGTH_SHORT).show();
 
-        final Call<CollegeHomeResponse> getCollegeByIdCall=myInterface.getCollegeById("home_screen",""+college_id);
+        final Call<CollegeHomeResponse> getCollegeByIdCall=myInterface.getCollegeById(""+college_id);
         getCollegeByIdCall.enqueue(new Callback<CollegeHomeResponse>() {
             @Override
             public void onResponse(Call<CollegeHomeResponse> call, Response<CollegeHomeResponse> response) {
                 progressDialog.dismiss();
-               // Toast.makeText(getActivity(), "asdsa"+response.message(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "asdsa"+college_id, Toast.LENGTH_SHORT).show();
+                Log.d("fsfs","iii"+response.errorBody());
+                Log.d("fsfs","iii"+response.message());
+                Log.d("fsfs","iii"+college_id);
+
                 if (response.isSuccessful())
                 {
-                    if (response.body().getCollegeInfo()!=null)
+                    if (response.body().getData()!=null)
                     {
-                        mobilenum.setText(response.body().getCollegeInfo().getPhone());
-                        email.setText(response.body().getCollegeInfo().getEmail());
-                        website.setText(response.body().getCollegeInfo().getWeb());
+                        mobilenum.setText(response.body().getData().getCollegeInfo().get(0).getPhone());
+                        email.setText(response.body().getData().getCollegeInfo().get(0).getEmail());
+                        website.setText(response.body().getData().getCollegeInfo().get(0).getWeb());
 
                         RequestOptions options = new RequestOptions()
                                 .centerCrop()
@@ -192,73 +198,73 @@ editor.commit();
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .priority(Priority.HIGH);
 
-                        Glide.with(getActivity()).load(response.body().getCollegeInfo().getCollegeImage())
+                        Glide.with(getActivity()).load(response.body().getData().getCollegeInfo().get(0).getCollegeImage())
                                 .apply(options)
                                 .into(imgbg);
 
-                         if (response.body().getCollegeInfo().getCollegeName()!=null  && !(response.body().getCollegeInfo().getCollegeName().isEmpty()))
+                         if (response.body().getData().getCollegeInfo().get(0).getCollegeName()!=null  && !(response.body().getData().getCollegeInfo().get(0).getCollegeName().isEmpty()))
                             {
-                                collegename.setText(""+response.body().getCollegeInfo().getCollegeName());
+                                collegename.setText(""+response.body().getData().getCollegeInfo().get(0).getCollegeName());
                             }
 
-                            if (response.body().getCollegeInfo().getCollegeCity()!=null  && !(response.body().getCollegeInfo().getCollegeCity().isEmpty()))
+                            if (response.body().getData().getCollegeInfo().get(0).getCollegeCity()!=null  && !(response.body().getData().getCollegeInfo().get(0).getCollegeCity().isEmpty()))
                             {
-                                collagelocation.setText(""+response.body().getCollegeInfo().getCollegeCity());
+                                collagelocation.setText(""+response.body().getData().getCollegeInfo().get(0).getCollegeCity()+",");
                             }
                             else
                             {
                                 collagelocation.setText("");
                             }
 
-                            if (response.body().getCollegeInfo().getCollegeCountry()!=null  && !(response.body().getCollegeInfo().getCollegeCountry().isEmpty()))
+                            if (response.body().getData().getCollegeInfo().get(0).getCollegeCountry()!=null  && !(response.body().getData().getCollegeInfo().get(0).getCollegeCountry().isEmpty()))
                             {
-                                collagelocation.append(" , "+response.body().getCollegeInfo().getCollegeCountry()+"");
+                                collagelocation.append(" "+response.body().getData().getCollegeInfo().get(0).getCollegeCountry()+"");
                                 address.setText(collagelocation.getText().toString());
                             }
 
-                            if (response.body().getCollegeInfo().getAccreditation()!=null  && !(response.body().getCollegeInfo().getAccreditation().isEmpty()))
+                            if (response.body().getData().getCollegeInfo().get(0).getAccreditation()!=null  && !(response.body().getData().getCollegeInfo().get(0).getAccreditation().isEmpty()))
                             {
-                                accreditation.setText("Accredited by: "+response.body().getCollegeInfo().getAccreditation()+"");
+                                accreditation.setText("Accredited by: "+response.body().getData().getCollegeInfo().get(0).getAccreditation()+"");
                             }
                             else
                             {
                                 accreditation.setText("Accredited by: -");
                             }
 
-                            if (response.body().getCollegeInfo().getApprovedBy()!=null  && !(response.body().getCollegeInfo().getApprovedBy().isEmpty()))
+                            if (response.body().getData().getCollegeInfo().get(0).getApprovedBy()!=null  && !(response.body().getData().getCollegeInfo().get(0).getApprovedBy().isEmpty()))
                             {
-                                approved_by.setText("Approved by: "+response.body().getCollegeInfo().getApprovedBy()+"");
+                                approved_by.setText("Approved by: "+response.body().getData().getCollegeInfo().get(0).getApprovedBy()+"");
                             }
                             else
                             {
                                 approved_by.setText("Approved by: -");
                             }
-                            if (response.body().getCollegeInfo().getPlacement()!=null  && !(response.body().getCollegeInfo().getPlacement().isEmpty()))
+                            if (response.body().getData().getCollegeInfo().get(0).getPlacement()!=null  && !(response.body().getData().getCollegeInfo().get(0).getPlacement().isEmpty()))
                             {
-                                placement.setText("Placement : "+response.body().getCollegeInfo().getPlacement()+"");
+                                placement.setText("Placement : "+response.body().getData().getCollegeInfo().get(0).getPlacement()+"");
                             }
                             else
                             {
                                 placement.setText("Placement : -");
-                            }if (response.body().getCollegeInfo().getRank()!=null  && !(response.body().getCollegeInfo().getRank().isEmpty()))
+                            }if (response.body().getData().getCollegeInfo().get(0).getRank()!=null  && !(response.body().getData().getCollegeInfo().get(0).getRank().isEmpty()))
                             {
                                 rank.setVisibility(View.VISIBLE);
-                                rank.setText("Rank : "+response.body().getCollegeInfo().getRank()+"");
+                                rank.setText("Rank : "+response.body().getData().getCollegeInfo().get(0).getRank()+"");
                             }
                             else
                             {
                                 rank.setVisibility(View.GONE);
                             }
- if (response.body().getCollegeInfo().getOwnership()!=null  && !(response.body().getCollegeInfo().getOwnership().isEmpty()))
+ if (response.body().getData().getCollegeInfo().get(0).getOwnership()!=null  && !(response.body().getData().getCollegeInfo().get(0).getOwnership().isEmpty()))
                             {
-                                ownership.setText(""+response.body().getCollegeInfo().getOwnership()+"");
+                                ownership.setText(""+response.body().getData().getCollegeInfo().get(0).getOwnership()+"");
                             }
                             else
                             {
                                 ownership.setText("");
-                            } if (response.body().getCollegeInfo().getUniversityName()!=null  && !(response.body().getCollegeInfo().getUniversityName().isEmpty()))
+                            } if (response.body().getData().getCollegeInfo().get(0).getUniversityName()!=null  && !(response.body().getData().getCollegeInfo().get(0).getUniversityName().isEmpty()))
                             {
-                                university_name.setText(""+response.body().getCollegeInfo().getUniversityName()+"");
+                                university_name.setText(""+response.body().getData().getCollegeInfo().get(0).getUniversityName()+"");
                             }
                             else
                             {
@@ -266,17 +272,17 @@ editor.commit();
                             }
 
 
-                            if (response.body().getCollegeInfo().getYears()!=null  && !(response.body().getCollegeInfo().getYears().isEmpty()))
+                            if (response.body().getData().getCollegeInfo().get(0).getYears()!=null  && !(response.body().getData().getCollegeInfo().get(0).getYears().isEmpty()))
                             {
                                 course_duration.setVisibility(View.VISIBLE);
-                                course_duration.setText(""+response.body().getCollegeInfo().getYears());
+                                course_duration.setText(""+response.body().getData().getCollegeInfo().get(0).getYears());
 
 
                             }
                             else
                             {
                                 course_duration.setVisibility(View.GONE);
-                            }/*if (response.body().getCollegeInfo().getStudyMode()!=null  && !(response.body().getData().getCollegeDetail().getStudyMode().isEmpty()))
+                            }/*if (response.body().getData().getCollegeInfo().get(0).getStudyMode()!=null  && !(response.body().getData().getCollegeDetail().getStudyMode().isEmpty()))
                             {
                                 study_mode.setVisibility(View.VISIBLE);
                                 study_mode.setText(""+response.body().getData().getCollegeDetail().getStudyMode());
@@ -286,9 +292,9 @@ editor.commit();
                             else
                             {
                                 study_mode.setVisibility(View.GONE);
-                            }*/if (response.body().getCollegeInfo().getRatings()!=null)
+                            }*/if (response.body().getData().getCollegeInfo().get(0).getRatings()!=null)
                             {
-                                myRatingBar.setRating(Float.parseFloat(""+response.body().getCollegeInfo().getRatings()));
+                                myRatingBar.setRating(Float.parseFloat(""+response.body().getData().getCollegeInfo().get(0).getRatings()));
 
 
                             }
@@ -301,60 +307,70 @@ editor.commit();
 
                         //setCourse
 
-                        if (response.body().getCourceFeeData()!=null)
+                        if (response.body().getData().getCource_detail()!=null)
                         {
-                            courseDetailArrayList.addAll(response.body().getCourceFeeData());
+                            courseDetailArrayList.addAll(response.body().getData().getCource_detail().get(0).getCourseResult());
+                            Log.d("fsfs","ghjgj"+response.body().getData().getCource_detail().get(0).getCourseResult());
 
 
-                            if (response.body().getCourceFeeData().size()<3)
+                            if (response.body().getData().getCource_detail().size()<3)
                             {
-                                firstcourseDetailArrayList.addAll(response.body().getCourceFeeData());
+                                firstcourseDetailArrayList.addAll(response.body().getData().getCource_detail().get(0).getCourseResult());
 
                             }
                             else {
                                 for (int i=0;i<3;i++)
                                 {
-                                    CourceFee courseDetail=new CourceFee();
-                                    courseDetail.setCourseName(""+response.body().getCourceFeeData().get(i).getCourseName());
-                                    courseDetail.setCourseFees(""+response.body().getCourceFeeData().get(i).getCourseFees());
-                                    courseDetail.setSpecializationName(""+response.body().getCourceFeeData().get(i).getSpecializationName());
+                                    CourseResult courseDetail=new CourseResult();
+                                    courseDetail.setCourseName(""+response.body().getData().getCource_detail().get(i).getCourseName());
+                                    courseDetail.setCourseFees(""+response.body().getData().getCource_detail().get(i).getCourseResult().get(i).getCourseFees());
+                                    courseDetail.setSpecializationName(""+response.body().getData().getCource_detail().get(i).getCourseResult().get(i).getSpecializationName());
                     firstcourseDetailArrayList.add(courseDetail);
                                 }
 
                             }
-                            Log.d("fsfs",""+response.body().getCourceFeeData().size());
+
                             courses_rc.setAdapter(new CoursesHomeAdapter(firstcourseDetailArrayList,getActivity()));
 
                         }
-  if (response.body().getGallery()!=null)
+  if (response.body().getData().getGallery()!=null)
                         {
 
 
-                            if (response.body().getGallery().size()<3)
+                            if (response.body().getData().getGallery().size()<3)
                             {
-                                galleryDataArrayList.addAll(response.body().getGallery());
+                                galleryDataArrayList.addAll(response.body().getData().getGallery());
 
                             }
                             else {
                                 for (int i=0;i<3;i++)
                                 {
-                                    GalleryData courseDetail=new GalleryData();
-                                   // courseDetail.setImageUrl(""+response.body().getGallery().get(i).getImageUrl());
+                                    Event courseDetail=new Event();
+                                   courseDetail.setImageUrl(""+response.body().getData().getGallery().get(i).getImageUrl());
 
                     galleryDataArrayList.add(courseDetail);
                                 }
 
                             }
-                            Log.d("fsfs",""+response.body().getGallery().size());
+                            Log.d("fsfgdss",college_id+"---"+response.body().getData().getGallery().get(0).getImageUrl());
                             rc_events.setAdapter(new CollegeGalleryAdapter(galleryDataArrayList,linearlayoutsize,getActivity()));
 
                         }
 
-  if (response.body().getFacility()!=null)
+  if (response.body().getData().getFacility()!=null)
   {
-      facilityDataArrayList.addAll(response.body().getFacility());
-      rc_facility.setAdapter(new FacilityAdapter(facilityDataArrayList,getActivity()));
 
+      for (int i=0;i<response.body().getData().getFacility().size();i++)
+      {
+          FacilityData courseDetail=new FacilityData();
+          courseDetail.setImageUrl(""+response.body().getData().getFacility().get(i).getImageUrl());
+          courseDetail.setFacilityName(""+response.body().getData().getFacility().get(i).getFacilityName());
+          courseDetail.setCollegeId(""+response.body().getData().getFacility().get(i).getCollegeId());
+          Log.d("fsfgdss",college_id+"---"+response.body().getData().getFacility().get(0).getImageUrl());
+
+          facilityDataArrayList.add(courseDetail);
+      }
+      rc_facility.setAdapter(new FacilityAdapter(facilityDataArrayList,getActivity()));
 
   }
 

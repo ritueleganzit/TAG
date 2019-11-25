@@ -6,6 +6,8 @@
     android:layout_marginTop="5dp"
     android:layout_marginBottom="2dp"
     android:padding="3dp"
+    android:visibility="gone"
+    android:id="@+id/linehide"
     android:background="#f7fdfc"
     xmlns:android="http://schemas.android.com/apk/res/android">
         <android.support.v7.widget.LinearLayoutCompat
@@ -15,12 +17,13 @@
 
             <android.support.v7.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
+
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
                     android:textColor="@color/txtcolor"
                     android:gravity="center_vertical"
-                    android:id="@+id/specialization_name"
+
                     android:fontFamily="@font/roboto_regular"
                     android:layout_width="match_parent"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"

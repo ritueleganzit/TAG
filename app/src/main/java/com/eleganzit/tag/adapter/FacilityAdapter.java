@@ -55,8 +55,8 @@ public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
 FacilityData facilityData=facilityDataArrayList.get(i);
-        myViewHolder.imageView.getLayoutParams().width= (int) (getScreenWidthInPXs(context,activity)/3.3);
-        myViewHolder.imageView.getLayoutParams().height=getScreenWidthInPXs(context,activity)/4;
+        //myViewHolder.imageView.getLayoutParams().width= (int) (getScreenWidthInPXs(context,activity)/3.3);
+       // myViewHolder.imageView.getLayoutParams().height=getScreenWidthInPXs(context,activity)/4;
         Log.d("dsadad",""+facilityData.getImageUrl());
 myViewHolder.nam.setText(""+facilityData.getFacilityName());
         Glide

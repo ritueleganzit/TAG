@@ -46,6 +46,42 @@ public class CourceFee {
     @SerializedName("cource_offer")
     @Expose
     private String courceOffer;
+    @SerializedName("cource_accredition")
+    @Expose
+    private String cource_accredition;
+
+
+ @SerializedName("course_year")
+    @Expose
+    private String course_year;
+
+ @SerializedName("course_status")
+    @Expose
+    private String course_status;
+
+    public String getCource_accredition() {
+        return cource_accredition;
+    }
+
+    public void setCource_accredition(String cource_accredition) {
+        this.cource_accredition = cource_accredition;
+    }
+
+    public String getCourse_year() {
+        return course_year;
+    }
+
+    public void setCourse_year(String course_year) {
+        this.course_year = course_year;
+    }
+
+    public String getCourse_status() {
+        return course_status;
+    }
+
+    public void setCourse_status(String course_status) {
+        this.course_status = course_status;
+    }
 
     public String getListId() {
         return listId;

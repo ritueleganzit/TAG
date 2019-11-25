@@ -44,6 +44,7 @@ android:layout_margin="15dp"
                     android:textColor="@color/txtcolor"
                     android:gravity="center_vertical"
                     android:fontFamily="@font/roboto_regular"
+                    android:id="@+id/specialisation_nam"
                     android:layout_width="match_parent"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:text=""
@@ -64,15 +65,7 @@ android:layout_margin="15dp"
 
         </android.support.v7.widget.LinearLayoutCompat>
 
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:visibility="gone"
-            android:layout_marginLeft="10dp"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-
-            android:layout_height="match_parent"
-            android:id="@+id/rchidetxt"></android.support.v7.widget.RecyclerView>
-
+      <include layout="@layout/course_detail_fee_row"></include>
     </LinearLayout>
 
 

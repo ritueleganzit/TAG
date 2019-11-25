@@ -274,11 +274,10 @@ public interface RetrofitInterface {
 @GET("/testhost/users/discussionList/{id}")
     Call<DiscussionListResponse> discussionList(@Path(value = "id", encoded = true) int id);
 
-    @FormUrlEncoded
-    @POST("/tags/college.php")
+
+    @GET("/testhost/users/homeScreen/{id}")
     Call<CollegeHomeResponse> getCollegeById(
-            @Field("action") String action,
-            @Field("college_id") String college_id
+            @Path(value = "id", encoded = true) String id
 
     );
 

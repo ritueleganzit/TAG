@@ -7,6 +7,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.eleganzit.tag.R;
 import com.eleganzit.tag.model.EventDetail;
 import com.eleganzit.tag.model.GalleryData;
+import com.eleganzit.tag.model.homegallery.Event;
 
 import java.util.ArrayList;
 
@@ -26,13 +28,13 @@ import static android.content.Context.WINDOW_SERVICE;
 
 public class CollegeGalleryAdapter extends RecyclerView.Adapter<CollegeGalleryAdapter.MyViewHolder> {
     String status,status_name,progress_name;
-    ArrayList<GalleryData> arr;
+    ArrayList<Event> arr;
     Context context;
     int h;
     Activity activity;
     ProgressDialog progressDialog;
 
-    public CollegeGalleryAdapter(ArrayList<GalleryData> arr,LinearLayout linearlayoutsize, Context context) {
+    public CollegeGalleryAdapter(ArrayList<Event> arr, LinearLayout linearlayoutsize, Context context) {
         this.context = context;
         this.arr = arr;
         activity = (Activity) context;
@@ -52,14 +54,16 @@ public class CollegeGalleryAdapter extends RecyclerView.Adapter<CollegeGalleryAd
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        GalleryData courseDetail=arr.get(i);
+        Event courseDetail=arr.get(i);
         myViewHolder.img.getLayoutParams().width= (int) (getScreenWidthInPXs(context,activity)/3.3);
         myViewHolder.img.getLayoutParams().height=getScreenWidthInPXs(context,activity)/4;
        // myViewHolder.rel_main.getLayoutParams().width= (int) (getScreenWidthInPXs(context,activity)/3.3);
        // myViewHolder.rel_main.getLayoutParams().height=getScreenWidthInPXs(context,activity)/4;
+
+        Log.d("hguyguyh",""+courseDetail.getImageUrl());
         Glide
                 .with(context)
-                .load(R.drawable.school)
+                .load(courseDetail.getImageUrl())
 
                 .into(myViewHolder.img);
     }
