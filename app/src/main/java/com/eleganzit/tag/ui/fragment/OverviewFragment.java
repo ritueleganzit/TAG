@@ -2,6 +2,8 @@ package com.eleganzit.tag.ui.fragment;
 
 
 import android.app.ProgressDialog;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +39,7 @@ public class OverviewFragment extends Fragment {
 
 
     SelectCourseActivity mActivity;
+    WebView web;
     public OverviewFragment() {
         // Required empty public constructor
     }
@@ -40,6 +47,7 @@ public class OverviewFragment extends Fragment {
     ProgressDialog progressDialog;
     TextView txt_content;
     String strtext;
+    private View mCustomView;
     String overviewFragment;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,6 +56,7 @@ public class OverviewFragment extends Fragment {
         View v=inflater.inflate(R.layout.fragment_overview, container, false);
 
         txt_content=v.findViewById(R.id.txt_content);
+        web=v.findViewById(R.id.webview);
 
        // overviewFragment=getArguments().getString("special");
         if (getArguments()!=null)
@@ -55,17 +64,62 @@ public class OverviewFragment extends Fragment {
              strtext = getArguments().getString("edttext");
 
         }
+        else
+        {
+            Toast.makeText(getActivity(), "Nothing to show", Toast.LENGTH_SHORT).show();
+        }
         Log.d("hfskdjhfs",""+strtext);
+
 
         if (strtext!=null && !(strtext.isEmpty()))
         {
             //txt_content.setText(SelectSpecializationActivity.getSpecialization.getOverview());
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                txt_content.setText(Html.fromHtml(strtext, Html.FROM_HTML_MODE_LEGACY));
-            } else {
-                txt_content.setText(Html.fromHtml(strtext));
-            }
+
+
+/*
+
+            web.setWebViewClient(new WebViewClient(){
+                @Override
+                public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                    return false;
+                }
+            });
+*/
+            web.getSettings().setBuiltInZoomControls(true);
+            web.setWebViewClient(new WebViewClient());
+            web.setWebChromeClient(new WebChromeClient());
+            web.getSettings().setUseWideViewPort(true);
+            web.getSettings().setLoadWithOverviewMode(true);
+            WebSettings webSettings = web.getSettings();
+            Resources res = getResources();
+            float fontSize = res.getDimension(R.dimen.txtSize);
+            webSettings.setDefaultFontSize((int)fontSize);
+            webSettings.setJavaScriptEnabled(true);
+            web.loadDataWithBaseURL("", strtext , "text/html",  "UTF-8", "");
+
+
+        } else {
+
+
+
+            web.getSettings().setBuiltInZoomControls(true);
+            web.setWebViewClient(new WebViewClient());
+            web.setWebChromeClient(new WebChromeClient());
+            web.getSettings().setUseWideViewPort(true);
+            web.getSettings().setLoadWithOverviewMode(true);
+            WebSettings webSettings = web.getSettings();
+            Resources res = getResources();
+            float fontSize = res.getDimension(R.dimen.txtSize);
+            webSettings.setDefaultFontSize((int)fontSize);
+
+            webSettings.setJavaScriptEnabled(true);
+            web.loadDataWithBaseURL("", strtext , "text/html",  "UTF-8", "");
+
+
+            // txt_content.setText(Html.fromHtml(strtext));
+
+
 
 
         }
@@ -135,4 +189,8 @@ public class OverviewFragment extends Fragment {
         getCourse(coursesData.getId());
 
     }*/
+
+
+
+
 }

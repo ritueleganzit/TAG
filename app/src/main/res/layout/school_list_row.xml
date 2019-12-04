@@ -62,12 +62,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
+
                 android:layout_alignParentLeft="true"
                 android:id="@+id/collegename"
+                android:capitalize="words"
                 android:layout_width="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:layout_toLeftOf="@+id/myRatingBar"
-                android:text="Don Bosco school"
                 android:fontFamily="@font/roboto_regular"
                 android:layout_height="wrap_content"></TextView>
 
@@ -82,6 +83,7 @@
                 android:isIndicator="true"
                 ></RatingBar>
             <TextView
+                android:capitalize="words"
                 android:id="@+id/collegeaddress"
                 android:textColor="#939393"
                 android:layout_alignParentLeft="true"
@@ -89,10 +91,10 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:layout_below="@+id/collegename"
                 android:fontFamily="@font/roboto_regular"
-                android:text="Banglore, Karnataka, India "
                 android:layout_height="wrap_content"></TextView>
 
             <TextView
+                android:capitalize="words"
                 android:id="@+id/ranktv"
                 android:textColor="#939393"
                 android:layout_alignParentRight="true"
@@ -100,7 +102,6 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:layout_below="@+id/myRatingBar"
                 android:fontFamily="@font/roboto_regular"
-                android:text="Rank 10"
                 android:layout_height="wrap_content"></TextView>
 
         </RelativeLayout>
@@ -125,11 +126,10 @@
                     android:fontFamily="@font/roboto_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:capitalize="words"
                     android:gravity="start"
 
                     android:id="@+id/specialname"
-                    android:text="Approved by -AICTE "
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
 
             </LinearLayout>
@@ -140,17 +140,16 @@
                 android:orientation="vertical"
                 android:layout_weight="1">
                 <TextView
-
+android:id="@+id/ownership"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_centerInParent="true"
                     android:layout_weight="1"
-
+                    android:capitalize="words"
                     android:drawablePadding="5dp"
                     android:gravity="center"
                     android:layout_gravity="top"
-                    android:id="@+id/college_type"
-                    android:text="Private"
+
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
 
 
@@ -167,12 +166,11 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:gravity="end"
-                    android:layout_gravity="top"
+                    android:layout_gravity="top|end"
                     android:layout_weight="1"
-                    android:id="@+id/years"
+                    android:id="@+id/accreditation"
                     android:drawablePadding="5dp"
-
-                    android:text="Accredited by NAAC"
+                    android:capitalize="words"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
 
             </LinearLayout>
@@ -202,10 +200,10 @@
                     android:fontFamily="@font/roboto_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:id="@+id/category"
+                    android:capitalize="words"
                     android:gravity="start"
 
-                    android:text="Senior Secondary School"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
 
 
@@ -222,11 +220,10 @@
                     android:layout_height="match_parent"
                     android:layout_centerInParent="true"
                     android:layout_weight="1"
-
+                    android:capitalize="words"
                     android:drawablePadding="5dp"
                     android:gravity="center"
                     android:layout_gravity="top"
-                    android:text="1st PUC"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
 
 
@@ -251,8 +248,7 @@ android:gravity="end|center"
                     android:gravity="end"
                     android:layout_gravity="center"
 
-
-                    android:text="Full Time"
+                    android:capitalize="words"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
 
             </LinearLayout>
@@ -276,15 +272,17 @@ android:gravity="end|center"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_weight="1">
+
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_below="@+id/collegename"
                     android:fontFamily="@font/roboto_regular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
+                    android:capitalize="words"
                     android:gravity="start"
+                    android:id="@+id/college_type"
 
-                    android:text="Non Boarding"
+                    android:text=""
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
 
 
@@ -296,16 +294,15 @@ android:gravity="end|center"
                 android:orientation="vertical"
                 android:layout_weight="1">
                 <TextView
-
+                    android:capitalize="words"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_centerInParent="true"
                     android:layout_weight="1"
-
                     android:drawablePadding="5dp"
                     android:gravity="center"
                     android:layout_gravity="top"
-                    android:text="Commerce"
+                    android:text=""
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
 
 
@@ -325,8 +322,9 @@ android:gravity="end|center"
                     android:layout_gravity="top"
                     android:layout_weight="1"
                     android:drawablePadding="5dp"
-
-                    android:text="Regular state Board"
+                    android:id="@+id/board_name"
+                    android:capitalize="words"
+                    android:text=""
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"></TextView>
                 </LinearLayout>
 

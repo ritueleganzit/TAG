@@ -32,6 +32,7 @@ public class AddWorkActivity extends AppCompatActivity {
     String user_id;
     TextView submit;
     String iscurrent="nodata";
+    String olddata="nodata";
 
     RadioGroup current_job;
     ProgressDialog progressDialog;
@@ -46,6 +47,7 @@ EditText department,designation,employee_name,employee_exp;
         progressDialog = new ProgressDialog(AddWorkActivity.this);
         progressDialog.setMessage("Please Wait");
         progressDialog.setCancelable(false);
+        olddata=getIntent().getStringExtra("iscurrent");
         progressDialog.setCanceledOnTouchOutside(false);
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,7 +98,14 @@ EditText department,designation,employee_name,employee_exp;
         paramObject2.addProperty("employee_name",employee_name.getText().toString());
         paramObject2.addProperty("designation",designation.getText().toString());
         paramObject2.addProperty("department",department.getText().toString());
-        paramObject2.addProperty("current_job_que",iscurrent);
+        if (olddata.equalsIgnoreCase("yes"))
+        {
+
+        }else
+        {
+            paramObject2.addProperty("current_job_que",iscurrent);
+
+        }
         JsonArray jsonArray=new JsonArray();
 
         jsonArray.add(paramObject2);

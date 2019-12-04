@@ -37,6 +37,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -56,6 +60,6 @@ dependencies {
 
     testImplementation 'junit:junit:4.12'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
-    compile project(path: ':multi-image-selector')
+    implementation project(path: ':multi-image-selector')
 
 }

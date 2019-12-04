@@ -124,7 +124,12 @@ else
 
                 else
                 {
-                    startActivity(new Intent(SchoolSelectSpecializationActivity.this,TopSchoolsActivity.class));
+                    startActivity(new Intent(SchoolSelectSpecializationActivity.this,TopSchoolsActivity.class)
+                    .putExtra("assigned_class",ed_course.getText().toString().trim())
+                    .putExtra("stream_name",e_sp.getText().toString().trim())
+
+
+                    );
 
 
                     overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
@@ -395,7 +400,13 @@ holder.txt_c1.setOnClickListener(new View.OnClickListener() {
 
         @Override
         public int getItemCount() {
-            return getSpecializations.size();
+            if (getSpecializations.size()>6)
+            {
+                return 6;
+            }
+            else {
+                return     getSpecializations.size();
+            }
         }
 
         public class MyViewHolder extends RecyclerView.ViewHolder {

@@ -6,7 +6,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -49,6 +51,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class GetWorkActivty extends AppCompatActivity {
+    String iscurrent="nodata";
 
     CardView add_work;
     RecyclerView rc_work_get;
@@ -182,7 +185,7 @@ public class GetWorkActivty extends AppCompatActivity {
         add_work.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(GetWorkActivty.this, AddWorkActivity.class));
+                startActivity(new Intent(GetWorkActivty.this, AddWorkActivity.class).putExtra("iscurrent",iscurrent));
                 finish();
             }
         });
@@ -194,10 +197,11 @@ public class GetWorkActivty extends AppCompatActivity {
     public  class WorkBackgroundAdapter extends RecyclerView.Adapter<WorkBackgroundAdapter.MyViewHolder>
     {
         ProgressDialog progressDialog;
-        String iscurrent="nodata";
-
+        private int lastSelectedPosition = -1;
         Context context;
         Activity activity;
+        boolean isSelected;
+
         String id;
         List<ExperienceInfo> accounts;
         public WorkBackgroundAdapter(List<ExperienceInfo> accounts, Context context,String id
@@ -294,7 +298,6 @@ holder.designation.addTextChangedListener(new TextWatcher() {
                 holder.rb2.setChecked(true);
                 iscurrent="no";
 
-
             }
             else
             {
@@ -305,17 +308,77 @@ holder.designation.addTextChangedListener(new TextWatcher() {
             }
 
             holder.current_job.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @RequiresApi(api = Build.VERSION_CODES.N)
                 @Override
                 public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    if (checkedId==R.id.rb1)
-                    {
-                        iscurrent="yes";
-                        workdata.setCurrentJobQue(iscurrent);
+                    if (checkedId==R.id.rb1) {
+                        if (containsName(accounts, "yes")) {
+                            new AlertDialog.Builder(context).setMessage("Current job can be only one at a time").setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    holder.rb2.setChecked(true);
+
+
+                                }
+                            }).setCancelable(false).show();
+                        } else {
+                            iscurrent = "yes";
+
+                            workdata.setCurrentJobQue(iscurrent);
+                            notifyDataSetChanged();
+
+                        }
+
+
+                       /* for (int j=0;j<accounts.size();j++)
+                        {
+                            Log.d("sdfadfsfsrr",j+"  "+accounts.size());
+
+                            if (accounts.get(j).getCurrentJobQue().contains(
+                                    ("yes")))
+                            {
+
+                                new AlertDialog.Builder(context).setMessage("Current job can be only one at a time").setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                      holder.rb2.setChecked(true);
+
+
+
+
+                                    }
+                                }).setCancelable(false).show();
+
+                            }
+
+
+                            else
+                            {
+                                iscurrent="yes";
+
+                                workdata.setCurrentJobQue(iscurrent);
+                                notifyDataSetChanged();
+                                Log.d("sdfadfsfselse",i+"  "+accounts.get(j).getCurrentJobQue());
+
+                                break;
+
+                            }
+
+
+
+                        }*/
                     } if (checkedId==R.id.rb2)
                     {
+
                         iscurrent="no";
                         workdata.setCurrentJobQue(iscurrent);
-                    }
+                        notifyDataSetChanged();
+                        for (int i=0;i<accounts.size();i++) {
+                            Log.d("sdfadfsfs", i + "  " + accounts.get(i).getCurrentJobQue());
+
+
+                        }
+                        }
                 }
             });
 
@@ -510,6 +573,11 @@ holder.designation.addTextChangedListener(new TextWatcher() {
 
             }
         }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public boolean containsName(final List<ExperienceInfo> list, final String name){
+        return list.stream().filter(o -> o.getCurrentJobQue().equals(name)).findFirst().isPresent();
     }
 
     private void updateWork() {

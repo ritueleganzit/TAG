@@ -26,16 +26,18 @@
 android:background="@color/colorPrimaryDark"
             app:popupTheme="@style/AppTheme.PopupOverlay" >
 
-<RelativeLayout
+<LinearLayout
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
                 <EditText
+                    android:layout_weight="0.9"
                     android:id="@+id/ed_search"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:cursorVisible="false"
                     android:focusable="false"
-                    android:layout_marginRight="20dp"
                     android:drawablePadding="10dp"
                     android:drawableLeft="@drawable/ic_search"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -45,15 +47,15 @@ android:background="@color/colorPrimaryDark"
                     android:background="@drawable/search_bg"/>
 
                 <ImageView
+                    android:layout_weight="0.1"
                     android:id="@+id/notification_ic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
                     android:layout_centerVertical="true"
                     app:srcCompat="@mipmap/ic_noti"/>
 
-            </RelativeLayout>
+            </LinearLayout>
 
 
 

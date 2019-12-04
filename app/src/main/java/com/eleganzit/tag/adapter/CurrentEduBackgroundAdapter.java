@@ -101,7 +101,7 @@ public class CurrentEduBackgroundAdapter extends RecyclerView.Adapter<CurrentEdu
                     public void onClick(DialogInterface dialog, int which) {
 
                         holder.course.setText(""+coursename.get(which));
-                        Toast.makeText(context, ""+couseid.get(which), Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(context, ""+couseid.get(which), Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -118,7 +118,7 @@ public class CurrentEduBackgroundAdapter extends RecyclerView.Adapter<CurrentEdu
                     public void onClick(DialogInterface dialog, int which) {
 
                         holder.mode_of_study.setText(""+modename.get(which));
-                        Toast.makeText(context, ""+modename.get(which), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(context, ""+modename.get(which), Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -136,7 +136,7 @@ public class CurrentEduBackgroundAdapter extends RecyclerView.Adapter<CurrentEdu
                     public void onClick(DialogInterface dialog, int which) {
 
                         holder.stream.setText(""+streamname.get(which));
-                        Toast.makeText(context, ""+streamid.get(which), Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(context, ""+streamid.get(which), Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -154,7 +154,7 @@ public class CurrentEduBackgroundAdapter extends RecyclerView.Adapter<CurrentEdu
                     public void onClick(DialogInterface dialog, int which) {
 
                         holder. specialisation.setText(""+specialization.get(which));
-                        Toast.makeText(context, ""+specialization.get(which), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, ""+specialization.get(which), Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -378,8 +378,10 @@ EditText stream,course,specialisation,mode_of_study;
                     } if (response.body().getData().getStudyMode()!=null)
                 {
 
-                    for (int i=0;i<response.body().getData().getStreamList().size();i++)
+                    for (int i=0;i<response.body().getData().getStudyMode().size();i++)
                     {
+
+
                         modename.add(""+response.body().getData().getStudyMode().get(i).getModeName());
 
                     }

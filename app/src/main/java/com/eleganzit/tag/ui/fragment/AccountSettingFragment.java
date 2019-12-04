@@ -4,6 +4,7 @@ package com.eleganzit.tag.ui.fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,9 +101,11 @@ public class AccountSettingFragment extends Fragment {
         progressDialog.show();
         JsonObject paramObject = new JsonObject();
         paramObject.addProperty("user_id", userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_ID));
-        paramObject.addProperty("curr_password", cnf_password.getText().toString());
+        paramObject.addProperty("curr_password", old_password.getText().toString());
         paramObject.addProperty("new_password", new_password.getText().toString());
 
+
+        Log.d("asdasdsad",""+paramObject.toString());
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://eleganzit.online/testhost/users/")
                 .addConverterFactory(ScalarsConverterFactory.create())

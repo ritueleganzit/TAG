@@ -39,7 +39,7 @@ UserLoggedInSession userLoggedInSession;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verification);
         vr_code=findViewById(R.id.vr_code);
-        data=getIntent().getStringExtra("user_email");
+        data=getIntent().getStringExtra("mobile");
         submit=findViewById(R.id.submit);
         resend=findViewById(R.id.resend);
         userLoggedInSession=new UserLoggedInSession(RegVerificationActivity.this);
@@ -85,7 +85,7 @@ UserLoggedInSession userLoggedInSession;
             }
         });
 
-
+        sendotp();
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,6 +99,8 @@ UserLoggedInSession userLoggedInSession;
         paramObject.addProperty("username", ""+data);
         paramObject.addProperty("type", "1");
 
+        Log.d("hnkyhu",""+paramObject.toString());
+
         RetrofitInterface myInterface = RetrofitAPI.getRetrofit().create(RetrofitInterface.class);
         Call<RegisterOtpSent> call=myInterface.sendregOtp(paramObject);
         call.enqueue(new Callback<RegisterOtpSent>() {
@@ -108,7 +110,7 @@ UserLoggedInSession userLoggedInSession;
                 if (response.isSuccessful()) {
 
                     if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
-                        Toast.makeText(RegVerificationActivity.this, "Verification Code has been send to Email", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegVerificationActivity.this, ""+""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
 code=response.body().getResponse().getOtp();
                     }
                     else

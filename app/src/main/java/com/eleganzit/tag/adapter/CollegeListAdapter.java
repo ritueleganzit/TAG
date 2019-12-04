@@ -31,6 +31,8 @@ import com.eleganzit.tag.ui.activity.CollegeDetailActivity;
 import com.eleganzit.tag.ui.activity.TopCollegesActivity;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import me.nereo.multi_image_selector.bean.Image;
 
@@ -112,11 +114,11 @@ final CollegeResult collegeResult=collegeResultArrayList.get(i);
         Glide.with(context).load(collegeResult.getCollegeImage())
                 .apply(options)
                 .into(holder.imgbg);
-holder.collegename.setText(""+collegeResult.getCollegeName());
-holder.specialname.setText(""+e_sp);
+holder.collegename.setText(capitalize(""+collegeResult.getCollegeName()));
+holder.specialname.setText(capitalize(""+e_sp));
         if (collegeResult.getCollegeCity()!=null  && !(collegeResult.getCollegeCity().isEmpty()))
         {
-            holder.collegeaddress.setText(""+collegeResult.getCollegeCity());
+            holder.collegeaddress.setText(capitalize(""+collegeResult.getCollegeCity()));
         }
         else
         {
@@ -129,7 +131,7 @@ holder.specialname.setText(""+e_sp);
         }
         else
         {
-            holder.collegeaddress.setText(""+holder.collegeaddress.getText().toString()+",");
+            holder.collegeaddress.setText(capitalize(""+holder.collegeaddress.getText().toString()+","));
         }
 
         if (collegeResult.getCollegeCountry()!=null  && !(collegeResult.getCollegeCountry().isEmpty()))
@@ -137,21 +139,21 @@ holder.specialname.setText(""+e_sp);
             holder.collegeaddress.append(" "+collegeResult.getCollegeCountry()+"");
         } if (collegeResult.getCollegeType()!=null  && !(collegeResult.getCollegeType().isEmpty()))
         {
-            holder.college_type.setText(""+collegeResult.getCollegeType()+"");
+            holder.college_type.setText(capitalize(""+collegeResult.getCollegeType()+""));
         } if (collegeResult.getYears()!=null  && !(collegeResult.getYears().isEmpty()))
         {
-            holder.years.setText(""+collegeResult.getYears()+"");
+            holder.years.setText(capitalize(""+collegeResult.getYears()+""));
         }if (collegeResult.getApprovedBy()!=null  && !(collegeResult.getApprovedBy().isEmpty()))
         {
-            holder.approved_by.setText(""+collegeResult.getApprovedBy()+"");
+            holder.approved_by.setText(capitalize(""+collegeResult.getApprovedBy()+""));
         }if (collegeResult.getAccreditation()!=null  && !(collegeResult.getAccreditation().isEmpty()))
         {
-            holder.accreditation.setText(""+collegeResult.getAccreditation()+"");
+            holder.accreditation.setText(capitalize(""+collegeResult.getAccreditation()+""));
         }
 
         if (collegeResult.getPlacement()!=null  && !(collegeResult.getPlacement().isEmpty()))
         {
-            holder.placement.setText(""+collegeResult.getPlacement()+"");
+            holder.placement.setText(capitalize(""+collegeResult.getPlacement()+""));
         }
 
         if (collegeResult.getIsUniversity()!=null)
@@ -159,7 +161,7 @@ holder.specialname.setText(""+e_sp);
             if (collegeResult.getIsUniversity()==1)
             {
                 if (collegeResult.getUniversityName()!=null  && !(collegeResult.getUniversityName().isEmpty()))
-                    holder.isUniversity.setText(""+collegeResult.getUniversityName());
+                    holder.isUniversity.setText(capitalize(""+collegeResult.getUniversityName()));
             }
             else {
                 holder.isUniversity.setText("Deemed university");
@@ -174,10 +176,10 @@ holder.specialname.setText(""+e_sp);
 
         if (collegeResult.getUniversityName()!=null && !(collegeResult.getUniversityName().isEmpty()))
         {
-            holder.privatetv.setText("Private  "+collegeResult.getUniversityName());
+            holder.privatetv.setText(capitalize("Private  "+collegeResult.getUniversityName()));
         }  if (collegeResult.getRank()!=null && !(collegeResult.getRank().isEmpty()))
         {
-            holder.rank.setText("Rank : "+collegeResult.getRank());
+            holder.rank.setText("Rank :" +capitalize(collegeResult.getRank()));
         }
         if (collegeResult.getRatings()!=null)
         {
@@ -236,5 +238,15 @@ clgcard=itemView.findViewById(R.id.clgcard);
         activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int width = displayMetrics.widthPixels;
         return width;
+    }
+
+    private String capitalize(String capString){
+        StringBuffer capBuffer = new StringBuffer();
+        Matcher capMatcher = Pattern.compile("([a-z])([a-z]*)", Pattern.CASE_INSENSITIVE).matcher(capString);
+        while (capMatcher.find()){
+            capMatcher.appendReplacement(capBuffer, capMatcher.group(1).toUpperCase() + capMatcher.group(2).toLowerCase());
+        }
+
+        return capMatcher.appendTail(capBuffer).toString();
     }
 }

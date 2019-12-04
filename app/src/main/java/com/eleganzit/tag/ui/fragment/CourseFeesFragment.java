@@ -123,7 +123,7 @@ Log.d("dfsfsf",""+response.body().getCourceFeeData().size());
             @Override
             public void onResponse(Call<CollegeHomeResponse> call, Response<CollegeHomeResponse> response) {
                 progressDialog.dismiss();
-                Toast.makeText(getActivity(), "asdsa"+college_id, Toast.LENGTH_SHORT).show();
+               /// Toast.makeText(getActivity(), "asdsa"+college_id, Toast.LENGTH_SHORT).show();
 
                 if (response.isSuccessful())
                 {

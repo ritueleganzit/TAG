@@ -27,8 +27,8 @@
            <ImageView
                android:id="@+id/profile_pic"
 
-               android:layout_width="80dp"
-               android:layout_height="80dp"
+               android:layout_width="75dp"
+               android:layout_height="75dp"
                android:layout_gravity="center"
                android:scaleType="centerInside"
                android:transitionName="simple_activity_transition"

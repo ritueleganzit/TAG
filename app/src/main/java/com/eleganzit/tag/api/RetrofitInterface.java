@@ -38,6 +38,7 @@ import com.eleganzit.tag.model.homecourse.CourseResponse;
 import com.eleganzit.tag.model.homefacility.FacilitiesResponse;
 import com.eleganzit.tag.model.homegallery.GalleryResponse;
 import com.eleganzit.tag.model.profileinfo.ProfileInfoDataResponse;
+import com.eleganzit.tag.model.schoolstream.GetSchoolListResponse;
 import com.eleganzit.tag.model.schoolstream.StreamResponse;
 import com.eleganzit.tag.model.specialization.SpecialsationDetailsResponse;
 import com.eleganzit.tag.model.askquestion.AskQuestionResponse;
@@ -437,5 +438,9 @@ public interface RetrofitInterface {
             @Part MultipartBody.Part photo
     );
 
+    @POST("/testhost/users/getSchoolList")
+    Call<GetSchoolListResponse> getSchoolList(
+            @Body JsonObject jsonObject
 
+    );
 }

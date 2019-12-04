@@ -186,7 +186,7 @@ private ArrayList<String> specialization;
                     } if (response.body().getData().getStudyMode()!=null)
                     {
 
-                        for (int i=0;i<response.body().getData().getStreamList().size();i++)
+                        for (int i=0;i<response.body().getData().getStudyMode().size();i++)
                         {
                             modename.add(""+response.body().getData().getStudyMode().get(i).getModeName());
 
