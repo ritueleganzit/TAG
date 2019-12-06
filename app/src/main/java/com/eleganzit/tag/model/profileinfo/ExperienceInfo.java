@@ -25,6 +25,9 @@ public class ExperienceInfo implements Parcelable {
     @SerializedName("current_job_que")
     @Expose
     private String currentJobQue;
+@SerializedName("exp_years")
+    @Expose
+    private String exp_years;
 
     protected ExperienceInfo(Parcel in) {
         if (in.readByte() == 0) {
@@ -41,6 +44,33 @@ public class ExperienceInfo implements Parcelable {
         designation = in.readString();
         department = in.readString();
         currentJobQue = in.readString();
+        exp_years = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (experienceId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(experienceId);
+        }
+        if (userId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(userId);
+        }
+        dest.writeString(employeeName);
+        dest.writeString(designation);
+        dest.writeString(department);
+        dest.writeString(currentJobQue);
+        dest.writeString(exp_years);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<ExperienceInfo> CREATOR = new Creator<ExperienceInfo>() {
@@ -75,6 +105,8 @@ public class ExperienceInfo implements Parcelable {
         return employeeName;
     }
 
+
+
     public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
     }
@@ -103,29 +135,11 @@ public class ExperienceInfo implements Parcelable {
         this.currentJobQue = currentJobQue;
     }
 
-
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getExp_years() {
+        return exp_years;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        if (experienceId == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(experienceId);
-        }
-        if (userId == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(userId);
-        }
-        dest.writeString(employeeName);
-        dest.writeString(designation);
-        dest.writeString(department);
-        dest.writeString(currentJobQue);
+    public void setExp_years(String exp_years) {
+        this.exp_years = exp_years;
     }
 }

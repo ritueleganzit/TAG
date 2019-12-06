@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.eleganzit.tag.R;
@@ -54,11 +55,15 @@ public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.My
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int i) {
         Result collegeResult=collegeResultArrayList.get(i);
         holder.collegename.setText(capitalize(""+collegeResult.getSchoolName()));
-
+       // Toast.makeText(context, ""+collegeResult.getSchoolId(), Toast.LENGTH_SHORT).show();
         holder.clgcard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, SchoolDetailActivity.class));
+                Intent intent=new Intent(context, SchoolDetailActivity.class);
+                intent.putExtra("college_id",""+collegeResult.getSchoolId());
+                intent.putExtra("college_name",""+collegeResult.getSchoolName());
+
+                context.startActivity(intent);
 
             }
         });

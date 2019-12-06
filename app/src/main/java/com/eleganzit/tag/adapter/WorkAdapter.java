@@ -46,6 +46,7 @@ holder.designation.setText(""+workdata.getDesignation());
 holder.employee_name.setText(""+workdata.getEmployeeName());
 holder.iscurrent.setText(""+workdata.getCurrentJobQue());
 holder.depart.setText(""+workdata.getDepartment());
+holder.exp.setText(""+workdata.getExp_years());
 
 
     }
@@ -57,12 +58,13 @@ holder.depart.setText(""+workdata.getDepartment());
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-TextView designation,employee_name,depart,iscurrent;
+TextView designation,employee_name,depart,iscurrent,exp;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             employee_name=itemView.findViewById(R.id.employee_name);
             iscurrent=itemView.findViewById(R.id.iscurrent);
             depart=itemView.findViewById(R.id.depart);
+            exp=itemView.findViewById(R.id.exp);
             designation=itemView.findViewById(R.id.designation);
 
 

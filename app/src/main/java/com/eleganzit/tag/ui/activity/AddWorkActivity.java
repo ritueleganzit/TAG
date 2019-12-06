@@ -1,6 +1,8 @@
 package com.eleganzit.tag.ui.activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +35,7 @@ public class AddWorkActivity extends AppCompatActivity {
     TextView submit;
     String iscurrent="nodata";
     String olddata="nodata";
+    String currentjob="";
 
     RadioGroup current_job;
     ProgressDialog progressDialog;
@@ -47,6 +50,7 @@ EditText department,designation,employee_name,employee_exp;
         progressDialog = new ProgressDialog(AddWorkActivity.this);
         progressDialog.setMessage("Please Wait");
         progressDialog.setCancelable(false);
+        currentjob=getIntent().getStringExtra("currentjob");
         olddata=getIntent().getStringExtra("iscurrent");
         progressDialog.setCanceledOnTouchOutside(false);
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
@@ -67,7 +71,21 @@ EditText department,designation,employee_name,employee_exp;
             public void onClick(View v) {
                 if (isValid())
                 {
-                    addWorkData();
+                    if (currentjob.equalsIgnoreCase(iscurrent))
+                    {
+                        new AlertDialog.Builder(AddWorkActivity.this).setMessage("Current job can be only one at a time").setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+dialog.dismiss();
+
+                            }
+                        }).setCancelable(false).show();
+                    }
+                    else
+                    {
+                        addWorkData();
+                    }
+
                 }
             }
         });
@@ -92,12 +110,13 @@ EditText department,designation,employee_name,employee_exp;
         progressDialog.show();
         JsonObject paramObject = new JsonObject();
         paramObject.addProperty("user_id", user_id);
-        paramObject.addProperty("total_exp", employee_exp.getText().toString());
 
         JsonObject paramObject2=new JsonObject();
         paramObject2.addProperty("employee_name",employee_name.getText().toString());
         paramObject2.addProperty("designation",designation.getText().toString());
         paramObject2.addProperty("department",department.getText().toString());
+        paramObject2.addProperty("exp_years", employee_exp.getText().toString());
+
         if (olddata.equalsIgnoreCase("yes"))
         {
 

@@ -170,14 +170,14 @@ RecyclerView rc_edu_pref;
                         }
                         if (response.body().getData().getTotalExp()!=null)
                         {
-                            if (response.body().getData().getTotalExp().get(0).getTotalExp().equalsIgnoreCase("0"))
+                            if (response.body().getData().getTotalExp().equalsIgnoreCase("0"))
                             {
                                 numofexp.setText(" : 0");
 
                             }
                             else
                             {
-                                numofexp.setText(" : "+response.body().getData().getTotalExp().get(0).getTotalExp());
+                                numofexp.setText(" : "+response.body().getData().getTotalExp());
 
                             }
                         }
@@ -193,7 +193,7 @@ RecyclerView rc_edu_pref;
                         }
                         if (response.body().getData().getTotalExp()!=null)
                         {
-                            exp=response.body().getData().getTotalExp().get(0).getTotalExp();
+                            exp=response.body().getData().getTotalExp();
                         }
                         if (response.body().getData().getExperienceInfo()!=null)
                         {
@@ -223,7 +223,7 @@ RecyclerView rc_edu_pref;
             @Override
             public void onFailure(Call<ProfileInfoDataResponse> call, Throwable t) {
                 progressDialog.dismiss();
-                Toast.makeText(getActivity(), "Server or Internet Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Server or Internet Error"+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 

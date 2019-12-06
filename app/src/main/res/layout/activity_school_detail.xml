@@ -42,6 +42,7 @@
                     <TextView
                         android:layout_toRightOf="@+id/back"
                         android:gravity="start"
+
                         android:textColor="#ffffff"
                         android:text="School Name"
                         android:layout_marginLeft="15dp"

@@ -64,7 +64,6 @@ ArrayList<EventDetail> arrayList=new ArrayList<>();
         View v=inflater.inflate(R.layout.fragment_college_gallery, container, false);
        // rc_video=v.findViewById(R.id.rc_video);
         linearlayoutsize=v.findViewById(R.id.linearlayoutsize);
-        rc_events=v.findViewById(R.id.grid);
         //rc_infra=v.findViewById(R.id.rc_infra);
         EventDetail eventDetail=new EventDetail();
         eventDetail.setImageUrl("https://eleganzit.online/img/tag_upload/college/images/myimage.jpeg");
@@ -112,7 +111,7 @@ ArrayList<EventDetail> arrayList=new ArrayList<>();
                             if (response.body().getData() != null)
                             {
                                 eventArrayList.addAll(response.body().getData());
-                                rc_events.setAdapter(new CollegeGalleryEventAdapter(eventArrayList,linearlayoutsize,getActivity()));
+                                grid.setAdapter(new CollegeGalleryEventAdapter(eventArrayList,linearlayoutsize,getActivity()));
                             }
 
                         }

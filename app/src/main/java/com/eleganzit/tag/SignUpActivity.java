@@ -140,7 +140,7 @@ if (arrayList!=null)
     public void sendotp(){
         progressDialog.show();
         JsonObject paramObject = new JsonObject();
-        paramObject.addProperty("username", ""+edemail.getText().toString());
+        paramObject.addProperty("username", ""+edmobile.getText().toString());
         paramObject.addProperty("type", "1");
 
         RetrofitInterface myInterface = RetrofitAPI.getRetrofit().create(RetrofitInterface.class);
@@ -152,7 +152,7 @@ if (arrayList!=null)
                 if (response.isSuccessful()) {
 
                     if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
-                        Toast.makeText(SignUpActivity.this, "Verification Code has been send to Email", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, "Verification Code has been send to mobile", Toast.LENGTH_SHORT).show();
 
                         Intent i = new Intent(SignUpActivity.this, RegVerificationActivity.class);
                         i.putExtra("user_email",""+edemail.getText().toString());

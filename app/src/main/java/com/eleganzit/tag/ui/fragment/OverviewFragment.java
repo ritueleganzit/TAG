@@ -28,6 +28,7 @@ import com.eleganzit.tag.api.RetrofitInterface;
 import com.eleganzit.tag.model.CoursesData;
 import com.eleganzit.tag.model.GetCoursesResponse;
 
+import im.delight.android.webview.AdvancedWebView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,11 +36,11 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class OverviewFragment extends Fragment {
+public class OverviewFragment extends Fragment implements AdvancedWebView.Listener {
 
 
     SelectCourseActivity mActivity;
-    WebView web;
+    AdvancedWebView web;
     public OverviewFragment() {
         // Required empty public constructor
     }
@@ -90,19 +91,23 @@ public class OverviewFragment extends Fragment {
             web.setWebViewClient(new WebViewClient());
             web.setWebChromeClient(new WebChromeClient());
             web.getSettings().setUseWideViewPort(true);
+            web.setListener(getActivity(),  this);
+
             web.getSettings().setLoadWithOverviewMode(true);
+            web.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
             WebSettings webSettings = web.getSettings();
             Resources res = getResources();
             float fontSize = res.getDimension(R.dimen.txtSize);
             webSettings.setDefaultFontSize((int)fontSize);
             webSettings.setJavaScriptEnabled(true);
-            web.loadDataWithBaseURL("", strtext , "text/html",  "UTF-8", "");
+            web.loadDataWithBaseURL(null, strtext , "text/html",  "UTF-8", "");
 
 
         } else {
 
 
-
+            web.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
+            web.setListener(getActivity(),  this);
             web.getSettings().setBuiltInZoomControls(true);
             web.setWebViewClient(new WebViewClient());
             web.setWebChromeClient(new WebChromeClient());
@@ -114,7 +119,7 @@ public class OverviewFragment extends Fragment {
             webSettings.setDefaultFontSize((int)fontSize);
 
             webSettings.setJavaScriptEnabled(true);
-            web.loadDataWithBaseURL("", strtext , "text/html",  "UTF-8", "");
+            web.loadDataWithBaseURL(null, strtext , "text/html",  "UTF-8", "");
 
 
             // txt_content.setText(Html.fromHtml(strtext));
@@ -178,6 +183,31 @@ public class OverviewFragment extends Fragment {
             }
         });
 
+
+    }
+
+    @Override
+    public void onPageStarted(String url, Bitmap favicon) {
+
+    }
+
+    @Override
+    public void onPageFinished(String url) {
+
+    }
+
+    @Override
+    public void onPageError(int errorCode, String description, String failingUrl) {
+
+    }
+
+    @Override
+    public void onDownloadRequested(String url, String suggestedFilename, String mimeType, long contentLength, String contentDisposition, String userAgent) {
+
+    }
+
+    @Override
+    public void onExternalPageRequest(String url) {
 
     }
 

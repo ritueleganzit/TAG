@@ -168,6 +168,8 @@ setupViewPager(htab_viewpager);
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d("sadadas", "resume" +userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_PHOTO));
+
         Glide.with(getApplicationContext())
                 .load("" + userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_PHOTO)).
 
@@ -276,7 +278,13 @@ if (response.body().getData()!=null)
             @Override
             public void onResponse(Call<ImageUploadedResponse> call, Response<ImageUploadedResponse> response) {
                 Log.d("sadadas","ffff"+response.body().getPath());
-                
+                userLoggedInSession.updateData(response.body().getPath());
+                Glide.with(getApplicationContext())
+                        .load("" + userLoggedInSession.getUserDetails().get(UserLoggedInSession.USER_PHOTO)).
+
+                        apply(RequestOptions.circleCropTransform().placeholder(R.drawable.user_shape))
+
+                        .into(myprofile);
                 updatepath(response.body().getPath());
 
             }
@@ -302,13 +310,13 @@ progressDialog.dismiss();
             @Override
             public void onResponse(Call<UnansweredQuestionsResponse> call, Response<UnansweredQuestionsResponse> response) {
 
-                progressDialog.dismiss();
+
                 if (response.isSuccessful()) {
 
                     if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
-
+                        progressDialog.dismiss();
                         Log.d("hrhrhr",""+response.body().getMessage());
-                        userLoggedInSession.updateData(path);
+
                         Toast.makeText(MyProfileActivity.this, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
 //notifyDataSetChanged();
                     }

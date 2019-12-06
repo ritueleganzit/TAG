@@ -104,7 +104,7 @@ public class GetWorkActivty extends AppCompatActivity {
 
                 JsonObject paramObject = new JsonObject();
                 paramObject.addProperty("user_id", user_id);
-                paramObject.addProperty("total_exp", employee_exp.getText().toString());
+               // paramObject.addProperty("total_exp", employee_exp.getText().toString());
                 JsonArray jsonArray=new JsonArray();
 
 
@@ -160,6 +160,7 @@ public class GetWorkActivty extends AppCompatActivity {
                         paramObject2.addProperty("designation",experienceInfo.getDesignation());
                         paramObject2.addProperty("department",experienceInfo.getDepartment());
                         paramObject2.addProperty("current_job_que",experienceInfo.getCurrentJobQue());
+                        paramObject2.addProperty("exp_years",experienceInfo.getExp_years());
 
                         jsonArray.add(paramObject2);
                     }
@@ -183,9 +184,15 @@ public class GetWorkActivty extends AppCompatActivity {
         });
         add_work=findViewById(R.id.add_work);
         add_work.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(GetWorkActivty.this, AddWorkActivity.class).putExtra("iscurrent",iscurrent));
+                String data="no";
+                if(containsName(workdata, "yes"))
+                {
+                    data="yes";
+                }
+                startActivity(new Intent(GetWorkActivty.this, AddWorkActivity.class).putExtra("iscurrent",iscurrent).putExtra("currentjob",data));
                 finish();
             }
         });
@@ -237,6 +244,7 @@ public class GetWorkActivty extends AppCompatActivity {
             holder.employee_name.setText(workdata.getEmployeeName());
             holder.designation.setText(workdata.getDesignation());
             holder.department.setText(workdata.getDepartment());
+            holder.exp_years.setText(workdata.getExp_years());
 
 
            holder.employee_name.addTextChangedListener(new TextWatcher() {
@@ -254,6 +262,22 @@ public class GetWorkActivty extends AppCompatActivity {
                @Override
                public void afterTextChanged(Editable s) {
             workdata.setEmployeeName(s.toString());
+               }
+           });holder.exp_years.addTextChangedListener(new TextWatcher() {
+               @Override
+               public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+               }
+
+               @Override
+               public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+               }
+
+               @Override
+               public void afterTextChanged(Editable s) {
+            workdata.setExp_years(s.toString());
                }
            });
 holder.designation.addTextChangedListener(new TextWatcher() {
@@ -456,7 +480,7 @@ holder.designation.addTextChangedListener(new TextWatcher() {
             progressDialog.show();
             JsonObject paramObject = new JsonObject();
             paramObject.addProperty("user_id", id);
-            paramObject.addProperty("total_exp", employee_exp.getText().toString());
+            paramObject.addProperty("exp_years", holder.exp_years.getText().toString());
 
             JsonObject paramObject2=new JsonObject();
             paramObject2.addProperty("experience_id",work_id);
@@ -555,13 +579,14 @@ holder.designation.addTextChangedListener(new TextWatcher() {
             RadioButton rb1,rb2;
 
             ImageView delete;
-            EditText employee_name,designation,department;
+            EditText employee_name,designation,department,exp_years;
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
                 current_job=itemView.findViewById(R.id.current_job);
                 rb1=itemView.findViewById(R.id.rb1);
                 rb2=itemView.findViewById(R.id.rb2);
 
+                exp_years=itemView.findViewById(R.id.exp_years);
                 delete=itemView.findViewById(R.id.delete);
                 employee_name=itemView.findViewById(R.id.employee_name);
                 designation=itemView.findViewById(R.id.designation);

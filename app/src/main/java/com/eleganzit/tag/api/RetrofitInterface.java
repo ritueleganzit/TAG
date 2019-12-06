@@ -38,6 +38,9 @@ import com.eleganzit.tag.model.homecourse.CourseResponse;
 import com.eleganzit.tag.model.homefacility.FacilitiesResponse;
 import com.eleganzit.tag.model.homegallery.GalleryResponse;
 import com.eleganzit.tag.model.profileinfo.ProfileInfoDataResponse;
+import com.eleganzit.tag.model.schoolhome.SchoolAppFacilityResponse;
+import com.eleganzit.tag.model.schoolhome.SchoolAppGalleryResponse;
+import com.eleganzit.tag.model.schoolhome.SchoolAppHomeResponse;
 import com.eleganzit.tag.model.schoolstream.GetSchoolListResponse;
 import com.eleganzit.tag.model.schoolstream.StreamResponse;
 import com.eleganzit.tag.model.specialization.SpecialsationDetailsResponse;
@@ -441,6 +444,18 @@ public interface RetrofitInterface {
     @POST("/testhost/users/getSchoolList")
     Call<GetSchoolListResponse> getSchoolList(
             @Body JsonObject jsonObject
+
+    );
+
+
+    @GET("/testhost/users/SchoolAppGallery/{id}")
+    Call<SchoolAppGalleryResponse> getschoolgallery(@Path(value = "id", encoded = true) String id);
+      @GET("/testhost/users/SchoolAppFacility/{id}")
+    Call<SchoolAppFacilityResponse> getfacilityschool(@Path(value = "id", encoded = true) String id);
+
+    @GET("/testhost/users/schoolHomeScreen/{id}")
+    Call<SchoolAppHomeResponse> getSchoolByid(
+            @Path(value = "id", encoded = true) String id
 
     );
 }

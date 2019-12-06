@@ -151,6 +151,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
                         android:padding="9dp"
+                        android:focusable="false"
                         android:fontFamily="@font/roboto_regular"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:inputType="text"
@@ -189,6 +190,7 @@
                 app:cardUseCompatPadding="true"
                 app:cardBackgroundColor="#ffffff"
                 android:id="@+id/add_work"
+                android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
 
                 android:layout_marginLeft="10dp"
@@ -201,6 +203,7 @@
                     android:drawableLeft="@drawable/ic_plus"
 
                     android:padding="10dp"
+                    android:gravity="center_vertical"
                     android:layout_gravity="center"
                     android:fontFamily="@font/roboto_regular"
                     android:textAppearance="?android:textAppearanceSmall"

@@ -23,7 +23,7 @@
                android:maxLines="2"
                android:layout_weight="1"
 
-               android:text="Employee Name"
+               android:text="Company Name"
                android:ellipsize="end"
                android:textColor="@color/txtcolor"
                android:fontFamily="@font/roboto_regular"
@@ -40,7 +40,7 @@
                android:maxLines="2"
                android:layout_weight="1"
 
-               android:text=""
+               android:text="-"
                android:ellipsize="end"
                android:textColor="@color/txtcolor"
                android:gravity="end"
@@ -86,6 +86,7 @@
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:maxLines="2"
+               android:text="-"
                android:id="@+id/designation"
                android:gravity="end"
                android:ellipsize="end"
@@ -96,7 +97,49 @@
            </TextView>
 
        </LinearLayout>
+       <LinearLayout
+           android:layout_marginTop="6dp"
 
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal">
+           <TextView
+
+               xmlns:android="http://schemas.android.com/apk/res/android"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:maxLines="2"
+               android:layout_weight="1"
+
+               android:text="Experience"
+               android:ellipsize="end"
+               android:textColor="@color/txtcolor"
+               android:fontFamily="@font/roboto_regular"
+               android:textAppearance="?android:textAppearanceSmall"
+
+               >
+
+
+           </TextView>
+           <TextView
+               android:layout_weight="1"
+
+               android:textColor="@color/txtcolor"
+android:text="-"
+               xmlns:android="http://schemas.android.com/apk/res/android"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:maxLines="2"
+               android:id="@+id/exp"
+               android:gravity="end"
+               android:ellipsize="end"
+               android:fontFamily="@font/roboto_regular"
+               android:textAppearance="?android:textAppearanceSmall"
+               >
+
+           </TextView>
+
+       </LinearLayout>
        <LinearLayout
            android:layout_marginTop="6dp"
 
@@ -125,7 +168,7 @@
                android:layout_weight="1"
 
                android:textColor="@color/txtcolor"
-
+               android:text="-"
                xmlns:android="http://schemas.android.com/apk/res/android"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"

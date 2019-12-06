@@ -77,7 +77,7 @@ public class ForgotPassword extends AppCompatActivity {
                 if (response.isSuccessful()) {
 
                     if (response.body().getStatus().toString().equalsIgnoreCase("1")) {
-                        Toast.makeText(ForgotPassword.this, "Verification Code has been send to Email", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ForgotPassword.this, "Verification Code has been send to mobile", Toast.LENGTH_SHORT).show();
 
                         startActivity(new Intent(ForgotPassword.this, VerificationActivity.class).putExtra("data",login_emailid.getText().toString()));
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);

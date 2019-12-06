@@ -15,15 +15,31 @@ public class ProfileInfoData implements Parcelable {
     @SerializedName("education_detail")
     @Expose
     private List<EducationDetail> educationDetail = null;
-    @SerializedName("total_exp")
-    @Expose
-    private List<TotalExp> totalExp = null;
+
     @SerializedName("experience_info")
     @Expose
     private List<ExperienceInfo> experienceInfo = null;
     @SerializedName("preference_info")
     @Expose
     private List<PreferenceInfo> preferenceInfo = null;
+
+    protected ProfileInfoData(Parcel in) {
+        educationDetail = in.createTypedArrayList(EducationDetail.CREATOR);
+        experienceInfo = in.createTypedArrayList(ExperienceInfo.CREATOR);
+        preferenceInfo = in.createTypedArrayList(PreferenceInfo.CREATOR);
+    }
+
+    public static final Creator<ProfileInfoData> CREATOR = new Creator<ProfileInfoData>() {
+        @Override
+        public ProfileInfoData createFromParcel(Parcel in) {
+            return new ProfileInfoData(in);
+        }
+
+        @Override
+        public ProfileInfoData[] newArray(int size) {
+            return new ProfileInfoData[size];
+        }
+    };
 
     public PersonalInfo getPersonalInfo() {
         return personalInfo;
@@ -40,12 +56,15 @@ public class ProfileInfoData implements Parcelable {
     public void setEducationDetail(List<EducationDetail> educationDetail) {
         this.educationDetail = educationDetail;
     }
+    @SerializedName("total_exp")
+    @Expose
+    private String totalExp;
 
-    public List<TotalExp> getTotalExp() {
+    public String getTotalExp() {
         return totalExp;
     }
 
-    public void setTotalExp(List<TotalExp> totalExp) {
+    public void setTotalExp(String totalExp) {
         this.totalExp = totalExp;
     }
 
@@ -73,6 +92,8 @@ public class ProfileInfoData implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeTypedList(educationDetail);
+        dest.writeTypedList(experienceInfo);
+        dest.writeTypedList(preferenceInfo);
     }
 }
